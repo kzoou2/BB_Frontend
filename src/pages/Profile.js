@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from './navbar';
 
-function Search() {
+function Profile() {
     return (
         <div>
             <Navbar />
-            <h1>Search</h1>
+            <h1>Profile</h1>
         </div>
     );
 }
 
-export default Search;
+export default Profile;
