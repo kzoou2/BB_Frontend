@@ -1,1 +1,11 @@
-// 회원가입 페이지
+import React from 'react';
+
+function SignUp() {
+    return (
+        <div>
+            <h1>Search</h1>
+        </div>
+    );
+}
+
+export default SignUp;
