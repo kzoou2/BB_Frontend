@@ -16,6 +16,7 @@ const Menu = ({ isActive }) => {
                 <li className='text-start'><a href='/Alarm'><FaItunesNote className='me-2' size='25' color='black'/>Alarm</a></li>
                 <li className='text-start'><a href='/Post'><FaRegSquarePlus className='me-2' size='25' color='black'/>Post</a></li>
                 <li className='text-start'><a href='/Profile'>Profile</a></li>
+                <li className='text-start'><a href='/Login'>Login</a></li>
             </Ul>
         </div>
     );
