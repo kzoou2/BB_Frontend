@@ -84,6 +84,7 @@ function Login({isLogin, setIsLogin}) {
             </PC>
 
 
+
             <Mobile>
                 <h1>모바일</h1>
                 <div className='container' style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
