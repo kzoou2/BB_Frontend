@@ -1,0 +1,4511 @@
+[
+  {
+    "id": 0,
+    "title": "헤어지자 말해요",
+    "album": "Alone",
+    "artist": "박재정",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 20
+  },
+  {
+    "id": 1,
+    "title": "Cupid - Twin Ver.",
+    "album": "The Beginning: Cupid",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 24
+  },
+  {
+    "id": 2,
+    "title": "Like Crazy",
+    "album": "FACE",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 24
+  },
+  {
+    "id": 3,
+    "title": "MONEY",
+    "album": "LALISA",
+    "artist": "LISA",
+    "release_year": 2021,
+    "release_month": 9,
+    "release_date": 10
+  },
+  {
+    "id": 4,
+    "title": "Take Two",
+    "album": "Take Two",
+    "artist": "BTS",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 9
+  },
+  {
+    "id": 5,
+    "title": "Seven (feat. Latto) (Explicit Ver.)",
+    "album": "Seven (feat. Latto)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 14
+  },
+  {
+    "id": 6,
+    "title": "Like Crazy",
+    "album": "Like Crazy (Remixes)",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 7,
+    "title": "Super Shy",
+    "album": "NewJeans 'Super Shy'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 7
+  },
+  {
+    "id": 8,
+    "title": "OMG",
+    "album": "NewJeans 'OMG'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 2
+  },
+  {
+    "id": 9,
+    "title": "Seven (feat. Latto) (Clean Ver.)",
+    "album": "Seven (feat. Latto)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 14
+  },
+  {
+    "id": 10,
+    "title": "Still With You",
+    "album": "Still With You",
+    "artist": "Jung Kook",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 5
+  },
+  {
+    "id": 11,
+    "title": "Ditto",
+    "album": "Ditto",
+    "artist": "NewJeans",
+    "release_year": 2022,
+    "release_month": 12,
+    "release_date": 19
+  },
+  {
+    "id": 12,
+    "title": "Bite Me",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 13,
+    "title": "Hype Boy",
+    "album": "NewJeans 1st EP 'New Jeans'",
+    "artist": "NewJeans",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 1
+  },
+  {
+    "id": 14,
+    "title": "UNFORGIVEN (feat. Nile Rodgers)",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 15,
+    "title": "Super",
+    "album": "SEVENTEEN 10th Mini Album 'FML'",
+    "artist": "SEVENTEEN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 16,
+    "title": "Dreamers [Music from the FIFA World Cup Qatar 2022 Official Soundtrack]",
+    "album": "Dreamers [Music from the FIFA World Cup Qatar 2022 Official Soundtrack]",
+    "artist": "Jung Kook",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 20
+  },
+  {
+    "id": 17,
+    "title": "My You",
+    "album": "My You",
+    "artist": "Jung Kook",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 13
+  },
+  {
+    "id": 18,
+    "title": "New Jeans",
+    "album": "NewJeans 'Super Shy'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 7
+  },
+  {
+    "id": 19,
+    "title": "FLOWER",
+    "album": "ME",
+    "artist": "JISOO",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 31
+  },
+  {
+    "id": 20,
+    "title": "Like Crazy (English Version)",
+    "album": "FACE",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 24
+  },
+  {
+    "id": 21,
+    "title": "Cupid",
+    "album": "The Beginning: Cupid",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 24
+  },
+  {
+    "id": 22,
+    "title": "Eve, Psyche & The Bluebeard_ wife",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 23,
+    "title": "The Astronaut",
+    "album": "The Astronaut",
+    "artist": "JIN",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 28
+  },
+  {
+    "id": 24,
+    "title": "Attention",
+    "album": "NewJeans 1st EP 'New Jeans'",
+    "artist": "NewJeans",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 1
+  },
+  {
+    "id": 25,
+    "title": "The Planet",
+    "album": "The Planet",
+    "artist": "BTS",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 12
+  },
+  {
+    "id": 26,
+    "title": "Run BTS",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 27,
+    "title": "Tally",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 28,
+    "title": "Set Me Free Pt.2",
+    "album": "Set Me Free Pt.2",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 17
+  },
+  {
+    "id": 29,
+    "title": "Spicy",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  },
+  {
+    "id": 30,
+    "title": "Do It Like That",
+    "album": "Do It Like That",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 7
+  },
+  {
+    "id": 31,
+    "title": "Rover",
+    "album": "Rover - The 3rd Mini Album",
+    "artist": "KAI",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 13
+  },
+  {
+    "id": 32,
+    "title": "Shut Down",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 33,
+    "title": "Sugar Rush Ride",
+    "album": "The Name Chapter: TEMPTATION",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 27
+  },
+  {
+    "id": 34,
+    "title": "on the street (with J. Cole)",
+    "album": "on the street (with J. Cole)",
+    "artist": "j-hope",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 3
+  },
+  {
+    "id": 35,
+    "title": "Stay Alive (Prod. SUGA of BTS)",
+    "album": "Stay Alive (Prod. SUGA of BTS)",
+    "artist": "Jung Kook",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 11
+  },
+  {
+    "id": 36,
+    "title": "Shoong! (feat. LISA of BLACKPINK)",
+    "album": "Down to Earth",
+    "artist": "TAEYANG",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 25
+  },
+  {
+    "id": 37,
+    "title": "LOVE DIVE",
+    "album": "LOVE DIVE",
+    "artist": "IVE",
+    "release_year": 2022,
+    "release_month": 4,
+    "release_date": 5
+  },
+  {
+    "id": 38,
+    "title": "First Class",
+    "album": "Come Home The Kids Miss You",
+    "artist": "Jack Harlow",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 6
+  },
+  {
+    "id": 39,
+    "title": "As If It's Your Last",
+    "album": "As If It's Your Last",
+    "artist": "BLACKPINK",
+    "release_year": 2017,
+    "release_month": 6,
+    "release_date": 22
+  },
+  {
+    "id": 40,
+    "title": "Face-off",
+    "album": "FACE",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 24
+  },
+  {
+    "id": 41,
+    "title": "ANTIFRAGILE",
+    "album": "ANTIFRAGILE",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 17
+  },
+  {
+    "id": 42,
+    "title": "Cookie",
+    "album": "NewJeans 1st EP 'New Jeans'",
+    "artist": "NewJeans",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 1
+  },
+  {
+    "id": 43,
+    "title": "Cream Soda",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 44,
+    "title": "LALISA",
+    "album": "LALISA",
+    "artist": "LISA",
+    "release_year": 2021,
+    "release_month": 9,
+    "release_date": 10
+  },
+  {
+    "id": 45,
+    "title": "Set Me Free Pt.2",
+    "album": "FACE",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 24
+  },
+  {
+    "id": 46,
+    "title": "Butter",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 47,
+    "title": "Like Crazy (English Version)",
+    "album": "Like Crazy (Remixes)",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 48,
+    "title": "Typa Girl",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 49,
+    "title": "seasons",
+    "album": "summer flows 0.02",
+    "artist": "wave to earth",
+    "release_year": 2020,
+    "release_month": 8,
+    "release_date": 4
+  },
+  {
+    "id": 50,
+    "title": "Pink Venom",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 51,
+    "title": "Alone",
+    "album": "FACE",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 24
+  },
+  {
+    "id": 52,
+    "title": "Hurt",
+    "album": "NewJeans 1st EP 'New Jeans'",
+    "artist": "NewJeans",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 1
+  },
+  {
+    "id": 53,
+    "title": "BOOMBAYAH",
+    "album": "SQUARE ONE",
+    "artist": "BLACKPINK",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 8
+  },
+  {
+    "id": 54,
+    "title": "GRL GVNG",
+    "album": "GRL GVNG",
+    "artist": "XG",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 30
+  },
+  {
+    "id": 55,
+    "title": "Let Me In",
+    "album": "Let Me In",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 12
+  },
+  {
+    "id": 56,
+    "title": "Permission to Dance",
+    "album": "Permission to Dance",
+    "artist": "BTS",
+    "release_year": 2021,
+    "release_month": 7,
+    "release_date": 23
+  },
+  {
+    "id": 57,
+    "title": "Hold On Tight",
+    "album": "Hold On Tight",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 30
+  },
+  {
+    "id": 58,
+    "title": "Broken Melodies",
+    "album": "Broken Melodies",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 19
+  },
+  {
+    "id": 59,
+    "title": "Tinnitus (Wanna be a rock)",
+    "album": "The Name Chapter: TEMPTATION",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 27
+  },
+  {
+    "id": 60,
+    "title": "HOT",
+    "album": "SEVENTEEN 4th Album 'Face the Sun'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 27
+  },
+  {
+    "id": 61,
+    "title": "Yet To Come",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 62,
+    "title": "Love Shot",
+    "album": "LOVE SHOT The 5th Album Repackage",
+    "artist": "EXO",
+    "release_year": 2018,
+    "release_month": 12,
+    "release_date": 13
+  },
+  {
+    "id": 63,
+    "title": "Drunk-Dazed",
+    "album": "BORDER : CARNIVAL",
+    "artist": "ENHYPEN",
+    "release_year": 2021,
+    "release_month": 4,
+    "release_date": 26
+  },
+  {
+    "id": 64,
+    "title": "How You Like That",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 65,
+    "title": "PLAYING WITH FIRE",
+    "album": "SQUARE TWO",
+    "artist": "BLACKPINK",
+    "release_year": 2016,
+    "release_month": 11,
+    "release_date": 1
+  },
+  {
+    "id": 66,
+    "title": "LEFT RIGHT",
+    "album": "SHOOTING STAR",
+    "artist": "XG",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 25
+  },
+  {
+    "id": 67,
+    "title": "Seven (feat. Latto) (Clean Ver.)",
+    "album": "Seven (Weekday Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 68,
+    "title": "Polaroid Love",
+    "album": "DIMENSION : ANSWER",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 1,
+    "release_date": 10
+  },
+  {
+    "id": 69,
+    "title": "Candy",
+    "album": "Candy - Winter Special Mini Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 12,
+    "release_date": 16
+  },
+  {
+    "id": 70,
+    "title": "Seven (feat. Latto) (Explicit Ver.)",
+    "album": "Seven (Weekday Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 71,
+    "title": "WHISTLE",
+    "album": "SQUARE ONE",
+    "artist": "BLACKPINK",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 8
+  },
+  {
+    "id": 72,
+    "title": "ELEVEN",
+    "album": "ELEVEN",
+    "artist": "IVE",
+    "release_year": 2021,
+    "release_month": 12,
+    "release_date": 1
+  },
+  {
+    "id": 73,
+    "title": "SHOOTING STAR",
+    "album": "SHOOTING STAR",
+    "artist": "XG",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 25
+  },
+  {
+    "id": 74,
+    "title": "ANTIFRAGILE",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 75,
+    "title": "They Don't Love It",
+    "album": "Jackman.",
+    "artist": "Jack Harlow",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 28
+  },
+  {
+    "id": 76,
+    "title": "Perfume",
+    "album": "Perfume - The 1st Mini Album",
+    "artist": "NCT DOJAEJUNG",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 17
+  },
+  {
+    "id": 77,
+    "title": "FEVER",
+    "album": "BORDER : CARNIVAL",
+    "artist": "ENHYPEN",
+    "release_year": 2021,
+    "release_month": 4,
+    "release_date": 26
+  },
+  {
+    "id": 78,
+    "title": "Psycho",
+    "album": "_he ReVe Festival Finale",
+    "artist": "Red Velvet",
+    "release_year": 2019,
+    "release_month": 12,
+    "release_date": 23
+  },
+  {
+    "id": 79,
+    "title": "Fighting (Feat. Lee Young Ji)",
+    "album": "BSS 1st Single Album 'SECOND WIND'",
+    "artist": "BSS",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 6
+  },
+  {
+    "id": 80,
+    "title": "Zero",
+    "album": "Zero",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 3
+  },
+  {
+    "id": 81,
+    "title": "On The Ground",
+    "album": "R",
+    "artist": "ROS_",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 12
+  },
+  {
+    "id": 82,
+    "title": "Sour Grapes",
+    "album": "FEARLESS",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 2
+  },
+  {
+    "id": 83,
+    "title": "WHATS POPPIN",
+    "album": "Sweet Action",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 3,
+    "release_date": 13
+  },
+  {
+    "id": 84,
+    "title": "Sacrifice (Eat Me Up)",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 85,
+    "title": "bad",
+    "album": "0.1 flaws and all.",
+    "artist": "wave to earth",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 20
+  },
+  {
+    "id": 86,
+    "title": "Lovesick Girls",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 87,
+    "title": "SOLO",
+    "album": "SOLO",
+    "artist": "JENNIE",
+    "release_year": 2018,
+    "release_month": 11,
+    "release_date": 12
+  },
+  {
+    "id": 88,
+    "title": "0X1=LOVESONG (I Know I Love You) feat. Seori",
+    "album": "The Chaos Chapter: FREEZE",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 31
+  },
+  {
+    "id": 89,
+    "title": "Tyler Herro",
+    "album": "Thats What They All Say",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 11
+  },
+  {
+    "id": 90,
+    "title": "Bills",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 91,
+    "title": "Promise",
+    "album": "Promise",
+    "artist": "Jimin",
+    "release_year": 2018,
+    "release_month": 12,
+    "release_date": 31
+  },
+  {
+    "id": 92,
+    "title": "FEARLESS",
+    "album": "FEARLESS",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 2
+  },
+  {
+    "id": 93,
+    "title": "Hard to Love",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 94,
+    "title": "Hear Me Out",
+    "album": "Hear Me Out",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 30
+  },
+  {
+    "id": 95,
+    "title": "Rock with you",
+    "album": "SEVENTEEN 9th Mini Album 'Attacca'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 96,
+    "title": "Gone",
+    "album": "R",
+    "artist": "ROS_",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 12
+  },
+  {
+    "id": 97,
+    "title": "Barbie Dreams (feat. Kaliii) [From Barbie The Album]",
+    "album": "Barbie Dreams (feat. Kaliii) [From Barbie The Album]",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 6
+  },
+  {
+    "id": 98,
+    "title": "All Eyes On Me",
+    "album": "ME",
+    "artist": "JISOO",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 31
+  },
+  {
+    "id": 99,
+    "title": "Dreamers - Music from the FIFA World Cup Qatar 2022 Official Soundtrack",
+    "album": "FIFA World Cup Qatar 2022 (Official Soundtrack)",
+    "artist": "FIFA Sound",
+    "release_year": 2022,
+    "release_month": 12,
+    "release_date": 9
+  },
+  {
+    "id": 100,
+    "title": "Seven (feat. Latto) (Summer Mix)",
+    "album": "Seven (Weekday Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 101,
+    "title": "F*ck My Life",
+    "album": "SEVENTEEN 10th Mini Album 'FML'",
+    "artist": "SEVENTEEN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 102,
+    "title": "Thirsty",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  },
+  {
+    "id": 103,
+    "title": "Good Boy Gone Bad",
+    "album": "minisode 2: Thursday's Child",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 104,
+    "title": "Seven (feat. Latto) (Band Ver.)",
+    "album": "Seven (Weekday Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 105,
+    "title": "With you",
+    "album": "Our Blues, Pt. 4 (Original Television Soundtrack)",
+    "artist": "Jimin",
+    "release_year": 2022,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 106,
+    "title": "LO$ER=LO_R",
+    "album": "The Chaos Chapter: FIGHT OR ESCAPE",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2021,
+    "release_month": 8,
+    "release_date": 17
+  },
+  {
+    "id": 107,
+    "title": "Stay With Me",
+    "album": "Guardian (Original Television Soundtrack), Pt. 1",
+    "artist": "CHANYEOL",
+    "release_year": 2016,
+    "release_month": 12,
+    "release_date": 3
+  },
+  {
+    "id": 108,
+    "title": "STAY",
+    "album": "SQUARE TWO",
+    "artist": "BLACKPINK",
+    "release_year": 2016,
+    "release_month": 11,
+    "release_date": 1
+  },
+  {
+    "id": 109,
+    "title": "SHALALA",
+    "album": "SHALALA - The 1st Mini Album",
+    "artist": "TAEYONG",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 5
+  },
+  {
+    "id": 110,
+    "title": "ICKY",
+    "album": "KARD 6th Mini Album 'ICKY'",
+    "artist": "KARD",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 23
+  },
+  {
+    "id": 111,
+    "title": "_WORLD",
+    "album": "SEVENTEEN 4th Album Repackage 'SECTOR 17'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 18
+  },
+  {
+    "id": 112,
+    "title": "HARD",
+    "album": "HARD - The 8th Album",
+    "artist": "SHINee",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 26
+  },
+  {
+    "id": 113,
+    "title": "Savage",
+    "album": "Savage - The 1st Mini Album",
+    "artist": "aespa",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 5
+  },
+  {
+    "id": 114,
+    "title": "DARARI",
+    "album": "THE SECOND STEP : CHAPTER ONE",
+    "artist": "TREASURE",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 15
+  },
+  {
+    "id": 115,
+    "title": "I Don't Understand But I Luv U",
+    "album": "SEVENTEEN 10th Mini Album 'FML'",
+    "artist": "SEVENTEEN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 116,
+    "title": "Angel Pt. 1 (feat. Jimin of BTS, JVKE & Muni Long) - Trailer Version",
+    "album": "Angel Pt. 1 (feat. Jimin of BTS, JVKE & Muni Long) [Trailer Version]",
+    "artist": "Fast & Furious: The Fast Saga",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 117,
+    "title": "Devil by the Window",
+    "album": "The Name Chapter: TEMPTATION",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 27
+  },
+  {
+    "id": 118,
+    "title": "MOVE (T5)",
+    "album": "MOVE (T5)",
+    "artist": "TREASURE",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 119,
+    "title": "Shootout",
+    "album": "Shootout",
+    "artist": "Izzamuzzic",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 30
+  },
+  {
+    "id": 120,
+    "title": "Some",
+    "album": "Red Diary Page.1",
+    "artist": "BOL4",
+    "release_year": 2017,
+    "release_month": 9,
+    "release_date": 28
+  },
+  {
+    "id": 121,
+    "title": "Kill This Love",
+    "album": "Kill This Love",
+    "artist": "BLACKPINK",
+    "release_year": 2019,
+    "release_month": 4,
+    "release_date": 5
+  },
+  {
+    "id": 122,
+    "title": "For Youth",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 123,
+    "title": "I DO",
+    "album": "I DO",
+    "artist": "(G)I-DLE",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 13
+  },
+  {
+    "id": 124,
+    "title": "VIBE (feat. Jimin of BTS)",
+    "album": "VIBE (feat. Jimin of BTS)",
+    "artist": "TAEYANG",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 13
+  },
+  {
+    "id": 125,
+    "title": "Next Level",
+    "album": "Next Level",
+    "artist": "aespa",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 17
+  },
+  {
+    "id": 126,
+    "title": "VILLAIN",
+    "album": "ALL OUT",
+    "artist": "K/DA",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 6
+  },
+  {
+    "id": 127,
+    "title": "Blue Hour",
+    "album": "minisode1 : Blue Hour",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 26
+  },
+  {
+    "id": 128,
+    "title": "VERY NICE",
+    "album": "Love&Letter repackage album",
+    "artist": "SEVENTEEN",
+    "release_year": 2016,
+    "release_month": 7,
+    "release_date": 4
+  },
+  {
+    "id": 129,
+    "title": "Mmmh",
+    "album": "KAI - The 1st Mini Album",
+    "artist": "KAI",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 30
+  },
+  {
+    "id": 130,
+    "title": "Welcome To MY World (feat. nævis)",
+    "album": "Welcome To MY World (feat. nævis)",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 2
+  },
+  {
+    "id": 131,
+    "title": "Darl+ing",
+    "album": "SEVENTEEN 4th Album 'Face the Sun'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 27
+  },
+  {
+    "id": 132,
+    "title": "eight(Prod.&Feat. SUGA of BTS)",
+    "album": "eight",
+    "artist": "IU",
+    "release_year": 2020,
+    "release_month": 5,
+    "release_date": 6
+  },
+  {
+    "id": 133,
+    "title": "Farewell, Neverland",
+    "album": "The Name Chapter: TEMPTATION",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 27
+  },
+  {
+    "id": 134,
+    "title": "Maria",
+    "album": "María",
+    "artist": "Hwa Sa",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 29
+  },
+  {
+    "id": 135,
+    "title": "Way Back Home (feat. Conor Maynard) - Sam Feldt Edit",
+    "album": "Way Back Home (feat. Conor Maynard) [Sam Feldt Edit]",
+    "artist": "SHAUN",
+    "release_year": 2018,
+    "release_month": 12,
+    "release_date": 21
+  },
+  {
+    "id": 136,
+    "title": "Shootout (Sped Up)",
+    "album": "Shootout (Sped Up)",
+    "artist": "Izzamuzzic",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 8
+  },
+  {
+    "id": 137,
+    "title": "Life Is Still Going On",
+    "album": "Hello Future - The 1st Album Repackage",
+    "artist": "NCT DREAM",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 138,
+    "title": "Feel My Rhythm",
+    "album": "_he ReVe Festival 2022 - Feel My Rhythm",
+    "artist": "Red Velvet",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 21
+  },
+  {
+    "id": 139,
+    "title": "Pretty Savage",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 140,
+    "title": "WHATS POPPIN (feat. DaBaby, Tory Lanez & Lil Wayne) - Remix",
+    "album": "WHATS POPPIN (feat. DaBaby, Tory Lanez & Lil Wayne) [Remix]",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 24
+  },
+  {
+    "id": 141,
+    "title": "DDU-DU DDU-DU",
+    "album": "SQUARE UP",
+    "artist": "BLACKPINK",
+    "release_year": 2018,
+    "release_month": 6,
+    "release_date": 15
+  },
+  {
+    "id": 142,
+    "title": "Butter",
+    "album": "Butter (Hotter, Sweeter, Cooler)",
+    "artist": "BTS",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 4
+  },
+  {
+    "id": 143,
+    "title": "Super Tuna",
+    "album": "Super Tuna",
+    "artist": "JIN",
+    "release_year": 2021,
+    "release_month": 12,
+    "release_date": 4
+  },
+  {
+    "id": 144,
+    "title": "CHEERS",
+    "album": "SEVENTEEN 4th Album Repackage 'SECTOR 17'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 18
+  },
+  {
+    "id": 145,
+    "title": "Chaconne",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 146,
+    "title": "FEARLESS (2023 Ver.)",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 147,
+    "title": "Tell Me",
+    "album": "THE FIFTY",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 18
+  },
+  {
+    "id": 148,
+    "title": "Seven (feat. Latto) (Clean Ver.)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 149,
+    "title": "SHOUT OUT",
+    "album": "MANIFESTO : DAY 1",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 4
+  },
+  {
+    "id": 150,
+    "title": "Bad Boy",
+    "album": "The Perfect Red Velvet - The 2nd Album Repackage",
+    "artist": "Red Velvet",
+    "release_year": 2018,
+    "release_month": 1,
+    "release_date": 29
+  },
+  {
+    "id": 151,
+    "title": "Seven (feat. Latto) (Explicit Ver.)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 152,
+    "title": "LILAC",
+    "album": "IU 5th Album 'LILAC'",
+    "artist": "IU",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 25
+  },
+  {
+    "id": 153,
+    "title": "EVERYTHING",
+    "album": "TEAM BABY",
+    "artist": "The Black Skirts",
+    "release_year": 2017,
+    "release_month": 5,
+    "release_date": 30
+  },
+  {
+    "id": 154,
+    "title": "SOS",
+    "album": "REALIEZ",
+    "artist": "KANGDANIEL",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 19
+  },
+  {
+    "id": 155,
+    "title": "JUMP",
+    "album": "HARMONY : ALL IN",
+    "artist": "P1Harmony",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 8
+  },
+  {
+    "id": 156,
+    "title": "POP/STARS",
+    "album": "POP/STARS",
+    "artist": "K/DA",
+    "release_year": 2018,
+    "release_month": 11,
+    "release_date": 3
+  },
+  {
+    "id": 157,
+    "title": "ZOOM",
+    "album": "ZOOM",
+    "artist": "Jessi",
+    "release_year": 2022,
+    "release_month": 4,
+    "release_date": 13
+  },
+  {
+    "id": 158,
+    "title": "HIP",
+    "album": "reality in BLACK",
+    "artist": "MAMAMOO",
+    "release_year": 2019,
+    "release_month": 11,
+    "release_date": 14
+  },
+  {
+    "id": 159,
+    "title": "LOVE SCENARIO",
+    "album": "Return",
+    "artist": "iKON",
+    "release_year": 2018,
+    "release_month": 1,
+    "release_date": 25
+  },
+  {
+    "id": 160,
+    "title": "Beatbox",
+    "album": "Beatbox - The 2nd Album Repackage",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 30
+  },
+  {
+    "id": 161,
+    "title": "Yours",
+    "album": "Jirisan (Original Television Soundtrack) Pt. 4",
+    "artist": "JIN",
+    "release_year": 2021,
+    "release_month": 11,
+    "release_date": 7
+  },
+  {
+    "id": 162,
+    "title": "Salty & Sweet",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  },
+  {
+    "id": 163,
+    "title": "Regret It",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 164,
+    "title": "Ice Cream (with Selena Gomez)",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 165,
+    "title": "��_ 룰�_ Russian Roulette",
+    "album": "Russian Roulette - The 3rd Mini Album",
+    "artist": "Red Velvet",
+    "release_year": 2016,
+    "release_month": 9,
+    "release_date": 7
+  },
+  {
+    "id": 166,
+    "title": "Anti-Romantic",
+    "album": "The Chaos Chapter: FREEZE",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 31
+  },
+  {
+    "id": 167,
+    "title": "Don't Wanna Cry",
+    "album": "SEVENTEEN 4th Mini Album _l1",
+    "artist": "SEVENTEEN",
+    "release_year": 2017,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 168,
+    "title": "Cinderella",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 169,
+    "title": "Good Parts (when the quality is bad but I am)",
+    "album": "ANTIFRAGILE",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 17
+  },
+  {
+    "id": 170,
+    "title": "Churchill Downs (feat. Drake)",
+    "album": "Come Home The Kids Miss You",
+    "artist": "Jack Harlow",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 6
+  },
+  {
+    "id": 171,
+    "title": "The Eve",
+    "album": "THE WAR - The 4th Album",
+    "artist": "EXO",
+    "release_year": 2017,
+    "release_month": 7,
+    "release_date": 18
+  },
+  {
+    "id": 172,
+    "title": "Private Party",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 173,
+    "title": "INVU",
+    "album": "INVU - The 3rd Album",
+    "artist": "TAEYEON",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 14
+  },
+  {
+    "id": 174,
+    "title": "Hot Sauce",
+    "album": "Hot Sauce - The 1st Album",
+    "artist": "NCT DREAM",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 10
+  },
+  {
+    "id": 175,
+    "title": "Seven (feat. Latto) (Lofi Mix)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 176,
+    "title": "PANDORA",
+    "album": "PANDORA'S BOX",
+    "artist": "MAVE:",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 25
+  },
+  {
+    "id": 177,
+    "title": "No Makeup",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 178,
+    "title": "Seven (feat. Latto) (Island Mix)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 179,
+    "title": "Seven (feat. Latto) (Nightfall Mix)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 180,
+    "title": "Future Perfect (Pass the MIC)",
+    "album": "MANIFESTO : DAY 1",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 4
+  },
+  {
+    "id": 181,
+    "title": "Rush Hour (Feat. j-hope of BTS)",
+    "album": "Rush Hour",
+    "artist": "Crush",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 22
+  },
+  {
+    "id": 182,
+    "title": "WAVE",
+    "album": "WAVE",
+    "artist": "IVE",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 183,
+    "title": "Love Fool",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 184,
+    "title": "Seven (feat. Latto) (Festival Mix)",
+    "album": "Seven (Weekend Ver.)",
+    "artist": "Jung Kook",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 185,
+    "title": "Queencard",
+    "album": "I feel",
+    "artist": "(G)I-DLE",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 15
+  },
+  {
+    "id": 186,
+    "title": "Hello Future",
+    "album": "Hello Future - The 1st Album Repackage",
+    "artist": "NCT DREAM",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 187,
+    "title": "Pink Venom",
+    "album": "Pink Venom",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 19
+  },
+  {
+    "id": 188,
+    "title": "Don't Know What To Do",
+    "album": "Kill This Love",
+    "artist": "BLACKPINK",
+    "release_year": 2019,
+    "release_month": 4,
+    "release_date": 5
+  },
+  {
+    "id": 189,
+    "title": "Way Back Home",
+    "album": "Take",
+    "artist": "SHAUN",
+    "release_year": 2018,
+    "release_month": 6,
+    "release_date": 27
+  },
+  {
+    "id": 190,
+    "title": "Given-Taken",
+    "album": "BORDER : DAY ONE",
+    "artist": "ENHYPEN",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 30
+  },
+  {
+    "id": 191,
+    "title": "Fate",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 192,
+    "title": "Hear Me Out",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 193,
+    "title": "Common Ground",
+    "album": "Jackman.",
+    "artist": "Jack Harlow",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 28
+  },
+  {
+    "id": 194,
+    "title": "Monster",
+    "album": "EX'ACT",
+    "artist": "EXO",
+    "release_year": 2016,
+    "release_month": 6,
+    "release_date": 9
+  },
+  {
+    "id": 195,
+    "title": "Angel Pt. 2 - Acoustic Version",
+    "album": "Angel Pt. 2 (Acoustic Version)",
+    "artist": "Fast & Furious: The Fast Saga",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 13
+  },
+  {
+    "id": 196,
+    "title": "Forever Young",
+    "album": "SQUARE UP",
+    "artist": "BLACKPINK",
+    "release_year": 2018,
+    "release_month": 6,
+    "release_date": 15
+  },
+  {
+    "id": 197,
+    "title": "Shadow",
+    "album": "SEVENTEEN 4th Album 'Face the Sun'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 27
+  },
+  {
+    "id": 198,
+    "title": "I WANNA SEE SOME ASS (feat. jetsonmade)",
+    "album": "Sweet Action",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 3,
+    "release_date": 13
+  },
+  {
+    "id": 199,
+    "title": "RUN2U",
+    "album": "YOUNG-LUV.COM",
+    "artist": "STAYC",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 21
+  },
+  {
+    "id": 200,
+    "title": "Lucid Dream",
+    "album": "Savage - The 1st Mini Album",
+    "artist": "aespa",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 5
+  },
+  {
+    "id": 201,
+    "title": "Another Day",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 202,
+    "title": "Born Singer",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 203,
+    "title": "Teddy Bear",
+    "album": "Teddy Bear",
+    "artist": "STAYC",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 14
+  },
+  {
+    "id": 204,
+    "title": "Darl+ing",
+    "album": "Darl+ing",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 4,
+    "release_date": 15
+  },
+  {
+    "id": 205,
+    "title": "9 and Three Quarters (Run Away)",
+    "album": "The Dream Chapter: MAGIC",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2019,
+    "release_month": 10,
+    "release_date": 21
+  },
+  {
+    "id": 206,
+    "title": "Lovin' Me",
+    "album": "THE FIFTY",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 18
+  },
+  {
+    "id": 207,
+    "title": "JIKJIN",
+    "album": "THE SECOND STEP : CHAPTER ONE",
+    "artist": "TREASURE",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 15
+  },
+  {
+    "id": 208,
+    "title": "MORE",
+    "album": "MORE",
+    "artist": "K/DA",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 28
+  },
+  {
+    "id": 209,
+    "title": "After School",
+    "album": "We play",
+    "artist": "Weeekly",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 17
+  },
+  {
+    "id": 210,
+    "title": "To you",
+    "album": "SEVENTEEN 9th Mini Album 'Attacca'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 211,
+    "title": "Opening Sequence",
+    "album": "minisode 2: Thursday's Child",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 212,
+    "title": "Pretty U",
+    "album": "SEVENTEEN 1ST ALBUM [FIRST _OVE&LETTER]",
+    "artist": "SEVENTEEN",
+    "release_year": 2016,
+    "release_month": 4,
+    "release_date": 25
+  },
+  {
+    "id": 213,
+    "title": "Angel Pt. 2 - Sped Up",
+    "album": "Angel Pt. 2 (Acoustic Version)",
+    "artist": "Fast & Furious: The Fast Saga",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 13
+  },
+  {
+    "id": 214,
+    "title": "Say Yes",
+    "album": "Moonlovers - Scarlet Heart Ryeo (Original Television Soundtrack), Pt. 2",
+    "artist": "Various Artists",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 29
+  },
+  {
+    "id": 215,
+    "title": "Let Me In",
+    "album": "EXIST  The 7th Album",
+    "artist": "EXO",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 10
+  },
+  {
+    "id": 216,
+    "title": "Impurities",
+    "album": "ANTIFRAGILE",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 17
+  },
+  {
+    "id": 217,
+    "title": "Blue Flame",
+    "album": "FEARLESS",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 2
+  },
+  {
+    "id": 218,
+    "title": "Yeah Yeah Yeah",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 219,
+    "title": "Ready For Love",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 220,
+    "title": "Red Flavor",
+    "album": "The Red Summer - Summer Mini Album",
+    "artist": "Red Velvet",
+    "release_year": 2017,
+    "release_month": 7,
+    "release_date": 9
+  },
+  {
+    "id": 221,
+    "title": "ASAP",
+    "album": "STAYDOM",
+    "artist": "STAYC",
+    "release_year": 2021,
+    "release_month": 4,
+    "release_date": 8
+  },
+  {
+    "id": 222,
+    "title": "CALL ME BABY",
+    "album": "EXODUS - The 2nd Album",
+    "artist": "EXO",
+    "release_year": 2015,
+    "release_month": 3,
+    "release_date": 30
+  },
+  {
+    "id": 223,
+    "title": "MOMMAE",
+    "album": "Worldwide",
+    "artist": "Jay Park",
+    "release_year": 2015,
+    "release_month": 11,
+    "release_date": 5
+  },
+  {
+    "id": 224,
+    "title": "Crazy Over You",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 225,
+    "title": "Beautiful",
+    "album": "Guardian (Original Television Soundtrack), Pt. 4",
+    "artist": "Crush",
+    "release_year": 2016,
+    "release_month": 12,
+    "release_date": 17
+  },
+  {
+    "id": 226,
+    "title": "FAKE LOVE",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 227,
+    "title": "Zero (J.I.D Remix)",
+    "album": "Zero (J.I.D Remix)",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 20
+  },
+  {
+    "id": 228,
+    "title": "Dream Girl - Remix",
+    "album": "Dream Girl (Remix)",
+    "artist": "Ir Sais",
+    "release_year": 2019,
+    "release_month": 12,
+    "release_date": 6
+  },
+  {
+    "id": 229,
+    "title": "Ditto",
+    "album": "NewJeans 'OMG'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 2
+  },
+  {
+    "id": 230,
+    "title": "BOOM",
+    "album": "We Boom - The 3rd Mini Album",
+    "artist": "NCT DREAM",
+    "release_year": 2019,
+    "release_month": 7,
+    "release_date": 26
+  },
+  {
+    "id": 231,
+    "title": "Shootout (Slowed + Reverb)",
+    "album": "Shootout (Slowed + Reverb)",
+    "artist": "Izzamuzzic",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 8
+  },
+  {
+    "id": 232,
+    "title": "Like Crazy (Deep House Remix)",
+    "album": "Like Crazy (Remixes)",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 233,
+    "title": "Step Back",
+    "album": "Step Back",
+    "artist": "GOT the beat",
+    "release_year": 2022,
+    "release_month": 1,
+    "release_date": 3
+  },
+  {
+    "id": 234,
+    "title": "DON QUIXOTE",
+    "album": "SEVENTEEN 4th Album 'Face the Sun'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 27
+  },
+  {
+    "id": 235,
+    "title": "Film out",
+    "album": "Film out",
+    "artist": "BTS",
+    "release_year": 2021,
+    "release_month": 4,
+    "release_date": 1
+  },
+  {
+    "id": 236,
+    "title": "Abyss",
+    "album": "Abyss",
+    "artist": "JIN",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 3
+  },
+  {
+    "id": 237,
+    "title": "ISTJ",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 238,
+    "title": "Left & Right",
+    "album": "Heng:garæ",
+    "artist": "SEVENTEEN",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 22
+  },
+  {
+    "id": 239,
+    "title": "CLAP",
+    "album": "SEVENTEEN 2ND ALBUM 'TEEN, AGE' (2)",
+    "artist": "SEVENTEEN",
+    "release_year": 2017,
+    "release_month": 11,
+    "release_date": 6
+  },
+  {
+    "id": 240,
+    "title": "Karma",
+    "album": "DARK BLOOD",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 22
+  },
+  {
+    "id": 241,
+    "title": "Replay",
+    "album": "The SHINee World - The First Album",
+    "artist": "SHINee",
+    "release_year": 2008,
+    "release_month": 8,
+    "release_date": 28
+  },
+  {
+    "id": 242,
+    "title": "Love To Hate Me",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 243,
+    "title": "Ready to love",
+    "album": "SEVENTEEN 8th Mini Album 'Your Choice'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 18
+  },
+  {
+    "id": 244,
+    "title": "The Happiest Girl",
+    "album": "BORN PINK",
+    "artist": "BLACKPINK",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 245,
+    "title": "Like Crazy (UK Garage Remix)",
+    "album": "Like Crazy (Remixes)",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 246,
+    "title": "Dust",
+    "album": "SEVENTEEN 10th Mini Album 'FML'",
+    "artist": "SEVENTEEN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 247,
+    "title": "Everytime",
+    "album": "Descendants Of The Sun Pt.2 (Original Television Soundtrack)",
+    "artist": "CHEN",
+    "release_year": 2016,
+    "release_month": 2,
+    "release_date": 25
+  },
+  {
+    "id": 248,
+    "title": "STEREOTYPE",
+    "album": "STEREOTYPE",
+    "artist": "STAYC",
+    "release_year": 2021,
+    "release_month": 9,
+    "release_date": 6
+  },
+  {
+    "id": 249,
+    "title": "FOREVER 1",
+    "album": "FOREVER 1 - The 7th Album",
+    "artist": "Girls' Generation",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 5
+  },
+  {
+    "id": 250,
+    "title": "BANG BANG BANG",
+    "album": "MADE",
+    "artist": "BIGBANG",
+    "release_year": 2016,
+    "release_month": 12,
+    "release_date": 13
+  },
+  {
+    "id": 251,
+    "title": "7PM (Feat. Peder Elias)",
+    "album": "BSS 1st Single Album 'SECOND WIND'",
+    "artist": "BSS",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 6
+  },
+  {
+    "id": 252,
+    "title": "Fine",
+    "album": "My Voice - The 1st Album",
+    "artist": "TAEYEON",
+    "release_year": 2017,
+    "release_month": 2,
+    "release_date": 28
+  },
+  {
+    "id": 253,
+    "title": "HELLO",
+    "album": "THE SECOND STEP : CHAPTER TWO",
+    "artist": "TREASURE",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 4
+  },
+  {
+    "id": 254,
+    "title": "No-Return (Into the unknown)",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 255,
+    "title": "Lonely Boy (The tattoo on my ring finger)",
+    "album": "minisode 2: Thursday's Child",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 256,
+    "title": "MAGO",
+    "album": ":Walpurgis Night",
+    "artist": "GFRIEND",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 9
+  },
+  {
+    "id": 257,
+    "title": "MASCARA",
+    "album": "MASCARA",
+    "artist": "XG",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 29
+  },
+  {
+    "id": 258,
+    "title": "Blessed-Cursed",
+    "album": "DIMENSION : ANSWER",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 1,
+    "release_date": 10
+  },
+  {
+    "id": 259,
+    "title": "April shower",
+    "album": "SEVENTEEN 10th Mini Album 'FML'",
+    "artist": "SEVENTEEN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 24
+  },
+  {
+    "id": 260,
+    "title": "Black Mamba",
+    "album": "Black Mamba",
+    "artist": "aespa",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 17
+  },
+  {
+    "id": 261,
+    "title": "Happy Fools (feat. Coi Leray)",
+    "album": "The Name Chapter: TEMPTATION",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 27
+  },
+  {
+    "id": 262,
+    "title": "LOVE ME RIGHT",
+    "album": "LOVE ME RIGHT - The 2nd Album Repackage",
+    "artist": "EXO",
+    "release_year": 2015,
+    "release_month": 6,
+    "release_date": 3
+  },
+  {
+    "id": 263,
+    "title": "Denver",
+    "album": "Jackman.",
+    "artist": "Jack Harlow",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 28
+  },
+  {
+    "id": 264,
+    "title": "Peaches",
+    "album": "Peaches - The 2nd Mini Album",
+    "artist": "KAI",
+    "release_year": 2021,
+    "release_month": 11,
+    "release_date": 30
+  },
+  {
+    "id": 265,
+    "title": "Over Me",
+    "album": "BOYS PLANET - ARTIST BATTLE",
+    "artist": "BOYS PLANET",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 6
+  },
+  {
+    "id": 266,
+    "title": "light",
+    "album": "light",
+    "artist": "wave to earth",
+    "release_year": 2019,
+    "release_month": 11,
+    "release_date": 18
+  },
+  {
+    "id": 267,
+    "title": "Jelly Pop",
+    "album": "BOYS PLANET - FINAL TOP9 BATTLE",
+    "artist": "BOYS PLANET",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 21
+  },
+  {
+    "id": 268,
+    "title": "BBIBBI",
+    "album": "BBIBBI",
+    "artist": "IU",
+    "release_year": 2018,
+    "release_month": 10,
+    "release_date": 10
+  },
+  {
+    "id": 269,
+    "title": "#menow",
+    "album": "Unlock My World",
+    "artist": "fromis_9",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 5
+  },
+  {
+    "id": 270,
+    "title": "Make It Right (feat. Lauv)",
+    "album": "Make It Right (feat. Lauv)",
+    "artist": "BTS",
+    "release_year": 2019,
+    "release_month": 10,
+    "release_date": 18
+  },
+  {
+    "id": 271,
+    "title": "Panorama",
+    "album": "One-reeler / Act IV",
+    "artist": "IZ*ONE",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 7
+  },
+  {
+    "id": 272,
+    "title": ",�, (Eyes, Nose, Lips)",
+    "album": "RISE",
+    "artist": "TAEYANG",
+    "release_year": 2014,
+    "release_month": 6,
+    "release_date": 3
+  },
+  {
+    "id": 273,
+    "title": "Tonight",
+    "album": "Tonight",
+    "artist": "JIN",
+    "release_year": 2019,
+    "release_month": 6,
+    "release_date": 5
+  },
+  {
+    "id": 274,
+    "title": "MORE",
+    "album": "MORE",
+    "artist": "j-hope",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 1
+  },
+  {
+    "id": 275,
+    "title": "Chicken Noodle Soup (feat. Becky G)",
+    "album": "Chicken Noodle Soup (feat. Becky G)",
+    "artist": "j-hope",
+    "release_year": 2019,
+    "release_month": 9,
+    "release_date": 27
+  },
+  {
+    "id": 276,
+    "title": "Never Goodbye",
+    "album": "Glitch Mode - The 2nd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 28
+  },
+  {
+    "id": 277,
+    "title": "One and Only",
+    "album": "One and Only",
+    "artist": "ENHYPEN",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 11
+  },
+  {
+    "id": 278,
+    "title": "You Never Know",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 279,
+    "title": "I'm Unhappy",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  },
+  {
+    "id": 280,
+    "title": "Already Best Friends (feat. Chris Brown)",
+    "album": "Thats What They All Say",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 11
+  },
+  {
+    "id": 281,
+    "title": "Peek-A-Boo",
+    "album": "Perfect Velvet - The 2nd Album",
+    "artist": "Red Velvet",
+    "release_year": 2017,
+    "release_month": 11,
+    "release_date": 17
+  },
+  {
+    "id": 282,
+    "title": "Ichu Ichu",
+    "album": "Vedi (Original Motion Picture Soundtrack)",
+    "artist": "Vijay Antony",
+    "release_year": 2011,
+    "release_month": 9,
+    "release_date": 5
+  },
+  {
+    "id": 283,
+    "title": "Birthday",
+    "album": "Birthday - SM STATION : NCT LAB",
+    "artist": "TEN",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 26
+  },
+  {
+    "id": 284,
+    "title": "Lotto",
+    "album": "LOTTO - The 3rd Album Repackage",
+    "artist": "EXO",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 18
+  },
+  {
+    "id": 285,
+    "title": "Cat & Dog",
+    "album": "The Dream Chapter: STAR",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2019,
+    "release_month": 3,
+    "release_date": 4
+  },
+  {
+    "id": 286,
+    "title": "TRICKY HOUSE",
+    "album": "HOUSE OF TRICKY : Doorbell Ringing",
+    "artist": "xikers",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 30
+  },
+  {
+    "id": 287,
+    "title": "Love, Maybe",
+    "album": "Love, Maybe (A Business Proposal OST Special Track)",
+    "artist": "MeloMance",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 18
+  },
+  {
+    "id": 288,
+    "title": "Heart Attack (�)",
+    "album": "Chuu",
+    "artist": "LOONA",
+    "release_year": 2017,
+    "release_month": 12,
+    "release_date": 28
+  },
+  {
+    "id": 289,
+    "title": "Love Talk - English Version",
+    "album": "Love Talk (English Version)",
+    "artist": "WayV",
+    "release_year": 2019,
+    "release_month": 11,
+    "release_date": 5
+  },
+  {
+    "id": 290,
+    "title": "THE BADDEST",
+    "album": "THE BADDEST",
+    "artist": "K/DA",
+    "release_year": 2020,
+    "release_month": 8,
+    "release_date": 27
+  },
+  {
+    "id": 291,
+    "title": "ParadoXXX Invasion",
+    "album": "MANIFESTO : DAY 1",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 4
+  },
+  {
+    "id": 292,
+    "title": "She's In The Rain",
+    "album": "Dawn",
+    "artist": "The Rose",
+    "release_year": 2018,
+    "release_month": 10,
+    "release_date": 4
+  },
+  {
+    "id": 293,
+    "title": "To My Youth",
+    "album": "Red Diary Page.1",
+    "artist": "BOL4",
+    "release_year": 2017,
+    "release_month": 9,
+    "release_date": 28
+  },
+  {
+    "id": 294,
+    "title": "Nail Tech",
+    "album": "Nail Tech",
+    "artist": "Jack Harlow",
+    "release_year": 2022,
+    "release_month": 2,
+    "release_date": 18
+  },
+  {
+    "id": 295,
+    "title": "La Vie en Rose",
+    "album": "COLOR*IZ",
+    "artist": "IZ*ONE",
+    "release_year": 2018,
+    "release_month": 10,
+    "release_date": 29
+  },
+  {
+    "id": 296,
+    "title": "28 Reasons",
+    "album": "28 Reasons - The 1st Mini Album",
+    "artist": "SEULGI",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 4
+  },
+  {
+    "id": 297,
+    "title": "WONDERLAND",
+    "album": "TREASURE EP.FIN: All To Action",
+    "artist": "ATEEZ",
+    "release_year": 2019,
+    "release_month": 10,
+    "release_date": 8
+  },
+  {
+    "id": 298,
+    "title": "DUN DUN",
+    "album": "reminiscence",
+    "artist": "EVERGLOW",
+    "release_year": 2020,
+    "release_month": 2,
+    "release_date": 3
+  },
+  {
+    "id": 299,
+    "title": "BONVOYAGE",
+    "album": "[Apocalypse : From us]",
+    "artist": "Dreamcatcher",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 24
+  },
+  {
+    "id": 300,
+    "title": "Ko Ko Bop",
+    "album": "THE WAR - The 4th Album",
+    "artist": "EXO",
+    "release_year": 2017,
+    "release_month": 7,
+    "release_date": 18
+  },
+  {
+    "id": 301,
+    "title": "Tamed-Dashed",
+    "album": "DIMENSION : DILEMMA",
+    "artist": "ENHYPEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 12
+  },
+  {
+    "id": 302,
+    "title": "BBoom BBoom",
+    "album": "GREAT!",
+    "artist": "MOMOLAND",
+    "release_year": 2018,
+    "release_month": 1,
+    "release_date": 3
+  },
+  {
+    "id": 303,
+    "title": "ZOO",
+    "album": "2021 Winter SMTOWN : SMCU EXPRESS",
+    "artist": "SMTOWN",
+    "release_year": 2021,
+    "release_month": 12,
+    "release_date": 27
+  },
+  {
+    "id": 304,
+    "title": "THRU THE NIGHT (feat. Bryson Tiller)",
+    "album": "Confetti",
+    "artist": "Jack Harlow",
+    "release_year": 2019,
+    "release_month": 9,
+    "release_date": 20
+  },
+  {
+    "id": 305,
+    "title": "I WANT",
+    "album": "I WANT",
+    "artist": "IVE",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 13
+  },
+  {
+    "id": 306,
+    "title": "Blueming",
+    "album": "Love poem",
+    "artist": "IU",
+    "release_year": 2019,
+    "release_month": 11,
+    "release_date": 18
+  },
+  {
+    "id": 307,
+    "title": "WA DA DA",
+    "album": "FIRST IMPACT",
+    "artist": "Kep1er",
+    "release_year": 2022,
+    "release_month": 1,
+    "release_date": 3
+  },
+  {
+    "id": 308,
+    "title": "instagram",
+    "album": "instagram",
+    "artist": "DEAN",
+    "release_year": 2017,
+    "release_month": 12,
+    "release_date": 26
+  },
+  {
+    "id": 309,
+    "title": "Gee",
+    "album": "Oh! - The Second Album",
+    "artist": "Girls' Generation",
+    "release_year": 2010,
+    "release_month": 1,
+    "release_date": 28
+  },
+  {
+    "id": 310,
+    "title": "All I Wanna Do",
+    "album": "EVERYTHING YOU WANTED",
+    "artist": "Jay Park",
+    "release_year": 2016,
+    "release_month": 10,
+    "release_date": 20
+  },
+  {
+    "id": 311,
+    "title": "Higher",
+    "album": "THE FIFTY",
+    "artist": "FIFTY FIFTY",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 18
+  },
+  {
+    "id": 312,
+    "title": "sorry",
+    "album": "Void",
+    "artist": "The Rose",
+    "release_year": 2018,
+    "release_month": 4,
+    "release_date": 16
+  },
+  {
+    "id": 313,
+    "title": "LA DI DA",
+    "album": "-77.82x-78.29",
+    "artist": "EVERGLOW",
+    "release_year": 2020,
+    "release_month": 9,
+    "release_date": 21
+  },
+  {
+    "id": 314,
+    "title": "ETA",
+    "album": "NewJeans 2nd EP 'Get Up'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 315,
+    "title": "4:00A.M.",
+    "album": "MIGNONNE (Mastered by Bernie Grundman)",
+    "artist": "Taeko Onuki",
+    "release_year": 1978,
+    "release_month": 9,
+    "release_date": 21
+  },
+  {
+    "id": 316,
+    "title": "New Jeans",
+    "album": "NewJeans 2nd EP 'Get Up'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 317,
+    "title": "Cool With You",
+    "album": "NewJeans 2nd EP 'Get Up'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 318,
+    "title": "Super Shy",
+    "album": "NewJeans 2nd EP 'Get Up'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 319,
+    "title": "Dynamite",
+    "album": "Dynamite (NightTime Version)",
+    "artist": "BTS",
+    "release_year": 2020,
+    "release_month": 9,
+    "release_date": 18
+  },
+  {
+    "id": 320,
+    "title": "Can't You See Me?",
+    "album": "The Dream Chapter: ETERNITY",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2020,
+    "release_month": 5,
+    "release_date": 18
+  },
+  {
+    "id": 321,
+    "title": "I Will Go To You Like the First Snow",
+    "album": "Guardian (Original Television Soundtrack), Pt. 9",
+    "artist": "AILEE",
+    "release_year": 2017,
+    "release_month": 1,
+    "release_date": 7
+  },
+  {
+    "id": 322,
+    "title": "New thing (Prod. ZICO) (Feat. Homies)",
+    "album": "Street Man Fighter Original Vol.3 (Mission by Rank)",
+    "artist": "Various Artists",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 6
+  },
+  {
+    "id": 323,
+    "title": "Queendom",
+    "album": "Queendom - The 6th Mini Album",
+    "artist": "Red Velvet",
+    "release_year": 2021,
+    "release_month": 8,
+    "release_date": 16
+  },
+  {
+    "id": 324,
+    "title": "Secret Story of the Swan",
+    "album": "Oneiric Diary",
+    "artist": "IZ*ONE",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 15
+  },
+  {
+    "id": 325,
+    "title": "Any song",
+    "album": "Any song",
+    "artist": "ZICO",
+    "release_year": 2020,
+    "release_month": 1,
+    "release_date": 13
+  },
+  {
+    "id": 326,
+    "title": "Eve, Psyche & the Bluebeard_ wife (English Ver.)",
+    "album": "Eve, Psyche & the Bluebeard_ wife (English Ver.)",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 6
+  },
+  {
+    "id": 327,
+    "title": "I'm Gonna Love You",
+    "album": "공�_ (Empathy) - The 1st Mini Album",
+    "artist": "D.O.",
+    "release_year": 2021,
+    "release_month": 7,
+    "release_date": 26
+  },
+  {
+    "id": 328,
+    "title": "Tyler Herro",
+    "album": "Tyler Herro",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 329,
+    "title": "Growl",
+    "album": "The 1st Album 'XOXO' (Repackage)",
+    "artist": "EXO",
+    "release_year": 2013,
+    "release_month": 8,
+    "release_date": 5
+  },
+  {
+    "id": 330,
+    "title": "Ussumu Laresey",
+    "album": "Uthama Puthiran (Original Motion Picture Soundtrack)",
+    "artist": "Vijay Antony",
+    "release_year": 2010,
+    "release_month": 10,
+    "release_date": 5
+  },
+  {
+    "id": 331,
+    "title": "Light a Flame",
+    "album": "; [Semicolon]",
+    "artist": "SEVENTEEN",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 19
+  },
+  {
+    "id": 332,
+    "title": "Blue Flame (2023 Ver.)",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 333,
+    "title": "Don't Go",
+    "album": "The 1st Album 'XOXO' (Repackage)",
+    "artist": "EXO",
+    "release_year": 2013,
+    "release_month": 8,
+    "release_date": 5
+  },
+  {
+    "id": 334,
+    "title": "Gashina",
+    "album": "SUNMI SPECIAL EDITION [Gashina]",
+    "artist": "SUNMI",
+    "release_year": 2017,
+    "release_month": 8,
+    "release_date": 22
+  },
+  {
+    "id": 335,
+    "title": "Your eyes tell",
+    "album": "MAP OF THE SOUL : 7 ~ THE JOURNEY ~",
+    "artist": "BTS",
+    "release_year": 2020,
+    "release_month": 7,
+    "release_date": 14
+  },
+  {
+    "id": 336,
+    "title": "LATATA",
+    "album": "I am",
+    "artist": "(G)I-DLE",
+    "release_year": 2018,
+    "release_month": 5,
+    "release_date": 2
+  },
+  {
+    "id": 337,
+    "title": "Rollin'",
+    "album": "Rollin'",
+    "artist": "Brave Girls",
+    "release_year": 2017,
+    "release_month": 3,
+    "release_date": 7
+  },
+  {
+    "id": 338,
+    "title": "Home",
+    "album": "SEVENTEEN 6TH MINI ALBUM 'YOU MADE MY DAWN'",
+    "artist": "SEVENTEEN",
+    "release_year": 2019,
+    "release_month": 1,
+    "release_date": 21
+  },
+  {
+    "id": 339,
+    "title": "Fire in the belly",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 340,
+    "title": "Get Up",
+    "album": "NewJeans 2nd EP 'Get Up'",
+    "artist": "NewJeans",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 341,
+    "title": "No Celestial",
+    "album": "ANTIFRAGILE",
+    "artist": "LE SSERAFIM",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 17
+  },
+  {
+    "id": 342,
+    "title": "Like We Just Met",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 343,
+    "title": "Stamp On It",
+    "album": "Stamp On It - The 1st Mini Album",
+    "artist": "GOT the beat",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 16
+  },
+  {
+    "id": 344,
+    "title": "Like Crazy (Instrumental)",
+    "album": "Like Crazy (Remixes)",
+    "artist": "Jimin",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 345,
+    "title": "Slow (with Ciara)",
+    "album": "Slow (with Ciara)",
+    "artist": "Jackson Wang",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 17
+  },
+  {
+    "id": 346,
+    "title": "NUNU NANA",
+    "album": "NUNA",
+    "artist": "Jessi",
+    "release_year": 2020,
+    "release_month": 7,
+    "release_date": 30
+  },
+  {
+    "id": 347,
+    "title": "peach eyes",
+    "album": "0.1 flaws and all.",
+    "artist": "wave to earth",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 20
+  },
+  {
+    "id": 348,
+    "title": "Butter - Megan Thee Stallion Remix",
+    "album": "Butter (Megan Thee Stallion Remix)",
+    "artist": "BTS",
+    "release_year": 2021,
+    "release_month": 8,
+    "release_date": 27
+  },
+  {
+    "id": 349,
+    "title": "Better Than Gold",
+    "album": "Glitch Mode - The 2nd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 28
+  },
+  {
+    "id": 350,
+    "title": "Celebrity",
+    "album": "IU 5th Album 'LILAC'",
+    "artist": "IU",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 25
+  },
+  {
+    "id": 351,
+    "title": "Circles",
+    "album": "SEVENTEEN 4th Album Repackage 'SECTOR 17'",
+    "artist": "SEVENTEEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 18
+  },
+  {
+    "id": 352,
+    "title": "Kaje",
+    "album": "Kaje",
+    "artist": "Yll Limani",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 353,
+    "title": "Obsession",
+    "album": "OBSESSION  The 6th Album",
+    "artist": "EXO",
+    "release_year": 2019,
+    "release_month": 11,
+    "release_date": 27
+  },
+  {
+    "id": 354,
+    "title": "Glitch Mode",
+    "album": "Glitch Mode - The 2nd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 28
+  },
+  {
+    "id": 355,
+    "title": "ILLELLA",
+    "album": "MIC ON",
+    "artist": "MAMAMOO",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 11
+  },
+  {
+    "id": 356,
+    "title": "CROWN",
+    "album": "The Dream Chapter: STAR",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2019,
+    "release_month": 3,
+    "release_date": 4
+  },
+  {
+    "id": 357,
+    "title": "Say My Name",
+    "album": "BOYS PLANET - ARTIST BATTLE",
+    "artist": "BOYS PLANET",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 6
+  },
+  {
+    "id": 358,
+    "title": "FIESTA",
+    "album": "BLOOM*IZ",
+    "artist": "IZ*ONE",
+    "release_year": 2020,
+    "release_month": 2,
+    "release_date": 17
+  },
+  {
+    "id": 359,
+    "title": "Whats Poppin (feat. DaBaby, Tory Lanez & Lil Wayne) [Remix] - Bonus Track",
+    "album": "Thats What They All Say",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 11
+  },
+  {
+    "id": 360,
+    "title": "Impurities",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 361,
+    "title": "LMLY",
+    "album": "LMLY",
+    "artist": "Jackson Wang",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 26
+  },
+  {
+    "id": 362,
+    "title": "Flash Forward",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 363,
+    "title": "Go Big or Go Home",
+    "album": "DIMENSION : DILEMMA",
+    "artist": "ENHYPEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 12
+  },
+  {
+    "id": 364,
+    "title": "그��_",
+    "album": "Hotel del Luna (Original Television Soundtrack) Pt.3",
+    "artist": "TAEYEON",
+    "release_year": 2019,
+    "release_month": 7,
+    "release_date": 21
+  },
+  {
+    "id": 365,
+    "title": "KAZINO",
+    "album": "KAZINO",
+    "artist": "BIBI",
+    "release_year": 2020,
+    "release_month": 4,
+    "release_date": 29
+  },
+  {
+    "id": 366,
+    "title": "Bambi",
+    "album": "Bambi - The 3rd Mini Album",
+    "artist": "BAEKHYUN",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 30
+  },
+  {
+    "id": 367,
+    "title": "Christmas Love",
+    "album": "Christmas Love",
+    "artist": "Jimin",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 24
+  },
+  {
+    "id": 368,
+    "title": "HEYDAY (Prod. Czaer)",
+    "album": "Street Man Fighter Original Vol.4 (Crew Songs)",
+    "artist": "Various Artists",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 20
+  },
+  {
+    "id": 369,
+    "title": "All I Wanna Do (K) (Feat. Hoody & Loco)",
+    "album": "EVERYTHING YOU WANTED",
+    "artist": "Jay Park",
+    "release_year": 2016,
+    "release_month": 10,
+    "release_date": 20
+  },
+  {
+    "id": 370,
+    "title": "BTBT (feat. DeVita)",
+    "album": "BTBT (feat. DeVita)",
+    "artist": "B.I",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 13
+  },
+  {
+    "id": 371,
+    "title": "Heartbeat (BTS World Original Soundtrack)",
+    "album": "BTS WORLD (Original Soundtrack)",
+    "artist": "Various Artists",
+    "release_year": 2019,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 372,
+    "title": "Daydream (백�_�)",
+    "album": "Hope World",
+    "artist": "j-hope",
+    "release_year": 2018,
+    "release_month": 3,
+    "release_date": 2
+  },
+  {
+    "id": 373,
+    "title": "Shine",
+    "album": "Positive",
+    "artist": "PENTAGON",
+    "release_year": 2018,
+    "release_month": 4,
+    "release_date": 2
+  },
+  {
+    "id": 374,
+    "title": "Really",
+    "album": "SQUARE UP",
+    "artist": "BLACKPINK",
+    "release_year": 2018,
+    "release_month": 6,
+    "release_date": 15
+  },
+  {
+    "id": 375,
+    "title": "Kick It",
+    "album": "Kill This Love",
+    "artist": "BLACKPINK",
+    "release_year": 2019,
+    "release_month": 4,
+    "release_date": 5
+  },
+  {
+    "id": 376,
+    "title": "Generation",
+    "album": "Acid Angel from Asia <ACCESS>",
+    "artist": "tripleS",
+    "release_year": 2022,
+    "release_month": 10,
+    "release_date": 28
+  },
+  {
+    "id": 377,
+    "title": "Bet You Wanna (Feat. Cardi B)",
+    "album": "THE ALBUM",
+    "artist": "BLACKPINK",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 2
+  },
+  {
+    "id": 378,
+    "title": "RED",
+    "album": "RED",
+    "artist": "The Rose",
+    "release_year": 2019,
+    "release_month": 8,
+    "release_date": 13
+  },
+  {
+    "id": 379,
+    "title": "That's okay",
+    "album": "That's okay",
+    "artist": "D.O.",
+    "release_year": 2019,
+    "release_month": 7,
+    "release_date": 1
+  },
+  {
+    "id": 380,
+    "title": "Is That Ight?",
+    "album": "Jackman.",
+    "artist": "Jack Harlow",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 28
+  },
+  {
+    "id": 381,
+    "title": "PTT (Paint The Town)",
+    "album": "[&]",
+    "artist": "LOONA",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 28
+  },
+  {
+    "id": 382,
+    "title": "Graduation",
+    "album": "Candy - Winter Special Mini Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 12,
+    "release_date": 16
+  },
+  {
+    "id": 383,
+    "title": "Hot Summer",
+    "album": "BOYS PLANET - FINAL TOP9 BATTLE",
+    "artist": "BOYS PLANET",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 21
+  },
+  {
+    "id": 384,
+    "title": "Fairy of Shampoo",
+    "album": "The Dream Chapter: ETERNITY",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2020,
+    "release_month": 5,
+    "release_date": 18
+  },
+  {
+    "id": 385,
+    "title": "daisy.",
+    "album": "daisy.",
+    "artist": "wave to earth",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 13
+  },
+  {
+    "id": 386,
+    "title": "Dive Into You",
+    "album": "Hot Sauce - The 1st Album",
+    "artist": "NCT DREAM",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 10
+  },
+  {
+    "id": 387,
+    "title": "Stay Gold",
+    "album": "MAP OF THE SOUL : 7 ~ THE JOURNEY ~",
+    "artist": "BTS",
+    "release_year": 2020,
+    "release_month": 7,
+    "release_date": 14
+  },
+  {
+    "id": 388,
+    "title": "Once Again",
+    "album": "Descendants Of The Sun Pt.5 (Original Television Soundtrack)",
+    "artist": "Mad Clown",
+    "release_year": 2016,
+    "release_month": 3,
+    "release_date": 17
+  },
+  {
+    "id": 389,
+    "title": "DRUM GO DUM",
+    "album": "ALL OUT",
+    "artist": "K/DA",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 6
+  },
+  {
+    "id": 390,
+    "title": "Dreams Come True",
+    "album": "Dreams Come True - SM STATION",
+    "artist": "aespa",
+    "release_year": 2021,
+    "release_month": 12,
+    "release_date": 20
+  },
+  {
+    "id": 391,
+    "title": "Make A Wish (Birthday Song)",
+    "album": "NCT RESONANCE Pt. 1 - The 2nd Album",
+    "artist": "NCT",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 12
+  },
+  {
+    "id": 392,
+    "title": "BEAUTIFUL MONSTER",
+    "album": "WE NEED LOVE",
+    "artist": "STAYC",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 19
+  },
+  {
+    "id": 393,
+    "title": "TFW (That Feeling When)",
+    "album": "MANIFESTO : DAY 1",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 7,
+    "release_date": 4
+  },
+  {
+    "id": 394,
+    "title": "DM",
+    "album": "Midnight Guest",
+    "artist": "fromis_9",
+    "release_year": 2022,
+    "release_month": 1,
+    "release_date": 17
+  },
+  {
+    "id": 395,
+    "title": "Overdose",
+    "album": "Overdose - The 2nd Mini Album",
+    "artist": "EXO-K",
+    "release_year": 2014,
+    "release_month": 8,
+    "release_date": 6
+  },
+  {
+    "id": 396,
+    "title": "Tempo",
+    "album": "DON_ MESS UP MY TEMPO  The 5th Album",
+    "artist": "EXO",
+    "release_year": 2018,
+    "release_month": 11,
+    "release_date": 2
+  },
+  {
+    "id": 397,
+    "title": "Monster",
+    "album": "Monster - The 1st Mini Album",
+    "artist": "Red Velvet - IRENE & SEULGI",
+    "release_year": 2020,
+    "release_month": 7,
+    "release_date": 6
+  },
+  {
+    "id": 398,
+    "title": "Cry For Love",
+    "album": "Bambi - The 3rd Mini Album",
+    "artist": "BAEKHYUN",
+    "release_year": 2021,
+    "release_month": 3,
+    "release_date": 30
+  },
+  {
+    "id": 399,
+    "title": "Paint Me Naked",
+    "album": "Paint Me Naked - SM STATION",
+    "artist": "TEN",
+    "release_year": 2021,
+    "release_month": 8,
+    "release_date": 10
+  },
+  {
+    "id": 400,
+    "title": "Euphoria",
+    "album": "Proof",
+    "artist": "BTS",
+    "release_year": 2022,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 401,
+    "title": "love.",
+    "album": "0.1 flaws and all.",
+    "artist": "wave to earth",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 20
+  },
+  {
+    "id": 402,
+    "title": "HOME;RUN",
+    "album": "; [Semicolon]",
+    "artist": "SEVENTEEN",
+    "release_year": 2020,
+    "release_month": 10,
+    "release_date": 19
+  },
+  {
+    "id": 403,
+    "title": "Candy",
+    "album": "Delight - The 2nd Mini Album",
+    "artist": "BAEKHYUN",
+    "release_year": 2020,
+    "release_month": 5,
+    "release_date": 25
+  },
+  {
+    "id": 404,
+    "title": "XOXO",
+    "album": "XOXO",
+    "artist": "JEON SOMI",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 29
+  },
+  {
+    "id": 405,
+    "title": "방�_ Lily of The Valley",
+    "album": "� Flower",
+    "artist": "DANIEL",
+    "release_year": 2020,
+    "release_month": 2,
+    "release_date": 14
+  },
+  {
+    "id": 406,
+    "title": "SUVs (Black on Black)",
+    "album": "SUVs (Black on Black)",
+    "artist": "Jack Harlow",
+    "release_year": 2021,
+    "release_month": 8,
+    "release_date": 3
+  },
+  {
+    "id": 407,
+    "title": "Egotistic",
+    "album": "RED MOON",
+    "artist": "MAMAMOO",
+    "release_year": 2018,
+    "release_month": 7,
+    "release_date": 16
+  },
+  {
+    "id": 408,
+    "title": "This Love",
+    "album": "Descendants Of The Sun Pt.3 (Original Television Soundtrack)",
+    "artist": "DAVICHI",
+    "release_year": 2016,
+    "release_month": 3,
+    "release_date": 3
+  },
+  {
+    "id": 409,
+    "title": "Dream lantern",
+    "album": "Your Name.",
+    "artist": "RADWIMPS",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 24
+  },
+  {
+    "id": 410,
+    "title": "Let Go",
+    "album": "FACE YOURSELF",
+    "artist": "BTS",
+    "release_year": 2018,
+    "release_month": 4,
+    "release_date": 4
+  },
+  {
+    "id": 411,
+    "title": "Dear My Light",
+    "album": "Dear My Light",
+    "artist": "DAWN",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 13
+  },
+  {
+    "id": 412,
+    "title": "Anyone",
+    "album": "SEVENTEEN 8th Mini Album 'Your Choice'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 18
+  },
+  {
+    "id": 413,
+    "title": "Oh My!",
+    "album": "SEVENTEEN 5TH MINI ALBUM 'YOU MAKE MY DAY'",
+    "artist": "SEVENTEEN",
+    "release_year": 2018,
+    "release_month": 7,
+    "release_date": 16
+  },
+  {
+    "id": 414,
+    "title": "I DO",
+    "album": "I DO",
+    "artist": "(G)I-DLE",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 13
+  },
+  {
+    "id": 415,
+    "title": "All Night (BTS World Original Soundtrack) (Pt. 3)",
+    "album": "All Night (BTS World Original Soundtrack) [Pt. 3]",
+    "artist": "BTS",
+    "release_year": 2019,
+    "release_month": 6,
+    "release_date": 21
+  },
+  {
+    "id": 416,
+    "title": "Juicy",
+    "album": "Juicy",
+    "artist": "EAZ",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 17
+  },
+  {
+    "id": 417,
+    "title": "Wave",
+    "album": "TREASURE EP.3: One To All",
+    "artist": "ATEEZ",
+    "release_year": 2019,
+    "release_month": 6,
+    "release_date": 10
+  },
+  {
+    "id": 418,
+    "title": "Without You (Feat. ROSE)",
+    "album": "One of a Kind",
+    "artist": "G-DRAGON",
+    "release_year": 2012,
+    "release_month": 9,
+    "release_date": 15
+  },
+  {
+    "id": 419,
+    "title": "Ring Ding Dong",
+    "album": "2009, Year Of Us - The Third Mini Album",
+    "artist": "SHINee",
+    "release_year": 2009,
+    "release_month": 10,
+    "release_date": 19
+  },
+  {
+    "id": 420,
+    "title": "JUICE",
+    "album": "HARD - The 8th Album",
+    "artist": "SHINee",
+    "release_year": 2023,
+    "release_month": 6,
+    "release_date": 26
+  },
+  {
+    "id": 421,
+    "title": "Adore U",
+    "album": "SEVENTEEN 1st Mini Album 17 CARAT",
+    "artist": "SEVENTEEN",
+    "release_year": 2015,
+    "release_month": 5,
+    "release_date": 29
+  },
+  {
+    "id": 422,
+    "title": "Into the I-LAND",
+    "album": "Into the I-LAND",
+    "artist": "I-LAND",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 26
+  },
+  {
+    "id": 423,
+    "title": "Poison",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 424,
+    "title": "Thursday's Child Has Far To Go",
+    "album": "minisode 2: Thursday's Child",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 9
+  },
+  {
+    "id": 425,
+    "title": "BYE BYE",
+    "album": "_he ReVe Festival 2022 - Birthday",
+    "artist": "Red Velvet",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 28
+  },
+  {
+    "id": 426,
+    "title": "BOSS",
+    "album": "NCT 2018 EMPATHY",
+    "artist": "NCT",
+    "release_year": 2018,
+    "release_month": 3,
+    "release_date": 14
+  },
+  {
+    "id": 427,
+    "title": "Welcome To MY World (feat. nævis)",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  },
+  {
+    "id": 428,
+    "title": "It's You",
+    "album": "While You Were Sleeping, Pt. 2 (Original Television Soundtrack)",
+    "artist": "HENRY",
+    "release_year": 2017,
+    "release_month": 10,
+    "release_date": 4
+  },
+  {
+    "id": 429,
+    "title": "REALLY REALLY",
+    "album": "FATE NUMBER FOR",
+    "artist": "WINNER",
+    "release_year": 2017,
+    "release_month": 4,
+    "release_date": 4
+  },
+  {
+    "id": 430,
+    "title": "Baby Don_ Stop",
+    "album": "NCT 2018 EMPATHY",
+    "artist": "NCT",
+    "release_year": 2018,
+    "release_month": 3,
+    "release_date": 14
+  },
+  {
+    "id": 431,
+    "title": "FEARNOT (Between you, me and the lamppost)",
+    "album": "UNFORGIVEN",
+    "artist": "LE SSERAFIM",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 1
+  },
+  {
+    "id": 432,
+    "title": "Hope Not",
+    "album": "Kill This Love",
+    "artist": "BLACKPINK",
+    "release_year": 2019,
+    "release_month": 4,
+    "release_date": 5
+  },
+  {
+    "id": 433,
+    "title": "Yogurt Shake",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 434,
+    "title": "Answer",
+    "album": "TREASURE EPILOGUE : Action To Answer",
+    "artist": "ATEEZ",
+    "release_year": 2020,
+    "release_month": 1,
+    "release_date": 6
+  },
+  {
+    "id": 435,
+    "title": "Rose - English Version",
+    "album": "공�_ (Empathy) - The 1st Mini Album",
+    "artist": "D.O.",
+    "release_year": 2021,
+    "release_month": 7,
+    "release_date": 26
+  },
+  {
+    "id": 436,
+    "title": "HANN (Alone)",
+    "album": "HANN (Alone)",
+    "artist": "(G)I-DLE",
+    "release_year": 2018,
+    "release_month": 8,
+    "release_date": 14
+  },
+  {
+    "id": 437,
+    "title": "Kidult",
+    "album": "Heng:garæ",
+    "artist": "SEVENTEEN",
+    "release_year": 2020,
+    "release_month": 6,
+    "release_date": 22
+  },
+  {
+    "id": 438,
+    "title": "WHISTLE - Acoustic Ver.",
+    "album": "SQUARE TWO",
+    "artist": "BLACKPINK",
+    "release_year": 2016,
+    "release_month": 11,
+    "release_date": 1
+  },
+  {
+    "id": 439,
+    "title": "Let Me In (20 CUBE)",
+    "album": "BORDER : DAY ONE",
+    "artist": "ENHYPEN",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 30
+  },
+  {
+    "id": 440,
+    "title": "Hello Bitches",
+    "album": "Hello Bitches",
+    "artist": "CL",
+    "release_year": 2015,
+    "release_month": 12,
+    "release_date": 5
+  },
+  {
+    "id": 441,
+    "title": "Crystal Snow",
+    "album": "FACE YOURSELF",
+    "artist": "BTS",
+    "release_year": 2018,
+    "release_month": 4,
+    "release_date": 4
+  },
+  {
+    "id": 442,
+    "title": "Menghapus Jejakmu",
+    "album": "Hari Yang Cerah",
+    "artist": "Peterpan",
+    "release_year": 2007,
+    "release_month": 5,
+    "release_date": 18
+  },
+  {
+    "id": 443,
+    "title": "Golden Hour",
+    "album": "Golden Hour - SM STATION : NCT LAB",
+    "artist": "MARK",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 7
+  },
+  {
+    "id": 444,
+    "title": "aenergy",
+    "album": "Savage - The 1st Mini Album",
+    "artist": "aespa",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 5
+  },
+  {
+    "id": 445,
+    "title": "Nail Tech",
+    "album": "Come Home The Kids Miss You",
+    "artist": "Jack Harlow",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 6
+  },
+  {
+    "id": 446,
+    "title": "Phase Me",
+    "album": "MOTH",
+    "artist": "WOOSUNG",
+    "release_year": 2022,
+    "release_month": 5,
+    "release_date": 13
+  },
+  {
+    "id": 447,
+    "title": "Imperfect love",
+    "album": "SEVENTEEN 9th Mini Album 'Attacca'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 448,
+    "title": "Poppy (Korean Ver.)",
+    "album": "Poppy (Korean Ver.)",
+    "artist": "STAYC",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 3
+  },
+  {
+    "id": 449,
+    "title": "Not For Sale",
+    "album": "BORDER : CARNIVAL",
+    "artist": "ENHYPEN",
+    "release_year": 2021,
+    "release_month": 4,
+    "release_date": 26
+  },
+  {
+    "id": 450,
+    "title": "Zenzenzense - movie ver.",
+    "album": "Your Name.",
+    "artist": "RADWIMPS",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 24
+  },
+  {
+    "id": 451,
+    "title": "Cherry Bomb",
+    "album": "NCT #127 CHERRY BOMB The 3rd Mini Album",
+    "artist": "NCT 127",
+    "release_year": 2017,
+    "release_month": 6,
+    "release_date": 14
+  },
+  {
+    "id": 452,
+    "title": "Way Out (feat. Big Sean)",
+    "album": "Thats What They All Say",
+    "artist": "Jack Harlow",
+    "release_year": 2020,
+    "release_month": 12,
+    "release_date": 11
+  },
+  {
+    "id": 453,
+    "title": "Dream",
+    "album": "Dream",
+    "artist": "Suzy",
+    "release_year": 2016,
+    "release_month": 1,
+    "release_date": 7
+  },
+  {
+    "id": 454,
+    "title": "No Rules",
+    "album": "The Chaos Chapter: FREEZE",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 31
+  },
+  {
+    "id": 455,
+    "title": "Mansae",
+    "album": "SEVENTEEN 2nd Mini Album _OYS BE",
+    "artist": "SEVENTEEN",
+    "release_year": 2015,
+    "release_month": 9,
+    "release_date": 10
+  },
+  {
+    "id": 456,
+    "title": "INCEPTION",
+    "album": "ZERO : FEVER Part.1",
+    "artist": "ATEEZ",
+    "release_year": 2020,
+    "release_month": 7,
+    "release_date": 29
+  },
+  {
+    "id": 457,
+    "title": "SO BAD",
+    "album": "Star To A Young Culture",
+    "artist": "STAYC",
+    "release_year": 2020,
+    "release_month": 11,
+    "release_date": 12
+  },
+  {
+    "id": 458,
+    "title": "D (Half Moon)",
+    "album": "130 Mood : TRBL",
+    "artist": "DEAN",
+    "release_year": 2016,
+    "release_month": 3,
+    "release_date": 25
+  },
+  {
+    "id": 459,
+    "title": "Birthday",
+    "album": "_he ReVe Festival 2022 - Birthday",
+    "artist": "Red Velvet",
+    "release_year": 2022,
+    "release_month": 11,
+    "release_date": 28
+  },
+  {
+    "id": 460,
+    "title": "BANANA SHAKE (SPED UP)",
+    "album": "BANANA SHAKE (SPED UP)",
+    "artist": "HUS",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 16
+  },
+  {
+    "id": 461,
+    "title": "Day 1",
+    "album": "The Red - The 1st Album",
+    "artist": "Red Velvet",
+    "release_year": 2015,
+    "release_month": 9,
+    "release_date": 9
+  },
+  {
+    "id": 462,
+    "title": "Crush",
+    "album": "SEVENTEEN 9th Mini Album 'Attacca'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 463,
+    "title": "Magic",
+    "album": "The Chaos Chapter: FREEZE",
+    "artist": "TOMORROW X TOGETHER",
+    "release_year": 2021,
+    "release_month": 5,
+    "release_date": 31
+  },
+  {
+    "id": 464,
+    "title": "Rising",
+    "album": "ASSEMBLE",
+    "artist": "tripleS",
+    "release_year": 2023,
+    "release_month": 2,
+    "release_date": 13
+  },
+  {
+    "id": 465,
+    "title": "LAW (Prod. Czaer)",
+    "album": "Street Man Fighter Original Vol.3 (Mission by Rank)",
+    "artist": "Various Artists",
+    "release_year": 2022,
+    "release_month": 9,
+    "release_date": 6
+  },
+  {
+    "id": 466,
+    "title": "PING PONG",
+    "album": "1+1=1",
+    "artist": "HyunA&DAWN",
+    "release_year": 2021,
+    "release_month": 9,
+    "release_date": 9
+  },
+  {
+    "id": 467,
+    "title": "GANADARA (Feat. IU)",
+    "album": "GANADARA",
+    "artist": "Jay Park",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 11
+  },
+  {
+    "id": 468,
+    "title": "Hope World",
+    "album": "Hope World",
+    "artist": "j-hope",
+    "release_year": 2018,
+    "release_month": 3,
+    "release_date": 2
+  },
+  {
+    "id": 469,
+    "title": "Plastic Love",
+    "album": "Expressions",
+    "artist": "Mariya Takeuchi",
+    "release_year": 2008,
+    "release_month": 5,
+    "release_date": 21
+  },
+  {
+    "id": 470,
+    "title": "Say My Name",
+    "album": "TREASURE EP.2: Zero To One",
+    "artist": "ATEEZ",
+    "release_year": 2019,
+    "release_month": 1,
+    "release_date": 15
+  },
+  {
+    "id": 471,
+    "title": "ALWAYS",
+    "album": "Descendants Of The Sun Pt.1 (Original Television Soundtrack)",
+    "artist": "Yoon Mirae",
+    "release_year": 2016,
+    "release_month": 2,
+    "release_date": 18
+  },
+  {
+    "id": 472,
+    "title": "SOS",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 473,
+    "title": "__",
+    "album": "ITAEWON CLASS (Original Television Soundtrack) Pt.2",
+    "artist": "Gaho",
+    "release_year": 2020,
+    "release_month": 2,
+    "release_date": 1
+  },
+  {
+    "id": 474,
+    "title": "Blue Wave",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 475,
+    "title": "Palette (feat. G-DRAGON)",
+    "album": "Palette",
+    "artist": "IU",
+    "release_year": 2017,
+    "release_month": 4,
+    "release_date": 21
+  },
+  {
+    "id": 476,
+    "title": "sunny days",
+    "album": "0.1 flaws and all.",
+    "artist": "wave to earth",
+    "release_year": 2023,
+    "release_month": 4,
+    "release_date": 20
+  },
+  {
+    "id": 477,
+    "title": "We don't talk together (Prod. by SUGA)",
+    "album": "We don_ talk together",
+    "artist": "HEIZE",
+    "release_year": 2019,
+    "release_month": 7,
+    "release_date": 7
+  },
+  {
+    "id": 478,
+    "title": "Candy (Feat. Zion.T)",
+    "album": "Candy",
+    "artist": "Jay Park",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 23
+  },
+  {
+    "id": 479,
+    "title": "We Go Up",
+    "album": "We Go Up",
+    "artist": "NCT DREAM",
+    "release_year": 2018,
+    "release_month": 9,
+    "release_date": 3
+  },
+  {
+    "id": 480,
+    "title": "HIT",
+    "album": "An Ode",
+    "artist": "SEVENTEEN",
+    "release_year": 2019,
+    "release_month": 9,
+    "release_date": 16
+  },
+  {
+    "id": 481,
+    "title": "Bon Bon Chocolat",
+    "album": "ARRIVAL OF EVERGLOW",
+    "artist": "EVERGLOW",
+    "release_year": 2019,
+    "release_month": 3,
+    "release_date": 18
+  },
+  {
+    "id": 482,
+    "title": "Can't Love You Anymore (With OHHYUK)",
+    "album": "Palette",
+    "artist": "IU",
+    "release_year": 2017,
+    "release_month": 4,
+    "release_date": 21
+  },
+  {
+    "id": 483,
+    "title": "Skateboard",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 484,
+    "title": "For You",
+    "album": "Moonlovers - Scarlet Heart Ryeo (Original Television Soundtrack), Pt. 1",
+    "artist": "CHEN",
+    "release_year": 2016,
+    "release_month": 8,
+    "release_date": 25
+  },
+  {
+    "id": 485,
+    "title": "Same dream, same mind, same night",
+    "album": "SEVENTEEN 8th Mini Album 'Your Choice'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 6,
+    "release_date": 18
+  },
+  {
+    "id": 486,
+    "title": "See U Later",
+    "album": "SQUARE UP",
+    "artist": "BLACKPINK",
+    "release_year": 2018,
+    "release_month": 6,
+    "release_date": 15
+  },
+  {
+    "id": 487,
+    "title": "Here I Am",
+    "album": "BOYS PLANET - Here I Am",
+    "artist": "BOYS PLANET",
+    "release_year": 2023,
+    "release_month": 1,
+    "release_date": 5
+  },
+  {
+    "id": 488,
+    "title": "You Are My Everything",
+    "album": "Descendants Of The Sun Pt.4 (Original Television Soundtrack)",
+    "artist": "Gummy",
+    "release_year": 2016,
+    "release_month": 3,
+    "release_date": 10
+  },
+  {
+    "id": 489,
+    "title": "Me Gustas Tu",
+    "album": "GFRIEND 2nd Mini Album 'Flower Bud'",
+    "artist": "GFRIEND",
+    "release_year": 2015,
+    "release_month": 7,
+    "release_date": 23
+  },
+  {
+    "id": 490,
+    "title": "BREATHE",
+    "album": "SEOULITE",
+    "artist": "LeeHi",
+    "release_year": 2016,
+    "release_month": 3,
+    "release_date": 9
+  },
+  {
+    "id": 491,
+    "title": "2 MINUS 1 (Bonus Track)",
+    "album": "SEVENTEEN 9th Mini Album 'Attacca'",
+    "artist": "SEVENTEEN",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 22
+  },
+  {
+    "id": 492,
+    "title": "Saturday Drip",
+    "album": "Glitch Mode - The 2nd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2022,
+    "release_month": 3,
+    "release_date": 28
+  },
+  {
+    "id": 493,
+    "title": "Broken Melodies",
+    "album": "ISTJ - The 3rd Album",
+    "artist": "NCT DREAM",
+    "release_year": 2023,
+    "release_month": 7,
+    "release_date": 17
+  },
+  {
+    "id": 494,
+    "title": "I'm Not Cool",
+    "album": "I'm Not Cool",
+    "artist": "HyunA",
+    "release_year": 2021,
+    "release_month": 1,
+    "release_date": 28
+  },
+  {
+    "id": 495,
+    "title": "Our dawn is hotter than day",
+    "album": "SEVENTEEN 5TH MINI ALBUM 'YOU MAKE MY DAY'",
+    "artist": "SEVENTEEN",
+    "release_year": 2018,
+    "release_month": 7,
+    "release_date": 16
+  },
+  {
+    "id": 496,
+    "title": "I Need The Light",
+    "album": "I Need The Light",
+    "artist": "ENHYPEN",
+    "release_year": 2022,
+    "release_month": 8,
+    "release_date": 12
+  },
+  {
+    "id": 497,
+    "title": "Love Me Like This",
+    "album": "expérgo",
+    "artist": "NMIXX",
+    "release_year": 2023,
+    "release_month": 3,
+    "release_date": 20
+  },
+  {
+    "id": 498,
+    "title": "Anymore",
+    "album": "XOXO",
+    "artist": "JEON SOMI",
+    "release_year": 2021,
+    "release_month": 10,
+    "release_date": 29
+  },
+  {
+    "id": 499,
+    "title": "Missing You",
+    "album": "Brother Act.",
+    "artist": "BTOB",
+    "release_year": 2017,
+    "release_month": 10,
+    "release_date": 16
+  },
+  {
+    "id": 500,
+    "title": "'Til We Meet Again",
+    "album": "MY WORLD - The 3rd Mini Album",
+    "artist": "aespa",
+    "release_year": 2023,
+    "release_month": 5,
+    "release_date": 8
+  }
+]
