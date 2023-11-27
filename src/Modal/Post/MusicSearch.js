@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { Overlay, ModalWrap, Contents, Button } from '../style/PostModal_Style';
-import ModalContainer from '../components/ModalContainer';
-import useOutSideClick from '../components/useOutSideClick';
+import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
+import ModalContainer from '../../components/ModalContainer';
+import useOutSideClick from '../../components/useOutSideClick';
 import MusicChoose from './MusicChoose';
 
 function MusicSearch({ onClose }) {
-    const modalRef = useRef(null)
-    const [isMusicSearchOpen, setIsMusicSearchOpen] = useState(false);
+    const modalRef = useRef(null);
+    const [isMusicChooseOpen, setIsMusicChooseOpen] = useState(false);
     const goMusicChoose = () => {
         console.log("음악 검색 완료")
-        setIsMusicSearchOpen(true);
+        setIsMusicChooseOpen(true);
     }
     const handleClose = () => {
         onClose?.();
@@ -18,7 +18,7 @@ function MusicSearch({ onClose }) {
     useOutSideClick(modalRef, handleClose);
 
     return (
-        <div className='mt-3'>
+        <div>
             <ModalContainer>
                 <Overlay>
                     <ModalWrap ref={modalRef}>
@@ -44,10 +44,10 @@ function MusicSearch({ onClose }) {
                 </Overlay>
             </ModalContainer>
 
-            {isMusicSearchOpen && (<MusicChoose
-                open={isMusicSearchOpen}
+            {isMusicChooseOpen && (<MusicChoose
+                open={isMusicChooseOpen}
                 onClose={() => {
-                    setIsMusicSearchOpen(false);
+                    setIsMusicChooseOpen(false);
                 }}
             />)}
         </div>

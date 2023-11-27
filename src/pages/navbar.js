@@ -8,12 +8,12 @@ import { FaSearch } from "react-icons/fa";
 import { LuMessageCircle } from "react-icons/lu";
 import { FaItunesNote, FaRegSquarePlus } from "react-icons/fa6";
 import { SiHeadspace } from "react-icons/si";
-import MusicSearch from '../Modal/MusicSearch';
+import CreatePost from '../Modal/Post/CreatePost';
 
 function Navbar() {
-    const [isPostModalOpen, setIsPostModalOpen] = useState(false);
-    const openPostModal = () => {
-        setIsPostModalOpen(true);
+    const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
+    const openCreatePost = () => {
+        setIsCreatePostOpen(true);
     };
 
     return (
@@ -28,7 +28,7 @@ function Navbar() {
                                 <li className='text-start'><a href='/BB_Frontend/Search'><FaSearch className='me-2' size='25' color='black' />Search</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/DM'><LuMessageCircle className='me-2' size='25' color='black' />DM</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/Alarm'><FaItunesNote className='me-2' size='25' color='black' />Alarm</a></li>
-                                <li className='text-start' onClick={() => openPostModal()}><a><FaRegSquarePlus className='me-2' size='25' color='black' />Post</a></li>
+                                <li className='text-start' onClick={() => openCreatePost()}><a><FaRegSquarePlus className='me-2' size='25' color='black' />Post</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/Profile'>Profile</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/Login'>Login</a></li>
                             </Ul>
@@ -36,10 +36,10 @@ function Navbar() {
                     </Outside>
                 </Container>
 
-                {isPostModalOpen && (<MusicSearch
-                    open={isPostModalOpen}
+                {isCreatePostOpen && (<CreatePost
+                    open={isCreatePostOpen}
                     onClose={() => {
-                        setIsPostModalOpen(false);
+                        setIsCreatePostOpen(false);
                     }}
                 />)}
             </PC>
@@ -58,10 +58,20 @@ function Navbar() {
                     <button className='button'>
                         <FaItunesNote className='me-2' size='25' color='black' />
                     </button>
+                    <button class="button" onClick={() => openCreatePost()}>
+                        <FaRegSquarePlus className='me-2' size='40' color='black' />
+                    </button>
                     <button class="button">
                         <SiHeadspace className='me-2' size='40' color='gray' />
                     </button>
                 </div>
+
+                {isCreatePostOpen && (<CreatePost
+                    open={isCreatePostOpen}
+                    onClose={() => {
+                        setIsCreatePostOpen(false);
+                    }}
+                />)}
             </Mobile>
 
         </div>
