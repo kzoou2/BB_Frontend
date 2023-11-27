@@ -1,37 +1,47 @@
-import React from 'react';
-import { useState } from "react";
-import Bar from '../components/Bar';
-import Menu from "../components/Menu";
-import { Container, Close, Outside } from "../style/navbar_Style";
-import { PC, Mobile } from "../components/Responsive";
+import React, { useState } from 'react';
 import "../css/navbar.css";
+import { Container, Outside } from "../style/navbar_Style";
+import { PC, Mobile } from "../components/Responsive";
+import { Ul } from '../style/navbar_Style';
 import { IoHomeSharp } from 'react-icons/io5';
 import { FaSearch } from "react-icons/fa";
 import { LuMessageCircle } from "react-icons/lu";
-import { FaItunesNote } from "react-icons/fa6";
+import { FaItunesNote, FaRegSquarePlus } from "react-icons/fa6";
 import { SiHeadspace } from "react-icons/si";
+import MusicSearch from '../Modal/MusicSearch';
 
 function Navbar() {
-    const [isActive, setActive] = useState(true);
-
-    const handleClick = () => {
-        console.log("active!");
-        setActive(!isActive);
+    const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+    const openPostModal = () => {
+        setIsPostModalOpen(true);
     };
 
     return (
         <div className='fixed-top'>
             <PC>
                 <Container>
-                    <Close onClick={handleClick}>
-                        <Bar isActive={isActive} />
-                    </Close>
-                    <Outside className={isActive ? "in" : null}>
+                    <Outside className={"in"}>
                         <div className="inside">
-                            <Menu isActive={isActive} />
+                            <Ul className={"in"}>
+                                <h2 className='mt-3'>BeatBuddy</h2>
+                                <li className='text-start'><a href='/BB_Frontend'><IoHomeSharp className='me-2' size='25' color='black' />Home</a></li>
+                                <li className='text-start'><a href='/BB_Frontend/Search'><FaSearch className='me-2' size='25' color='black' />Search</a></li>
+                                <li className='text-start'><a href='/BB_Frontend/DM'><LuMessageCircle className='me-2' size='25' color='black' />DM</a></li>
+                                <li className='text-start'><a href='/BB_Frontend/Alarm'><FaItunesNote className='me-2' size='25' color='black' />Alarm</a></li>
+                                <li className='text-start' onClick={() => openPostModal()}><a><FaRegSquarePlus className='me-2' size='25' color='black' />Post</a></li>
+                                <li className='text-start'><a href='/BB_Frontend/Profile'>Profile</a></li>
+                                <li className='text-start'><a href='/BB_Frontend/Login'>Login</a></li>
+                            </Ul>
                         </div>
                     </Outside>
                 </Container>
+
+                {isPostModalOpen && (<MusicSearch
+                    open={isPostModalOpen}
+                    onClose={() => {
+                        setIsPostModalOpen(false);
+                    }}
+                />)}
             </PC>
 
             <Mobile>

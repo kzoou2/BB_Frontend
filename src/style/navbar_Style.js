@@ -6,17 +6,6 @@ height: 100vh;
 background-color: #white;
 `;
 
-export const Close = styled.button`
-position: absolute;
-top: 0;
-right: 0;
-background-color: whitesmoke;
-border: 0;
-padding: 22px;
-z-index: 10;
-cursor: pointer;
-`;
-
 export const Outside = styled.div`
 width: 25vw;
 min-width: 200px;
@@ -25,11 +14,8 @@ height: 100vh;
 transform: translateX(-101%);
 transition: all 0.5s cubic-bezier(0, 0.05, 0, 1.3);
 overflow: hidden;
-
-&.in {
-    transform: translateX(0);
-    transition: 0;
-}
+transform: translateX(0);
+transition: 0;
 
 > div {
     position: absolute;
@@ -50,26 +36,30 @@ overflow: hidden;
     border-radius: 0;
     transition-delay: 0s;
 }
+`;
 
-/* material animation*/
-> div:before {
-    content: "";
-    width: 2100px;
-    height: 2100px;
-    display: block;
-    background-color: white;
-    position: absolute;
-    top: -50%;
-    left: -100%;
-    z-index: -1;
-    transition: all 0.75s linear;
-    transition-delay: 0.15s;
-    transform: scale(0);
-    transform-origin: top right;
-    border-radius: 1000px;
+export const Ul = styled.ul`
+list-style: none;
+margin: 0;
+padding: 0;
+line-height: 2;
+
+> li {
+    background: whitesmoke;
+    opacity: 0;
+    padding: 12px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: gray;
+    transition: all 0.25s linear;
 }
 
-&.in > div:before {
-    transform: scale(1);
+&.in > li {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+&.in > li > a {
+    text-decoration: none;
+    color: #000;
 }
 `;
