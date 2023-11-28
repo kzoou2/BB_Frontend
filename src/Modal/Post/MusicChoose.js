@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Overlay, ModalWrap, Contents, Button } from '../style/PostModal_Style';
-import ModalContainer from '../components/ModalContainer';
-import useOutSideClick from '../components/useOutSideClick';
+import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
+import ModalContainer from '../../components/ModalContainer';
+import useOutSideClick from '../../components/useOutSideClick';
 import FeedPicChoose from './FeedPicChoose';
 
 function MusicChoose({ onClose }) {
@@ -18,7 +18,7 @@ function MusicChoose({ onClose }) {
     useOutSideClick(modalRef, handleClose);
 
     return (
-        <div className='mt-3'>
+        <div>
             <ModalContainer>
                 <Overlay>
                     <ModalWrap ref={modalRef}>

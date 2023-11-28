@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { SiHeadspace } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
-import { Overlay, ModalWrap, Contents, Button } from '../style/PostModal_Style';
-import ModalContainer from '../components/ModalContainer';
-import useOutSideClick from '../components/useOutSideClick';
+import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
+import ModalContainer from '../../components/ModalContainer';
+import useOutSideClick from '../../components/useOutSideClick';
 
 function FeedTextInput({ onClose }) {
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ function FeedTextInput({ onClose }) {
     useOutSideClick(modalRef, handleClose);
 
     return (
-        <div className='mt-3'>
+        <div>
             <ModalContainer>
                 <Overlay>
                     <ModalWrap ref={modalRef}>

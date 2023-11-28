@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import data from '../Data/sample_music.json';
-import { Overlay, ModalWrap, Contents, Button } from '../style/PostModal_Style';
-import ModalContainer from '../components/ModalContainer';
-import useOutSideClick from '../components/useOutSideClick';
-import FeedTextInput from './FeedText';
+import data from '../../Data/sample_music.json';
+import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
+import ModalContainer from '../../components/ModalContainer';
+import useOutSideClick from '../../components/useOutSideClick';
+import FeedText from './FeedText';
 
 function FeedPicChoose({ onClose }) {
     const modalRef = useRef(null)
@@ -19,7 +19,7 @@ function FeedPicChoose({ onClose }) {
     useOutSideClick(modalRef, handleClose);
 
     return (
-        <div className='mt-3'>
+        <div>
             <ModalContainer>
                 <Overlay>
                     <ModalWrap ref={modalRef}>
@@ -48,7 +48,7 @@ function FeedPicChoose({ onClose }) {
                 </Overlay>
             </ModalContainer>
 
-            {isFeedTextOpen && (<FeedTextInput
+            {isFeedTextOpen && (<FeedText
                 open={isFeedTextOpen}
                 onClose={() => {
                     setIsFeedTextOpen(false);
