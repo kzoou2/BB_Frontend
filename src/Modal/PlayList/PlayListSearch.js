@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ModalContainer from '../../components/ModalContainer';
 import { Button, Contents, ModalWrap, Overlay } from '../../style/PostModal_Style';
 import useOutSideClick from '../../components/useOutSideClick';
@@ -13,6 +13,14 @@ function PlayListSearch({ onClose }) {
     const handleClose = () => {
         onClose?.();
     }
+    useEffect(() => {
+        const $body = document.querySelector("body");
+        const overflow = $body.style.overflow;
+        $body.style.overflow = "hidden";
+        return () => {
+            $body.style.overflow = overflow
+        };
+    }, []);
 
     useOutSideClick(modalRef, handleClose)
 

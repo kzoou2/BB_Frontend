@@ -16,6 +16,8 @@ import FeedTextInput from '../Modal/Post/FeedText';
 import PlayListSearch from '../Modal/PlayList/PlayListSearch';
 import PlayListPicChoose from '../Modal/PlayList/PlayListPicChoose';
 import PlayListText from '../Modal/PlayList/PlayListText';
+import FeedDetail from '../Modal/Feed/FeedDetail';
+import MusicPlayerTest from './MusicPlayerTest';
 
 function App() {
     return (
@@ -29,6 +31,7 @@ function App() {
                     <Route path="/dm" element={<DM />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
                     <Route path="/post" element={<MusicSearch />} /> {/* Post Test Link */}
                     <Route path="/post/1" element={<MusicChoose />} /> {/* Post Test Link */}
@@ -37,6 +40,7 @@ function App() {
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
                     <Route path="/pl/1" element={<PlayListPicChoose />} /> {/* Post Test Link */}
                     <Route path="/pl/2" element={<PlayListText />} /> {/* Post Test Link */}
+                    <Route path="/mptest" element={<MusicPlayerTest />} />
                 </Routes>
             </div>
         </BrowserRouter>

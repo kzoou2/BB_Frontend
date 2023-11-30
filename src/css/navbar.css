@@ -1,6 +1,6 @@
 .button-container {
     display: flex;
-    width: 767;
+    width: 767px;
     height: 50px;
     align-items: center;
     justify-content: space-around;

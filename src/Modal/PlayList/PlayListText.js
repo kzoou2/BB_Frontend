@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ModalContainer from '../../components/ModalContainer';
 import { Button, Contents, ModalWrap, Overlay } from '../../style/PostModal_Style';
 import { SiHeadspace } from "react-icons/si";
@@ -15,6 +15,14 @@ function PlayListText({ onClose }) {
     const handleClose = () => {
         onClose?.();
     };
+    useEffect(() => {
+        const $body = document.querySelector("body");
+        const overflow = $body.style.overflow;
+        $body.style.overflow = "hidden";
+        return () => {
+            $body.style.overflow = overflow
+        };
+    }, []);
 
     useOutSideClick(modalRef, handleClose);
 

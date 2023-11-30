@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SiHeadspace } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
 import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
@@ -15,6 +15,14 @@ function FeedTextInput({ onClose }) {
     const handleClose = () => {
         onClose?.();
     };
+    useEffect(() => {
+        const $body = document.querySelector("body");
+        const overflow = $body.style.overflow;
+        $body.style.overflow = "hidden";
+        return () => {
+            $body.style.overflow = overflow
+        };
+    }, []);
 
     useOutSideClick(modalRef, handleClose);
 
