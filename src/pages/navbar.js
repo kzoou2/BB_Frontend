@@ -17,7 +17,7 @@ function Navbar() {
     };
 
     return (
-        <div className='fixed-top'>
+        <div>
             <PC>
                 <Container>
                     <Outside className={"in"}>

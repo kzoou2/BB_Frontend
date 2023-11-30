@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import data from '../../Data/sample_music.json';
 import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
 import ModalContainer from '../../components/ModalContainer';
@@ -15,6 +15,14 @@ function FeedPicChoose({ onClose }) {
     const handleClose = () => {
         onClose?.();
     };
+    useEffect(() => {
+        const $body = document.querySelector("body");
+        const overflow = $body.style.overflow;
+        $body.style.overflow = "hidden";
+        return () => {
+            $body.style.overflow = overflow
+        };
+    }, []);
 
     useOutSideClick(modalRef, handleClose);
 
