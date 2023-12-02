@@ -67,7 +67,7 @@ function Profile() {
             </PC>
 
             <Mobile>
-            <div className='row'>
+                <div className='row'>
                     <div className='col-md-3'>
                         <Navbar />
                     </div>
