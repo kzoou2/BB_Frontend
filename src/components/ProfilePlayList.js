@@ -10,7 +10,9 @@ function ProfilePlayList(){
             <PC>
                 <p>playlist!!!!</p>
             </PC>
-            <Mobile></Mobile>
+            <Mobile>
+                <p>playlist!!!!</p>
+            </Mobile>
         </div>
 
 

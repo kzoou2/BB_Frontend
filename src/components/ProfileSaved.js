@@ -9,7 +9,9 @@ function ProfileSaved(){
             <PC>
                 <p>savved!</p>
             </PC>
-            <Mobile></Mobile>
+            <Mobile>
+                <p>savved!</p>
+            </Mobile>
         </div>
 
     );

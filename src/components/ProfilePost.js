@@ -56,7 +56,37 @@ function ProfilePost({postCount, setPostCount}) {
             </PC>
 
             <Mobile>
-                <h1>ProfilePost</h1>
+                <div className='row'>
+                        {data.map((music) => (
+                            <div className='col-4' key={music.id}>
+                                <div className='card-header'>
+                                    <img className=''style={{width:'110px', height:'110px', cursor: 'pointer'}} src={music.album_cover} 
+                                    onClick={() => openFeedDetail(music)} alt={`Album cover for ${music.title}`}>
+                                    </img>
+                                </div>
+                                <div className='card-body'>
+                                    <div>
+                                        <b>{music.title}</b>
+                                    </div>
+                                    <b> · </b>
+                                    <div>
+                                        <b>{music.artist}</b>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: 'gray' }}>{music.album} · {music.release_year}</p>
+                                </div> 
+
+                            </div>
+                        ))}
+                    </div>
+                    {isFeedDetailOpen && (
+                        <FeedDetail
+                            open={isFeedDetailOpen}
+                            onClose={() => {
+                                setIsFeedDetailOpen(false);
+                            }}
+                            music={selectedMusic}
+                        />
+                    )}
             </Mobile>
         </div>
 
