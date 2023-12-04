@@ -23,7 +23,8 @@ function Navbar() {
                     <Outside className={"in"}>
                         <div className="inside">
                             <Ul className={"in"}>
-                                <h2 className='mt-3'>BeatBuddy</h2>
+                                {/* <h2 className='mt-3'>BeatBuddy</h2> */}
+                                <img src='https://github.com/eeeeeddy/Coding_Test_Practice/assets/71869717/17575447-1369-4795-9713-b95368701fea' width={'100%'}/>
                                 <li className='text-start'><a href='/BB_Frontend'><IoHomeSharp className='me-2' size='25' color='black' />Home</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/Search'><FaSearch className='me-2' size='25' color='black' />Search</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/DM'><LuMessageCircle className='me-2' size='25' color='black' />DM</a></li>
