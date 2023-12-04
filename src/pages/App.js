@@ -40,7 +40,7 @@ function App() {
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
                     <Route path="/pl/1" element={<PlayListPicChoose />} /> {/* Post Test Link */}
                     <Route path="/pl/2" element={<PlayListText />} /> {/* Post Test Link */}
-                    <Route path="/mptest" element={<MusicPlayerTest />} />
+                    <Route path="/test" element={<MusicPlayerTest />} />
                 </Routes>
             </div>
         </BrowserRouter>
