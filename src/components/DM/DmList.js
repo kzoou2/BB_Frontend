@@ -1,9 +1,9 @@
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { BiMessageEdit } from "react-icons/bi";
-import { PC, Mobile } from './Responsive';
+import { PC, Mobile } from '../Responsive';
 import styled from 'styled-components';
-import NewDm from '../Modal/Dm/NewDm';
+import NewDm from '../../Modal/Dm/NewDm';
 
 const DmList = ({ onSelectChat, selectedChat, currentUser, chatRooms }) => {
     const [isNewChatOpen, setIsNewChatOpen] = useState(false);

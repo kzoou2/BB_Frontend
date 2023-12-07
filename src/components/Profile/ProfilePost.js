@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {PC,Mobile} from '../components/Responsive';
-import sample_music from "../Data/sample_music.json";
-import FeedDetail from '../Modal/Feed/FeedDetail';
+import {PC,Mobile} from '../Responsive';
+import sample_music from "../../Data/sample_music.json";
+import FeedDetail from '../../Modal/Feed/FeedDetail';
 
 function ProfilePost({postCount, setPostCount}) {
     const data = sample_music.slice(0,15);
