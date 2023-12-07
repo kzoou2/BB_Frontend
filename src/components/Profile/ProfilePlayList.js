@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {PC,Mobile} from '../components/Responsive';
+import {PC,Mobile} from '../Responsive';
 
 function ProfilePlayList(){
 

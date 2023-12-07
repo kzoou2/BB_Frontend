@@ -5,9 +5,9 @@ import { SiHeadspace } from 'react-icons/si';
 import { FiBookmark } from "react-icons/fi";
 import { RiFolderMusicLine } from "react-icons/ri";
 import { TbPlaylist } from "react-icons/tb";
-import ProfilePost from '../components/ProfilePost';
-import ProfileSaved from '../components/ProfileSaved';
-import ProfilePlayList from '../components/ProfilePlayList';
+import ProfilePost from '../components/Profile/ProfilePost';
+import ProfileSaved from '../components/Profile/ProfileSaved';
+import ProfilePlayList from '../components/Profile/ProfilePlayList';
 import { FaEdit } from 'react-icons/fa';
 
 

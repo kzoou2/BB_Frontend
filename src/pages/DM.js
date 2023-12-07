@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './navbar';
-import DmList from '../components/DmList';
-import DmRoom from '../components/DmRoom';
+import DmList from '../components/DM/DmList';
+import DmRoom from '../components/DM/DmRoom';
 import styled from 'styled-components';
 import { AiOutlineMessage } from "react-icons/ai";
 import NewDm from '../Modal/Dm/NewDm';

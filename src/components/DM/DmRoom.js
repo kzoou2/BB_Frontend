@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { IoMdSend } from "react-icons/io";
-import "../css/DmRoom.css";
+import "../../css/DmRoom.css";
 
 
 const DmRoom= ({ userImage, username, messages }) => {
