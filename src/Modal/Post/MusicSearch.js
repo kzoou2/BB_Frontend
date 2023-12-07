@@ -2,14 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
 import ModalContainer from '../../components/ModalContainer';
 import useOutSideClick from '../../components/useOutSideClick';
-import MusicChoose from './MusicChoose';
+import FeedPicChoose from './FeedPicChoose';
+import axios from 'axios';
+import sample from '../../Data/youtube_result.json';
 
 function MusicSearch({ onClose }) {
+    let youtubeApiKey = 'AIzaSyDcj9hLbUKY9Yga4KPFBsnmG5anWzaQsjU'
     const modalRef = useRef(null);
-    const [isMusicChooseOpen, setIsMusicChooseOpen] = useState(false);
-    const goMusicChoose = () => {
+    const [isFeedPicChooseOpen, setIsFeedPicChooseOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+
+    const goFeedPicChoose = () => {
         console.log("음악 검색 완료")
-        setIsMusicChooseOpen(true);
+        setIsFeedPicChooseOpen(true);
     }
     const handleClose = () => {
         onClose?.();
@@ -25,37 +31,86 @@ function MusicSearch({ onClose }) {
 
     useOutSideClick(modalRef, handleClose);
 
+    const searchMusic = async () => {
+        try {
+            // API 요청 보내기
+            // https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=성시경 희재&type=video&key=AIzaSyDcj9hLbUKY9Yga4KPFBsnmG5anWzaQsjU
+            const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&type=video&key=${youtubeApiKey}&q=${encodeURIComponent(searchQuery)}`);
+            const temp = response.data.items
+
+            setSearchResults(temp)
+        } catch (error) {
+            console.error('YouTube API 요청 중 오류 발생:', error);
+        }
+    };
+
+    useEffect(() => {
+        console.log(searchResults)
+    }, [searchResults])
+
+    const handleInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleKeyPress = (e) => {
+        // 엔터 키를 눌렀을 때 검색 실행
+        if (e.key === 'Enter') {
+            searchMusic();
+        }
+    };
+
     return (
         <div>
-            <ModalContainer>
-                <Overlay>
-                    <ModalWrap ref={modalRef}>
-                        <Contents>
-                            <h3 className='d-flex justify-content-center'>New Post (MusicSearch)</h3>
-                            <div className='d-flex justify-content-center mb-3'>
-                                <hr style={{ width: "80%" }} />
-                            </div>
+            {isFeedPicChooseOpen ? null : (
+                <ModalContainer>
+                    <Overlay>
+                        <ModalWrap ref={modalRef}>
+                            <Contents>
+                                <h3 className='d-flex justify-content-center'>New Post (MusicSearch)</h3>
+                                <div className='d-flex justify-content-center mb-1'>
+                                    <hr style={{ width: "80%" }} />
+                                </div>
 
-                            <div className='d-flex justify-content-center'>
-                                <input type="text" className="form-control" placeholder="노래, 앨범, 아티스트 검색" style={{ width: "60%" }} />
-                            </div>
+                                <div className='d-flex justify-content-center mb-3'>
+                                    <input type="text" className="form-control" placeholder="노래, 앨범, 아티스트 검색" style={{ width: "60%" }}
+                                        value={searchQuery} onChange={handleInputChange} onKeyDown={handleKeyPress}
+                                    />
+                                </div>
 
-                            <div className='d-flex justify-content-center mt-5 mb-5'>
-                                <h3>검색 결과 리스트</h3>
-                            </div>
+                                <div className='justify-content-center mt-2 mb-1' style={{ width: "", height: "400px", overflow: "scroll" }}>
+                                    {(searchResults && searchResults.length > 0) ? (
+                                        searchResults.map((data, index) => (
+                                            <div key={index} onClick={() => goFeedPicChoose()} style={{ cursor: 'pointer' }}>
+                                                <div className='border-bottom mb-1' style={{ height: "70px", alignItems: "center" }}>
+                                                    <img className='float-start me-3' src={data.snippet.thumbnails.high.url} alt={`Thumbnail ${index}`} style={{ width: "80px", height: "60px" }} />
+                                                    <p className='align-middle mt-3' dangerouslySetInnerHTML={{ __html: data.snippet.title }} />
+                                                </div>
+                                            </div>
+                                        )))
+                                        : (
+                                            <div className='d-flex align-items-center justify-content-center' style={{ height: "300px" }}>
+                                                <h2 className='text-center align-middle'>검색어를 입력하세요.</h2>
+                                            </div>
+                                        )
+                                    }
+                                </div>
 
-                            <div className='d-flex justify-content-center'>
+                                {/* <div className='d-flex justify-content-center'>
                                 <Button onClick={() => goMusicChoose()}>Next</Button>
-                            </div>
-                        </Contents>
-                    </ModalWrap>
-                </Overlay>
-            </ModalContainer>
+                            </div> */}
+                            </Contents>
+                        </ModalWrap>
+                    </Overlay>
+                </ModalContainer>
+            )}
 
-            {isMusicChooseOpen && (<MusicChoose
-                open={isMusicChooseOpen}
+            {isFeedPicChooseOpen && (<FeedPicChoose
+                open={isFeedPicChooseOpen}
                 onClose={() => {
-                    setIsMusicChooseOpen(false);
+                    setIsFeedPicChooseOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
                 }}
             />)}
         </div>

@@ -24,7 +24,7 @@ transform: translate(-50%, -50%);
 `;
 
 export const Contents = styled.div`
-margin: 50px 30px;
+margin: 30px 30px;
 `;
 
 export const Button = styled.button`
