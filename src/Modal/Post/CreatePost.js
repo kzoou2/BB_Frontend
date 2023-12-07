@@ -31,36 +31,44 @@ function CreatePost({ onClose }) {
 
     useOutSideClick(modalRef, handleClose)
 
+    console.log(isMusicSearchOpen || isPlayListSearchOpen)
+    console.log(!isMusicSearchOpen && !isPlayListSearchOpen)
+
     return (
         <div>
-            <ModalContainer>
-                <Overlay>
-                    <ModalWrap ref={modalRef}>
-                        <Contents>
-                            <h3 className='d-flex justify-content-center'>New Post</h3>
-                            <div className='d-flex justify-content-center mb-3'>
-                                <hr style={{ width: "80%" }} />
-                            </div>
+            {isMusicSearchOpen || isPlayListSearchOpen ? null : (
+                <ModalContainer>
+                    <Overlay>
+                        <ModalWrap ref={modalRef}>
+                            <Contents>
+                                <h3 className='d-flex justify-content-center'>New Post</h3>
+                                <div className='d-flex justify-content-center mb-3'>
+                                    <hr style={{ width: "80%" }} />
+                                </div>
 
-                            <div className='d-flex justify-content-center mt-5 pt-5'>
-                                <div className='me-5' onClick={() => goMusicSearch()} style={{ cursor: "pointer" }}>
-                                    <FaItunesNote className='mb-3' size='130' color='black' />
-                                    <h5>Create Post</h5>
+                                <div className='d-flex justify-content-center mt-5 pt-5'>
+                                    <div className='me-5' onClick={() => goMusicSearch()} style={{ cursor: "pointer" }}>
+                                        <FaItunesNote className='mb-3' size='130' color='black' />
+                                        <h5 className='ms-3'>Create Post</h5>
+                                    </div>
+                                    <div className='ms-5' onClick={() => goPlayListSearch()} style={{ cursor: "pointer" }}>
+                                        <BsMusicNoteList className='ms-4 mb-3' size='130' color='black' />
+                                        <h5 className='ms-3'>Create PlayList</h5>
+                                    </div>
                                 </div>
-                                <div className='ms-5' onClick={() => goPlayListSearch()} style={{ cursor: "pointer" }}>
-                                    <BsMusicNoteList className='ms-4 mb-3' size='130' color='black' />
-                                    <h5>Create PlayList</h5>
-                                </div>
-                            </div>
-                        </Contents>
-                    </ModalWrap>
-                </Overlay>
-            </ModalContainer>
+                            </Contents>
+                        </ModalWrap>
+                    </Overlay>
+                </ModalContainer>
+            )}
 
             {isMusicSearchOpen && (<MusicSearch
                 open={isMusicSearchOpen}
                 onClose={() => {
                     setIsMusicSearchOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
                 }}
             />)}
 
@@ -68,6 +76,9 @@ function CreatePost({ onClose }) {
                 open={isPlayListSearchOpen}
                 onClose={() => {
                     setIsPlayListSearchOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
                 }}
             />)}
         </div>

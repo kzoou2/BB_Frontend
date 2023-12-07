@@ -33,7 +33,7 @@ function PlayListText({ onClose }) {
                     <ModalWrap ref={modalRef}>
                         <Contents>
                             <h3 className='d-flex justify-content-center'>New PlayList (PlayListText)</h3>
-                            <div className='d-flex justify-content-center mb-3'>
+                            <div className='d-flex justify-content-center'>
                                 <hr style={{ width: "80%" }} />
                             </div>
 
@@ -42,6 +42,7 @@ function PlayListText({ onClose }) {
                             </div>
 
                             <div className='d-flex flex-column align-items-center mb-3'>
+                                <input type="text" className="form-control mb-2" placeholder="타이틀을 입력하세요." style={{ width: "70%" }} />
                                 <input type="text" className="form-control mb-2" placeholder="" style={{ width: "70%", height: "200px" }} />
                                 <input type="text" className="form-control" placeholder="해시태그를 추가하세요." style={{ width: "70%", height: "100px" }} />
                             </div>

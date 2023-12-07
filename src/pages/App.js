@@ -10,13 +10,13 @@ import Search from './Search';
 import Profile from './Profile';
 import CreatePost from '../Modal/Post/CreatePost';
 import MusicSearch from '../Modal/Post/MusicSearch';
-import MusicChoose from '../Modal/Post/MusicChoose';
 import FeedPicChoose from '../Modal/Post/FeedPicChoose';
 import FeedTextInput from '../Modal/Post/FeedText';
 import PlayListSearch from '../Modal/PlayList/PlayListSearch';
 import PlayListPicChoose from '../Modal/PlayList/PlayListPicChoose';
 import PlayListText from '../Modal/PlayList/PlayListText';
 import FeedDetail from '../Modal/Feed/FeedDetail';
+import Playlist from './Playlist';
 import MusicPlayerTest from './MusicPlayerTest';
 
 function App() {
@@ -34,12 +34,12 @@ function App() {
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
                     <Route path="/post" element={<MusicSearch />} /> {/* Post Test Link */}
-                    <Route path="/post/1" element={<MusicChoose />} /> {/* Post Test Link */}
-                    <Route path="/post/2" element={<FeedPicChoose />} /> {/* Post Test Link */}
-                    <Route path="/post/3" element={<FeedTextInput />} /> {/* Post Test Link */}
+                    <Route path="/post/1" element={<FeedPicChoose />} /> {/* Post Test Link */}
+                    <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
                     <Route path="/pl/1" element={<PlayListPicChoose />} /> {/* Post Test Link */}
                     <Route path="/pl/2" element={<PlayListText />} /> {/* Post Test Link */}
+                    <Route path="/playlist" element={<Playlist />} />
                     <Route path="/test" element={<MusicPlayerTest />} />
                 </Routes>
             </div>
