@@ -6,7 +6,7 @@ import PostPicSelect from './PostPicSelect';
 import axios from 'axios';
 
 function MusicSearch({ onClose }) {
-    let youtubeApiKey = process.env.YOUTUBE_API_KEY;
+    const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
     const modalRef = useRef(null);
     const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
