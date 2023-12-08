@@ -31,9 +31,6 @@ function CreatePost({ onClose }) {
 
     useOutSideClick(modalRef, handleClose)
 
-    console.log(isMusicSearchOpen || isPlayListSearchOpen)
-    console.log(!isMusicSearchOpen && !isPlayListSearchOpen)
-
     return (
         <div>
             {isMusicSearchOpen || isPlayListSearchOpen ? null : (

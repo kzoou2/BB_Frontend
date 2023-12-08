@@ -33,8 +33,8 @@ function MusicSearch({ onClose }) {
     const searchMusic = async () => {
         try {
             // API 요청 보내기
-            // https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=성시경 희재&type=video&key=AIzaSyDcj9hLbUKY9Yga4KPFBsnmG5anWzaQsjU
             const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&type=video&key=${youtubeApiKey}&q=${encodeURIComponent(searchQuery)}`);
+            // const response = await axios.get(`http://www.maniadb.com/api/search/${encodeURIComponent(searchQuery)}/?sr=song&display=10`);
             const temp = response.data.items
 
             setSearchResults(temp)
