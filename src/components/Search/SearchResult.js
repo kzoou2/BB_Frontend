@@ -92,9 +92,7 @@ const SearchResult = ({ searchText, searchResult, filter }) =>{
                 </div>
             </Mobile>
         </div>
-
     );
 };
-
 
 export default SearchResult;

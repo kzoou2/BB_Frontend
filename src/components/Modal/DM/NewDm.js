@@ -1,16 +1,16 @@
-import React, { useRef, useState } from 'react';
-import ModalContainer from '../../components/ModalContainer';
-import { Contents, ModalWrap, Overlay, Button } from '../../style/PostModal_Style';
-import useOutSideClick from '../../components/useOutSideClick';
-import styled from "styled-components";
+import React, { useRef } from 'react';
+import ModalContainer from '../Config/ModalContainer';
+import { Contents, ModalWrap, Overlay, Button } from '../../../style/styled_components/PostModal_Style';
+import useOutSideClick from '../Config/useOutSideClick';
+import { CloseButton } from 'react-bootstrap';
 
 function NewDm({ onClose }){
     const modalRef = useRef(null);
 
-
     const handleClose = () => {
         onClose?.();
     }
+
     useOutSideClick(modalRef, handleClose)
 
     return(
@@ -45,19 +45,7 @@ function NewDm({ onClose }){
             </ModalContainer>
 
         </div>
-
-
     );
 }
 
 export default NewDm;
-
-
-const CloseButton = styled.div`
-    cursor: pointer;
-    color:  #5d5d5d;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-`;

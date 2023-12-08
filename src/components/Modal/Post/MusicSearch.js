@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
-import ModalContainer from '../../components/ModalContainer';
-import useOutSideClick from '../../components/useOutSideClick';
-import FeedPicChoose from './FeedPicChoose';
+import { Overlay, ModalWrap, Contents } from '../../../style/styled_components/PostModal_Style';
+import ModalContainer from '../Config/ModalContainer';
+import useOutSideClick from '../Config/useOutSideClick';
+import PostPicSelect from './PostPicSelect';
 import axios from 'axios';
-import sample from '../../Data/youtube_result.json';
 
 function MusicSearch({ onClose }) {
     let youtubeApiKey = 'AIzaSyDcj9hLbUKY9Yga4KPFBsnmG5anWzaQsjU'
     const modalRef = useRef(null);
-    const [isFeedPicChooseOpen, setIsFeedPicChooseOpen] = useState(false);
+    const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-    const goFeedPicChoose = () => {
+    const goPostPicSelect = () => {
         console.log("음악 검색 완료")
-        setIsFeedPicChooseOpen(true);
+        setIsPostPicSelectOpen(true);
     }
     const handleClose = () => {
         onClose?.();
@@ -61,7 +60,7 @@ function MusicSearch({ onClose }) {
 
     return (
         <div>
-            {isFeedPicChooseOpen ? null : (
+            {isPostPicSelectOpen ? null : (
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
@@ -80,7 +79,7 @@ function MusicSearch({ onClose }) {
                                 <div className='justify-content-center mt-2 mb-1' style={{ width: "", height: "400px", overflow: "scroll" }}>
                                     {(searchResults && searchResults.length > 0) ? (
                                         searchResults.map((data, index) => (
-                                            <div key={index} onClick={() => goFeedPicChoose()} style={{ cursor: 'pointer' }}>
+                                            <div key={index} onClick={() => goPostPicSelect()} style={{ cursor: 'pointer' }}>
                                                 <div className='border-bottom mb-1' style={{ height: "70px", alignItems: "center" }}>
                                                     <img className='float-start me-3' src={data.snippet.thumbnails.high.url} alt={`Thumbnail ${index}`} style={{ width: "80px", height: "60px" }} />
                                                     <p className='align-middle mt-3' dangerouslySetInnerHTML={{ __html: data.snippet.title }} />
@@ -104,10 +103,10 @@ function MusicSearch({ onClose }) {
                 </ModalContainer>
             )}
 
-            {isFeedPicChooseOpen && (<FeedPicChoose
-                open={isFeedPicChooseOpen}
+            {isPostPicSelectOpen && (<PostPicSelect
+                open={isPostPicSelectOpen}
                 onClose={() => {
-                    setIsFeedPicChooseOpen(false);
+                    setIsPostPicSelectOpen(false);
                     if (onClose) {
                         onClose();
                     }

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {PC,Mobile} from '../Responsive';
-import sample_music from "../../Data/sample_music.json";
-import FeedDetail from '../../Modal/Feed/FeedDetail';
+import sample_music from "../../data/sample_music.json";
+import FeedDetail from '../Modal/Feed/FeedDetail';
 
 function ProfilePost({postCount, setPostCount}) {
     const data = sample_music.slice(0,15);
     const [selectedMusic, setSelectedMusic] = useState(null);
     const [isFeedDetailOpen, setIsFeedDetailOpen] = useState(false);
-
 
     const openFeedDetail = (music) => {
         setSelectedMusic(music);
@@ -43,6 +42,7 @@ function ProfilePost({postCount, setPostCount}) {
                         </div>
                     ))}
                 </div>
+
                 {isFeedDetailOpen && (
                     <FeedDetail
                         open={isFeedDetailOpen}
@@ -52,6 +52,7 @@ function ProfilePost({postCount, setPostCount}) {
                         music={selectedMusic}
                     />
                 )}
+                
             </PC>
 
             <Mobile>
@@ -77,6 +78,7 @@ function ProfilePost({postCount, setPostCount}) {
                             </div>
                         ))}
                     </div>
+
                     {isFeedDetailOpen && (
                         <FeedDetail
                             open={isFeedDetailOpen}
@@ -86,11 +88,9 @@ function ProfilePost({postCount, setPostCount}) {
                             music={selectedMusic}
                         />
                     )}
+
             </Mobile>
         </div>
-
-
-
     );
 }
 

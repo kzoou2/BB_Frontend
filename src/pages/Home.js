@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Navbar from './navbar';
 import { SiHeadspace } from "react-icons/si";
 import { PC, Mobile } from "../components/Responsive";
-import sample_music from '../Data/sample_music.json';
-import FeedDetail from '../Modal/Feed/FeedDetail';
+import sample_music from '../data/sample_music.json';
+import FeedDetail from '../components/Modal/Feed/FeedDetail'
 
 function Home() {
     // const [title, setTitle] = useState("헤어지자 말해요");
@@ -36,14 +36,14 @@ function Home() {
                                                 <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
                                             </div>
                                             <div className='d-flex justify-content-end mb-3'>
-                                                <a>버튼그룹</a>
+                                                <p>버튼그룹</p>
                                             </div>
                                             <div className="">
                                                 <img style={{ width: "70%", height: "70%" }} src={music.album_cover} alt={music.title}></img>
                                                 <h5 className='mt-3'>{music.title} · {music.artist}</h5>
                                                 <p>{music.album} · {music.release_year}</p>
                                                 <p style={{ color: '#4887E5' }}>{hashtagList.map((tag, index) => `#${tag} ${index < hashtagList.length - 1 ? ' ' : ''}`)}</p>
-                                                <p>이 노래 좋아요... <a style={{ color: "red", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</a></p>
+                                                <p>이 노래 좋아요... <span style={{ color: "red", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -76,14 +76,14 @@ function Home() {
                                     <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
                                 </div>
                                 <div className='d-flex justify-content-end me-4 mb-3'>
-                                    <a>버튼그룹</a>
+                                    <p>버튼그룹</p>
                                 </div>
                                 <div className="">
                                     <img style={{ width: "80%", height: "80%" }} src={music.album_cover} alt={music.title}></img>
                                     <h5 className='mt-3'>{music.title} · {music.artist}</h5>
                                     <p>{music.album} · {music.release_year}</p>
                                     <p style={{ color: '#4887E5' }}>{hashtagList.map((tag, index) => `#${tag} ${index < hashtagList.length - 1 ? ' ' : ''}`)}</p>
-                                    <p>이 노래 좋아요... <a style={{ color: "red", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</a></p>
+                                    <p>이 노래 좋아요... <span style={{ color: "red", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</span></p>
                                 </div>
                             </div>
                         </div>

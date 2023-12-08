@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import ModalContainer from '../../components/ModalContainer';
-import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../style/FeedModal_Style';
-import useOutSideClick from '../../components/useOutSideClick';
-import { Mobile, PC } from '../../components/Responsive';
+import ModalContainer from '../Config/ModalContainer';
+import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedModal_Style';
+import useOutSideClick from '../Config/useOutSideClick';
+import { Mobile, PC } from '../../Responsive';
 import { SiHeadspace } from "react-icons/si";
-import '../../css/FeedDetail.css'
+import '../../../style/css/FeedDetail.css'
 
 function FeedDetail({ onClose, music }) {
     const modalRef = useRef(null)
