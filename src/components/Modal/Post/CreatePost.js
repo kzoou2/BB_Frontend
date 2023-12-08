@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ModalContainer from '../../components/ModalContainer';
-import { Contents, ModalWrap, Overlay } from '../../style/PostModal_Style';
+import ModalContainer from '../Config/ModalContainer';
+import { Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
 import { FaItunesNote } from "react-icons/fa6";
 import { BsMusicNoteList } from "react-icons/bs";
-import useOutSideClick from '../../components/useOutSideClick';
+import useOutSideClick from '../Config/useOutSideClick';
 import MusicSearch from './MusicSearch';
 import PlayListSearch from '../PlayList/PlayListSearch';
 

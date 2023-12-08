@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Navbar from './navbar';
-import {Mobile, PC} from '../components/Responsive';
-import sample_music from '../Data/sample_music.json';
+import { Mobile, PC } from '../components/Responsive';
+import sample_music from '../data/sample_music.json';
 import RecentSearch from '../components/Search/RecentSearch';
 import SearchResult from '../components/Search/SearchResult';
 
@@ -9,14 +9,14 @@ function Search() {
     const data = sample_music;
     const [searchText, setSearchText] = useState("");
     const [recentSearches, setRecentSearches] = useState([]);
-    const [searchResult , setSearchResult ] = useState([]);
+    const [searchResult, setSearchResult] = useState([]);
     const [filter, setFilter] = useState("all");
 
     const handleInputChange = (e) => {
         setSearchText(e.target.value);
     };
-    
-    const handleSearch = () =>{
+
+    const handleSearch = () => {
         // setSearchResult([searchText]);
         const filteredData = data.filter(item => item.title.toLowerCase().includes(searchText.toLowerCase()));
         setSearchResult(filteredData);
@@ -29,11 +29,11 @@ function Search() {
         handleSearch();
     };
 
-    const handleDeleteRecent = () =>{
+    const handleDeleteRecent = () => {
         setRecentSearches([]);
     };
 
-    const handleFilterChange = (newFilter) =>{
+    const handleFilterChange = (newFilter) => {
         setFilter(newFilter);
     }
 
@@ -46,15 +46,13 @@ function Search() {
                     </div>
                     <div className='col-md-3' style={{ borderRight: '1px solid #ddd' }}>
                         <RecentSearch
-                        recentSearches={recentSearches}
-                        handleRecentSearchClick={handleRecentSearchClick}
-                        handleDeleteRecent={handleDeleteRecent}
+                            recentSearches={recentSearches}
+                            handleRecentSearchClick={handleRecentSearchClick}
+                            handleDeleteRecent={handleDeleteRecent}
                         />
-
                     </div>
-
                     <div className='col-md-7'>
-                        <div className='search-input d-flex' style={{ marginTop: '30px', marginBottom:'30px' }}>
+                        <div className='search-input d-flex' style={{ marginTop: '30px', marginBottom: '30px' }}>
                             <input class="form-control me-2" type="text" placeholder="Search" value={searchText} onChange={handleInputChange} />
                             <button class="btn btn-outline-success" onClick={handleSearch}>Search</button>
                         </div>
@@ -67,26 +65,23 @@ function Search() {
                             </div>
                         </div>
                         <div>
-                            <SearchResult searchText={searchText} searchResult={searchResult}  filter={filter}  />
+                            <SearchResult searchText={searchText} searchResult={searchResult} filter={filter} />
                         </div>
-
                     </div>
-
                 </div>
             </PC>
 
             <Mobile>
                 <div>
-                    <Navbar/>
-                    <div className='search-input d-flex' style={{ marginTop: '30px', marginBottom:'30px' }}>
+                    <Navbar />
+                    <div className='search-input d-flex' style={{ marginTop: '30px', marginBottom: '30px' }}>
                         <input class="form-control me-2" type="text" placeholder="Search" value={searchText} onChange={handleInputChange} />
                         <button class="btn btn-outline-success" onClick={handleSearch}>Search</button>
                     </div>
                     <div>
                         <SearchResult searchText={searchText} searchResult={searchResult} />
-                    </div>    
+                    </div>
                 </div>
-                
             </Mobile>
         </div>
     );

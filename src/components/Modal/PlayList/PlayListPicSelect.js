@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ModalContainer from '../../components/ModalContainer';
-import { Button, Contents, ModalWrap, Overlay } from '../../style/PostModal_Style';
+import ModalContainer from '../Config/ModalContainer';
+import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
 import { AiFillPicture } from "react-icons/ai";
-import useOutSideClick from '../../components/useOutSideClick';
-import PlayListText from '../PlayList/PlayListText';
+import useOutSideClick from '../Config/useOutSideClick';
+import PlayListText from './PlayListText';
 
 function PlayListPicChoose({ onClose }) {
     const modalRef = useRef(null);

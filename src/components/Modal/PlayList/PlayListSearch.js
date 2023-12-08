@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ModalContainer from '../../components/ModalContainer';
-import { Button, Contents, ModalWrap, Overlay } from '../../style/PostModal_Style';
-import useOutSideClick from '../../components/useOutSideClick';
-import PlayListPicChoose from './PlayListPicChoose';
+import ModalContainer from '../Config/ModalContainer';
+import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
+import useOutSideClick from '../Config/useOutSideClick';
+import PlayListPicSelect from './PlayListPicSelect';
 
 function PlayListSearch({ onClose }) {
     const modalRef = useRef(null);
-    const [isPlayListPicChooseOpen, setIsPlayListPicOpen] = useState(false);
-    const goPlayListPicChoose = () => {
-        setIsPlayListPicOpen(true);
+    const [isPlstListPicSelectOpen, setIsPlayListPicSelectOpen] = useState(false);
+    const goPlayListPicSelect = () => {
+        setIsPlayListPicSelectOpen(true);
     }
     const handleClose = () => {
         onClose?.();
@@ -26,7 +26,7 @@ function PlayListSearch({ onClose }) {
 
     return (
         <div>
-            {isPlayListPicChooseOpen ? null : (
+            {isPlstListPicSelectOpen ? null : (
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
@@ -45,7 +45,7 @@ function PlayListSearch({ onClose }) {
                                 </div>
 
                                 <div className='d-flex justify-content-center'>
-                                    <Button onClick={() => goPlayListPicChoose()}>Next</Button>
+                                    <Button onClick={() => goPlayListPicSelect()}>Next</Button>
                                 </div>
                             </Contents>
                         </ModalWrap>
@@ -53,10 +53,10 @@ function PlayListSearch({ onClose }) {
                 </ModalContainer>
             )}
 
-            {isPlayListPicChooseOpen && (<PlayListPicChoose
-                open={isPlayListPicChooseOpen}
+            {isPlstListPicSelectOpen && (<PlayListPicSelect
+                open={isPlstListPicSelectOpen}
                 onClose={() => {
-                    setIsPlayListPicOpen(false);
+                    setIsPlayListPicSelectOpen(false);
                     if (onClose) {
                         onClose();
                     }

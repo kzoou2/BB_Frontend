@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import data from '../../Data/sample_music.json';
-import { Overlay, ModalWrap, Contents, Button } from '../../style/PostModal_Style';
-import ModalContainer from '../../components/ModalContainer';
-import useOutSideClick from '../../components/useOutSideClick';
-import FeedText from './FeedText';
+import data from '../../../data/sample_music.json'
+import { Overlay, ModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
+import ModalContainer from '../Config/ModalContainer';
+import useOutSideClick from '../Config/useOutSideClick';
+import FeedText from './PostText';
 
 function FeedPicChoose({ onClose }) {
     const modalRef = useRef(null)

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Mobile, PC } from "../Responsive";
 
 const RecentSearch =({ recentSearches, handleRecentSearchClick, handleDeleteRecent}) =>{
@@ -43,11 +43,7 @@ const RecentSearch =({ recentSearches, handleRecentSearchClick, handleDeleteRece
                 </div>
             </Mobile>
         </div>
-
     );
 };
 
-
 export default RecentSearch;
-
-
