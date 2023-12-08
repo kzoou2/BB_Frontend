@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { PC, Mobile } from '../components/Responsive';
 import '../css/Login.css';
-import { func } from 'prop-types';
+import {GoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthProvider} from "@react-oauth/google";
+
 
 function Login({isLogin, setIsLogin}) {
 
@@ -17,25 +19,8 @@ function Login({isLogin, setIsLogin}) {
             setPassword(event.target.value)
         }
     };
-
-    // async function onSubmit(event){
-    //     event.preventDefault();
-
-        
-    //     const newErrorMessages = []
-    //     if (userid === "") {
-    //         newErrorMessages.push("아이디를 입력하세요.");
-    //     }
-    //     if (password === "") {
-    //         newErrorMessages.push("비밀번호를 입력하세요.");
-    //     }
-
-    //     setErrorMessage(newErrorMessages);
-
-    //     if (newErrorMessages.length === 0 ) {
-
-    //     }
-    // }
+    
+    const clientId = '293049760557-j0ki70fdjtfcltgd712dtghlf8gntq33.apps.googleusercontent.com'
 
     return (
 
@@ -71,9 +56,18 @@ function Login({isLogin, setIsLogin}) {
                             <span></span>
                         </div>
                         <div class="content__forgot-buttons">
-                            <button>
-                                <span>Log in with Facebook</span>
-                                </button>
+                        <button>
+                            <GoogleOAuthProvider clientId={clientId}>
+                                <GoogleLogin
+                                    onSuccess={(res) => {
+                                        console.log(res);
+                                    }}
+                                    onFailure={(err) => {
+                                        console.log(err);
+                                    }}
+                                />
+                            </GoogleOAuthProvider>
+                        </button>
                             <button>비밀번호를 잊으셨나요?</button>
                         </div>
 
@@ -82,7 +76,6 @@ function Login({isLogin, setIsLogin}) {
 
                 
             </PC>
-
 
 
             <Mobile>
@@ -118,8 +111,17 @@ function Login({isLogin, setIsLogin}) {
                             </div>
                             <div class="content__forgot-buttons">
                                 <button>
-                                    <span>Log in with Facebook</span>
-                                    </button>
+                                <GoogleOAuthProvider clientId={clientId}>
+                                    <GoogleLogin
+                                        onSuccess={(res) => {
+                                            console.log(res);
+                                        }}
+                                        onFailure={(err) => {
+                                            console.log(err);
+                                        }}
+                                    />
+                                </GoogleOAuthProvider>
+                            </button>
                                 <button>비밀번호를 잊으셨나요?</button>
                             </div>
 
