@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ModalContainer from '../Config/ModalContainer';
 import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
-import useOutSideClick from '../Config/useOutSideClick';
+import useOutSideClick from '../../../hooks/useOutSideClick';
 import PlayListPicSelect from './PlayListPicSelect';
 
 function PlayListSearch({ onClose }) {

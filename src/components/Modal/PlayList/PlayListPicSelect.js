@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import ModalContainer from '../Config/ModalContainer';
 import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
 import { AiFillPicture } from "react-icons/ai";
-import useOutSideClick from '../Config/useOutSideClick';
+import useOutSideClick from '../../../hooks/useOutSideClick';
 import PlayListText from './PlayListText';
 
-function PlayListPicChoose({ onClose }) {
+function PlayListPicSelect({ onClose }) {
     const modalRef = useRef(null);
+    const inputFileRef = useRef(null);
     const [isPlayListTextOpen, setIsPlayListTextOpen] = useState(false);
+    const [imageSrc, setImageSrc] = useState('');
+
     const goPlayListText = () => {
         console.log("사진 선택 완료")
         setIsPlayListTextOpen(true);
@@ -26,6 +29,15 @@ function PlayListPicChoose({ onClose }) {
 
     useOutSideClick(modalRef, handleClose);
 
+    const onUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            setImageSrc(event.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
     return (
         <div>
             {isPlayListTextOpen ? null : (
@@ -39,11 +51,16 @@ function PlayListPicChoose({ onClose }) {
                                 </div>
 
                                 <div className='d-flex justify-content-center'>
-                                    <AiFillPicture className='mb-3' size='300' color='lightblue' />
+                                    {(imageSrc === '') ? (
+                                        <AiFillPicture className='mb-3' size='300' color='lightblue' />
+                                    ) : (
+                                        <img style={{ width: "50%", height: "50%" }} src={imageSrc} alt="Album cover"></img>
+                                    )}
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-5'>
-                                    <Button className='btn btn-primary me-3'>Change Picture</Button>
+                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
+                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
                                     <Button className='btn btn-primary' onClick={() => goPlayListText()}>Next</Button>
                                 </div>
                             </Contents>
@@ -53,6 +70,7 @@ function PlayListPicChoose({ onClose }) {
             )}
 
             {isPlayListTextOpen && (<PlayListText
+                imageSrc={imageSrc}
                 open={isPlayListTextOpen}
                 onClose={() => {
                     setIsPlayListTextOpen(false);
@@ -65,4 +83,4 @@ function PlayListPicChoose({ onClose }) {
     );
 }
 
-export default PlayListPicChoose;
+export default PlayListPicSelect;
