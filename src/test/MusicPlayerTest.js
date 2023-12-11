@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import '../style/css/MusicPlayer.css';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
-import sampleResult from '../data/youtube_result.json';
+import sampleResult from '../Data/youtube_result.json';
 
 function MusicPlayerTest() {
     const [isPlaying, setIsPlaying] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import data from '../../../data/sample_music.json'
+import data from '../../../Data/sample_music.json';
 import { Overlay, ModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
 import ModalContainer from '../Config/ModalContainer';
 import useOutSideClick from '../Config/useOutSideClick';

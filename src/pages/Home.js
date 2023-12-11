@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './navbar';
 import { SiHeadspace } from "react-icons/si";
 import { PC, Mobile } from "../components/Responsive";
-import sample_music from '../data/sample_music.json';
+import sample_music from '../Data/sample_music.json';
 import FeedDetail from '../components/Modal/Feed/FeedDetail'
 
 function Home() {

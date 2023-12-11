@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {PC,Mobile} from '../Responsive';
-import sample_music from "../../data/sample_music.json";
+import sample_music from '../../Data/sample_music.json';
 import FeedDetail from '../Modal/Feed/FeedDetail';
 
 function ProfilePost({postCount, setPostCount}) {

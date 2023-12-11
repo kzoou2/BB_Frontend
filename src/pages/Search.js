@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './navbar';
 import { Mobile, PC } from '../components/Responsive';
-import sample_music from '../data/sample_music.json';
+import sample_music from '../Data/sample_music.json';
 import RecentSearch from '../components/Search/RecentSearch';
 import SearchResult from '../components/Search/SearchResult';
 

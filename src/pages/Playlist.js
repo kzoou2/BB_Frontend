@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
 import Navbar from './navbar';
 import { PC, Mobile } from '../components/Responsive';
-import sampleResult from '../data/youtube_result.json';
+import sampleResult from '../Data/youtube_result.json';
 
 function Playlist() {
     const [isPlaying, setIsPlaying] = useState(false);

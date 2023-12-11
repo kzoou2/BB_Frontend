@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PC, Mobile } from '../components/Responsive';
 import '../style/css/Login.css';
+import {GoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthProvider} from "@react-oauth/google";
 import { func } from 'prop-types';
 
 function Login({ isLogin, setIsLogin }) {
@@ -18,7 +20,8 @@ function Login({ isLogin, setIsLogin }) {
         }
     };
 
-   
+    const clientId = '293049760557-j0ki70fdjtfcltgd712dtghlf8gntq33.apps.googleusercontent.com'
+
 
     return (
         <div>
@@ -52,7 +55,16 @@ function Login({ isLogin, setIsLogin }) {
 
                         <div class="content__forgot-buttons">
                             <button>
-                                <span>Log in with Facebook</span>
+                                <GoogleOAuthProvider clientId={clientId}>
+                                    <GoogleLogin
+                                        onSuccess={(res) => {
+                                            console.log(res);
+                                        }}
+                                        onFailure={(err) => {
+                                            console.log(err);
+                                        }}
+                                    />
+                                </GoogleOAuthProvider>
                             </button>
                             <button>비밀번호를 잊으셨나요?</button>
                         </div>
