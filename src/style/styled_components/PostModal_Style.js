@@ -23,6 +23,17 @@ left: 50%;
 transform: translate(-50%, -50%);
 `;
 
+export const TextInputModalWrap = styled.div`
+width: 900px;
+height: 600px;
+border-radius: 15px;
+background-color: #fff;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+`;
+
 export const Contents = styled.div`
 margin: 30px 30px;
 `;

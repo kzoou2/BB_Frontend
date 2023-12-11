@@ -17,7 +17,9 @@ import PlayListPicSelect from '../components/Modal/PlayList/PlayListPicSelect';
 import PlayListText from '../components/Modal/PlayList/PlayListText';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import Playlist from './Playlist';
+// Test
 import MusicPlayerTest from '../test/MusicPlayerTest';
+import MusicSearchTest from '../test/MusicSearchTest';
 
 function App() {
     return (
@@ -40,7 +42,10 @@ function App() {
                     <Route path="/pl/1" element={<PlayListPicSelect />} /> {/* Post Test Link */}
                     <Route path="/pl/2" element={<PlayListText />} /> {/* Post Test Link */}
                     <Route path="/playlist" element={<Playlist />} />
+                    
+                    {/* Test */}
                     <Route path="/test" element={<MusicPlayerTest />} />
+                    <Route path='/test/1' element={<MusicSearchTest />} />
                 </Routes>
             </div>
         </BrowserRouter>
