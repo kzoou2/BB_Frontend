@@ -1,0 +1,32 @@
+.button-container {
+    display: flex;
+    width: 767px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1px;
+    background-color: #fff;
+}
+
+.button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.icon {
+    font-size: 20px;
+}

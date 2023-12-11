@@ -5,7 +5,6 @@ export const PC = ({ children }) => {
   return isDesktop ? children : null;
 };
 
-
 export const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({ maxWidth: 700 });
   return isMobile ? children : null;
