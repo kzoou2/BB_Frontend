@@ -18,24 +18,7 @@ function Login({ isLogin, setIsLogin }) {
         }
     };
 
-    // async function onSubmit(event){
-    //     event.preventDefault();
-
-
-    //     const newErrorMessages = []
-    //     if (userid === "") {
-    //         newErrorMessages.push("아이디를 입력하세요.");
-    //     }
-    //     if (password === "") {
-    //         newErrorMessages.push("비밀번호를 입력하세요.");
-    //     }
-
-    //     setErrorMessage(newErrorMessages);
-
-    //     if (newErrorMessages.length === 0 ) {
-
-    //     }
-    // }
+   
 
     return (
         <div>
