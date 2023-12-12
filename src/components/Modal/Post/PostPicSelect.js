@@ -1,20 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
-import data from '../../../Data/sample_music.json';
 import { Overlay, ModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
 import ModalContainer from '../Config/ModalContainer';
-import useOutSideClick from '../Config/useOutSideClick';
-import FeedText from './PostText';
+import useOutSideClick from '../../../hooks/useOutSideClick';
+import PostText from './PostText';
+import axios from 'axios';
 
-function FeedPicChoose({ onClose }) {
+function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
+    const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY_2;
     const modalRef = useRef(null)
+    const inputFileRef = useRef(null);
     const [isFeedTextOpen, setIsFeedTextOpen] = useState(false);
+    const [youTubeResults, setYouTubeResults] = useState([]);
+    const youTubeQuery = (`${musicTitle} ${musicArtist}`);
+    const [imageSrc, setImageSrc] = useState(albumImage);
+
     const goFeedText = () => {
         console.log("사진 선택 완료")
         setIsFeedTextOpen(true);
     }
+
     const handleClose = () => {
         onClose?.();
     };
+
     useEffect(() => {
         const $body = document.querySelector("body");
         const overflow = $body.style.overflow;
@@ -24,7 +32,37 @@ function FeedPicChoose({ onClose }) {
         };
     }, []);
 
+    useEffect(() => {
+        // YouTube API 요청 보내기
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&key=${youtubeApiKey}&q=${encodeURIComponent(youTubeQuery)}`)
+            .then((response) => {
+                const temp = response.data.items;
+                setYouTubeResults(temp);
+            })
+            .catch((error) => {
+                console.error('YouTube API 요청 중 오류 발생:', error);
+            })
+    }, [])
+
+    // YouTube API 결과 확인
+    useEffect(() => {
+        console.log("유튜브 검색 결과: ", youTubeResults)
+    }, [youTubeResults])
+
+    const openYouTube = () => {
+        window.open(`https://www.youtube.com/watch?v=${youTubeResults[0].id.videoId}`)
+    };
+
     useOutSideClick(modalRef, handleClose);
+
+    const onUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            setImageSrc(event.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
 
     return (
         <div>
@@ -33,23 +71,25 @@ function FeedPicChoose({ onClose }) {
                     <Overlay>
                         <ModalWrap ref={modalRef}>
                             <Contents>
-                                <h3 className='d-flex justify-content-center'>New Post (FeedPicChoose)</h3>
+                                <h3 className='d-flex justify-content-center'>New Post (PostPicSelect)</h3>
                                 <div className='d-flex justify-content-center mb-3'>
                                     <hr style={{ width: "80%" }} />
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-3'>
-                                    <img style={{ width: "50%", height: "50%" }} src="https://image.bugsm.co.kr/album/images/500/40856/4085673.jpg" alt="Album cover"></img>
+                                    <img style={{ width: "50%", height: "50%" }} src={imageSrc} alt="Album cover"></img>
                                 </div>
 
                                 <div>
-                                    <h3 className='d-flex justify-content-center'>{data[0].title}</h3>
-                                    <h5 className='d-flex justify-content-center'>{data[0].artist}</h5>
-                                    <p className='d-flex justify-content-center'>{data[0].album} · {data[0].release_year}</p>
+                                    <h3 className='d-flex justify-content-center'>{musicTitle}</h3>
+                                    <h5 className='d-flex justify-content-center'>{musicArtist}</h5>
+                                    <p className='d-flex justify-content-center'>{albumName} · {releaseDate}</p>
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-5'>
-                                    <Button className='btn btn-primary me-3'>Change Picture</Button>
+                                    <Button className='btn btn-primary me-3' onClick={() => openYouTube()}>Open YouYube</Button>
+                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
+                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)}/>
                                     <Button className='btn btn-primary' onClick={() => goFeedText()}>Next</Button>
                                 </div>
                             </Contents>
@@ -58,7 +98,8 @@ function FeedPicChoose({ onClose }) {
                 </ModalContainer>
             )}
 
-            {isFeedTextOpen && (<FeedText
+            {isFeedTextOpen && (<PostText
+                imageSrc={imageSrc}
                 open={isFeedTextOpen}
                 onClose={() => {
                     setIsFeedTextOpen(false);
@@ -71,4 +112,4 @@ function FeedPicChoose({ onClose }) {
     );
 }
 
-export default FeedPicChoose;
+export default PostPicSelect;

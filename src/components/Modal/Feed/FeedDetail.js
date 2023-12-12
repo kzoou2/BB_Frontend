@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ModalContainer from '../Config/ModalContainer';
 import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedModal_Style';
-import useOutSideClick from '../Config/useOutSideClick';
+import useOutSideClick from '../../../hooks/useOutSideClick';
 import { Mobile, PC } from '../../Responsive';
 import { SiHeadspace } from "react-icons/si";
 import '../../../style/css/FeedDetail.css'

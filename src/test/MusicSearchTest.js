@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Overlay, ModalWrap, Contents } from '../../../style/styled_components/PostModal_Style';
-import ModalContainer from '../Config/ModalContainer';
-import useOutSideClick from '../../../hooks/useOutSideClick';
-import PostPicSelect from './PostPicSelect';
+import { Overlay, ModalWrap, Contents } from '../style/styled_components/PostModal_Style';
+import ModalContainer from '../components/Modal/Config/ModalContainer';
 import axios from 'axios';
-import SpotifyAPI from '../../../api/SpotifyAPI';
+import PostPicSelect from '../components/Modal/Post/PostPicSelect';
 
-function MusicSearch({ onClose }) {
+function MusicSearchTest({ onClose }) {
     const modalRef = useRef(null);
     const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -16,7 +14,6 @@ function MusicSearch({ onClose }) {
     const [musicArtist, setMusicArtist] = useState('');
     const [albumName, setAlbumName] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
-    const [token, setToken] = useState('');
 
     const goPostPicSelect = ({ albumImage, musicTitle, musicArtist, albumName, releaseDate }) => {
         setAlbumImage(albumImage);
@@ -41,23 +38,6 @@ function MusicSearch({ onClose }) {
         };
     }, []);
 
-    useOutSideClick(modalRef, handleClose);
-
-    async function CreateToken() {
-        try {
-            const spotifyAPI = new SpotifyAPI();
-            setToken(await spotifyAPI.getToken());
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    
-    useEffect(() => {
-        // 컴포넌트가 처음 마운트될 때 한 번만 실행
-        CreateToken();
-    }, []); // 빈 배열을 두어 처음 마운트될 때만 실행되도록 함
-
-
     const searchMusic = async () => {
         try {
             // Spotify API 요청 보내기
@@ -68,8 +48,7 @@ function MusicSearch({ onClose }) {
                     market: 'KR',
                 },
                 headers: {
-                    Authorization: `Bearer ${token}`,
-
+                    Authorization: `Bearer ${'BQAZvYKF6efameTxpa_NprR1iEneTA3R8suEJO7hYYJnmBGvGJJxSS5mBT_ARQoE1qtQH-Noi4OQtVHnWBowBMOJKdVeemwkTLWxVhI-I-NPtk_iHwE'}`,
                 },
             });
             const temp = response.data.tracks.items
@@ -81,7 +60,7 @@ function MusicSearch({ onClose }) {
     };
 
     useEffect(() => {
-        console.log("음악 검색 결과: ", searchResults)
+        console.log(searchResults)
     }, [searchResults])
 
     const handleInputChange = (e) => {
@@ -166,19 +145,19 @@ function MusicSearch({ onClose }) {
             {isPostPicSelectOpen && (<PostPicSelect
                 albumImage={albumImage}
                 musicTitle={musicTitle}
-                musicArtist={musicArtist}
+                musicArtist={musicArtist} 
                 albumName={albumName}
                 releaseDate={releaseDate}
                 open={isPostPicSelectOpen}
-                onClose={() => {
-                    setIsPostPicSelectOpen(false);
-                    if (onClose) {
-                        onClose();
-                    }
-                }}
+            onClose={() => {
+                setIsPostPicSelectOpen(false);
+                if (onClose) {
+                    onClose();
+                }
+            }}
             />)}
         </div>
     );
 }
 
-export default MusicSearch;
+export default MusicSearchTest;

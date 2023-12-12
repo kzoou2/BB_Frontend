@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from './navbar';
 import { SiHeadspace } from "react-icons/si";
+import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
+import { FaRegBookmark } from "react-icons/fa";
 import { PC, Mobile } from "../components/Responsive";
 import sample_music from '../Data/sample_music.json';
 import FeedDetail from '../components/Modal/Feed/FeedDetail'
@@ -27,16 +29,22 @@ function Home() {
                         <Navbar />
                     </div>
                     <div className='col-md-9'>
-                        <div className='mt-5' style={{maxHeight: "700px", overflow: "scroll"}}>
+                        <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
                             {data.map((music) => (
                                 <div className='d-flex justify-content-center mb-4' key={music.id}>
                                     <div className="border-bottom" style={{ width: "40rem", height: "auto" }}>
                                         <div>
-                                            <div className='d-flex justify-content-start mb-3'>
-                                                <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
-                                            </div>
-                                            <div className='d-flex justify-content-end mb-3'>
-                                                <p>버튼그룹</p>
+                                            <div className='d-flex justify-content-center'>
+                                                <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
+                                                    <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                                </div>
+                                                <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
+                                                    <span className='mt-2'>
+                                                        <IoMusicalNoteSharp className='me-4' size='26' style={{ cursor: "pointer" }} />
+                                                        <IoPaperPlaneOutline className='me-4' size='26' style={{ cursor: "pointer" }} />
+                                                        <FaRegBookmark className='' size='26' style={{ cursor: "pointer" }} />
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div className="">
                                                 <img style={{ width: "70%", height: "70%" }} src={music.album_cover} alt={music.title}></img>

@@ -3,7 +3,7 @@ import ModalContainer from '../Config/ModalContainer';
 import { Contents, ModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
 import { FaItunesNote } from "react-icons/fa6";
 import { BsMusicNoteList } from "react-icons/bs";
-import useOutSideClick from '../Config/useOutSideClick';
+import useOutSideClick from '../../../hooks/useOutSideClick';
 import MusicSearch from './MusicSearch';
 import PlayListSearch from '../PlayList/PlayListSearch';
 

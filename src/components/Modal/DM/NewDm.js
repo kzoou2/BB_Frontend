@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import ModalContainer from '../Config/ModalContainer';
 import { Contents, ModalWrap, Overlay, Button } from '../../../style/styled_components/PostModal_Style';
-import useOutSideClick from '../Config/useOutSideClick';
+import useOutSideClick from '../../../hooks/useOutSideClick';
 import { CloseButton } from 'react-bootstrap';
 
 function NewDm({ onClose }){
