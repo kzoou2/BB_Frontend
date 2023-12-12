@@ -114,14 +114,14 @@ function SignUp() {
                                         <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" ></input>
                                     </label>
                                     <label className='form-label' htmlFor='passwordComfirm'>
-                                        <input onChange={onChange} type="passwordComfirm" id="passwordComfirm" name="passwordComfirm" placeholder="비밀번호 확인"></input>
+                                        <input onChange={onChange} type="password" id="passwordComfirm" name="passwordComfirm" placeholder="비밀번호 확인"></input>
                                     </label>
-                                    <label className='form-label' htmlFor='gender'>
+                                    {/* <label className='form-label' htmlFor='gender'>
                                         <input onChange={onChange} type="text" id="gender" name="gender" placeholder="성별"></input>
                                     </label>
                                     <label className='form-label' htmlFor='birth'>
                                         <input onChange={onChange} type="text" id="birth" name="birth" placeholder="생일"></input>
-                                    </label>
+                                    </label> */}
 
                                 </div>
                                 <button type='submit'><b>가입</b></button>
