@@ -10,8 +10,9 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm ] = useState("");
     const [gender, setGender] = useState("");
-    const [birth, setBirth] = useState("");
+    const [birth, setBirth] = useState(""); 
     const [errorMessage, setErrorMessage] = useState([]);
+    const [passwordMatchError,setPasswordMatchError] = useState("");
     const navigate = useNavigate();
 
 
@@ -20,14 +21,14 @@ function SignUp() {
             setNickname(event.target.value)
         } else if (event.target.name === "email") {
             setEmail(event.target.value)
-        } else if (event.target.name === " password") {
+        } else if (event.target.name === "password") {
             setPassword(event.target.value)
-        } else if (event.target.name === " passwordConfirm"){
+        } else if (event.target.name === "passwordConfirm"){
             setPasswordConfirm(event.target.value)
-        } else if (event.target.name === " gender"){
+        } else if (event.target.name === "gender"){
             setGender(event.target.value)
-        } else if (event.target.name === "birth"){
-            setBirth(event.target.value)
+        } else if (event.target.name === "birth") {
+            setBirth(event.target.value);
         }
     }
 
@@ -36,7 +37,7 @@ function SignUp() {
 
         const newErrorMessages = [];
         if (nickname === "") {
-            newErrorMessages.push("");
+            newErrorMessages.push("닉네임은 필수 입력 항목입니다.");
         }
         if (password === "") {
             newErrorMessages.push("비밀번호는 필수 입력 항목입니다.");
@@ -45,21 +46,23 @@ function SignUp() {
             newErrorMessages.push("비밀번호 확인은 필수 입력 항목입니다.");
         }
         if (email === "") {
-            newErrorMessages.push("이메일은 필수 입력 항목입니다.")
+            newErrorMessages.push("이메일은 필수 입력 항목입니다.");
         }
-        if (gender === "") {
-            newErrorMessages.push("성별은 필수 입력 항목입니다.")
+        if (password !== passwordConfirm) {
+            setPasswordMatchError("비밀번호가 일치하지 않습니다.");
+            newErrorMessages.push("비밀번호 확인이 일치하지 않습니다.");
+        } else {
+            setPasswordMatchError("");
         }
-        if (birth === "") {
-            newErrorMessages.push("생일은 필수 입력 항목입니다.")
-        }
-        
-
         setErrorMessage(newErrorMessages);
 
+
         if(newErrorMessages.length === 0 ) {
+            window.localStorage.setItem('email', email);
+            window.localStorage.setItem('password', password);
+      
             try {
-                const result = await axios.post("http://localhost:8080//sign-up",{
+                const result = await axios.post("http://localhost:8080/api/v1/users/sign-up",{
                     email: email, 
                     nickname: nickname,
                     password: password,
@@ -69,6 +72,7 @@ function SignUp() {
                 })
                 if(result.status === 200 ){
                     console.log("가입 성공:", result);
+
                     navigate("/login")
                 }
             } catch(error){
@@ -79,13 +83,17 @@ function SignUp() {
                     setEmail("")
                     setPasswordConfirm("")
                     setBirth("")
-                    setBirth("")
                 } else {
                     console.log("가입 실패:", error);
                 }
             }
+            
+            //테스트
+            // navigate('/login');
         }
     }
+
+    
 
     return (
         <div>
@@ -111,20 +119,28 @@ function SignUp() {
                                     </label>
 
                                     <label className='form-label' htmlFor='password'>
-                                        <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" ></input>
+                                        <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" autoComplete="new-password" ></input>
                                     </label>
-                                    <label className='form-label' htmlFor='passwordComfirm'>
-                                        <input onChange={onChange} type="passwordComfirm" id="passwordComfirm" name="passwordComfirm" placeholder="비밀번호 확인"></input>
+                                    <label className='form-label' htmlFor='passwordConfirm'>
+                                        <input onChange={onChange} type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인" autoComplete="new-password" ></input>
                                     </label>
-                                    <label className='form-label' htmlFor='gender'>
-                                        <input onChange={onChange} type="text" id="gender" name="gender" placeholder="성별"></input>
-                                    </label>
-                                    <label className='form-label' htmlFor='birth'>
-                                        <input onChange={onChange} type="text" id="birth" name="birth" placeholder="생일"></input>
-                                    </label>
+                                    {passwordMatchError && <div className="alert alert-danger">{passwordMatchError}</div>}
 
+                                    <div class="input-box" style={{ display: 'flex', gap: '10px' }}>
+                                        <label className='form-label' htmlFor='gender' style={{ flex: 1, minWidth: '130px' }}>
+                                            <select onChange={onChange} id="gender" name="gender">
+                                                <option value="">성별 선택</option>
+                                                <option value="male">남</option>
+                                                <option value="female">여</option>
+                                            </select>
+                                        </label>
+
+                                        <label className='form-label' htmlFor='birth' style={{ flex: 1, minWidth: '130px' }}>
+                                            <input onChange={onChange} id="birth" name="birth" required="" placeholder="생일" type="date"/>
+                                        </label>
+                                    </div>
                                 </div>
-                                <button type='submit'><b>가입</b></button>
+                                <button type='submit'><b>Sign Up</b></button>
 
                                 <br/>
                             </form>
@@ -163,15 +179,32 @@ function SignUp() {
                                     </label>
 
                                     <label className='form-label' htmlFor='username'>
-                                        <input onChange={onChange} type='text' id="username" name='username' placeholder='성명' ></input>
+                                        <input onChange={onChange} type='text' id="nickname" name='nickname' placeholder='닉네임' ></input>
                                     </label>
 
                                     <label className='form-label' htmlFor='password'>
-                                        <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" ></input>
+                                        <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" autoComplete="new-password" ></input>
                                     </label>
+                                    <label className='form-label' htmlFor='passwordConfirm'>
+                                        <input onChange={onChange} type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인" autoComplete="new-password" ></input>
+                                    </label>
+                                    {passwordMatchError && <div className="alert alert-danger">{passwordMatchError}</div>}
 
+                                    <div class="input-box" style={{ display: 'flex', gap: '10px' }}>
+                                        <label className='form-label' htmlFor='gender' style={{ flex: 1, minWidth: '130px' }}>
+                                            <select onChange={onChange} id="gender" name="gender">
+                                                <option value="">성별 선택</option>
+                                                <option value="male">남</option>
+                                                <option value="female">여</option>
+                                            </select>
+                                        </label>
+
+                                        <label className='form-label' htmlFor='birth' style={{ flex: 1, minWidth: '130px' }}>
+                                            <input onChange={onChange} id="birth" name="birth" required="" placeholder="생일" type="date"/>
+                                        </label>
+                                    </div>
                                 </div>
-                                <button type='submit'><b>가입</b></button>
+                                <button type='submit'><b>Sign Up</b></button>
 
                                 <br/>
                             </form>
