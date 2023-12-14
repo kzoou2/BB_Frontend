@@ -1,15 +1,15 @@
 import React from 'react';
-import {PC,Mobile} from '../Responsive';
+import { PC, Mobile } from '../Responsive';
 
-function ProfilePlayList(){
+function ProfilePlayList() {
 
-    return(
+    return (
         <div>
             <PC>
-                <p>playlist!!!!</p>
+                <a href='/BB_Frontend/playlistDetail'>PlaylistDetail 이동</a>
             </PC>
             <Mobile>
-                <p>playlist!!!!</p>
+                <a href='/BB_Frontend/playlistDetail'>PlaylistDetail 이동</a>
             </Mobile>
         </div>
 

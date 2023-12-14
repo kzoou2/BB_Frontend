@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Navbar from './navbar';
 import { SiHeadspace } from "react-icons/si";
 import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
-import { FaRegBookmark } from "react-icons/fa";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { PC, Mobile } from "../components/Responsive";
 import sample_music from '../data/sample_music.json';
-import FeedDetail from '../components/Modal/Feed/FeedDetail'
+import FeedDetail from '../components/Modal/Feed/FeedDetail';
+import '../style/css/Home.css';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
     // const [title, setTitle] = useState("헤어지자 말해요");
@@ -14,11 +16,27 @@ function Home() {
     // const [album, setAlbum] = useState("Alone");
     const [hashtagList, setHashtagList] = useState(["Tag1", "Tag2", "Tag3"]);
     const data = sample_music.slice(0, 20);
+    const navigate = useNavigate();
     const [selectedMusic, setSelectedMusic] = useState(null);
     const [isFeedDetailOpen, setIsFeedDetailOpen] = useState(false);
+    const [isNoteClicked, setIsNoteClicked] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
     const openFeedDetail = (music) => {
         setSelectedMusic(music);
         setIsFeedDetailOpen(true);
+    }
+
+    const clickNote = () => {
+        setIsNoteClicked(!isNoteClicked);
+    }
+
+    const goDM = () => {
+        navigate('/dm');
+    }
+
+    const onBookmark = () => {
+        setIsBookmarked(!isBookmarked);
     }
 
     return (
@@ -36,13 +54,17 @@ function Home() {
                                         <div>
                                             <div className='d-flex justify-content-center'>
                                                 <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                                    <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                                    <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
                                                 </div>
                                                 <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
                                                     <span className='mt-2'>
-                                                        <IoMusicalNoteSharp className='me-4' size='26' style={{ cursor: "pointer" }} />
-                                                        <IoPaperPlaneOutline className='me-4' size='26' style={{ cursor: "pointer" }} />
-                                                        <FaRegBookmark className='' size='26' style={{ cursor: "pointer" }} />
+                                                        <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
+                                                        <IoPaperPlaneOutline className='me-4' size='26' onClick={() => goDM()} style={{ cursor: "pointer" }} />
+                                                        {isBookmarked ? (
+                                                            <FaBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                                        ) : (
+                                                            <FaRegBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                                        )}
                                                     </span>
                                                 </div>
                                             </div>
@@ -64,6 +86,8 @@ function Home() {
                 {isFeedDetailOpen && (
                     <FeedDetail
                         open={isFeedDetailOpen}
+                        isNoteClicked={isNoteClicked}
+                        isBookmarked={isBookmarked}
                         onClose={() => {
                             setIsFeedDetailOpen(false);
                         }}
@@ -77,14 +101,24 @@ function Home() {
                 <h2 className='text-start ms-3 mt-3 mb-3'>BeatBuddy</h2>
 
                 {data.map((music) => (
-                    <div className='d-flex justify-content-center mb-4'>
+                    <div className='d-flex justify-content-center mb-4 ms-3 me-3'>
                         <div className="border-bottom" style={{ width: "40rem", height: "auto" }}>
                             <div>
-                                <div className='d-flex justify-content-start ms-4 mb-3'>
-                                    <a href='/BB_Frontend/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
-                                </div>
-                                <div className='d-flex justify-content-end me-4 mb-3'>
-                                    <p>버튼그룹</p>
+                                <div className='d-flex justify-content-center'>
+                                    <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
+                                        <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                    </div>
+                                    <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
+                                        <span className='mt-2'>
+                                            <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
+                                            <IoPaperPlaneOutline className='me-4' size='26' onClick={() => goDM()} style={{ cursor: "pointer" }} />
+                                            {isBookmarked ? (
+                                                <FaBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                            ) : (
+                                                <FaRegBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                            )}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="">
                                     <img style={{ width: "80%", height: "80%" }} src={music.album_cover} alt={music.title}></img>
@@ -101,6 +135,8 @@ function Home() {
                 {isFeedDetailOpen && (
                     <FeedDetail
                         open={isFeedDetailOpen}
+                        isNoteClicked={isNoteClicked}
+                        isBookmarked={isBookmarked}
                         onClose={() => {
                             setIsFeedDetailOpen(false);
                         }}

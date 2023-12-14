@@ -25,10 +25,6 @@ function MusicSearchTest({ onClose }) {
         setIsPostPicSelectOpen(true);
     };
 
-    const handleClose = () => {
-        onClose?.();
-    };
-
     useEffect(() => {
         const $body = document.querySelector("body");
         const overflow = $body.style.overflow;
