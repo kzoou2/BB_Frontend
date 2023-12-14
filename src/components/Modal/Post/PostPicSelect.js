@@ -15,7 +15,6 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
     const [imageSrc, setImageSrc] = useState(albumImage);
 
     const goFeedText = () => {
-        console.log("사진 선택 완료")
         setIsFeedTextOpen(true);
     }
 
@@ -89,7 +88,7 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
                                 <div className='d-flex justify-content-center mb-5'>
                                     <Button className='btn btn-primary me-3' onClick={() => openYouTube()}>Open YouYube</Button>
                                     <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
-                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)}/>
+                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
                                     <Button className='btn btn-primary' onClick={() => goFeedText()}>Next</Button>
                                 </div>
                             </Contents>
@@ -99,7 +98,12 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
             )}
 
             {isFeedTextOpen && (<PostText
-                imageSrc={imageSrc}
+                albumImage={imageSrc}
+                videoId={youTubeResults[0].id.videoId}
+                musicTitle={musicTitle}
+                musicArtist={musicArtist}
+                albumName={albumName}
+                releaseDate={releaseDate}
                 open={isFeedTextOpen}
                 onClose={() => {
                     setIsFeedTextOpen(false);

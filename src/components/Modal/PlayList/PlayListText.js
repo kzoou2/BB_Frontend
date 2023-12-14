@@ -8,10 +8,12 @@ import Tagify from '@yaireo/tagify';
 import '@yaireo/tagify/dist/tagify.css';
 import '../../../style/css/Hashtag.css';
 
+// 가수, 노래제목, 발매연도, 앨범이름, 사진, 플리 타이틀, 글, 해시태그, 작성자
 function PlayListText({ onClose, imageSrc }) {
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const [hashtagList, setHashtagList] = useState([]);
+    const [content, setContent] = useState('안녕하세요');
 
     const postPlayList = () => {
         console.log("플레이리스트 게시 완료")
@@ -49,6 +51,18 @@ function PlayListText({ onClose, imageSrc }) {
         };
     }, []);
 
+    const handleContentChange = (event) => {
+        setContent(event.target.value);
+    };
+
+    useEffect(() => {
+        console.log(content);
+    }, [content])
+
+    const goProfile = () => {
+        navigate('/profile');
+    }
+
     useOutSideClick(modalRef, handleClose);
 
     return (
@@ -63,22 +77,22 @@ function PlayListText({ onClose, imageSrc }) {
                             </div>
 
                             <div className='d-flex justify-content-center'>
-                                <div className='d-flex justify-content-center' style={{ width: "40%" }}>
+                                <div className='d-flex justify-content-center' style={{ width: "55%" }}>
                                     <img className='mt-5' style={{ width: "80%", height: "80%" }} src={imageSrc} alt="Album cover" />
                                 </div>
-                                <div style={{ width: "60%" }}>
-                                    <div className='d-flex justify-content-center mb-3'>
-                                        <a href='/profile'><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                <div style={{ width: "45%" }}>
+                                    <div className='d-flex justify-content-start ms-4 mb-3'>
+                                        <a href='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' onClick={() => { goProfile() }} />User Nickname</a>
                                     </div>
                                     <div className='d-flex flex-column align-items-center mb-3'>
-                                        <input type="text" className="form-control mb-2" placeholder="타이틀을 입력하세요." style={{ width: "70%" }} />
-                                        <input type="text" className="form-control mb-2" placeholder="" style={{ width: "70%", height: "180px" }} />
+                                        <input type="text" className="form-control mb-2" placeholder="타이틀을 입력하세요." style={{ width: "90%" }} />
+                                        <textarea id='contentInput' type="text" className="form-control mb-2" placeholder="" onChange={handleContentChange} value={content} style={{ width: "90%", height: "250px", resize: "none"}} />
                                         <input id='hashtagInput' type="text" className="form-control" placeholder="해시태그를 추가하세요." />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className='d-flex justify-content-center mt-3'>
+                            <div className='d-flex justify-content-center mt-1'>
                                 <Button className='btn btn-primary' onClick={() => postPlayList()}>Post</Button>
                             </div>
                         </Contents>
