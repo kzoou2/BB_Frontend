@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PC, Mobile } from '../components/Responsive';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/css/Login.css';
@@ -7,13 +7,26 @@ import {GoogleOAuthProvider} from "@react-oauth/google";
 import axios from 'axios';
 
 
-function Login({ isLogin, setIsLogin }) {
-
+function Login() {
+    const [isLogin, setIsLogin ] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const storedEmail = window.localStorage.getItem("email");
+        const storedIsLogin = window.localStorage.getItem("isLogin");
+
+        if (storedEmail && storedIsLogin === 'true') {
+            setIsLogin(true);
+        }
+    }, []);
+
+    const handleLogin = () =>{
+        setIsLogin(true);
+        navigate("/");
+    };
 
     function onChange(event) {
         if (event.target.name === "email") {
@@ -40,7 +53,7 @@ function Login({ isLogin, setIsLogin }) {
 
         if (newErrorMessages.length === 0 ){
             try{
-                const result = await axios.post("http://localhost:8080/login",{
+                const result = await axios.post("http://localhost:8080/api/v1/users/login",{
                     email: email,
                     password: password
                 })
@@ -48,12 +61,18 @@ function Login({ isLogin, setIsLogin }) {
                 if (result.status === 200){
                     console.log(result)
                         console.log("로그인 성공:", result);
+                        
+                        const token = result.data.token;
+                        localStorage.setItem("token", token);
+
                         setIsLogin(true);
+                        window.localStorage.setItem("email", result.data.email);
+                        window.localStorage.setItem('isLogin', 'true');
                         navigate("/");
                     }
                 } catch(error){
                     if (error.response && error.response.data){
-                        setErrorMessage([error.response.data]);
+                        setErrorMessage([error.response.data.message]);
                         setEmail("");
                         setPassword("");
                     } else{
@@ -62,6 +81,13 @@ function Login({ isLogin, setIsLogin }) {
                 }
             }
         }
+
+        // 테스트}
+        // setIsLogin(true);
+        // window.localStorage.setItem("email", email);
+        // window.localStorage.setItem('isLogin', 'true');
+        // navigate("/");
+    // }    
     
 
     return (
@@ -105,8 +131,9 @@ function Login({ isLogin, setIsLogin }) {
                             <button>
                                 <GoogleOAuthProvider clientId={clientId}>
                                         <GoogleLogin
-                                            onSuccess={(res) => {
+                                            onSuccess={async (res) => {
                                                 console.log(res);
+                                                handleLogin();
                                             }}
                                             onFailure={(err) => {
                                                 console.log(err);

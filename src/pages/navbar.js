@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import '../style/css/navbar.css';
 import { Container, Outside, Ul } from "../style/styled_components/navbar_Style";
 import { PC, Mobile } from "../components/Responsive";
@@ -15,6 +16,20 @@ function Navbar() {
         setIsCreatePostOpen(true);
     };
 
+    const [isLogin, setIsLogin] = useState(false);
+    const navigate = useNavigate();
+    useEffect (()=>{
+        const loggedin = localStorage.getItem('isLogin')
+        setIsLogin(loggedin);
+    },[]);
+
+    const logout = () =>{
+        localStorage.removeItem('email');
+        localStorage.removeItem('isLogin');
+        setIsLogin(false);
+        navigate("/");
+    }
+
     return (
         <div>
             <PC>
@@ -30,7 +45,11 @@ function Navbar() {
                                 <li className='text-start'><a href='/BB_Frontend/Alarm'><FaItunesNote className='me-2' size='25' color='black' />Alarm</a></li>
                                 <li className='text-start' onClick={() => openCreatePost()}><a><FaRegSquarePlus className='me-2' size='25' color='black' />Post</a></li>
                                 <li className='text-start'><a href='/BB_Frontend/Profile'>Profile</a></li>
-                                <li className='text-start'><a href='/BB_Frontend/Login'>Login</a></li>
+                                {isLogin ? (
+                                    <li className='text-start'><a onClick={logout}>Logout</a></li>
+                                ) : (
+                                    <li className='text-start'><a href='/BB_Frontend/Login'>Login</a></li>
+                                )}
                             </Ul>
                         </div>
                     </Outside>
