@@ -21,6 +21,7 @@ import PlayListDetail from './PlayListDetail';
 // Test
 import MusicPlayerTest from '../test/MusicPlayerTest';
 import MusicSearchTest from '../test/MusicSearchTest';
+import HomeTest from '../test/HomeTest';
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
                     <Route path="/test" element={<MusicPlayerTest />} />
                     <Route path='/test/1' element={<MusicSearchTest />} />
+                    <Route path='/test/2' element={<HomeTest />} />
                 </Routes>
             </div>
         </BrowserRouter>

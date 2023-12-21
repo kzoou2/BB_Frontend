@@ -16,7 +16,6 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
     const [hashtagList, setHashtagList] = useState([]);
     const [content, setContent] = useState('');
     const [imageSrc, setImageSrc] = useState(albumImage);
-    const token = process.env.REACT_APP_LOGIN_KEY;
 
     const postFeed = () => {
         console.log(
@@ -54,7 +53,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
         var requestOptions = {
             method: 'POST',
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: formdata,
             redirect: 'follow'
