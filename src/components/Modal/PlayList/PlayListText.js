@@ -18,7 +18,6 @@ function PlayListText({ onClose, playlist }) {
     const [imageSrc, setImageSrc] = useState('');
     const [content, setContent] = useState('');
     const [playlistTitle, setPlaylistTitle] = useState('');
-    const token = process.env.REACT_APP_LOGIN_KEY;
     const musicInfoList = [];
 
     // playlist 배열을 순회하면서 musicInfoList를 추출하여 새로운 배열에 저장
@@ -45,7 +44,7 @@ function PlayListText({ onClose, playlist }) {
         var requestOptions = {
             method: 'POST',
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: formdata,
             redirect: 'follow'

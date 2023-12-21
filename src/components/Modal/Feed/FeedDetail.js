@@ -17,7 +17,6 @@ function FeedDetail({ onClose, music }) {
     const [isNoteClicked, setIsNoteClicked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [comment, setComment] = useState("");
-    const token = process.env.REACT_APP_LOGIN_KEY;
 
     const handleClose = () => {
         onClose?.();
@@ -57,7 +56,7 @@ function FeedDetail({ onClose, music }) {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             }
         )

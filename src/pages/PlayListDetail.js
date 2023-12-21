@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './navbar';
 import { PC, Mobile } from '../components/Responsive';
 import ReactPlayer from 'react-player/lazy'
-import { SiHeadspace } from 'react-icons/si';
-import { FaEdit } from 'react-icons/fa';
 import { FaPlay, FaPause } from "react-icons/fa6";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -21,7 +19,6 @@ function PlayListDetail() {
     const playerRef = useRef(null);
     const { playlistId } = useParams([]);
     const [videoIdList, setVideoIdList] = useState();
-    const token = process.env.REACT_APP_LOGIN_KEY;
 
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
@@ -29,7 +26,7 @@ function PlayListDetail() {
         axios.get(`https://94ed-121-190-220-40.ngrok-free.app/api/playlist/my/${playlistId}`, {
             headers: {
                 'Content-Type': `application/json`,
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })
