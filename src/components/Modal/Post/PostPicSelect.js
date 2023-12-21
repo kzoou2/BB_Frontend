@@ -8,11 +8,9 @@ import axios from 'axios';
 function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
     const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY_2;
     const modalRef = useRef(null)
-    const inputFileRef = useRef(null);
     const [isFeedTextOpen, setIsFeedTextOpen] = useState(false);
     const [youTubeResults, setYouTubeResults] = useState([]);
     const youTubeQuery = (`${musicTitle} ${musicArtist}`);
-    const [imageSrc, setImageSrc] = useState(albumImage);
 
     const goFeedText = () => {
         setIsFeedTextOpen(true);
@@ -54,15 +52,6 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
 
     useOutSideClick(modalRef, handleClose);
 
-    const onUpload = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            setImageSrc(event.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-
     return (
         <div>
             {isFeedTextOpen ? null : (
@@ -76,7 +65,7 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-3'>
-                                    <img style={{ width: "50%", height: "50%" }} src={imageSrc} alt="Album cover"></img>
+                                    <img style={{ width: "50%", height: "50%" }} src={albumImage} alt="Album cover"></img>
                                 </div>
 
                                 <div>
@@ -87,8 +76,6 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
 
                                 <div className='d-flex justify-content-center mb-5'>
                                     <Button className='btn btn-primary me-3' onClick={() => openYouTube()}>Open YouYube</Button>
-                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
-                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
                                     <Button className='btn btn-primary' onClick={() => goFeedText()}>Next</Button>
                                 </div>
                             </Contents>
@@ -98,7 +85,7 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
             )}
 
             {isFeedTextOpen && (<PostText
-                albumImage={imageSrc}
+                albumImage={albumImage}
                 videoId={youTubeResults[0].id.videoId}
                 musicTitle={musicTitle}
                 musicArtist={musicArtist}

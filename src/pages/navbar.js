@@ -77,10 +77,10 @@ function Navbar() {
                     <button className='button'>
                         <FaItunesNote className='me-2' size='25' color='black' />
                     </button>
-                    <button class="button" onClick={() => openCreatePost()}>
+                    <button className="button" onClick={() => openCreatePost()}>
                         <FaRegSquarePlus className='me-2' size='40' color='black' />
                     </button>
-                    <button class="button">
+                    <button className="button">
                         <SiHeadspace className='me-2' size='40' color='gray' />
                     </button>
                 </div>

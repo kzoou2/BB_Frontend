@@ -13,7 +13,6 @@ import MusicSearch from '../components/Modal/Post/MusicSearch';
 import PostPicSelect from '../components/Modal/Post/PostPicSelect';
 import FeedTextInput from '../components/Modal/Post/PostText';
 import PlayListSearch from '../components/Modal/PlayList/PlayListSearch';
-import PlayListPicSelect from '../components/Modal/PlayList/PlayListPicSelect';
 import PlayListText from '../components/Modal/PlayList/PlayListText';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import Playlist from './Playlist';
@@ -37,7 +36,8 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
-                    <Route path="/playlistDetail" element={<PlayListDetail />} />
+                    {/* <Route path="/playlistDetail" element={<PlayListDetail />} /> */}
+                    <Route path="/playlistDetail/:playlistId" element={<PlayListDetail />} />
                     
                     {/* Test */}
                     <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
@@ -45,8 +45,7 @@ function App() {
                     <Route path="/post/1" element={<PostPicSelect />} /> {/* Post Test Link */}
                     <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
-                    <Route path="/pl/1" element={<PlayListPicSelect />} /> {/* Post Test Link */}
-                    <Route path="/pl/2" element={<PlayListText />} /> {/* Post Test Link */}
+                    <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
                     <Route path="/test" element={<MusicPlayerTest />} />
                     <Route path='/test/1' element={<MusicSearchTest />} />
                 </Routes>
