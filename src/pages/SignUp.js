@@ -61,8 +61,9 @@ function SignUp() {
             window.localStorage.setItem('email', email);
             window.localStorage.setItem('password', password);
       
-            try {
-                const result = await axios.post("http://localhost:8080/api/v1/users/sign-up",{
+            try { 
+                // const result = await axios.post("http://localhost:8080/api/v1/users/sign-up",{
+                    const result = await axios.post("https://94ed-121-190-220-40.ngrok-free.app/api/v1/users/sign-up",{
                     email: email, 
                     nickname: nickname,
                     password: password,

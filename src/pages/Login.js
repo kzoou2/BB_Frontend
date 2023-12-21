@@ -53,7 +53,8 @@ function Login() {
 
         if (newErrorMessages.length === 0 ){
             try{
-                const result = await axios.post("http://localhost:8080/api/v1/users/login",{
+                // const result = await axios.post("http://localhost:8080/api/v1/users/login",{
+                const result = await axios.post("https://94ed-121-190-220-40.ngrok-free.app/api/v1/users/login",{
                     email: email,
                     password: password
                 })
@@ -62,13 +63,16 @@ function Login() {
                     console.log(result)
                         console.log("로그인 성공:", result);
                         
-                        const token = result.data.token;
+                        const token = result.data.data.accessToken;
+                        console.log("token",token);
                         localStorage.setItem("token", token);
 
                         setIsLogin(true);
-                        window.localStorage.setItem("email", result.data.email);
+                        window.localStorage.setItem("email", email);
                         window.localStorage.setItem('isLogin', 'true');
+                        window.localStorage.setItem("token", token);
                         navigate("/");
+                    
                     }
                 } catch(error){
                     if (error.response && error.response.data){
@@ -77,6 +81,7 @@ function Login() {
                         setPassword("");
                     } else{
                         console.log("로그인 실패:",error);
+                        alert("회원 정보가 없습니다.")
                     }
                 }
             }
