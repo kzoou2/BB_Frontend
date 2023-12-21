@@ -8,13 +8,16 @@ import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import '../../../style/css/FeedDetail.css'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // Home에서 좋아요, 북마크 변수 값 받아야함. 디테일에서 변경한 값도 Home으로 보내서 공유해야함.
 function FeedDetail({ onClose, music }) {
-    const modalRef = useRef(null)
+    const modalRef = useRef(null);
     const navigate = useNavigate();
     const [isNoteClicked, setIsNoteClicked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [comment, setComment] = useState("");
+    const token = process.env.REACT_APP_LOGIN_KEY;
 
     const handleClose = () => {
         onClose?.();
@@ -41,6 +44,31 @@ function FeedDetail({ onClose, music }) {
         setIsBookmarked(!isBookmarked);
     }
 
+    const handleCommentChange = (event) => {
+        setComment(event.target.value);
+    }
+
+    const inputComment = async (feedId) => {
+        await axios.post(
+            `https://94ed-121-190-220-40.ngrok-free.app/api/comments/save/${feedId}`,
+            {
+                comment: `${comment}`
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log("댓글 작성 API 호출 중 오류", error);
+            });
+    };
+
     useOutSideClick(modalRef, handleClose)
 
     return (
@@ -63,7 +91,7 @@ function FeedDetail({ onClose, music }) {
                                                 )}
                                             </span>
                                         </div>
-                                        <img className='mt-3' style={{ width: "95%", height: "95%" }} src={music.album_cover} alt={music.title}></img>
+                                        <img className='mt-3' style={{ width: "95%", height: "95%" }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
                                     </div>
                                     <div className='ms-2' style={{ width: "50%", backgroundColor: "white" }}>
                                         <div className='d-flex justify-content-start'>
@@ -71,24 +99,24 @@ function FeedDetail({ onClose, music }) {
                                         </div>
                                         <hr />
                                         <div className='justify-content-center text-center'>
-                                            <h5>{music.title} · {music.artist}</h5>
-                                            <p>{music.album} · {music.release_year}</p>
+                                            <h5>{music.musicInfoList[0].musicTitle} · {music.musicInfoList[0].musicArtist}</h5>
+                                            <p>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
                                         </div>
                                         <div className='justify-content-start text-start'>
-                                            <p>글 내용</p>
-                                            <p>해시태그</p>
+                                            <p>{music.content}</p>
+                                            {music.tagName.map((tag, index) => (
+                                                <p key={index} className='btn btn-outline-primary btn-sm me-2 rounded-pill disabled'>#{tag}</p>
+                                            ))}
                                         </div>
                                         <hr />
                                         <div className='justify-content-start text-start'>
-                                            <p>댓글 1</p>
-                                            <p>댓글 2</p>
-                                            <p>댓글 3</p>
-                                            <p>댓글 4</p>
-                                            <p>댓글 5</p>
+                                            {music.comments.map((data) => (
+                                                <p key={data.id}>{data.nickName} : {data.comment}</p>
+                                            ))}
                                         </div>
                                         <div className="d-flex justify-content-center" id='search'>
-                                            <input type="text" className="search_input" placeholder="댓글을 입력하세요." />
-                                            <button className="search_button">입력</button>
+                                            <input type="text" className="search_input" placeholder="댓글을 입력하세요." onChange={handleCommentChange} value={comment} />
+                                            <button className="search_button" onClick={() => inputComment(music.id)}>입력</button>
                                         </div>
                                     </div>
                                 </div>
@@ -121,21 +149,24 @@ function FeedDetail({ onClose, music }) {
                                         </div>
                                     </div>
                                     <div className='d-flex justify-content-center mb-1'>
-                                        <img style={{ width: "40%", height: "40%" }} src={music.album_cover} alt={music.title}></img>
+                                        <img style={{ width: "40%", height: "40%" }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
                                     </div>
                                     <div className='justify-content-center mt-3'>
                                         <div className='text-center'>
-                                            <h5>{music.title} · {music.artist}</h5>
-                                            <p>{music.album} · {music.release_year}</p>
+                                            <h5>{music.musicInfoList[0].musicTitle} · {music.musicInfoList[0].musicArtist}</h5>
+                                            <p>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
                                         </div>
                                         <div className='text-start'>
-                                            <p>글 내용</p>
-                                            <p>해시태그</p>
+                                            <p>{music.content}</p>
+                                            {music.tagName.map((tag, index) => (
+                                                <p key={index} className='btn btn-outline-primary btn-sm me-2 rounded-pill disabled'>#{tag}</p>
+                                            ))}
                                         </div>
                                         <hr />
                                         <div className='text-start'>
-                                            <p>댓글 1</p>
-                                            <p>댓글 2</p>
+                                            {music.comments.map((data) => (
+                                                <p key={data.id}>{data.nickName} : {data.comment}</p>
+                                            ))}
                                         </div>
                                         <div className="search" id='search'>
                                             <input type="text" className="search_input" placeholder="댓글을 입력하세요." />

@@ -16,11 +16,11 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
     const [hashtagList, setHashtagList] = useState([]);
     const [content, setContent] = useState('');
     const [imageSrc, setImageSrc] = useState(albumImage);
-    const token = "";
+    const token = process.env.REACT_APP_LOGIN_KEY;
 
     const postFeed = () => {
-        console.log("글 작성 완료")
         console.log(
+            "글 작성 완료 \n",
             "제목: ", musicTitle, "\n",
             "가수: ", musicArtist, "\n",
             "앨범명 : ", albumName, "\n",
@@ -28,8 +28,45 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             "비디오아이디 : ", videoId, "\n",
             "이미지: ", { albumImage }, "\n",
             "내용: ", content, "\n",
-            "해시태그 리스트: ", hashtagList
+            "해시태그 리스트: ", hashtagList.map(tag => ({ tagName: tag }))
         )
+
+        const formdata = new FormData();
+
+        if (inputFileRef.current.files[0]) {
+            formdata.append("imageFile", inputFileRef.current.files[0], "sample.jpeg");
+        }
+
+        formdata.append('feedRequestDto', new Blob([JSON.stringify({
+            content: `${content}`,
+            musicInfo: {
+                musicArtist: `${musicArtist}`,
+                releaseDate: `${releaseDate}`,
+                musicTitle: `${musicTitle}`,
+                albumName: `${albumName}`,
+                videoId: `${videoId}`,
+                albumUrl: `${albumImage}`
+            },
+            albumSrc: `${albumImage}`,
+            hashTags: hashtagList.map(tag => ({ tagName: tag }))
+        })], { type: 'application/json' }));
+
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://94ed-121-190-220-40.ngrok-free.app/api/feeds", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                onClose?.();
+            })
+            .catch(error => console.log('error', error));
     }
 
     const handleClose = () => {
@@ -51,10 +88,10 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
 
         // 태그가 추가되면 이벤트 발생
         tagify.on('add', function (e) {
-            console.log("태그", tagify.value); // 입력된 태그 정보 객체
+            const tags = tagify.value.map(tag => tag.value); // 입력된 태그 정보 객체의 value만을 리스트로 저장
+            console.log("태그", tags);
+            setHashtagList(tags)
         });
-
-        setHashtagList(tagify.value);
 
         // 컴포넌트가 언마운트될 때에는 Tagify 인스턴스를 정리
         return () => {
@@ -65,10 +102,6 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
     const handleContentChange = (event) => {
         setContent(event.target.value);
     };
-
-    useEffect(() => {
-        console.log(content);
-    }, [content])
 
     const goProfile = () => {
         navigate('/profile');
@@ -81,6 +114,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             setImageSrc(event.target.result);
         };
         reader.readAsDataURL(file);
+        inputFileRef.current.files = e.target.files;
     }
 
     useOutSideClick(modalRef, handleClose);

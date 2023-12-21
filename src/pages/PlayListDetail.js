@@ -1,26 +1,60 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './navbar';
 import { PC, Mobile } from '../components/Responsive';
 import ReactPlayer from 'react-player/lazy'
 import { SiHeadspace } from 'react-icons/si';
 import { FaEdit } from 'react-icons/fa';
 import { FaPlay, FaPause } from "react-icons/fa6";
-import sampleResult from '../data/youtube_result.json';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Loading from '../components/Loading';
 
 function PlayListDetail() {
-    const [postCount, setPostCount] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [playlistData, setPlaylistData] = useState([]);
+    const [musicInfoList, setMusicInfoList] = useState([]);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(null); // 현재 재생 중인 동영상의 인덱스
     const [currentVideoTitle, setCurrentVideoTitle] = useState(""); // 현재 재생 중인 동영상의 제목
     const [isVolume, setIsVolume] = useState(0.5);
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0.01);
     const playerRef = useRef(null);
-    const videoIdList = sampleResult.items.map(item => `https://www.youtube.com/watch?v=` + item.id.videoId);
+    const { playlistId } = useParams([]);
+    const [videoIdList, setVideoIdList] = useState();
+    const token = process.env.REACT_APP_LOGIN_KEY;
+
+    useEffect(() => {
+        setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
+
+        axios.get(`https://94ed-121-190-220-40.ngrok-free.app/api/playlist/my/${playlistId}`, {
+            headers: {
+                'Content-Type': `application/json`,
+                'Authorization': `Bearer ${token}`,
+                'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
+            },
+        })
+            .then((response) => {
+                console.log("서버에서 받아온 결과", response.data);
+                const temp1 = response.data;
+                setPlaylistData(temp1);
+
+                const temp2 = response.data.musicInfoList;
+                setMusicInfoList(temp2);
+
+                const temp3 = response.data.musicInfoList.map(item => `https://www.youtube.com/watch?v=` + item.videoId);
+                setVideoIdList(temp3);
+
+                setIsLoading(false); // API 호출이 완료되면 false로 변경하여 로딩화면 숨김처리
+            })
+            .catch((error) => {
+                console.error('API 요청 중 오류 발생:', error);
+            });
+    }, [])
 
     const handleTitleClick = (index) => {
         setIsPlaying(true);
         setCurrentVideoIndex(index);
-        setCurrentVideoTitle(sampleResult.items[index].snippet.title);
+        setCurrentVideoTitle(musicInfoList[index].musicTitle);
     }
 
     const handlePlayPause = () => {
@@ -28,7 +62,7 @@ function PlayListDetail() {
         // 만약 재생 중이지 않다면 첫 번째 동영상을 재생
         if (!isPlaying && currentVideoIndex === null) {
             setCurrentVideoIndex(0);
-            setCurrentVideoTitle(sampleResult.items[0].snippet.title);
+            setCurrentVideoTitle(musicInfoList[0].musicTitle);
         }
     };
 
@@ -58,33 +92,10 @@ function PlayListDetail() {
                     <div className='col-md-3'>
                         <Navbar />
                     </div>
-                    <div className='col-md-8'>
-                        <div className='user-container d-flex align-items-center mb-3'>
-                            <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                <SiHeadspace className='' size='130' color='lightgray' />
-                            </div>
-                            <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
-                                <div className="d-flex align-items-center">
-                                    <p style={{ fontSize: '20px', marginRight: '50px' }}> <b> User Nickname </b> </p>
-                                    <button className='btn btn-outline-primary'> <FaEdit /> 프로필 편집 </button>
-                                </div>
-                                <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '10px' }} >
-                                    <span className='me-4'> 게시글 {postCount}</span>
-                                    <span className='me-4'> 팔로우 100 </span>
-                                    <span> 팔로워 100 </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='highlight' style={{ display: 'flex', marginLeft: '8%', alignItems: 'center', gap: '15px' }}>
-                            <SiHeadspace className='' size='60' color='lightgray' />
-                            <SiHeadspace className='' size='60' color='lightgray' />
-                        </div>
-
-                        <hr />
-                        <div>
+                    <div className='col-md-9'>
+                        <div className='text-start mt-3'>
                             <p>playlist image</p>
-                            <p>playlist title</p>
+                            <h2>{playlistData.title}</h2>
                         </div>
                         <div className='d-flex justify-content-center mt-3 mb-3'>
                             <div className='d-flex justify-content-center'>
@@ -95,14 +106,13 @@ function PlayListDetail() {
                                         url={videoIdList[currentVideoIndex]} // 현재 재생 중인 동영상만을 전달
                                         width="0px"
                                         height="0px"
-                                        sound // sound prop을 true로 설정
+                                        sound="true" // sound prop을 true로 설정
                                         volume={isVolume}
                                         controls={false} // 기본 컨트롤러를 숨기고 직접 컨트롤할 것임
                                         playing={isPlaying} // playing prop을 통해 비디오의 재생 여부를 제어
                                         onProgress={handleProgress}
                                     />
                                 )}
-                                {/* <p dangerouslySetInnerHTML={{ __html: currentVideoTitle }} /> */}
                             </div>
                             <button onClick={handlePlayPause} className='me-3'>
                                 {isPlaying ? <FaPause size="20" /> : <FaPlay size="20" />} {/* 버튼 클릭으로 재생/일시정지를 토글합니다. */}
@@ -126,16 +136,38 @@ function PlayListDetail() {
                             />
                         </div>
                         <div>
-                            {sampleResult.items.map((data, index) => (
-                                <div key={index}
-                                    onClick={() => handleTitleClick(index)} // 클릭 이벤트 추가
-                                    style={{ cursor: 'pointer' }} // 클릭 가능한 요소로 변경
-                                >
-                                    {/* <img src={data.snippet.thumbnails.high.url} alt={`Thumbnail ${index}`} /> */}
-                                    <p className='text-start border-bottom mb-1' dangerouslySetInnerHTML={{ __html: data.snippet.title }} />
-                                    {/* 추가적으로 필요한 정보를 여기에 표시할 수 있습니다. */}
-                                </div>
-                            ))}
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">제목</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">가수</th>
+                                        <th scope="col">앨범</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {isLoading ? <tr><td><Loading /></td></tr> : null}
+                                    {musicInfoList.map((music, index) => (
+                                        <tr key={index}
+                                            onClick={() => handleTitleClick(index)} // 클릭 이벤트 추가
+                                            style={{ cursor: 'pointer' }} // 클릭 가능한 요소로 변경
+                                        >
+                                            <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
+                                            <td>
+                                                <img
+                                                    src={music.albumUrl}
+                                                    alt="앨범 이미지"
+                                                    style={{ verticalAlign: "middle", maxWidth: '50px', maxHeight: '50px' }}
+                                                />
+                                            </td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicTitle }}></td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicArtist }}></td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.albumName }}></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -146,33 +178,10 @@ function PlayListDetail() {
                     <div className='col-md-3'>
                         <Navbar />
                     </div>
-                    <div className='col-md-8'>
-                        <div className='user-container d-flex align-items-center mb-3'>
-                            <div className='col-md-2 user-img mt-5'>
-                                <SiHeadspace className='' size='90' color='lightgray' />
-                            </div>
-                            <div className='user-info' style={{ marginLeft: '100px' }}>
-                                <div className="d-flex align-items-center">
-                                    <p style={{ fontSize: '20px', marginRight: '20px' }}> <b> User Nickname </b> </p>
-                                    <button className='btn btn-outline-primary'> <FaEdit /> 프로필 편집 </button>
-                                </div>
-                                <div className="d-flex align-items-center" style={{ marginTop: '10px' }} >
-                                    <span style={{ marginRight: '24px' }}> 게시글{postCount}</span>
-                                    <span style={{ marginRight: '24px' }} > 팔로우100 </span>
-                                    <sapn> 팔로워100 </sapn>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='highlight' style={{ display: 'flex', marginLeft: '8%', alignItems: 'center', gap: '15px' }}>
-                            <SiHeadspace className='' size='60' color='lightgray' />
-                            <SiHeadspace className='' size='60' color='lightgray' />
-                        </div>
-
-                        <hr />
+                    <div className='col-md-9'>
                         <div>
                             <p>playlist image</p>
-                            <p>playlist title</p>
+                            <h2>playlist title</h2>
                         </div>
                         <div className='d-flex justify-content-center mt-3 mb-3'>
                             <div className='d-flex justify-content-center'>
@@ -183,14 +192,13 @@ function PlayListDetail() {
                                         url={videoIdList[currentVideoIndex]} // 현재 재생 중인 동영상만을 전달
                                         width="0px"
                                         height="0px"
-                                        sound // sound prop을 true로 설정
+                                        sound="true" // sound prop을 true로 설정
                                         volume={isVolume}
                                         controls={false} // 기본 컨트롤러를 숨기고 직접 컨트롤할 것임
                                         playing={isPlaying} // playing prop을 통해 비디오의 재생 여부를 제어
                                         onProgress={handleProgress}
                                     />
                                 )}
-                                {/* <p dangerouslySetInnerHTML={{ __html: currentVideoTitle }} /> */}
                             </div>
                             <button onClick={handlePlayPause} className='me-3'>
                                 {isPlaying ? <FaPause size="20" /> : <FaPlay size="20" />} {/* 버튼 클릭으로 재생/일시정지를 토글합니다. */}
@@ -214,16 +222,38 @@ function PlayListDetail() {
                             />
                         </div>
                         <div className='ms-3 me-3'>
-                            {sampleResult.items.map((data, index) => (
-                                <div key={index}
-                                    onClick={() => handleTitleClick(index)} // 클릭 이벤트 추가
-                                    style={{ cursor: 'pointer' }} // 클릭 가능한 요소로 변경
-                                >
-                                    {/* <img src={data.snippet.thumbnails.high.url} alt={`Thumbnail ${index}`} /> */}
-                                    <p className='text-start border-bottom mb-1' dangerouslySetInnerHTML={{ __html: data.snippet.title }} />
-                                    {/* 추가적으로 필요한 정보를 여기에 표시할 수 있습니다. */}
-                                </div>
-                            ))}
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">제목</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">가수</th>
+                                        <th scope="col">앨범</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {isLoading ? <tr><td><Loading /></td></tr> : null}
+                                    {musicInfoList.map((music, index) => (
+                                        <tr key={index}
+                                            onClick={() => handleTitleClick(index)} // 클릭 이벤트 추가
+                                            style={{ cursor: 'pointer' }} // 클릭 가능한 요소로 변경
+                                        >
+                                            <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
+                                            <td>
+                                                <img
+                                                    src={music.albumUrl}
+                                                    alt="앨범 이미지"
+                                                    style={{ verticalAlign: "middle", maxWidth: '50px', maxHeight: '50px' }}
+                                                />
+                                            </td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicTitle }}></td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicArtist }}></td>
+                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.albumName }}></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
