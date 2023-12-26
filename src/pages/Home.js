@@ -60,10 +60,10 @@ function Home() {
         <div>
             <PC>
                 <div className='row'>
-                    <div className='col-md-3'>
+                    <div className='col-md-2'>
                         <Navbar />
                     </div>
-                    <div className='col-md-9'>
+                    <div className='col-md-10'>
                         <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
                             {isLoading ? <Loading /> : null}
                             {feedData.slice().reverse().map((music) => (

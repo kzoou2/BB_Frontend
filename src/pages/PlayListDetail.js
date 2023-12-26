@@ -178,7 +178,7 @@ function PlayListDetail() {
                     <div className='col-md-9'>
                         <div>
                             <p>playlist image</p>
-                            <h2>playlist title</h2>
+                            <h2>{playlistData.title}</h2>
                         </div>
                         <div className='d-flex justify-content-center mt-3 mb-3'>
                             <div className='d-flex justify-content-center'>

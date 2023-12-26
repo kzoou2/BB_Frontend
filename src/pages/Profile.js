@@ -69,8 +69,8 @@ function Profile() {
                         <div className='button-container' style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center', marginLeft: '110px', marginBottom: '20px' }}>
                             <div className='button-container' style={{ display: 'inline-block', width: '300px', justifyContent: 'space-between' }} >
                                 <button onClick={() => handleTabChange('post')} className={activeTab === 'post' ? 'active' : ''}><RiFolderMusicLine className='me-2' size='20' />게시물</button>
-                                <button onClick={() => handleTabChange('saved')} className={activeTab === 'saved' ? 'active' : ''}><FiBookmark className='me-2' size='20' />저장됨</button>
                                 <button onClick={() => handleTabChange('playlist')} className={activeTab === 'playlist' ? 'active' : ''}><TbPlaylist className='me-2' size='20' />플레이리스트</button>
+                                <button onClick={() => handleTabChange('saved')} className={activeTab === 'saved' ? 'active' : ''}><FiBookmark className='me-2' size='20' />저장됨</button>
                             </div>
                         </div>
 
@@ -83,10 +83,10 @@ function Profile() {
 
             <Mobile>
                 <div className='row'>
-                    <div className='col-md-3'>
+                    <div className='col-md-2'>
                         <Navbar />
                     </div>
-                    <div className='col-md-8'>
+                    <div className='col-md-10'>
                         <div className='user-container d-flex align-items-center mb-3'>
                             <div className='col-md-2 user-img mt-5'>
                                 <SiHeadspace className='' size='90' color='lightgray' />
@@ -113,8 +113,8 @@ function Profile() {
                         <div className='button-container d-flex align-items-center justify-content-center' style={{ marginBottom: '20px' }}>
                             <div className='button-container' style={{ display: 'inline-block', width: '250px', justifyContent: 'space-between' }} >
                                 <button onClick={() => handleTabChange('post')} className={activeTab === 'post' ? 'active' : ''}><RiFolderMusicLine className='ms-2 me-2' size='20' /></button>
-                                <button onClick={() => handleTabChange('saved')} className={activeTab === 'saved' ? 'active' : ''}><FiBookmark className='ms-2 me-2' size='20' /></button>
                                 <button onClick={() => handleTabChange('playlist')} className={activeTab === 'playlist' ? 'active' : ''}><TbPlaylist className='ms-2 me-2' size='20' /></button>
+                                <button onClick={() => handleTabChange('saved')} className={activeTab === 'saved' ? 'active' : ''}><FiBookmark className='ms-2 me-2' size='20' /></button>
                             </div>
                         </div>
 

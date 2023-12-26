@@ -4,16 +4,31 @@ import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_comp
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import PlayListText from './PlayListText';
 import axios from 'axios';
+import { FaArrowLeft } from "react-icons/fa";
+import CreatePost from '../Post/CreatePost';
 
-function PlayListSearch({ onClose }) {
+function PlayListSearch({ onClose, searchKeyword }) {
     const modalRef = useRef(null);
     const [isPlstListTextOpen, setIsPlayListTextOpen] = useState(false);
+    const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [originalResults, setOriginalResults] = useState([]);
 
+    // TODO: PlayListText에서 되돌아왔을 때 검색했던 결과 보여주어야함.
+    // TODO: db에 없는 해시태그 검색 시 알림창 띄우기
+    console.log("검색어", searchKeyword);
+
     const goPlayListText = () => {
-        setIsPlayListTextOpen(true);
+        if (searchResults.length === 0) {
+            alert("플레이리스트를 구성하세요.")
+        } else {
+            setIsPlayListTextOpen(true);
+        }
+    }
+
+    const goCreatePost = () => {
+        setIsCreatePostOpen(true);
     }
 
     const handleClose = () => {
@@ -69,12 +84,17 @@ function PlayListSearch({ onClose }) {
 
     return (
         <div>
-            {isPlstListTextOpen ? null : (
+            {isPlstListTextOpen || isCreatePostOpen ? null : (
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
                             <Contents>
-                                <h3 className='d-flex justify-content-center'>New PlayList (PlayListSearch)</h3>
+                                <div className='row'>
+                                    <FaArrowLeft className='col' size='36' onClick={() => goCreatePost()} style={{ color: "blue", cursor: "pointer" }} />
+                                    <h3 className='col-10 text-center'>New PlayList (PlayListSearch)</h3>
+                                    <div className='col'></div>
+                                </div>
+
                                 <div className='d-flex justify-content-center mb-1'>
                                     <hr style={{ width: "80%" }} />
                                 </div>
@@ -104,12 +124,11 @@ function PlayListSearch({ onClose }) {
                                                         <td style={{ verticalAlign: 'middle' }}>
                                                             <button className='btn btn-danger btn-sm' onClick={() => deleteMusic(music.id)}>DELETE</button>
                                                         </td>
-                                                        {/* </div> */}
                                                     </tr>
                                                 )))
                                                 : (
                                                     <tr className='text-center align-middle'>
-                                                        <td style={{ borderBottom: "none" }}>
+                                                        <td style={{ borderBottom: "none", height: "300px"}}>
                                                             <h2>해시태그를 입력하세요.</h2>
                                                         </td>
                                                     </tr>
@@ -129,9 +148,10 @@ function PlayListSearch({ onClose }) {
                 </ModalContainer>
             )}
 
-            {isPlstListTextOpen && (<PlayListText 
+            {isPlstListTextOpen && (<PlayListText
                 open={isPlstListTextOpen}
                 playlist={searchResults}
+                searchQuery={searchQuery}
                 onClose={() => {
                     setIsPlayListTextOpen(false);
                     if (onClose) {
@@ -139,6 +159,17 @@ function PlayListSearch({ onClose }) {
                     }
                 }}
             />)}
+
+            {isCreatePostOpen && (<CreatePost
+                open={isCreatePostOpen}
+                onClose={() => {
+                    setIsCreatePostOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
+                }}
+            />)}
+
         </div>
     );
 }

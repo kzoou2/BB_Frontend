@@ -5,10 +5,14 @@ import useOutSideClick from '../../../hooks/useOutSideClick';
 import PostPicSelect from './PostPicSelect';
 import axios from 'axios';
 import SpotifyAPI from '../../../api/SpotifyAPI';
+import { FaArrowLeft } from "react-icons/fa";
+import CreatePost from './CreatePost';
 
+// TODO: 검색결과 없을 때 알림창 띄우기
 function MusicSearch({ onClose }) {
     const modalRef = useRef(null);
     const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
+    const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [albumImage, setAlbumImage] = useState('');
@@ -28,6 +32,10 @@ function MusicSearch({ onClose }) {
         setIsPostPicSelectOpen(true);
     };
 
+    const goCreatePost = () => {
+        setIsCreatePostOpen(true); // MusicSearch 모달 닫기
+    }
+
     const handleClose = () => {
         onClose?.();
     };
@@ -43,7 +51,7 @@ function MusicSearch({ onClose }) {
 
     useOutSideClick(modalRef, handleClose);
 
-    async function CreateToken() {
+    async function CreateSpotifyToken() {
         try {
             const spotifyAPI = new SpotifyAPI();
             setToken(await spotifyAPI.getToken());
@@ -51,10 +59,10 @@ function MusicSearch({ onClose }) {
             console.error(error);
         }
     }
-    
+
     useEffect(() => {
         // 컴포넌트가 처음 마운트될 때 한 번만 실행
-        CreateToken();
+        CreateSpotifyToken();
     }, []); // 빈 배열을 두어 처음 마운트될 때만 실행되도록 함
 
 
@@ -97,12 +105,17 @@ function MusicSearch({ onClose }) {
 
     return (
         <div>
-            {isPostPicSelectOpen ? null : (
+            {isPostPicSelectOpen || isCreatePostOpen ? null : (
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
                             <Contents>
-                                <h3 className='d-flex justify-content-center'>New Post (MusicSearch)</h3>
+                                <div className='row'>
+                                    <FaArrowLeft className='col' size='36' onClick={() => goCreatePost()} style={{ color: "blue", cursor: "pointer" }} />
+                                    <h3 className='col-10 text-center'>New Post (MusicSearch)</h3>
+                                    <div className='col'></div>
+                                </div>
+
                                 <div className='d-flex justify-content-center mb-1'>
                                     <hr style={{ width: "80%" }} />
                                 </div>
@@ -177,6 +190,17 @@ function MusicSearch({ onClose }) {
                     }
                 }}
             />)}
+
+            {isCreatePostOpen && (<CreatePost
+                open={isCreatePostOpen}
+                onClose={() => {
+                    setIsCreatePostOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
+                }}
+            />)}
+
         </div>
     );
 }
