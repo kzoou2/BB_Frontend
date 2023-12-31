@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
 import sampleResult from '../data/youtube_result.json';
 
+// test/2
 function MusicPlayerTest() {
     const [isPlaying, setIsPlaying] = useState(false);
     // 유튜브 영상 url : https://www.youtube.com/watch?v={videoId}

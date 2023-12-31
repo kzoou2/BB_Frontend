@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import '../style/css/navbar.css';
-import { Container, Outside, Ul } from "../style/styled_components/navbar_Style";
-import { PC, Mobile } from "../components/Responsive";
+import '../../style/css/navbar.css';
+import { Container, Outside, Ul } from "../../style/styled_components/navbar_Style";
+import { PC, Mobile } from "../Responsive";
 import { IoHomeSharp } from 'react-icons/io5';
 import { FaSearch } from "react-icons/fa";
 import { LuMessageCircle } from "react-icons/lu";
 import { FaItunesNote, FaRegSquarePlus } from "react-icons/fa6";
 import { SiHeadspace } from "react-icons/si";
 import { RiPlayListFill } from "react-icons/ri";
-import CreatePost from '../components/Modal/Post/CreatePost';
+import CreatePost from '../Modal/Post/CreatePost';
 
 function Navbar() {
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);

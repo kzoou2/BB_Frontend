@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from './navbar';
+import Navbar from '../components/Navigation/Navbar';
 import { Mobile, PC } from '../components/Responsive';
 import sample_music from '../data/sample_music.json';
 import RecentSearch from '../components/Search/RecentSearch';
