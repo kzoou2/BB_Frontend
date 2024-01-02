@@ -5,6 +5,7 @@ import '../style/css/Home.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import MiniPlayer from '../components/Player/MiniPlayer';
 
 function Playlist() {
     const navigate = useNavigate();
@@ -42,13 +43,13 @@ function Playlist() {
                     <div className='col-md-2'>
                         <Navbar />
                     </div>
-                    <div className='col-md-10'>
+                    <div className='col-md-8'>
                         <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
+                            {isLoading ? <Loading /> : null}
                             <div className='row ms-5 me-5'>
-                                {isLoading ? <Loading /> : null}
                                 {playlistData.slice().reverse().map((playlist) => (
                                     <div className='col-md-3' key={playlist.id}>
-                                        <div className="card mb-2" style={{ height: "auto", backgroundColor: "#f2f2f2" }}>
+                                        <div className="card mb-2" style={{ height: "auto", backgroundColor: "#242424", color: "white" }}>
                                             <div className="card-body">
                                                 <img style={{ width: "70%", height: "70%" }} src={playlist.imageFileUrl} alt={playlist.title}></img>
                                                 <p className='mt-2'><b className='mt-3'>{playlist.title}</b></p>
@@ -61,6 +62,9 @@ function Playlist() {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                    <div className='col-md-2'>
+                        <MiniPlayer />
                     </div>
                 </div>
             </PC>

@@ -6,7 +6,7 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { PC, Mobile } from "../components/Responsive";
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import '../style/css/Home.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
 import MiniPlayer from '../components/Player/MiniPlayer';
@@ -74,7 +74,7 @@ function Home() {
                                         <div>
                                             <div className='d-flex justify-content-center'>
                                                 <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                                    <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                                    <Link to='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</Link>
                                                 </div>
                                                 <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
                                                     <span className='mt-2'>
@@ -92,7 +92,7 @@ function Home() {
                                                 <img style={{ width: "70%", height: "70%" }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
                                                 <h5 className='mt-3'>{music.musicInfoList[0].musicTitle} · {music.musicInfoList[0].musicArtist}</h5>
                                                 <p>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
-                                                <p style={{ color: '#4887E5' }}>{music.tagName.map((tag, index) => `#${tag} ${index < music.tagName.length - 1 ? ' ' : ''}`)}</p>
+                                                <p style={{ color: '#27A8FC' }}>{music.tagName.map((tag, index) => `#${tag} ${index < music.tagName.length - 1 ? ' ' : ''}`)}</p>
                                                 <p>{music.content}<span className='ms-2' style={{ color: "grey", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</span></p>
                                             </div>
                                         </div>
@@ -129,7 +129,7 @@ function Home() {
                             <div>
                                 <div className='d-flex justify-content-center'>
                                     <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                        <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                        <Link to='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</Link>
                                     </div>
                                     <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
                                         <span className='mt-2'>
@@ -147,7 +147,7 @@ function Home() {
                                     <img style={{ width: "80%", height: "80%" }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
                                     <h5 className='mt-3'>{music.musicInfoList[0].musicTitle} · {music.musicInfoList[0].musicArtist}</h5>
                                     <p>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
-                                    <p style={{ color: '#4887E5' }}>{music.tagName.map((tag, index) => `#${tag} ${index < music.tagName.length - 1 ? ' ' : ''}`)}</p>
+                                    <p style={{ color: '#27A8FC' }}>{music.tagName.map((tag, index) => `#${tag} ${index < music.tagName.length - 1 ? ' ' : ''}`)}</p>
                                     <p>{music.content}<span className='ms-2' style={{ color: "grey", cursor: "pointer" }} onClick={() => openFeedDetail(music)}>더보기</span></p>
                                 </div>
                             </div>

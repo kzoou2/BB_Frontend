@@ -16,7 +16,7 @@ export const PCModalWrap = styled.div`
 width: 900px;
 height: 600px;
 border-radius: 15px;
-background-color: #fff;
+background-color: #242424;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -27,7 +27,7 @@ export const MobileModalWrap = styled.div`
 width: 600px;
 height: 650px;
 border-radius: 15px;
-background-color: #fff;
+background-color: #242424;
 position: absolute;
 top: 50%;
 left: 50%;

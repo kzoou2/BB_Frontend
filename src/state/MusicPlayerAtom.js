@@ -28,30 +28,22 @@ export const videoProgressAtom = atom({
     effects_UNSTABLE: [persistAtom]
 });
 
-//TODO: play, pause, stop 중 1개 값을 가지도록 수정해야함 -> miniPlayerStateAtom 이용하기
 export const playStateAtom = atom({
     key: "playStateAtom",
-    default: false 
-});
-
-export const videoControlAtom = atom({
-    key: "videoControlAtom",
-    default: false
-});
-
-export const videoPlayingAtom = atom({
-    key: "videoPlayingAtom",
-    default: false
+    default: false,
+    effects_UNSTABLE: [persistAtom]
 });
 
 export const currentVideoIndexAtom = atom({
     key: "currentVideoIndexAtom",
-    default: null
+    default: null,
+    effects_UNSTABLE: [persistAtom]
 })
 
 export const currentVideoTitleAtom = atom({
     key: "currentVideoTitleAtom",
-    default: ""
+    default: "",
+    effects_UNSTABLE: [persistAtom]
 });
 
 // 참고

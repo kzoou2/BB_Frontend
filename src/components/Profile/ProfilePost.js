@@ -21,6 +21,7 @@ function ProfilePost() {
         axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })
@@ -43,7 +44,7 @@ function ProfilePost() {
                     {feedData ? (
                         feedData.slice().reverse().map((music) => (
                             <div className='col-md-3' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
-                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
+                                <div className='card mb-2' style={{ backgroundColor: "#242424", color: "white"}}>
                                     <div className='card-body'>
                                         <div>
                                             <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}

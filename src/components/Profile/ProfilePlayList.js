@@ -41,7 +41,7 @@ function ProfilePlayList() {
                     {playlistData ? (
                         playlistData.slice().reverse().map((playlist) => (
                             <div className='col-md-3' key={playlist.id} style={{ cursor: 'pointer' }} onClick={() => openPlayListDetail(playlist.id)}>
-                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
+                                <div className='card mb-2' style={{ backgroundColor: "#242424", color: "white" }}>
                                     <div className='card-body'>
                                         <div>
                                             <img className='img-fluid rounded-start mb-3' style={{ width: '150px', height: '150px', cursor: 'pointer' }} src={playlist.imageFileUrl} alt={playlist.title} />
