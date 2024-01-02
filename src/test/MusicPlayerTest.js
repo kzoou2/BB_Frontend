@@ -1,14 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../style/css/MusicPlayer.css';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
 import sampleResult from '../data/youtube_result.json';
+import { useRecoilState } from 'recoil';
+import { videoIdListAtom } from '../state/MusicPlayerAtom';
 
+// test/2
 function MusicPlayerTest() {
     const [isPlaying, setIsPlaying] = useState(false);
     // 유튜브 영상 url : https://www.youtube.com/watch?v={videoId}
     // 유튜브 썸네일 이미지 url : https://i.ytimg.com/vi/{videoId}/hqdefault.jpgß
-    const videoIdList = sampleResult.items.map(item => `https://www.youtube.com/watch?v=` + item.id.videoId);
+    const sampleData = sampleResult.items.map(item => `https://www.youtube.com/watch?v=` + item.id.videoId);
+    const [videoIdList, setVideoIdList] = useRecoilState(videoIdListAtom);
     const [isVolume, setIsVolume] = useState(0.5);
     const [progress, setProgress] = useState(0);
     const playerRef = useRef(null);
@@ -33,7 +37,7 @@ function MusicPlayerTest() {
     const handleVolume = (e) => {
         const newVolume = parseFloat(e.target.value);
         setIsVolume(newVolume);
-    };    
+    };
 
     const handleProgress = ({ played }) => {
         setProgress(played * 100);
@@ -49,10 +53,24 @@ function MusicPlayerTest() {
         }
     };
 
+    // FIXME: 동작 로직 수정 필요 (두번째 클릭 시에 어떻게 동작할 지 수정해야함.)
+    const addPlayList = () => {
+        if (videoIdList.length !== 0) {
+            setVideoIdList([])
+        }
+
+        setVideoIdList((prev) => [...prev, ...sampleData])
+    }
+
+    useEffect(() => {
+        console.log(videoIdList)
+    }, [videoIdList])
+
     return (
         <div>
             <h1>Music Player Test</h1>
             <div className='d-flex justify-content-center mt-3'>
+                <button className='btn btn-primary btn-sm' onClick={() => addPlayList()}>재생</button>
                 <button onClick={handlePlayPause} className='me-3'>
                     {isPlaying ? <FaPause size="20" /> : <FaPlay size="20" />} {/* 버튼 클릭으로 재생/일시정지를 토글합니다. */}
                 </button>

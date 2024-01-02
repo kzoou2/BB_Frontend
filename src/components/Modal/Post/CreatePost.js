@@ -11,15 +11,19 @@ function CreatePost({ onClose }) {
     const modalRef = useRef(null);
     const [isMusicSearchOpen, setIsMusicSearchOpen] = useState(false);
     const [isPlayListSearchOpen, setIsPlayListSearchOpen] = useState(false);
+
     const goMusicSearch = () => {
         setIsMusicSearchOpen(true);
     }
+
     const goPlayListSearch = () => {
         setIsPlayListSearchOpen(true);
     }
+
     const handleClose = () => {
         onClose?.();
     }
+    
     useEffect(() => {
         const $body = document.querySelector("body");
         const overflow = $body.style.overflow;

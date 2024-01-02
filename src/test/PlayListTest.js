@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navigation/Navbar';
-import { PC, Mobile } from '../components/Responsive';
+import { PC } from '../components/Responsive';
 import axios from 'axios';
 import Loading from '../components/Loading';
 import { useRecoilState } from 'recoil';
-import { currentVideoIndexAtom, currentVideoTitleAtom, playStateAtom, videoIdListAtom, videoPlaylistAtom } from '../state/MusicPlayerAtom';
-import { useParams } from 'react-router-dom';
-import MiniPlayer from '../components/Player/MiniPlayer';
+import { currentVideoIndexAtom, playStateAtom, videoIdListAtom } from '../state/MusicPlayerAtom';
 
-function PlayListDetail() {
+// test/1
+function PlayListTest() {
     const [isLoading, setIsLoading] = useState(true);
-    const { playlistId } = useParams([]);
 
     const [videoIdList, setVideoIdList] = useRecoilState(videoIdListAtom);
-    const [videoPlayList, setVideoPlayList] = useRecoilState(videoPlaylistAtom);
     const [playState, setPlayState] = useRecoilState(playStateAtom);
     const [currentVideoIndex, setCurrentVideoIndex] = useRecoilState(currentVideoIndexAtom); // 현재 재생 중인 동영상의 인덱스
-    const [currentVideoTitle, setCurrentVideoTitle] = useRecoilState(currentVideoTitleAtom); // 현재 재생 중인 동영상의 제목
 
     const [playlistData, setPlaylistData] = useState([]);
     const [musicInfoList, setMusicInfoList] = useState([]);
@@ -24,7 +20,7 @@ function PlayListDetail() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/playlist/my/${playlistId}`, {
+        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/playlist/my/48`, {
             headers: {
                 'Content-Type': `application/json`,
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -38,7 +34,9 @@ function PlayListDetail() {
 
                 const temp2 = response.data.musicInfoList;
                 setMusicInfoList(temp2);
-                console.log(temp2)
+
+                // const temp3 = response.data.musicInfoList.map(item => `https://www.youtube.com/watch?v=` + item.videoId);
+                // setVideoIdList(temp3);
 
                 setIsLoading(false); // API 호출이 완료되면 false로 변경하여 로딩화면 숨김처리
             })
@@ -47,21 +45,16 @@ function PlayListDetail() {
             });
     }, [])
 
-    // FIXME: 동작 로직 수정 필요 (두번째 클릭 시에 어떻게 동작할 지 수정해야함.)
     const addPlayList = () => {
-        if (videoIdList.length !== 0) {
-            setVideoIdList([])
-            setVideoPlayList([])
-        }
+        setVideoIdList([])
+        setVideoIdList((prev) => [...prev, [musicInfoList], ...musicInfoList.map(item => `https://www.youtube.com/watch?v=` + item.videoId)])
+        console.log("비디오리스트: ", videoIdList)
 
-        setVideoIdList((prev) => [...prev, ...musicInfoList.map(item => `https://www.youtube.com/watch?v=` + item.videoId)])
-        setVideoPlayList((prev) => [...prev, ...musicInfoList])
         setPlayState(!playState);
-
         // 만약 재생 중이지 않다면 첫 번째 동영상을 재생
         if (!playState && currentVideoIndex === null) {
-            setCurrentVideoIndex(0);
-            setCurrentVideoTitle(videoPlayList[0].musicTitle);
+            setCurrentVideoIndex(1);
+            // setCurrentVideoTitle(sampleResult.items[0].snippet.title);
         }
     }
 
@@ -69,10 +62,10 @@ function PlayListDetail() {
         <div>
             <PC>
                 <div className='row'>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <Navbar />
                     </div>
-                    <div className='col-md-8'>
+                    <div className='col-md-9'>
                         <div className='text-start mt-3'>
                             <p>playlist image</p>
                             <h2>{playlistData.title}</h2>
@@ -112,60 +105,10 @@ function PlayListDetail() {
                             </table>
                         </div>
                     </div>
-                    <div className='col-md-2'>
-                        <MiniPlayer />
-                    </div>
                 </div>
             </PC>
-            {/* <Mobile>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <Navbar />
-                    </div>
-                    <div className='col-md-9'>
-                        <div>
-                            <p>playlist image</p>
-                            <h2>{playlistData.title}</h2>
-                        </div>
-                        <div className='d-flex justify-content-center mt-3 mb-3'>
-                            <button className='btn btn-primary btn-sm' onClick={() => addPlayList()}>재생</button>
-                        </div>
-                        <div className='ms-3 me-3'>
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">제목</th>
-                                        <th scope="col"></th>
-                                        <th scope="col">가수</th>
-                                        <th scope="col">앨범</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {isLoading ? <tr><td><Loading /></td></tr> : null}
-                                    {musicInfoList.map((music, index) => (
-                                        <tr key={index}>
-                                            <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
-                                            <td>
-                                                <img
-                                                    src={music.albumUrl}
-                                                    alt="앨범 이미지"
-                                                    style={{ verticalAlign: "middle", maxWidth: '50px', maxHeight: '50px' }}
-                                                />
-                                            </td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicTitle }}></td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicArtist }}></td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.albumName }}></td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </Mobile> */}
         </div>
     );
 }
 
-export default PlayListDetail;
+export default PlayListTest;

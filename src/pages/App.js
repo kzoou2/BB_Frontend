@@ -17,11 +17,12 @@ import PlayListText from '../components/Modal/PlayList/PlayListText';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
+import MiniPlayer from '../components/Player/MiniPlayer';
 
 // Test
 import MusicPlayerTest from '../test/MusicPlayerTest';
-import MusicSearchTest from '../test/MusicSearchTest';
 import HomeTest from '../test/HomeTest';
+import PlaylistTest from '../test/PlayListTest';
 
 function App() {
     return (
@@ -39,7 +40,8 @@ function App() {
                     <Route path="/playlist" element={<Playlist />} />
                     {/* <Route path="/playlistDetail" element={<PlayListDetail />} /> */}
                     <Route path="/playlistDetail/:playlistId" element={<PlayListDetail />} />
-                    
+                    <Route path="/miniplayer" element={<MiniPlayer />} />
+
                     {/* Test */}
                     <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
                     <Route path="/post" element={<MusicSearch />} /> {/* Post Test Link */}
@@ -47,9 +49,9 @@ function App() {
                     <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
                     <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
-                    <Route path="/test" element={<MusicPlayerTest />} />
-                    <Route path='/test/1' element={<MusicSearchTest />} />
-                    <Route path='/test/2' element={<HomeTest />} />
+                    <Route path='/test' element={<HomeTest />} />
+                    <Route path='/test/1' element={<PlaylistTest />} />
+                    <Route path="/test/2" element={<MusicPlayerTest />} />
                 </Routes>
             </div>
         </BrowserRouter>

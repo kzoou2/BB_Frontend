@@ -18,7 +18,7 @@ function ProfilePost() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://94ed-121-190-220-40.ngrok-free.app/api/feeds`, {
+        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
@@ -42,18 +42,20 @@ function ProfilePost() {
                     {isLoading ? <Loading /> : null}
                     {feedData ? (
                         feedData.slice().reverse().map((music) => (
-                            <div className='col-md-4' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
-                                <div className='card-header'>
-                                    <img className='' style={{ width: '150px', height: '150px' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
-                                        alt={`Album cover for ${music.musicInfoList[0].musicTitle}`}>
-                                    </img>
-                                </div>
-                                <div className='card-body mt-2'>
-                                    <b>{music.musicInfoList[0].musicTitle}</b>
-                                    <div>
+                            <div className='col-md-3' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
+                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
+                                    <div className='card-body'>
+                                        <div>
+                                            <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
+                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                        </div>
+                                        <p className='mb-0'><b>{music.musicInfoList[0].musicTitle}</b></p>
                                         <b>{music.musicInfoList[0].musicArtist}</b>
+                                        <div className='mt-2 mb-0'>
+                                            <p className='mt-0 mb-0' style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName}</p>
+                                            <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].releaseDate}</p>
+                                        </div>
                                     </div>
-                                    <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
                                 </div>
                             </div>
                         ))
@@ -79,17 +81,19 @@ function ProfilePost() {
                     {feedData ? (
                         feedData.slice().reverse().map((music) => (
                             <div className='col-4' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
-                                <div className='card-header'>
-                                    <img className='' style={{ width: '110px', height: '110px' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
-                                        alt={`Album cover for ${music.musicInfoList[0].musicTitle}`}>
-                                    </img>
-                                </div>
-                                <div className='card-body mt-2'>
-                                    <b>{music.musicInfoList[0].musicTitle}</b>
-                                    <div>
+                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
+                                    <div className='card-body'>
+                                        <div>
+                                            <img className='mb-3' style={{ width: '110px', height: 'auto' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
+                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                        </div>
+                                        <p className='mb-0'><b>{music.musicInfoList[0].musicTitle}</b></p>
                                         <b>{music.musicInfoList[0].musicArtist}</b>
+                                        <div className='mt-2 mb-0'>
+                                            <p className='mt-0 mb-0' style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName}</p>
+                                            <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].releaseDate}</p>
+                                        </div>
                                     </div>
-                                    <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
                                 </div>
                             </div>
                         ))
