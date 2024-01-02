@@ -58,7 +58,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
                 redirect: 'follow'
             };
 
-            fetch("https://94ed-121-190-220-40.ngrok-free.app/api/playlist", requestOptions)
+            fetch("https://9d71-121-143-39-62.ngrok-free.app/api/playlist", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     console.log(result);

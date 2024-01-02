@@ -18,7 +18,7 @@ function ProfilePost() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://94ed-121-190-220-40.ngrok-free.app/api/feeds`, {
+        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더

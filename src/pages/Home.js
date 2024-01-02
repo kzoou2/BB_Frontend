@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './navbar';
+import Navbar from '../components/Navigation/Navbar';
 import { SiHeadspace } from "react-icons/si";
 import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
@@ -9,6 +9,7 @@ import '../style/css/Home.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import MiniPlayer from '../components/Player/MiniPlayer';
 
 function Home() {
     const navigate = useNavigate();
@@ -22,9 +23,10 @@ function Home() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://94ed-121-190-220-40.ngrok-free.app/api/feeds`, {
+        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })
@@ -63,7 +65,7 @@ function Home() {
                     <div className='col-md-2'>
                         <Navbar />
                     </div>
-                    <div className='col-md-10'>
+                    <div className='col-md-8'>
                         <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
                             {isLoading ? <Loading /> : null}
                             {feedData.slice().reverse().map((music) => (
@@ -98,6 +100,9 @@ function Home() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                    <div className='col-md-2'>
+                        <MiniPlayer />
                     </div>
                 </div>
 

@@ -62,7 +62,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             redirect: 'follow'
         };
 
-        fetch("https://94ed-121-190-220-40.ngrok-free.app/api/feeds", requestOptions)
+        fetch("https://9d71-121-143-39-62.ngrok-free.app/api/feeds", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
