@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../style/css/MusicPlayer.css';
+import '../style/css/MiniPlayer.css';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
 import sampleResult from '../data/youtube_result.json';
@@ -61,10 +61,6 @@ function MusicPlayerTest() {
 
         setVideoIdList((prev) => [...prev, ...sampleData])
     }
-
-    useEffect(() => {
-        console.log(videoIdList)
-    }, [videoIdList])
 
     return (
         <div>

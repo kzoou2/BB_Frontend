@@ -27,7 +27,7 @@ import PlaylistTest from '../test/PlayListTest';
 function App() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <div className="App">
+            <div className="App" style={{backgroundColor: "black", color: "white"}}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />

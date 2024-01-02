@@ -117,7 +117,7 @@ function PlayListDetail() {
                     </div>
                 </div>
             </PC>
-            {/* <Mobile>
+            <Mobile>
                 <div className='row'>
                     <div className='col-md-3'>
                         <Navbar />
@@ -163,7 +163,7 @@ function PlayListDetail() {
                         </div>
                     </div>
                 </div>
-            </Mobile> */}
+            </Mobile>
         </div>
     );
 }

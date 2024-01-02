@@ -1,22 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ModalContainer from '../Config/ModalContainer';
-import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedModal_Style';
+import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedDetailModal_Style';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import { Mobile, PC } from '../../Responsive';
 import { SiHeadspace } from "react-icons/si";
 import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import '../../../style/css/FeedDetail.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { feedCommentAtom } from '../../../state/FeedAtom';
 
 // Home에서 좋아요, 북마크 변수 값 받아야함. 디테일에서 변경한 값도 Home으로 보내서 공유해야함.
+// TODO: 모바일 미작업
 function FeedDetail({ onClose, music }) {
     const modalRef = useRef(null);
     const navigate = useNavigate();
     const [isNoteClicked, setIsNoteClicked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [comment, setComment] = useState("");
+    const [feedComment, setFeedComment] = useRecoilState(feedCommentAtom);
 
     const handleClose = () => {
         onClose?.();
@@ -62,6 +66,8 @@ function FeedDetail({ onClose, music }) {
         )
             .then((response) => {
                 console.log(JSON.stringify(response.data));
+                setFeedComment(prev => [...prev, response.data]);
+                setComment("");
             })
             .catch((error) => {
                 console.log("댓글 작성 API 호출 중 오류", error);
@@ -78,7 +84,7 @@ function FeedDetail({ onClose, music }) {
                         <PCModalWrap ref={modalRef}>
                             <PCContents>
                                 <div className='d-flex justify-content-center'>
-                                    <div className='justify-content-center' style={{ width: "50%", backgroundColor: "white" }}>
+                                    <div className='justify-content-center' style={{ width: "50%", backgroundColor: "#242424" }}>
                                         <div className='d-flex justify-content-end me-4' style={{}}>
                                             <span className=''>
                                                 <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
@@ -92,9 +98,9 @@ function FeedDetail({ onClose, music }) {
                                         </div>
                                         <img className='mt-3' style={{ width: "95%", height: "95%" }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
                                     </div>
-                                    <div className='ms-2' style={{ width: "50%", backgroundColor: "white" }}>
+                                    <div className='ms-2' style={{ width: "50%", backgroundColor: "#242424", color: "white" }}>
                                         <div className='d-flex justify-content-start'>
-                                            <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                            <Link to='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</Link>
                                         </div>
                                         <hr />
                                         <div className='justify-content-center text-center'>
@@ -109,7 +115,7 @@ function FeedDetail({ onClose, music }) {
                                         </div>
                                         <hr />
                                         <div className='justify-content-start text-start'>
-                                            {music.comments.map((data) => (
+                                            {feedComment.map((data) => (
                                                 <p key={data.id}>{data.nickName} : {data.comment}</p>
                                             ))}
                                         </div>
@@ -133,7 +139,7 @@ function FeedDetail({ onClose, music }) {
                                 <div>
                                     <div className='d-flex justify-content-center'>
                                         <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                            <a href='/BB_Frontend/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</a>
+                                            <Link to='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</Link>
                                         </div>
                                         <div className='d-flex justify-content-end mt-2 me-1' style={{ width: "50%" }}>
                                             <span className=''>
