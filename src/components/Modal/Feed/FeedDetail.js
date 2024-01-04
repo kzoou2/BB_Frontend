@@ -9,18 +9,18 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import '../../../style/css/FeedDetail.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { feedCommentAtom } from '../../../state/FeedAtom';
 
 // Home에서 좋아요, 북마크 변수 값 받아야함. 디테일에서 변경한 값도 Home으로 보내서 공유해야함.
-// TODO: 모바일 미작업
+// TODO: 모바일 미작업, 디테일 클릭할 때 다시 서버에서 통신해야할 듯
 function FeedDetail({ onClose, music }) {
     const modalRef = useRef(null);
     const navigate = useNavigate();
     const [isNoteClicked, setIsNoteClicked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [comment, setComment] = useState("");
-    const [feedComment, setFeedComment] = useRecoilState(feedCommentAtom);
+    const [commentList, setCommentList] = useState(music.comments);
+
+    console.log(music)
 
     const handleClose = () => {
         onClose?.();
@@ -60,13 +60,13 @@ function FeedDetail({ onClose, music }) {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             }
         )
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setFeedComment(prev => [...prev, response.data]);
+                setCommentList(prev => [...prev, response.data]);
                 setComment("");
             })
             .catch((error) => {
@@ -87,12 +87,12 @@ function FeedDetail({ onClose, music }) {
                                     <div className='justify-content-center' style={{ width: "50%", backgroundColor: "#242424" }}>
                                         <div className='d-flex justify-content-end me-4' style={{}}>
                                             <span className=''>
-                                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
-                                                <IoPaperPlaneOutline className='me-4' size='26' onClick={() => goDM()} style={{ cursor: "pointer" }} />
+                                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
+                                                <IoPaperPlaneOutline className='me-4' size='26' color='white' onClick={() => goDM()} style={{ cursor: "pointer" }} />
                                                 {isBookmarked ? (
-                                                    <FaBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                                    <FaBookmark className='' size='26' color='white' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
                                                 ) : (
-                                                    <FaRegBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
+                                                    <FaRegBookmark className='' size='26' color='white' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
                                                 )}
                                             </span>
                                         </div>
@@ -110,12 +110,12 @@ function FeedDetail({ onClose, music }) {
                                         <div className='justify-content-start text-start'>
                                             <p>{music.content}</p>
                                             {music.tagName.map((tag, index) => (
-                                                <p key={index} className='btn btn-outline-primary btn-sm me-2 rounded-pill disabled'>#{tag}</p>
+                                                <p key={index} className='btn btn-warning btn-sm me-2 rounded-pill'>#{tag}</p>
                                             ))}
                                         </div>
                                         <hr />
-                                        <div className='justify-content-start text-start'>
-                                            {feedComment.map((data) => (
+                                        <div className='justify-content-start text-start' style={{ height: "20vh", overflow: "scroll" }}>
+                                            {commentList.map((data) => (
                                                 <p key={data.id}>{data.nickName} : {data.comment}</p>
                                             ))}
                                         </div>

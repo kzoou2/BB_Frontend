@@ -23,11 +23,10 @@ function PlayListDetail() {
 
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
-
         axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/playlist/my/${playlistId}`, {
             headers: {
                 'Content-Type': `application/json`,
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })
@@ -76,6 +75,7 @@ function PlayListDetail() {
                         <div className='text-start mt-3'>
                             <p>playlist image</p>
                             <h2>{playlistData.title}</h2>
+                            {/* TODO: 플리 설명, 작성자, 종아요 수(해보고), 총 곡 수*/}
                         </div>
                         <div className='d-flex justify-content-center mt-3 mb-3'>
                             <button className='btn btn-primary btn-sm' onClick={() => addPlayList()}>재생</button>

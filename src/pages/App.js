@@ -14,6 +14,7 @@ import PostPicSelect from '../components/Modal/Post/PostPicSelect';
 import FeedTextInput from '../components/Modal/Post/PostText';
 import PlayListSearch from '../components/Modal/PlayList/PlayListSearch';
 import PlayListText from '../components/Modal/PlayList/PlayListText';
+import Feed from './Feed';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/dm" element={<DM />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path='/feed/:feedId' element={<Feed />} />
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
                     {/* <Route path="/playlistDetail" element={<PlayListDetail />} /> */}

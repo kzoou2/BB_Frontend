@@ -10,6 +10,7 @@ import { SiHeadspace } from "react-icons/si";
 import { RiPlayListFill } from "react-icons/ri";
 import CreatePost from '../Modal/Post/CreatePost';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Navbar() {
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
@@ -24,12 +25,28 @@ function Navbar() {
         setIsLogin(loggedin);
     }, []);
 
-    const logout = () => {
+    const logout = async () => {
         localStorage.removeItem('email');
         localStorage.removeItem('isLogin');
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         setIsLogin(false);
-        navigate("/");
+
+        await axios.post(
+            `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/logout`,
+            {
+                accessToken: `${window.localStorage.accessToken}`,
+                refreshToken: `${window.localStorage.refreshToken}`
+            }
+        )
+            .then((response) => {
+                console.log("로그아웃 성공", response);
+            })
+            .catch((error) => {
+                console.log("로그아웃 API 호출 중 오류", error);
+            });
+
+        navigate("/login");
     }
 
     return (
