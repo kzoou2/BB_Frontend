@@ -13,15 +13,15 @@ display: flex;
 align-items: center;
 // font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
 border: none;
-background: ${({ selected }) => (selected ? '#EAEAEA' : 'white')};
+background: ${({ selected }) => (selected ? '#EAEAEA' : 'gray')};
 transition: background 0.3s;
 
 &:not(:hover) {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : 'white')};
+    background: ${({ selected }) => (selected ? '#EAEAEA' : 'black')};
 }
 
 &:hover {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : '#F6F6F6')}; 
+    background: ${({ selected }) => (selected ? '#EAEAEA' : '#242424')}; 
 }
 
 div {
