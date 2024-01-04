@@ -1,3 +1,11 @@
+#clicked {
+    color: #27A8FC;
+}
+
+#unclicked {
+    color: white;
+}
+
 #search {
     display: flex;
     align-items: center;

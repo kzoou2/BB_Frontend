@@ -21,7 +21,7 @@ function ProfilePost() {
         axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })

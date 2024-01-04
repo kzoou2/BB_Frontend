@@ -5,6 +5,9 @@ import '../style/css/Login.css';
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import { useResetRecoilState } from 'recoil';
+import { currentVideoTitleAtom, videoPlaylistAtom } from '../state/MusicPlayerAtom';
 
 function Login() {
     const [isLogin, setIsLogin] = useState(false);
@@ -13,11 +16,13 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState([]);
     const navigate = useNavigate();
     const clientId = '293049760557-j0ki70fdjtfcltgd712dtghlf8gntq33.apps.googleusercontent.com';
+    const setVideoPlayList = useResetRecoilState(videoPlaylistAtom);
+    const setCurrentVideoTitle = useResetRecoilState(currentVideoTitleAtom);
 
-    const handleLogin = () => {
-        setIsLogin(true);
-        navigate("/");
-    };
+    // const handleLogin = () => {
+    //     setIsLogin(true);
+    //     navigate("/");
+    // };
 
     const openSignUp = () => {
         setIsLogin(true);
@@ -29,6 +34,33 @@ function Login() {
             setEmail(event.target.value);
         } else if (event.target.name === "password") {
             setPassword(event.target.value);
+        }
+    };
+
+    const refreshAccessToken = async () => {
+        try {
+            const response = await axios.post(
+                `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/reissue`, {
+                accessToken: window.localStorage.accessToken,
+                refreshToken: window.localStorage.refreshToken
+            });
+
+            if (response.data.state === 200) {
+                const newAccessToken = response.data.data.accessToken;
+                const newRefreshToken = response.data.data.refreshToken;
+                window.localStorage.setItem("accessToken", newAccessToken);
+                window.localStorage.setItem("refreshToken", newRefreshToken);
+                console.log("토큰 갱신 성공");
+
+                setTimeout(() => {
+                    refreshAccessToken();
+                }, 4 * 60 * 1000);
+
+            } else {
+                console.log("토큰 정보 갱신 실패");
+            }
+        } catch (error) {
+            console.log("토큰 갱신 API 호출 중 오류:", error);
         }
     };
 
@@ -46,6 +78,10 @@ function Login() {
         setErrorMessage(newErrorMessages);
 
         if (newErrorMessages.length === 0) {
+
+            // const currentTime = new Date().toLocaleString();
+            // window.localStorage.setItem("lastLoginTime", currentTime);
+
             await axios.post(
                 `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/login`, {
                 email: email,
@@ -53,13 +89,23 @@ function Login() {
             })
                 .then((response) => {
                     if (response.data.state === 200) {
-                        console.log("로그인 성공");
+                        console.log("로그인 성공", response);
                         setIsLogin(true);
-                        const token = response.data.data.accessToken;
+                        const accessToken = response.data.data.accessToken;
+                        const refreshToken = response.data.data.refreshToken;
                         window.localStorage.setItem("email", email);
                         window.localStorage.setItem('isLogin', true);
-                        window.localStorage.setItem("token", token);
+                        window.localStorage.setItem("accessToken", accessToken);
+                        window.localStorage.setItem("refreshToken", refreshToken);
                         navigate("/");
+
+                        setTimeout(() => {
+                            refreshAccessToken();
+                        }, 4 * 60 * 1000);
+
+                        setVideoPlayList([]);
+                        setCurrentVideoTitle('');
+
                     } else if (response.data.message === "비밀번호가 일치하지 않습니다.") {
                         console.log("로그인 실패");
                         alert("비밀번호가 일치하지 않습니다.");
@@ -120,7 +166,8 @@ function Login() {
                                             console.log("구글 로그인 성공", response);
                                             setIsLogin(true);
                                             const token = response.credential;
-                                            window.localStorage.setItem("email", email);
+                                            console.log(jwtDecode(token))
+                                            window.localStorage.setItem("email", jwtDecode(token).email);
                                             window.localStorage.setItem('isLogin', true);
                                             window.localStorage.setItem("token", token);
                                             openSignUp();
@@ -177,14 +224,15 @@ function Login() {
                             <button>
                                 <GoogleOAuthProvider clientId={clientId}>
                                     <GoogleLogin
-                                        onSuccess={async (response) => {
+                                        onSuccess={(response) => {
                                             console.log("구글 로그인 성공", response);
                                             setIsLogin(true);
                                             const token = response.credential;
-                                            window.localStorage.setItem("email", email);
+                                            console.log(jwtDecode(token))
+                                            window.localStorage.setItem("email", jwtDecode(token).email);
                                             window.localStorage.setItem('isLogin', true);
                                             window.localStorage.setItem("token", token);
-                                            handleLogin();
+                                            openSignUp();
                                         }}
                                         onFailure={(error) => {
                                             console.log("구글 로그인 실패", error);
