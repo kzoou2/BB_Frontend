@@ -1,14 +1,40 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState} from 'react';
 import ModalContainer from '../Config/ModalContainer';
 import { Contents, ModalWrap, Overlay, Button } from '../../../style/styled_components/PostModal_Style';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import { CloseButton } from 'react-bootstrap';
+import axios from 'axios';
 
 function NewDm({ onClose }){
     const modalRef = useRef(null);
+    const [nickname, setNickname] = useState('');
 
     const handleClose = () => {
         onClose?.();
+    }
+
+    const handleNewChatRoom = async () =>{
+        try{
+            const res = await axios.post(`https://9d71-121-143-39-62.ngrok-free.app/create-room`,
+            {
+                nickname: nickname,
+            },
+            // {
+            //     headers: {
+            //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            //     },
+            // }
+            );
+
+            if (res.ok){
+                onClose?.();
+            } else{
+                console.error("새로운 채팅방 생성에 실패했습니다.")
+            }
+            
+        } catch(error){
+            console.error("새로운 채팅방 만드는 중 오류 발생했습니다.", error);
+        }
     }
 
     useOutSideClick(modalRef, handleClose)
@@ -28,7 +54,7 @@ function NewDm({ onClose }){
                             <div className='d-flex justify-content-center align-items-center'>
                                 <span><b> 받는사람: </b></span>
                                 <div style={{ width: '10px' }}></div> 
-                                <input type='text' className="form-control" style={{ width: "80%" }}  placeholder='검색...' />
+                                <input type='text' className="form-control" style={{ width: "80%" }}  placeholder='검색...' onChange={(e) => setNickname(e.target.value)} />
                             </div>
                             <hr/>
                             
@@ -37,7 +63,7 @@ function NewDm({ onClose }){
                             </div>
 
                             <div className='justify-content-center'>
-                                <Button> 채팅 </Button>
+                                <Button onClick={handleNewChatRoom}> 채팅 </Button>
                             </div>
                         </Contents>
                     </ModalWrap>
