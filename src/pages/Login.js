@@ -40,7 +40,7 @@ function Login() {
     const refreshAccessToken = async () => {
         try {
             const response = await axios.post(
-                `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/reissue`, {
+                `https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/reissue`, {
                 accessToken: window.localStorage.accessToken,
                 refreshToken: window.localStorage.refreshToken
             });
@@ -83,9 +83,12 @@ function Login() {
             // window.localStorage.setItem("lastLoginTime", currentTime);
 
             await axios.post(
-                `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/login`, {
+                `https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/login`, {
                 email: email,
-                password: password
+                password: password,
+                headers: {
+                    'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
+                },
             })
                 .then((response) => {
                     if (response.data.state === 200) {
@@ -121,6 +124,7 @@ function Login() {
                 })
         }
     }
+
 
     return (
         <div>

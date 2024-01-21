@@ -57,7 +57,7 @@ function SignUp() {
             window.localStorage.setItem('password', password); //왜저장하지?
 
             try {
-                const result = await axios.post("https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/sign-up", {
+                const result = await axios.post("https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/sign-up", {
                     email: email,
                     nickname: nickname,
                     password: password,

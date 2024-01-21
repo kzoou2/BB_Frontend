@@ -33,7 +33,7 @@ function Navbar() {
         setIsLogin(false);
 
         await axios.post(
-            `https://9d71-121-143-39-62.ngrok-free.app/api/v1/users/logout`,
+            `https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/logout`,
             {
                 accessToken: `${window.localStorage.accessToken}`,
                 refreshToken: `${window.localStorage.refreshToken}`

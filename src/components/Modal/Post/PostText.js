@@ -56,13 +56,14 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
         var requestOptions = {
             method: 'POST',
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
             body: formdata,
             redirect: 'follow'
         };
 
-        fetch("https://9d71-121-143-39-62.ngrok-free.app/api/feeds", requestOptions)
+        fetch("https://34ae-39-124-165-135.ngrok-free.app/api/feeds", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);

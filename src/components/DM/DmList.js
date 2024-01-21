@@ -4,40 +4,35 @@ import { PC, Mobile } from '../Responsive';
 import { ListContainer, StyledChatButton } from '../../style/styled_components/DmList_Style';
 import NewDm from '../Modal/DM/NewDm';
 import axios from 'axios';
-import DmRoom from './DmRoom';
 import { useRecoilState } from 'recoil';
 import { DmRoomIdAtom } from '../../state/DmAtom';
 
-const DmList = ({ selectedChat, currentUser }) => {
+const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
     const [isNewChatOpen, setIsNewChatOpen] = useState(false);
     const [chatRooms, setChatRooms] = useState([]);
     const [roomId, setRoomId] = useRecoilState(DmRoomIdAtom);
- 
+    const currentUser = "lkj";
+
     useEffect(() => {
         ChatRoomList();
-    }, []);
+    }, [roomId]);
 
     const ChatRoomList = async () => {
         try {
-            const res = await axios.get('https://9d71-121-143-39-62.ngrok-free.app/rooms', {
+            const res = await axios.get('https://34ae-39-124-165-135.ngrok-free.app/rooms', {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
                 }
             });
             console.log("result", res)
             const allChatRooms = res.data;
-            const currentUser = "lkj";
-
-            const userChatRooms = allChatRooms.filter(room =>
-                room.participantNames.includes(currentUser));
-
-            setChatRooms(userChatRooms);
-            console.log(userChatRooms);
+            setChatRooms(allChatRooms);
         } catch (error) {
             console.error('Error chat rooms', error)
         }
     }
+    
 
     const openNewCaht = () => {
         setIsNewChatOpen(true);
@@ -46,46 +41,63 @@ const DmList = ({ selectedChat, currentUser }) => {
     const onSelectChat = (roomId) => {
         setRoomId(roomId);
         console.log(roomId)
+
+        const selectedRoomInfo = chatRooms.find(room => room.id === roomId);
+
+        // selectedChatInfo에 필요한 정보 업데이트
+        setSelectedChatInfo({
+            participantImgSrc: selectedRoomInfo.participants.find(participant => participant.participantName !== currentUser)?.participantImgSrc,
+            participantName: selectedRoomInfo.participants.find(participant => participant.participantName !== currentUser)?.participantName,
+        });
     }
 
 
     return (
         <div>
             <PC>
-                <div className='' style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '10px' }} >
-                    <h3> {currentUser}</h3>
-                    <button className='button' onClick={() => openNewCaht()} >
-                        <BiMessageEdit className='' size='27' color='black' />
-                    </button>
+                <div className='dm-list' style={{height: "96vh", borderRadius:"15px", backgroundColor: "#181818"}}>
+                    <div className='list-user' style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }} >
+                        <h3 style={{marginLeft:'20px', marginTop:'10px'}}> {currentUser}</h3>
+                        <button className='button' onClick={() => openNewCaht()} >
+                            <BiMessageEdit className='' size='27' color='white' />
+                        </button>
+                    </div>
+
+                    <div>
+                        <p> 메세지</p>
+                    </div>
+
+                    <ListContainer as='ul'>
+                        {chatRooms.map((room) => (
+                            <StyledChatButton
+                                key={room.id}
+                                onClick={() => onSelectChat(room.id)}
+                                selected={selectedChat === room.id}
+                                as="li"
+                            >
+                                <div className='chat'>
+                                    {Array.isArray(room.participants) && room.participants.length > 0 ? (
+                                        <img
+                                            src={room.participants.find(participant => participant.participantName !== currentUser)?.participantImgSrc}
+                                            style={{ width: '50px', height: '50px', borderRadius: '50%' , marginRight: '10px' }}
+                                            alt="Participant Image"
+                                        />
+                                    ) : null}
+                                    <div>
+                                        <strong>
+                                            {Array.isArray(room.participants) ? (
+                                                room.participants
+                                                    .filter(participant => participant.participantName !== currentUser)
+                                                    .map(participant => participant.participantName)
+                                                    .join(', ')
+                                            ) : null}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </StyledChatButton>
+                        ))}
+                    </ListContainer>
                 </div>
-
-                <div>
-                    <p> 메시지</p>
-                </div>
-
-                <ListContainer as='ul'>
-                    {chatRooms.map((room) => (
-                        <StyledChatButton
-                            key={room.id}
-                            onClick={() => onSelectChat(room.id)}
-                            // onClick={()=> handleChatRoomClick(room.id)}
-                            selected={selectedChat === room.id}
-                            as="li"
-                        >
-                            <div className='chat'>
-                                <img
-                                    src={room.userImage}
-                                    alt={`${room.username}`}
-                                    style={{ width: '50px', height: '50px', marginRight: '10px' }}
-                                />
-                                <div> {room.id}</div>
-                                {/* <div></div> 받는 사람 넣어줄것  */}
-                                <div> {room.lastMessage}</div>
-
-                            </div>
-                        </StyledChatButton>
-                    ))}
-                </ListContainer>
 
                 {isNewChatOpen && (<NewDm
                     open={isNewChatOpen}
