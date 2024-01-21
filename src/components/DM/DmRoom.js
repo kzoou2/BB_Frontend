@@ -88,7 +88,7 @@ const DmRoom= ({ selectedChatInfo  }) => {
             const parsedMessage = JSON.parse(body);
             if (parsedMessage.chatType === "MESSAGE") {
                 setChatList(prevChatList => [...prevChatList, parsedMessage]);
-            }
+            } 
         }, headers);
 
         //     // 신규 메시지 도착 시 처리
