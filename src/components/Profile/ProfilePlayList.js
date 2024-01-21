@@ -12,7 +12,7 @@ function ProfilePlayList() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/playlist`, {
+        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/playlist`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더

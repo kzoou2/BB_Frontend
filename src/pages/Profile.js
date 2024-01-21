@@ -22,7 +22,7 @@ function Profile() {
     };
 
     useEffect(() => {
-        axios.get(`https://9d71-121-143-39-62.ngrok-free.app/api/feeds`, {
+        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/feeds`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
