@@ -16,7 +16,7 @@ function DM() {
     return (
         <div>
             <PC>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', marginLeft: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0px', marginLeft: '20px' }}>
                     <div className='col-md-2' >
 
                         <DmList 

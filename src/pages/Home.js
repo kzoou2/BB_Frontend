@@ -15,7 +15,7 @@ function Home() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/feeds`, {
+        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/feeds/followings`, {
             headers: {
                 'Content-Type': `application/json`,
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -43,7 +43,7 @@ function Home() {
                     <div className='col-md-8'>
                         <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
                             {isLoading ? <Loading /> : null}
-                            {feedData.slice().reverse().map((music) => (
+                            {feedData.map((music) => (
                                 <Feed feedData={music} />
                             ))}
                         </div>

@@ -6,7 +6,7 @@ import '../style/css/Login.css';
 
 function SignUp() {
     const [email, setEmail] = useState("");
-    const [nickname, setNickname] = useState("");
+    const [nickName, setNickName] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errorMessage, setErrorMessage] = useState([]);
@@ -16,7 +16,7 @@ function SignUp() {
 
     function onChange(event) {
         if (event.target.name === "nickname") {
-            setNickname(event.target.value)
+            setNickName(event.target.value)
         } else if (event.target.name === "email") {
             setEmail(event.target.value)
         } else if (event.target.name === "password") {
@@ -30,7 +30,7 @@ function SignUp() {
         event.preventDefault();
 
         const newErrorMessages = [];
-        if (nickname === "") {
+        if (nickName === "") {
             newErrorMessages.push("닉네임은 필수 입력 항목입니다.");
         }
         if (password === "") {
@@ -59,7 +59,7 @@ function SignUp() {
             try {
                 const result = await axios.post("https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/sign-up", {
                     email: email,
-                    nickname: nickname,
+                    nickName: nickName,
                     password: password,
                     passwordConfirm: passwordConfirm,
                 })
@@ -71,7 +71,7 @@ function SignUp() {
             } catch (error) {
                 if (error.response && error.response.data) {
                     setErrorMessage([error.response.data]);
-                    setNickname("")
+                    setNickName("")
                     setPassword("")
                     setEmail("")
                     setPasswordConfirm("")

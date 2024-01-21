@@ -62,7 +62,7 @@ function Feed({ feedData }) {
                             <div>
                                 <div className='d-flex justify-content-center'>
                                     <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                        <Link to='/profile' style={{ textDecorationLine: "none", color: "white" }}><SiHeadspace className='me-2' size='40' color='gray' />User Nickname</Link>
+                                        <Link to='/profile' style={{ textDecorationLine: "none", color: "white" }}><SiHeadspace className='me-2' size='40' color='gray' />{feedData.userName}</Link>
                                     </div>
                                     <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
                                         <span className='mt-2'>

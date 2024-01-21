@@ -11,7 +11,7 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
     const [isNewChatOpen, setIsNewChatOpen] = useState(false);
     const [chatRooms, setChatRooms] = useState([]);
     const [roomId, setRoomId] = useRecoilState(DmRoomIdAtom);
-    const currentUser = "lkj";
+    const currentUser = window.localStorage.getItem('nickName');
 
     useEffect(() => {
         ChatRoomList();

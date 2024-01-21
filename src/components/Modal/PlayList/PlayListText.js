@@ -52,7 +52,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
             var requestOptions = {
                 method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: formdata,
                 redirect: 'follow'

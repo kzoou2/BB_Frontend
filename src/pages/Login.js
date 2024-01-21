@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PC, Mobile } from '../components/Responsive';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/css/Login.css';
@@ -96,7 +96,9 @@ function Login() {
                         setIsLogin(true);
                         const accessToken = response.data.data.accessToken;
                         const refreshToken = response.data.data.refreshToken;
+                        const nickName = response.data.data.nickName;
                         window.localStorage.setItem("email", email);
+                        window.localStorage.setItem("nickName", nickName);
                         window.localStorage.setItem('isLogin', true);
                         window.localStorage.setItem("accessToken", accessToken);
                         window.localStorage.setItem("refreshToken", refreshToken);
@@ -124,7 +126,6 @@ function Login() {
                 })
         }
     }
-
 
     return (
         <div>
