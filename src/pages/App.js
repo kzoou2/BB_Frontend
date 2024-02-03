@@ -36,12 +36,12 @@ function App() {
                     <Route path="/alarm" element={<Alarm />} />
                     <Route path="/dm" element={<DM />} />
                     <Route path="/search" element={<Search />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path='/feed/:feedId' element={<Feed />} />
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
                     {/* <Route path="/playlistDetail" element={<PlayListDetail />} /> */}
-                    <Route path="/playlistDetail/:playlistId" element={<PlayListDetail />} />
+                    <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
                     <Route path="/miniplayer" element={<MiniPlayer />} />
 
                     {/* Test */}

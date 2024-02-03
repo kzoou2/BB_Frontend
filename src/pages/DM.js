@@ -5,6 +5,7 @@ import { Mobile, PC } from '../components/Responsive';
 import { useRecoilValue } from 'recoil';
 import { DmRoomIdAtom } from '../state/DmAtom';
 import '../style/css/DmRoom.css';
+import MiniNavbar from '../components/Navigation/MiniNavbar';
 import MiniPlayer from '../components/Player/MiniPlayer';
 
 
@@ -17,14 +18,14 @@ function DM() {
         <div>
             <PC>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0px', marginLeft: '20px' }}>
+                    <div className='col-md-1'><MiniNavbar/></div>
                     <div className='col-md-2' >
-
                         <DmList 
                         selectedChatInfo={selectedChatInfo}
                         setSelectedChatInfo={setSelectedChatInfo}
                         />
                     </div>
-                    <div className='col-md-8'>
+                    <div className='col-md-7'>
                         {/* {dmRoomId !== 0 && (
                             <div className="dm-header">
                                 <div className="img-avatar"></div>

@@ -40,7 +40,7 @@ const DmRoom= ({ selectedChatInfo  }) => {
     const connect = () => {
         client.current = new StompJs.Client({
             // brokerURL: 'ws://ec2-13-125-0-53.ap-northeast-2.compute.amazonaws.com:8080/ws-chat',
-            brokerURL: 'ws://34ae-39-124-165-135.ngrok-free.app/ws-chat',
+            brokerURL: 'ws://localhost:8080/ws-chat',
             connectHeaders: {
                 Authorization: localStorage.getItem('accessToken'),
             },
@@ -97,7 +97,7 @@ const DmRoom= ({ selectedChatInfo  }) => {
         // }, headers);
     
         // 기존 채팅 내역 불러오기
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/room/${dmRoomId}/messages?limit=25`, {
+        axios.get(`http://localhost:8080/room/${dmRoomId}/messages?limit=25`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더

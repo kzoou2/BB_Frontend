@@ -1,6 +1,6 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { NavContainer, Outside, Ul } from "../../style/styled_components/navbar_Style";
+import { NavContainer, Outside, Ul } from "../../style/styled_components/MiniNavbar_Style";
 import { PC, Mobile } from "../Responsive";
 import { IoHomeSharp } from 'react-icons/io5';
 import { FaSearch } from "react-icons/fa";
@@ -13,14 +13,14 @@ import CreatePost from '../Modal/Post/CreatePost';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Navbar() {
+function MiniNavbar() {
     const [userNickname, setUserNickname] = useState("");
-    const [userInfo, setUserInfo] = useState('');
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
     const openCreatePost = () => {
         setIsCreatePostOpen(true);
     };
 
+    const [userInfo, setUserInfo] = useState({});
     const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
 
@@ -72,6 +72,7 @@ function Navbar() {
 
         navigate("/login");
     }
+    
 
 
     return (
@@ -83,41 +84,40 @@ function Navbar() {
                             <Ul className={"in"}>
                                 {/* <h2 className='mt-3'>BeatBuddy</h2> */}
                                 <Link to='/'>
-                                    <img src='https://github.com/eeeeeddy/eeeeeddy/assets/71869717/ba3957b2-2b3c-4f55-8426-008dfc56e00b' alt='BeatBuddy' width={'100%'} />
+                                    <img  />
                                 </Link>
                                 <li className='text-start'>
-                                    <Link to='/'><IoHomeSharp className='me-2' size='25' color='white' />Home</Link>
+                                    <Link to='/'><IoHomeSharp className='me-2' size='25' color='white' /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/playlist'><RiPlayListFill className='me-2' size='25' color='white' />PlayList</Link>
+                                    <Link to='/playlist'><RiPlayListFill className='me-2' size='25' color='white' /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/Search'><FaSearch className='me-2' size='25' color='white' />Search</Link>
+                                    <Link to='/Search'><FaSearch className='me-2' size='25' color='white' /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/DM'><LuMessageCircle className='me-2' size='25' color='white' />DM</Link>
+                                    <Link to='/DM'><LuMessageCircle className='me-2' size='25' color='white' /></Link>
                                 </li>
                                 {/* <li className='text-start'>
-                                    <Link to='/Alarm'><FaItunesNote className='me-2' size='25' color='white' />Alarm</Link>
+                                    <Link to='/Alarm'><FaItunesNote className='me-2' size='25' color='white' /></Link>
                                 </li> */}
                                 <li className='text-start' onClick={() => openCreatePost()}>
-                                    <span style={{ color: "white", cursor: "pointer" }}><FaRegSquarePlus className='me-2' size='25' color='white' />Post</span>
+                                    <span style={{ color: "white", cursor: "pointer" }}/><FaRegSquarePlus className='me-2' size='25' color='white'/>
                                 </li>
                                 {isLogin ? (
                                     <>
                                     <li className='text-start'>
                                         <Link to={`/profile/${userNickname}`}>
                                             <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px'}}/>
-                                            <b style={{fontSize:'17px'}}>{userNickname}</b>
                                         </Link>
                                     </li>
                                     <li className='text-start'>
-                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><IoMdLogOut  className='me-2' size='25' color='white'/>Logout</span>
+                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><IoMdLogOut  className='me-2' size='25' color='white'/></span>
                                     </li>
                                     </>
                                 ) : (
                                     <li className='text-start'>
-                                        <Link to='/Login'><IoMdLogIn className='me-2' size='25' color='white' /> Login</Link>
+                                        <Link to='/Login'><IoMdLogIn className='me-2' size='25' color='white' /> </Link>
                                     </li>
                                 )}
                             </Ul>
@@ -168,4 +168,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default MiniNavbar;

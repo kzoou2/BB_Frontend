@@ -19,7 +19,7 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
 
     const ChatRoomList = async () => {
         try {
-            const res = await axios.get('https://34ae-39-124-165-135.ngrok-free.app/rooms', {
+            const res = await axios.get('http://localhost:8080/rooms', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더

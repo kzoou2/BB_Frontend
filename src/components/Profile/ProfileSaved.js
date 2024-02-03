@@ -1,12 +1,12 @@
 import React from 'react';
 import {PC,Mobile} from '../Responsive';
 
-function ProfileSaved(){
+function ProfileSaved({userNickname}){
 
     return(
         <div>
             <PC>
-                <p>savved!</p>
+                <p>{userNickname}    savved!</p>
             </PC>
             <Mobile>
                 <p>savved!</p>

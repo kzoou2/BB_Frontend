@@ -14,7 +14,7 @@
 //     })
     
 //     useEffect (()=>{
-//         axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/info`)
+//         axios.get(`http://localhost:8080/api/v1/users/info`)
 //         .then(response => {
 //             setFormData(response.data);
 //         })

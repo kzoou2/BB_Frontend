@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const NavContainer = styled.div`
-width: 100vw;
+width: 5vw;
 height: 100vh;
 background-color: #black;
 `;
 
 export const Outside = styled.div`
-width: 16vw;
-min-width: 16vw;
-max-width: 16vw;
+width: 5vw;
+min-width: 5vw;
+max-width: 4vw;
 height: 100vh;
 transform: translateX(-101%);
 transition: all 0.5s cubic-bezier(0, 0.05, 0, 1.3);

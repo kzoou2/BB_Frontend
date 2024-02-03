@@ -7,11 +7,11 @@ import { useRecoilState } from 'recoil';
 import { currentVideoIndexAtom, currentVideoTitleAtom, playStateAtom, videoIdListAtom, videoPlaylistAtom } from '../state/MusicPlayerAtom';
 import { useParams } from 'react-router-dom';
 import MiniPlayer from '../components/Player/MiniPlayer';
+import '../style/css/PlayListDetail.css';
 
 function PlayListDetail() {
     const [isLoading, setIsLoading] = useState(true);
-    const { playlistId } = useParams([]);
-
+    const {nickName,playlistId } = useParams([]);
     const [videoIdList, setVideoIdList] = useRecoilState(videoIdListAtom);
     const [videoPlayList, setVideoPlayList] = useRecoilState(videoPlaylistAtom);
     const [playState, setPlayState] = useRecoilState(playStateAtom);
@@ -21,9 +21,10 @@ function PlayListDetail() {
     const [playlistData, setPlaylistData] = useState([]);
     const [musicInfoList, setMusicInfoList] = useState([]);
 
+
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/playlist/my/${playlistId}`, {
+        axios.get(`http://localhost:8080/api/playlist/user/${nickName}/${playlistId}`, {
             headers: {
                 'Content-Type': `application/json`,
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -72,16 +73,42 @@ function PlayListDetail() {
                         <Navbar />
                     </div>
                     <div className='col-md-8'>
-                        <div className='text-start mt-3'>
-                            <p>playlist image</p>
-                            <h2>{playlistData.title}</h2>
-                            {/* TODO: 플리 설명, 작성자, 종아요 수(해보고), 총 곡 수*/}
+                        <div className='text-start mt-3' style={{ backgroundColor: 'rgba(0, 0, 0, 6)'}}>
+                                <div className='plcard'>
+                                    <img className='plimg' src={playlistData.imageFileUrl} alt='Playlist Image' />
+                                    {/* <div className='plHeader'>
+                                        <h2>{playlistData.title}</h2>
+                                    </div>
+                                    <hr/> */}
+                                    <div className='pltextbox'>
+                                        <div className='pltextcontent'>
+                                            <h2>{playlistData.title}</h2>
+                                            <div className='plInfo'>
+                                                <div className='contents'>{playlistData.contents}</div>
+                                                <div className='userInfo'><img src={playlistData.userImgSrc} style={{width:'25px', height:'25px', borderRadius:'50%', marginRight:'10px'}}/>
+                                                {playlistData.nickName} ·  좋아요 {playlistData.plLike} · 총 {playlistData.musicInfoList? playlistData.musicInfoList.length : 0}곡</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* TODO: 플리 설명, 작성자, 종아요 수(해보고), 총 곡 수*/}
+
+                                    <div className='d-flex justify-content-center mt-3 mb-3'>
+                                        <div className="plbtn-container">
+                                            <label className="play-btn play-icon-label">
+                                                <input className="play-btn" type="checkbox"  onClick={() => addPlayList()}/>
+                                                <div className="play-icon"></div>
+                                                <div className="pause-icon"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {/* </div> */}
                         </div>
-                        <div className='d-flex justify-content-center mt-3 mb-3'>
-                            <button className='btn btn-primary btn-sm' onClick={() => addPlayList()}>재생</button>
-                        </div>
+
                         <div>
-                            <table className='table'>
+                            <table className='table table-hover'>
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -96,7 +123,7 @@ function PlayListDetail() {
                                     {musicInfoList.map((music, index) => (
                                         <tr key={index}>
                                             <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
-                                            <td>
+                                            <td >
                                                 <img
                                                     src={music.albumUrl}
                                                     alt="앨범 이미지"

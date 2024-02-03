@@ -15,7 +15,7 @@ function Playlist() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/playlist`, {
+        axios.get(`http://localhost:8080/api/playlist`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
@@ -33,7 +33,7 @@ function Playlist() {
     }, [])
 
     const openPlaylistDetail = (playlist) => {
-        navigate(`/playlistDetail/${playlist.id}`);
+        navigate(`/playlistDetail/${playlist.nickName}/${playlist.id}`);
     }
 
     return (
@@ -53,6 +53,7 @@ function Playlist() {
                                             <div className="card-body">
                                                 <img style={{ width: "70%", height: "70%" }} src={playlist.imageFileUrl} alt={playlist.title}></img>
                                                 <p className='mt-2'><b className='mt-3'>{playlist.title}</b></p>
+                                                <p>{`${playlist.nickName}`}</p>
                                                 <p>{`${playlist.musicInfoList.length} 곡`}</p>
                                                 {/* <p style={{ color: '#4887E5' }}>{playlist.tagName.map((tag, index) => `#${tag} ${index < playlist.tagName.length - 1 ? ' ' : ''}`)}</p> */}
                                                 <p>{playlist.content}<span style={{ color: "grey", cursor: "pointer" }} onClick={() => openPlaylistDetail(playlist)}>더보기</span></p>
