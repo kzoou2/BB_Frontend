@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { PC, Mobile } from '../components/Responsive';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/css/Login.css';
-import { GoogleLogin } from "@react-oauth/google";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useResetRecoilState } from 'recoil';
@@ -40,7 +40,7 @@ function Login() {
     const refreshAccessToken = async () => {
         try {
             const response = await axios.post(
-                `https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/reissue`, {
+                `http://localhost:8080/api/v1/users/reissue`, {
                 accessToken: window.localStorage.accessToken,
                 refreshToken: window.localStorage.refreshToken
             });
@@ -83,7 +83,7 @@ function Login() {
             // window.localStorage.setItem("lastLoginTime", currentTime);
 
             await axios.post(
-                `https://34ae-39-124-165-135.ngrok-free.app/api/v1/users/login`, {
+                `http://localhost:8080/api/v1/users/login`, {
                 email: email,
                 password: password,
                 headers: {
@@ -132,40 +132,48 @@ function Login() {
             <PC>
                 <div className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div className='content'>
-                        <h1>BeatBuddy</h1>
                         <div>
-                            <form className='content__form' onSubmit={onSubmit}>
-                                <div className='content__input'>
-                                    {errorMessage.length > 0 &&
-                                        (<div className="alert alert-danger" role="alert">
-                                            {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                        </div>)
-                                    }
+                            <div className="form-ui">
+                                <form className='form' onSubmit={onSubmit}>
+                                    <div className="form-body">
+                                        <div className="welcome-lines">
+                                            <div className="welcome-line-1">BeatBuddy</div>
+                                            <div className="welcome-line-2"><b>LogIn</b></div>
+                                        </div>
+                                        <div className="input-area">
+                                        {errorMessage.length > 0 &&
+                                            (<div className="alert alert-danger" role="alert">
+                                                {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
+                                            </div>)
+                                        }
+                                        <div className="form-inp">
+                                            <input  onChange={onChange} placeholder="이메일" type="email" id='email' name='email'/>
+                                        </div>
+                                        <div className="form-inp">
+                                            <input onChange={onChange} type='password'  placeholder="비밀번호" id='password' name='password' />
+                                        </div>
+                                        </div>
+                                        <div className="submit-button-cvr">
+                                            <button className="submit-button" type="submit">Login</button>
+                                        </div>
 
-                                    <label className='form-lable' htmlFor='email'>
-                                        <input onChange={onChange} type='email' id='email' name='email' placeholder='이메일'></input>
-                                        {/* <span>전화번호, 사용자 이름 또는 이메일 </span> */}
-                                    </label>
-                                    <label className="form-label mt-2" htmlFor="password">
-                                        <input onChange={onChange} type='password' id='password' name='password' placeholder='비밀번호' autoComplete='current-password' />
-                                        {/* <span>Password</span> */}
-                                    </label>
-                                </div>
+                                        <div className="content__or-text">
+                                            <span></span>
+                                            <span> or </span>
+                                            <span></span>
+                                        </div>
 
-                                <button type="submit"><b>Login</b></button>
-                                <br />
-                            </form>
-                        </div>
-
-                        <div className="content__or-text">
-                            <span></span>
-                            <span> or </span>
-                            <span></span>
+                                        <div className='forgot-pass'>
+                                            <button><Link to="/signup"> <span >Don't have an account?</span> <button className='signUp-button'>SignUp</button></Link></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <div className="content__forgot-buttons">
                             <button>
-                                <GoogleOAuthProvider clientId={clientId}>
+                                {/* <GoogleOAuthProvider clientId={clientId}>
                                     <GoogleLogin
                                         onSuccess={async (response) => {
                                             console.log("구글 로그인 성공", response);
@@ -181,55 +189,63 @@ function Login() {
                                             console.log("구글 로그인 실패", error);
                                         }}
                                     />
-                                </GoogleOAuthProvider>
+                                </GoogleOAuthProvider> */}
                             </button>
-                            <div className="content__forgot-buttons">
+                            {/* <div className="content__forgot-buttons">
                                 <button><Link to="/signup"> <span>Don't have an account? Sign up</span> </Link></button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
             </PC>
 
             <Mobile>
-                <div className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div className='content'>
-                        <h1>BeatBuddy</h1>
                         <div>
-                            <form className='content__form' onSubmit={onSubmit}>
-                                <div className='content__input'>
-                                    {errorMessage.length > 0 &&
-                                        (<div className="alert alert-danger" role="alert">
-                                            {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                        </div>)
-                                    }
+                            <div id="form-ui">
+                                <form className='form' onSubmit={onSubmit}>
+                                    <div className="form-body">
+                                        <div className="welcome-lines">
+                                            <div className="welcome-line-1">BeatBuddy</div>
+                                            <div className="welcome-line-2">Login</div>
+                                        </div>
+                                        <div className="input-area">
+                                        {errorMessage.length > 0 &&
+                                            (<div className="alert alert-danger" role="alert">
+                                                {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
+                                            </div>)
+                                        }
+                                        <div className="form-inp">
+                                            <input  onChange={onChange} placeholder="Email Address" type="email" id='email' name='email'/>
+                                        </div>
+                                        <div className="form-inp">
+                                            <input onChange={onChange} type='password'  placeholder="Password" id='password' name='password' />
+                                        </div>
+                                        </div>
+                                        <div className="submit-button-cvr">
+                                        <button className="submit-button" type="submit">Login</button>
+                                        </div>
 
-                                    <label className='form-lable' htmlFor='email'>
-                                        <input onChange={onChange} type='email' id='email' name='email' placeholder='이메일'></input>
-                                        {/* <span>전화번호, 사용자 이름 또는 이메일 </span> */}
-                                    </label>
-                                    <label className="form-label" htmlFor="password">
-                                        <input onChange={onChange} type='password' id='password' name='password' placeholder='비밀번호' autoComplete='current-password' />
-                                        {/* <span>Password</span> */}
-                                    </label>
-                                </div>
+                                        <div className="content__or-text">
+                                            <span></span>
+                                            <span> or </span>
+                                            <span></span>
+                                        </div>
 
-                                <button type="submit"><b>Login</b></button>
-                                <br />
-                            </form>
-                        </div>
-
-                        <div className="content__or-text">
-                            <span></span>
-                            <span> or </span>
-                            <span></span>
+                                        <div className='forgot-pass'>
+                                            <button><Link to="/signup"> <span >Don't have an account?</span> <button className='signUp-button'>SignUp</button></Link></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <div className="content__forgot-buttons">
                             <button>
-                                <GoogleOAuthProvider clientId={clientId}>
+                                {/* <GoogleOAuthProvider clientId={clientId}>
                                     <GoogleLogin
-                                        onSuccess={(response) => {
+                                        onSuccess={async (response) => {
                                             console.log("구글 로그인 성공", response);
                                             setIsLogin(true);
                                             const token = response.credential;
@@ -243,11 +259,11 @@ function Login() {
                                             console.log("구글 로그인 실패", error);
                                         }}
                                     />
-                                </GoogleOAuthProvider>
+                                </GoogleOAuthProvider> */}
                             </button>
-                            <div className="content__forgot-buttons">
+                            {/* <div className="content__forgot-buttons">
                                 <button><Link to="/signup"> <span>Don't have an account? Sign up</span> </Link></button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import Loading from '../Loading';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function ProfilePlayList() {
+function ProfilePlayList({userNickname}) {
     const [isLoading, setIsLoading] = useState(true);
     const [playlistData, setPlaylistData] = useState([]);
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ function ProfilePlayList() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/playlist`, {
+        axios.get(`http://localhost:8080/api/playlist/user/${userNickname}`, {
             headers: {
                 'Content-Type': `application/json`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더

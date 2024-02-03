@@ -4,7 +4,7 @@ import FeedDetail from '../Modal/Feed/FeedDetail';
 import axios from 'axios';
 import Loading from '../Loading';
 
-function ProfilePost() {
+function ProfilePost({ userNickname }) {
     const [selectedMusic, setSelectedMusic] = useState(null);
     const [isFeedDetailOpen, setIsFeedDetailOpen] = useState(false);
     const [feedData, setFeedData] = useState([]);
@@ -18,7 +18,7 @@ function ProfilePost() {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`https://34ae-39-124-165-135.ngrok-free.app/api/feeds`, {
+        axios.get(`http://localhost:8080/api/feeds/user/${userNickname}`, {
             headers: {
                 'Content-Type': `application/json`,
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -34,7 +34,7 @@ function ProfilePost() {
             .catch((error) => {
                 console.error('API 요청 중 오류 발생:', error);
             });
-    }, [])
+    }, [userNickname])
 
     return (
         <div>
@@ -47,8 +47,14 @@ function ProfilePost() {
                                 <div className='card mb-2' style={{ backgroundColor: "#242424", color: "white"}}>
                                     <div className='card-body'>
                                         <div>
-                                            <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
+                                            {music.feedImgSrc !== null ? (
+                                                <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.feedImgSrc}
                                                 alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                            ):(
+                                                <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.musicInfoList[0].albumUrl}
+                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                            )}
+
                                         </div>
                                         <p className='mb-0'><b>{music.musicInfoList[0].musicTitle}</b></p>
                                         <b>{music.musicInfoList[0].musicArtist}</b>

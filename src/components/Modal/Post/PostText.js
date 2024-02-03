@@ -63,7 +63,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             redirect: 'follow'
         };
 
-        fetch("https://34ae-39-124-165-135.ngrok-free.app/api/feeds", requestOptions)
+        fetch("http://localhost:8080/api/feeds", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -149,7 +149,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
                                     </div>
                                     <div style={{ width: "45%" }}>
                                         <div className='d-flex justify-content-start ms-4 mb-3'>
-                                            <a href='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' onClick={() => { goProfile() }} />User Nickname</a>
+                                            <SiHeadspace className='me-2' size='40' color='black' />
                                         </div>
                                         <div className='d-flex flex-column align-items-center mb-3'>
                                             <textarea id='contentInput' type="text" className="form-control mb-2" placeholder="" onChange={handleContentChange} value={content} style={{ width: "90%", height: "280px", resize: "none" }} />

@@ -58,7 +58,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
                 redirect: 'follow'
             };
 
-            fetch("https://34ae-39-124-165-135.ngrok-free.app/api/playlist", requestOptions)
+            fetch("http://localhost:8080/api/playlist", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     console.log(result);
@@ -154,7 +154,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
                                     </div>
                                     <div style={{ width: "45%" }}>
                                         <div className='d-flex justify-content-start ms-4 mb-3'>
-                                            <a href='/profile' style={{ textDecorationLine: "none" }}><SiHeadspace className='me-2' size='40' color='gray' onClick={() => { goProfile() }} />User Nickname</a>
+                                        <SiHeadspace className='me-2' size='40' color='black' />
                                         </div>
                                         <div className='d-flex flex-column align-items-center mb-3'>
                                             <input id='titleInput' type="text" className="form-control mb-2" placeholder="타이틀을 입력하세요." onChange={handlePlaylistTitleChange} value={playlistTitle} style={{ width: "90%" }} />

@@ -10,7 +10,7 @@ import axios from 'axios';
 
 function Feed({ feedData }) {
     const navigate = useNavigate();
-    const { userNickname, feedId } = useParams([]);
+    const { nickName, feedId } = useParams([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isFeedDetailOpen, setIsFeedDetailOpen] = useState(false);
     const [isNoteClicked, setIsNoteClicked] = useState(false);
@@ -37,6 +37,10 @@ function Feed({ feedData }) {
     //         });
     // }, [])
 
+    useEffect (()=>{
+        
+    })
+
     const openFeedDetail = (music) => {
         setIsFeedDetailOpen(true);
     }
@@ -62,7 +66,9 @@ function Feed({ feedData }) {
                             <div>
                                 <div className='d-flex justify-content-center'>
                                     <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                        <Link to='/profile' style={{ textDecorationLine: "none", color: "white" }}><SiHeadspace className='me-2' size='40' color='gray' />{feedData.userName}</Link>
+                                        <Link to={`/profile/${feedData.nickName}`} style={{ textDecorationLine: "none", color: "white" }}><img className='userimg' src={feedData.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', marginRight:'13px'}} />
+                                            <b>{feedData.nickName}</b>
+                                        </Link>
                                     </div>
                                     <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
                                         <span className='mt-2'>
