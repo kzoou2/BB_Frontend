@@ -1,0 +1,236 @@
+
+.plcard {
+    width: 100%;
+    height: 30vh;
+    background: #242424;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    backdrop-filter: blur(10px);
+    transition: 0.5s ease-in-out;
+    margin-bottom: 7px;
+}
+
+/* .plcard:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+} */
+
+.plimg {
+    width: 30%;
+    height: 80%;
+    object-fit: cover;
+    margin-left: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+
+}
+
+/* .plcard:hover > .img {
+    transition: 0.5s ease-in-out;
+    background: linear-gradient(#9198e5, #712020);
+  } */
+
+.pltextBox {
+    width: calc(100% - 90px);
+    margin-left: 20px;
+    color: white;
+    font-family: 'Poppins' sans-serif;
+}
+
+.pltextContent {
+    display: flex;
+    padding: 10%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.pl .contents {
+    font-size: 12px;
+    font-weight: bo;
+}
+.pl h2 {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.pl p {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+
+
+/* 플레이버튼 */
+.plbtn-container {
+    width: 45px;
+    height: 45px;
+    position: relative;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+}
+
+.play-btn {
+    position: absolute;
+    appearance: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.5s ease-in-out;
+}
+
+.play-btn:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.play-btn:checked:hover {
+    cursor: pointer; 
+    transform: scale(1.05);
+}
+
+.play-btn::before {
+    content: "";
+    position: absolute;
+    width: 93%;
+    height: 93%;
+    background-color:#FEF164;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.play-btn:checked {
+    animation: borderAnimate 700ms ease-in-out 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes borderAnimate {
+    0% {
+        transform: rotate(0);
+        background: conic-gradient(#1E1E1E, transparent 20%);
+    }
+
+    80% {
+        background: conic-gradient(#1E1E1E, transparent 90%);
+    }
+
+    100% {
+        transform: rotate(360deg);
+        background: conic-gradient(#1E1E1E, #1E1E1E);
+    }
+}
+
+.play-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 60%;
+    top: 50%;
+    background-color: #1E1E1E;
+    transform: translate(-60%, -50%) rotate(90deg);
+    clip-path: polygon(50% 15%, 0% 100%, 100% 100%);
+    transition: all 400ms ease-in-out;
+    cursor: pointer;
+}
+
+.play-btn:checked + .play-icon {
+    clip-path: polygon(0 100%, 0% 100%, 100% 100%);
+}
+
+.pause-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.pause-icon::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: #1E1E1E;
+    left: 0;
+}
+
+.pause-icon::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: #1E1E1E;
+    right: 0;
+}
+
+.play-btn:checked ~ .pause-icon::before {
+    animation: reveal 300ms ease-in-out 350ms 1;
+    animation-fill-mode: forwards;
+}
+
+.play-btn:checked ~ .pause-icon::after {
+    animation: reveal 300ms ease-in-out 600ms 1;
+    animation-fill-mode: forwards;
+    
+}
+
+@keyframes reveal {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 35%;
+    }
+}
+
+
+
+/* 테이블 */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+    background-color: #1E1E1E;
+    color: white;
+}
+
+
+.table thead th {
+    background-color: #181818;
+    color: white;
+
+}
+
+.table img {
+    display: block;
+    margin: 0 auto;
+}
+
+.table td {
+    border: none; /* 선 없음 */
+}
+
+/* Optional: Hover effect */
+.table tbody tr:hover {
+    background-color: #353535;
+}
+
+
+.userInfo{
+    margin-top: 20%;
+}

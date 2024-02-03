@@ -1,0 +1,67 @@
+.buttons {
+    display: flex;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.custom-progress {
+    width: 160px;
+    height: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+    outline: none;
+    appearance: none;
+}
+
+.custom-progress::-webkit-progress-bar {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.custom-progress::-webkit-progress-value {
+    background-color: #27A8FC;
+    border-radius: 5px;
+}
+
+.custom-progress::-moz-progress-bar {
+    background-color: #27A8FC;
+    border-radius: 5px;
+}
+
+.custom-range {
+    width: 160px;
+    height: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+    outline: none;
+    appearance: none;
+    margin-top: 5px;
+    /* Adjust as needed for spacing */
+}
+
+.custom-range::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #27A8FC;
+    cursor: pointer;
+    appearance: none;
+    /* Center thumb vertically */
+}
+
+.custom-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #27A8FC;
+    cursor: pointer;
+    appearance: none;
+    /* Center thumb vertically */
+}
