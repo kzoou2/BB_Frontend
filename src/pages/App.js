@@ -20,11 +20,6 @@ import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
 import MiniPlayer from '../components/Player/MiniPlayer';
 
-// Test
-import MusicPlayerTest from '../test/MusicPlayerTest';
-import HomeTest from '../test/HomeTest';
-import PlaylistTest from '../test/PlayListTest';
-
 function App() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -51,9 +46,6 @@ function App() {
                     <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
                     <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
                     <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
-                    <Route path='/test' element={<HomeTest />} />
-                    <Route path='/test/1' element={<PlaylistTest />} />
-                    <Route path="/test/2" element={<MusicPlayerTest />} />
                 </Routes>
             </div>
         </BrowserRouter>
