@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../style/css/MiniPlayer.css';
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay, FaPause } from "react-icons/fa6";
