@@ -8,6 +8,7 @@ import Alarm from './Alarm';
 import DM from './DM';
 import Search from './Search';
 import Profile from './Profile';
+import ProfileEdit from '../components/Profile/ProfileEdit';
 import CreatePost from '../components/Modal/Post/CreatePost';
 import MusicSearch from '../components/Modal/Post/MusicSearch';
 import PostPicSelect from '../components/Modal/Post/PostPicSelect';
@@ -16,6 +17,7 @@ import PlayListSearch from '../components/Modal/PlayList/PlayListSearch';
 import PlayListText from '../components/Modal/PlayList/PlayListText';
 import Feed from './Feed';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
+import FeedEdit from '../components/Modal/Feed/FeedEdit';
 import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
 import MiniPlayer from '../components/Player/MiniPlayer';
@@ -32,10 +34,10 @@ function App() {
                     <Route path="/dm" element={<DM />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/profile/:nickName" element={<Profile />} />
-                    <Route path='/feed/:feedId' element={<Feed />} />
+                    <Route path="/Profile/edit/:nickName" element={<ProfileEdit />} />
+                    <Route path="/feed/:feedId" element={<Feed />} />
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
-                    {/* <Route path="/playlistDetail" element={<PlayListDetail />} /> */}
                     <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
                     <Route path="/miniplayer" element={<MiniPlayer />} />
 

@@ -16,7 +16,7 @@ export const ModalWrap = styled.div`
 width: 600px;
 height: 600px;
 border-radius: 15px;
-background-color: #fff;
+background-color: #242424;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -27,15 +27,17 @@ export const TextInputModalWrap = styled.div`
 width: 900px;
 height: 600px;
 border-radius: 15px;
-background-color: #fff;
+background-color: #242424;
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+
 `;
 
 export const Contents = styled.div`
 margin: 24px 24px;
+color: white;
 `;
 
 export const Button = styled.button`

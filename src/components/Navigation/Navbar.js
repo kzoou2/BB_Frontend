@@ -101,13 +101,13 @@ function Navbar() {
                                     <Link to='/Alarm'><FaItunesNote className='me-2' size='25' color='white' />Alarm</Link>
                                 </li> */}
                                 <li className='text-start' onClick={() => openCreatePost()}>
-                                    <span style={{ color: "white", cursor: "pointer" }}><FaRegSquarePlus className='me-2' size='25' color='white' />Post</span>
+                                    <span style={{ color: "white", cursor: "pointer" }}><FaRegSquarePlus className='me-2' size='25' />Post</span>
                                 </li>
                                 {isLogin ? (
                                     <>
                                     <li className='text-start'>
                                         <Link to={`/profile/${userNickname}`}>
-                                            <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px'}}/>
+                                            <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px', backgroundColor:"white"}}/>
                                             <b style={{fontSize:'17px'}}>{userNickname}</b>
                                         </Link>
                                     </li>

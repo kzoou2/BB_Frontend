@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navigation/Navbar';
 import { PC, Mobile } from '../components/Responsive';
 import { SiHeadspace } from 'react-icons/si';
 import { FiBookmark } from "react-icons/fi";
-import { RiFolderMusicLine } from "react-icons/ri";
-import { TbPlaylist } from "react-icons/tb";
+import { RiFolderMusicLine, RiUserHeartLine } from "react-icons/ri";
+import { TbPlaylist, TbUserHeart } from "react-icons/tb";
 import ProfilePost from '../components/Profile/ProfilePost';
 import ProfileSaved from '../components/Profile/ProfileSaved';
 import ProfilePlayList from '../components/Profile/ProfilePlayList';
@@ -19,12 +19,13 @@ function Profile() {
     const [activeTab, setActiveTab] = useState('post');
     const [postCount, setPostCount] = useState(null);
     const [userInfo, setUserInfo] = useState([]);
+    const userNickname = localStorage.getItem("nickName");
     const [isOwnProfile, setIsOwnProfile] = useState(false);
+    const [isFollowed, setIsFollowed] = useState(false);
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
     };
-
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/users/info/${nickName}`, {
@@ -36,28 +37,74 @@ function Profile() {
         })
         .then((response) => {
             setUserInfo(response.data);
-            setIsOwnProfile(response.data.nickName === nickName);
 
-            // 사용자의 게시글 개수를 가져옵니다.
-            axios.get(`http://localhost:8080/api/feeds/user/${nickName}`, {
-                headers: {
+            if (userNickname !== nickName) {
+                axios.get(`http://localhost:8080/api/follow/followInfo`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                        'ngrok-skip-browser-warning': '69420',
+                    },
+                })
+                    .then((response) => {
+                        console.log(response.data)
+                        const followingNickNames = response.data.followingNickNames || [];
+                        setIsFollowed(followingNickNames.includes(nickName));
+                    })
+                    .catch((error) => {
+                        console.error('followINFO API 요청 중 오류 발생:', error);
+                    });
+            }
+
+            const followingNickNames = response.data.followingNickNames || [];
+            setIsFollowed(followingNickNames.includes(userNickname));
+        })
+        .catch((error) => {
+            console.error('API 요청 중 오류 발생:', error);
+        });
+
+        setIsOwnProfile(userNickname === nickName);
+    }, [nickName, userNickname]);
+
+
+    const handleFollowToggle = () =>{
+        if(isFollowed){
+            //언팔
+            axios.post(`http://localhost:8080/api/unfollow/${nickName}`, {
+                headers:{
                     'Content-Type': `application/json`,
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420',
                 },
             })
             .then((response) => {
-                setPostCount(response.data.length);
+                console.log('언팔로우 성공')
+                setIsFollowed(false);
             })
             .catch((error) => {
-                console.error('API 요청 중 오류 발생:', error);
+                console.log('언팔로우 실패', error);
             });
-        })
-        .catch((error) => {
-            console.error('API 요청 중 오류 발생:', error);
-        });
-    }, [nickName]);
-    
+        } else {
+            axios.post(`http://localhost:8080/api/follow/${nickName}`, {
+                headers:{
+                    'Content-Type': `application/json`,
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                    'ngrok-skip-browser-warning': '69420',
+                },
+            })
+            .then((response) => {
+                console.log('팔로우 성공');
+                setIsFollowed(true);
+            })
+            .catch((error) => {
+                console.log('팔로우 실패', error);
+            });
+        }
+    };
+
+    const handlePostCount = (count) => {
+        setPostCount(count);
+    };
 
     return (
         <div>
@@ -67,22 +114,44 @@ function Profile() {
                         <Navbar />
                     </div>
                     <div className='col-md-8'>
-                        <div className='user-container d-flex align-items-center mb-3'>
-                            <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px'}} />
-                            </div>
-                            <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
-                                <div className="d-flex align-items-center">
-                                    <p style={{ fontSize: '20px', marginRight: '50px' }}> <b>{userInfo.nickName}</b> </p>
-                                    <button className='btn btn-outline-primary'> <FaEdit /> 프로필 편집 </button>
+                        {isOwnProfile ? (
+                            <div className='user-container d-flex align-items-center mb-3'>
+                                <div className=' col-md-2 offset-md-1 user-img mt-5 '>
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px', backgroundcolor:'white'}} />
                                 </div>
-                                <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '10px' }} >
-                                    <span className='me-4'> 게시글 {postCount}</span>
-                                    <span className='me-4'> 팔로우 {userInfo.followingCnt} </span>
-                                    <span> 팔로워 {userInfo.followerCnt}</span>
+                                <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
+                                    <div className="d-flex align-items-center">
+                                        <p style={{ fontSize: '20px', marginRight: '50px' }}> <b>{userInfo.nickName}</b> </p>
+                                        <Link to={`/profile/edit/${nickName}`}><button className='btn btn-outline-primary'> <FaEdit /> 프로필 편집 </button></Link>
+                                    </div>
+                                    <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '10px' }} >
+                                        <span className='me-4'> 게시글 {postCount} </span>
+                                        <span className='me-4'> 팔로우 {userInfo.followingCnt} </span>
+                                        <span> 팔로워 {userInfo.followerCnt}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className='user-container d-flex align-items-center mb-3'>
+                                <div className=' col-md-2 offset-md-1 user-img mt-5 '>
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px'}} />
+                                </div>
+                                <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
+                                    <div className="d-flex align-items-center">
+                                        <p style={{ fontSize: '20px', marginRight: '50px' }}> <b>{userInfo.nickName}</b> </p>
+                                        <button onClick={handleFollowToggle} className='btn btn-outline-primary'>
+                                            {isFollowed ? <RiUserHeartLine /> : <TbUserHeart />} {isFollowed ? '팔로잉' : '팔로우'}
+                                        </button>
+                                    </div>
+                                    <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '10px' }} >
+                                        <span className='me-4'> 게시글 {postCount} </span>
+                                        <span className='me-4'> 팔로우 {userInfo.followingCnt} </span>
+                                        <span> 팔로워 {userInfo.followerCnt}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        )}
 
                         {/* <div className='highlight' style={{ display: 'flex', marginLeft: '8%', alignItems: 'center', gap: '15px' }}>
                             <SiHeadspace className='' size='60' color='black' />
@@ -96,7 +165,7 @@ function Profile() {
                             <button onClick={() => handleTabChange('saved')} className={activeTab === 'saved' ? 'active' : ''} style={{ color: "white" }}><FiBookmark className='me-2' size='20' />저장됨</button>
                         </div>
                         <div className='contents' style={{overflow: "scroll" , maxHeight: '450px', scrollbarColor:'black' }}>
-                            {activeTab === 'post' && <ProfilePost  userNickname={userInfo.nickName}/>}
+                            {activeTab === 'post' && <ProfilePost  userNickname={userInfo.nickName} postCount={handlePostCount}  />}
                             {activeTab === 'saved' && <ProfileSaved userNickname={userInfo.nickName}/>}
                             {activeTab === 'playlist' && <ProfilePlayList userNickname={userInfo.nickName}/>}
                         </div>

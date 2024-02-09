@@ -56,7 +56,7 @@ function PlayListSearch({ onClose, searchKeyword }) {
     };
 
     const searchHashtag = async () => {
-        await axios.get(`http://localhost:8080/api/search/feed/Keyword/${searchQuery}`, {
+        await axios.get(`http://localhost:8080/api/feeds/byTag/${searchQuery}`, {
             headers: {
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
