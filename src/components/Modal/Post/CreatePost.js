@@ -49,11 +49,11 @@ function CreatePost({ onClose }) {
 
                                 <div className='d-flex justify-content-center mt-5 pt-5'>
                                     <div className='me-5' onClick={() => goMusicSearch()} style={{ cursor: "pointer" }}>
-                                        <FaItunesNote className='mb-3' size='130' color='black' />
+                                        <FaItunesNote className='mb-3' size='130' color='white' />
                                         <h5 className='ms-3'>Create Post</h5>
                                     </div>
                                     <div className='ms-5' onClick={() => goPlayListSearch()} style={{ cursor: "pointer" }}>
-                                        <BsMusicNoteList className='ms-4 mb-3' size='130' color='black' />
+                                        <BsMusicNoteList className='ms-4 mb-3' size='130' color='white' />
                                         <h5 className='ms-3'>Create PlayList</h5>
                                     </div>
                                 </div>

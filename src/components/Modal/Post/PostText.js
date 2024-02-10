@@ -110,10 +110,6 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
         setContent(event.target.value);
     };
 
-    const goProfile = () => {
-        navigate('/profile');
-    }
-
     const onUpload = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { PC, Mobile } from '../Responsive';
 import FeedDetail from '../Modal/Feed/FeedDetail';
 import axios from 'axios';
 import Loading from '../Loading';
 
-function ProfilePost({ userNickname }) {
+function ProfilePost({ postCount }) {
+    const { nickName } = useParams();
     const [selectedMusic, setSelectedMusic] = useState(null);
     const [isFeedDetailOpen, setIsFeedDetailOpen] = useState(false);
     const [feedData, setFeedData] = useState([]);
@@ -18,7 +20,7 @@ function ProfilePost({ userNickname }) {
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
 
-        axios.get(`http://localhost:8080/api/feeds/user/${userNickname}`, {
+        axios.get(`http://localhost:8080/api/feeds/user/${nickName}`, {
             headers: {
                 'Content-Type': `application/json`,
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -29,12 +31,13 @@ function ProfilePost({ userNickname }) {
                 console.log("서버에서 받아온 결과", response.data);
                 const temp = response.data;
                 setFeedData(temp);
+                postCount(temp.length);
                 setIsLoading(false); // API 호출이 완료되면 false로 변경하여 로딩화면 숨김처리
             })
             .catch((error) => {
                 console.error('API 요청 중 오류 발생:', error);
             });
-    }, [userNickname])
+    }, [nickName, postCount])
 
     return (
         <div>
