@@ -1,11 +1,14 @@
-.P-container{
-
+.userimg{
+    width: 23%;
+    height: 23% ;
+    border-Radius:50%,
 }
 .p-content{
     display: flex;
     align-items: center;
     justify-content: center; 
 }
+
 .p-header-1{
     padding-top: 5%;
     font-weight: 600;

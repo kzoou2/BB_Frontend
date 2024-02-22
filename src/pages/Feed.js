@@ -83,7 +83,7 @@ function Feed({ feedData }) {
                                     </div>
                                 </div>
                                 <div className="">
-                                    <img style={{ width: "70%", height: "70%" }} src={feedData.imageFileUrl || feedData.musicInfoList[0].albumUrl} alt={feedData.musicInfoList.musicTitle}></img>
+                                    <img style={{ width: "70%", height: "70%" }} src={feedData.feedImgSrc || feedData.musicInfoList[0].albumUrl} alt={feedData.musicInfoList.musicTitle}></img>
                                     <h5 className='mt-3'>{feedData.musicInfoList[0].musicTitle} · {feedData.musicInfoList[0].musicArtist}</h5>
                                     <p>{feedData.musicInfoList[0].albumName} · {feedData.musicInfoList[0].releaseDate}</p>
                                     <p style={{ color: '#27A8FC' }}>{feedData.tagName.map((tag, index) => `#${tag} ${index < feedData.tagName.length - 1 ? ' ' : ''}`)}</p>

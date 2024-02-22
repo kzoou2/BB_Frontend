@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import ModalContainer from "../Config/ModalContainer";
-// import { Overlay } from "../../../style/styled_components/FeedDetailModal_Style";
 import useOutSideClick from "../../../hooks/useOutSideClick";
 import Tagify from "@yaireo/tagify";
 import '@yaireo/tagify/dist/tagify.css';
@@ -13,8 +12,7 @@ import axios from "axios";
 
 function FeedEdit({ onClose, feedId, musicInfoList }){
     const modalRef = useRef(null);
-    // const inputFileRef = useRef(null);
-    // const [fileImg, setFileImg] = useState(null);
+    const inputFileRef = useRef(null);
     const [feedData, setFeedData]= useState([]);
     const [editFeedData, setEditFeedData] = useState({
         content: "",
@@ -36,8 +34,8 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
             setEditFeedData({
                 content: response.data.content,
                 tagName: response.data.tagName,
-                // feedImgSrc: response.data.feedImgSrc,
             });
+            console.log('Music Info List:', response.data.musicInfoList);
         })
         .catch((error) =>{
             console.error('api 요청 중 오류 발생:', error);
@@ -49,58 +47,67 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
         setEditFeedData((prevData) => ({ ...prevData, [name]: value }));
     }
 
-    // const handleFileChange = (e) => {
-    //     const selectedFile = e.target.files[0];
-    //     setFileImg(selectedFile);
-    // };
 
     const hanleFeedSubmit = async (e) =>{
         e.preventDefault();
 
-        try{
+        // try{
             const formData = new FormData();
 
             // 파일이 선택된 경우에만 FormData에 추가
-            // if (inputFileRef.current.files[0]) {
-            //     formData.append('imageFile', inputFileRef.current.files[0]);
-            // }
+            if (inputFileRef.current?.files[0]) {
+                formData.append('imageFile', inputFileRef.current.files[0]);
+            }
 
             // 피드 데이터 추가
-            // formData.append('feedRequestDto', JSON.stringify({
-            //     content: editFeedData.content,
-            //     videoId: 'string', // 여기에 실제 videoId 값을 설정해야 함
-            //     musicInfo: {
-            //         musicArtist: `${musicInfoList.musicArtist}`,
-            //         releaseDate: `${musicInfoList.releaseDate}`,
-            //         musicTitle: `${musicInfoList.musicTitle}`,
-            //         albumName: `${musicInfoList.albumName}`,
-            //         videoId: `${musicInfoList.videoId}`,
-            //         albumUrl: `${musicInfoList.albumImage}`
-            //     },
-            //     albumSrc: `${musicInfoList.albumImage}`, // 여기에 실제 albumSrc 값을 설정해야 함
-            //     hashTags: editFeedData.tagName.map(tag => ({ id: 0, tagName: tag }))
-            // }));
-            
-            const res = await axios.put(`http://localhost:8080/api/feeds/${feedId}`,
-            editFeedData,
-            {
-                headers:{
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    'ngrok-skip-browser-warning': '69420',
+            formData.append('feedRequestDto', new Blob([JSON.stringify({
+                content: editFeedData.content,
+                videoId: 'string',
+                musicInfo: {
+                    musicArtist: `${feedData.musicInfoList[0].musicArtist}`,
+                    releaseDate: `${feedData.musicInfoList[0].releaseDate}`,
+                    musicTitle: `${feedData.musicInfoList[0].musicTitle}`,
+                    albumName: `${feedData.musicInfoList[0].albumName}`,
+                    videoId: `${feedData.musicInfoList[0].videoId}`,
+                    albumUrl: `${feedData.musicInfoList[0]?.albumImage || ''}`
                 },
-            });
-            console.log('피드 수정 성공', res.data);
+                albumSrc: `${feedData.musicInfoList[0]?.albumImage || ''}`,
+                hashTags: editFeedData.tagName.map(tag => ({ id: 0, tagName: tag }))
+            })], { type: 'application/json' }));
 
-            // PostFeed(feedId);
-        } catch(error){
-            console.log('피드 수정 중 오류 발생', error);
-        }
+            var requestOptions = {
+                method: 'PUT',
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
+                },
+                body: formData,
+                redirect: 'follow'
+            };
+
+            fetch(`http://localhost:8080/api/feeds/${feedId}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                onClose?.();
+            })
+            .catch(error => console.log('error', error));
     }
-    // const openFileInput = () => {
-    //     inputFileRef.current.click();
-    // };
-
+    
+    const openFileInput = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = ()=>{
+            setEditFeedData((prevData)=> ({
+                ...prevData,
+                feedImgSrc: reader.result,
+            }));
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+            inputFileRef.current.files = e.target.files;
+        }
+    };
 
 
     useEffect(() => {
@@ -121,7 +128,7 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
     }, []);
 
     const handleClose = () => {
-        onClose?.(true);
+        onClose?.();
     };
     useOutSideClick(modalRef, handleClose)
 
@@ -144,13 +151,17 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                                     
                                 <div className="d-flex justify-content-center" >
                                     <div className="d-flex justify-content-center" style={{width:'55%'}}>
-                                        {feedData.feedImgSrc !==  null ? (
-                                            <img className="mt-5" style={{width:'80%', height:'80%'}} src={feedData.feedImgSrc} alt="Album cover"/>
+                                        {editFeedData.feedImgSrc ?(
+                                            <img className="mt-5" style={{width:'80%', height:'80%'}} src={editFeedData.feedImgSrc} alt="feedImgSrc"/>
                                         ):(
-                                            <img className="mt-5" style={{width:'80%', height:'80%'}} src={feedData.musicInfoList[0].albumUrl} alt="Album cover"/>
+                                            feedData.feedImgSrc !==  null ? (
+                                                <img className="mt-5" style={{width:'80%', height:'80%'}} src={feedData.feedImgSrc} alt="Album cover"/>
+                                            ) : (
+                                                <img className="mt-5" style={{width:'80%', height:'80%'}} src={feedData.musicInfoList[0].albumUrl} alt="Album cover"/>
+                                            )
                                         )}
-                                        
                                     </div>
+                                    
                                     <div style={{ width:"45%"}}>
                                         <div className="d-flex justify-content-start ms-4 mb-3">
                                             <SiHeadspace className='me-2' size='40' color='#242424' />
@@ -162,8 +173,8 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                                     </div>
                                 </div>
                                 <div className='d-flex justify-content-center mt-1'>
-                                    {/* <Button type="button" className="btn btn-primary me-3" onClick={openFileInput}>Change Image</Button>
-                                    <input ref={inputFileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileChange} /> */}
+                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
+                                    <input ref={inputFileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => openFileInput(e)} />
                                     <Button className='btn btn-primary' onClick={(e) => hanleFeedSubmit(e)}>Edit</Button>
                                 </div>
                             </Contents>
