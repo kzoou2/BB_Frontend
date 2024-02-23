@@ -6,13 +6,14 @@ import Loading from "../Loading";
 import { useParams } from "react-router-dom";
 import MiniPlayer from "../Player/MiniPlayer";
 import "../../style/css/Edit.css";
-
+import ProfileDelete from "./ProfileDelete";
 
 
 function ProfileEdit (){
     const {nickName} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState([]);
+    const [isUserDelete, setIsUserDelete] = useState(false);
     const [formData, setFormData] = useState({
         userName:"",
         nickName:"",
@@ -21,7 +22,11 @@ function ProfileEdit (){
         birth:"",
         profilePicture: null, // 파일 자체를 저장
         profilePictureUrl: "", // 파일 URL을 저장
-    })
+    });
+
+    const goProfileDelete = ()=>{
+        setIsUserDelete(true);
+    }
     
     const UserInfo = async (nickName) =>{
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
@@ -37,7 +42,7 @@ function ProfileEdit (){
             setFormData({
                 userName: res.data.userName,
                 nickName: res.data.nickName,
-                imgSrc: res.data.imgSrc,
+                // imgSrc: res.data.imgSrc,
                 gender: res.data.gender,
                 birth: res.data.birth,
             });
@@ -60,48 +65,32 @@ function ProfileEdit (){
     const handleFormSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const userUpdateRes = await axios.put(`http://localhost:8080/api/v1/users/updateUser`,
-            formData,
-            {
+            const formDataWithImage = new FormData();
+            
+            if (formData.profilePicture) {
+                formDataWithImage.append('imageFile', formData.profilePicture);
+            }
+
+            const updateInfoJson = JSON.stringify({
+                userName: formData.userName,
+                nickName: formData.nickName,
+                gender: formData.gender,
+                birth: formData.birth,
+            });
+            formDataWithImage.append('updateInfo', new Blob([updateInfoJson], { type: 'application/json' }));
+
+            const userUpdateRes = await axios.put(`http://localhost:8080/api/v1/users/updateUser`,formDataWithImage, {
                 headers:{
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420',
                 },
             });
             console.log('유저정보 수정 성공', userUpdateRes.data);
-            
-
-             // 만약 프로필 이미지가 변경되었을 경우에만 사진 업데이트 엔드포인트 호출
-            if (formData.profilePicture) {
-                const pictureUpdateRes = await axios.post(
-                    'http://localhost:8080/api/v1/users/updateImage',
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                            'ngrok-skip-browser-warning': '69420',
-                        },
-                    }
-                );
-                console.log('프로필 이미지 업데이트 성공', pictureUpdateRes.data);
-            }
-
-
             UserInfo(nickName);
 
         } catch (error){
             console.log('유저정보 수정 중 오류 발생', error);
-            
-            // 프로필 이미지 업데이트 에러 처리
-            if (error.response && error.response.data) {
-                console.error('프로필 이미지 업데이트 에러', error.response.data);
-            }
-
-            // 에러 메시지에 대한 처리를 원하는 대로 추가할 수 있습니다.
-            // 예를 들면, 사용자에게 알림을 표시하거나 다른 작업을 수행할 수 있습니다.
-            alert('유저정보 수정에 실패했습니다.');
             }
     }
 
@@ -114,8 +103,7 @@ function ProfileEdit (){
         // 파일 읽기가 완료되면 실행되는 콜백 함수
         reader.onloadend = () => {
           // 읽어온 파일의 URL을 formData에 추가
-        setFormData((prevData) => ({
-            ...prevData,
+        setFormData((prevData) => ({...prevData, 
             profilePicture: file,
             // profilePictureUrl은 새로운 파일의 URL로 설정됩니다.
             profilePictureUrl: reader.result,
@@ -136,22 +124,24 @@ function ProfileEdit (){
                         <Navbar/>
                     </div>
 
+
                     <div className="col-md-8">
                         <div className="P-container">
                             <div className="p-header-1"> 프로필 편집</div>
+                            <button className="btn btn-primary" type="submit" onClick={()=> goProfileDelete()} > 회원탈퇴 </button>
                             <hr/>
 
                             <div className="p-content">
                                 <form className="p-edit-form" onSubmit={handleFormSubmit}>
                                     <div>
                                     {formData.profilePictureUrl ? (
-                                            <img src={formData.profilePictureUrl} alt="프로필 이미지" style={{ width: '22%', height: '22%', borderRadius:'50%' }} />
+                                            <img className="userimg" src={formData.profilePictureUrl} alt="프로필 이미지" />
                                         ) : (
                                             userData.userImgSrc && (
-                                                <img src={userData.userImgSrc} alt="프로필 이미지" style={{ width: '22%', height: '22%', borderRadius:'50%' }} />
+                                                <img className="userimg" src={userData.userImgSrc} alt="프로필 이미지" style={{ backgroundColor:"white"  }} />
                                             )
                                         )}
-                                        <label className="file-input-label">
+                                        <label className="file-input-label ">
                                             변경
                                             <input type="file" name="userimgSrc" accept="image/*" onChange={handleFormChangeFile} style={{ display: 'none' }} />
                                         </label>
@@ -199,17 +189,27 @@ function ProfileEdit (){
                                         </label>
                                         
                                     </div>
-                                    <button type="submit" style={{color:'white', borderColor:'white'}}> 수정</button>
+                                    <button className="btn btn-primary" type="submit" > 수정</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                     <div className="col-md-2">
                         <MiniPlayer/>
                     </div>
-
                 </div>
+
+                {isUserDelete &&(
+                    <ProfileDelete
+                        open={isUserDelete}
+                        onClose={()=>{
+                            setIsUserDelete(false);
+                        }}
+                    />
+                )}
             </PC>
+
             <Mobile></Mobile>
         </div>
 

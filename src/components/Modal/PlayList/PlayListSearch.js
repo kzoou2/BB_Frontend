@@ -58,6 +58,7 @@ function PlayListSearch({ onClose, searchKeyword }) {
     const searchHashtag = async () => {
         await axios.get(`http://localhost:8080/api/feeds/byTag/${searchQuery}`, {
             headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
             },
         })
@@ -72,6 +73,7 @@ function PlayListSearch({ onClose, searchKeyword }) {
     }
 
     const deleteMusic = (musicId) => {
+        console.log(musicId);
         let updateResults = searchResults.filter(item => item.id !== musicId);
         setSearchResults(updateResults)
     }

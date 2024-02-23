@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import ModalContainer from '../Config/ModalContainer';
 import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedDetailModal_Style';
 import useOutSideClick from '../../../hooks/useOutSideClick';
@@ -15,6 +14,8 @@ import '../../../style/css/FeedDetail.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FeedEdit from './FeedEdit';
+import FeedDelete from './FeedDelete';
+
 
 // Home에서 좋아요, 북마크 변수 값 받아야함. 디테일에서 변경한 값도 Home으로 보내서 공유해야함.
 // TODO: 모바일 미작업, 디테일 클릭할 때 다시 서버에서 통신해야할 듯
@@ -27,6 +28,7 @@ function FeedDetail({ onClose, music }) {
     const [commentList, setCommentList] = useState(music.comments);
     const [isToggled, setIsToggled] = useState(false);
     const [isFeedEdit, setIsFeedEdit] = useState(false);
+    const [isFeedDelete, setIsFeedDelete] = useState(false);
 
 
     // console.log(music)
@@ -63,6 +65,11 @@ function FeedDetail({ onClose, music }) {
     const goFeedEdit = () =>{
         setIsFeedEdit(true);
     }
+
+    const goFeedDelete = () =>{
+        setIsFeedDelete(true);
+    }
+
     const inputComment = async (feedId) => {
         await axios.post(
             `http://localhost:8080/api/comments/save/${feedId}`,
@@ -110,7 +117,7 @@ function FeedDetail({ onClose, music }) {
     return (
         <div>
             <PC>
-            {isFeedEdit ? null : (
+            {isFeedEdit || isFeedDelete ? null : (
                 <ModalContainer>
                     <Overlay>
                         <PCModalWrap ref={modalRef}>
@@ -134,16 +141,14 @@ function FeedDetail({ onClose, music }) {
                                     <div className='ms-2' style={{ width: "50%", backgroundColor: "#242424", color: "white" }}>
                                         <div className='d-flex justify-content-start'>
                                             <Link to={`/profile/${music.nickName}`} style={{ textDecorationLine: "none", color: "white" }}>
-                                            <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px'}} /> {music.nickName}</Link>
+                                            <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', backgroundColor:"white" }} /> {music.nickName}</Link>
                                             <div className='edbtn' >
                                                 <button onClick={handleClick}>
                                                     {isToggled ? 
                                                     <>
-                                                        <LuMoreVertical style={{color:'white', margin: '10px'}} />
-                                                            {/* <GrEdit id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer", margin:'5px' }} />
-                                                            <RiDeleteBinLine id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer", margin:'5px' }} /> */}
                                                         <button className='editbtn' onClick={()=> goFeedEdit()}><GrEdit id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer" }} /></button>
-                                                        <button className='delbtn'><RiDeleteBinLine id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer" }} /></button>
+                                                        <button className='delbtn' onClick={()=> goFeedDelete()}><RiDeleteBinLine id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer" }} /></button>
+                                                        <LuMoreVertical style={{color:'white', margin: '10px'}} />
                                                         </> : 
                                                         
                                                         <LuMoreHorizontal style={{color:'white', margin: '10px'}} />}
@@ -172,7 +177,7 @@ function FeedDetail({ onClose, music }) {
                                         <hr />
                                         <div className='justify-content-start text-start' style={{ height: "20vh", overflow: "scroll" }}>
                                             {commentList.map((data) => (
-                                                <p key={data.id}> <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '30px', height:'30px'}} /> {data.nickName} : {data.comment}</p>
+                                                <p key={data.id}> <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '30px', height:'30px' , backgroundColor:"white" }} /> {data.nickName} : {data.comment}</p>
                                             ))}
                                         </div>
                                         <div className="d-flex justify-content-center" id='search'>
@@ -194,6 +199,17 @@ function FeedDetail({ onClose, music }) {
                     open={isFeedEdit}
                     onClose={() => {
                         setIsFeedEdit(false);
+                        if(onClose){
+                            onClose();
+                        }
+                    }}
+                />)}
+
+                {isFeedDelete &&(<FeedDelete
+                    feedId={music.id}
+                    open={isFeedDelete}
+                    onClose={() => {
+                        setIsFeedDelete(false);
                         if(onClose){
                             onClose();
                         }

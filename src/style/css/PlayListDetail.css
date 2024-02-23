@@ -39,6 +39,12 @@
     font-family: 'Poppins' sans-serif;
 }
 
+.edbtn{
+    top: 5%;
+    right: 3%;
+    position: absolute;
+}
+
 .pltextContent {
     display: flex;
     padding: 10%;
@@ -65,16 +71,14 @@
 
 /* 플레이버튼 */
 .plbtn-container {
-    width: 45px;
-    height: 45px;
-    position: relative;
+    position: absolute;
     border-radius: 50%;
-    bottom: 0;
-    right: 0;
+    bottom: 10%;
+    right: 7%;
+    justify-content: flex-end; 
 }
 
 .play-btn {
-    position: absolute;
     appearance: none;
     width: 100px;
     height: 100px;

@@ -30,7 +30,7 @@ function ProfilePlayList({userNickname}) {
     }, [])
 
     const openPlayListDetail = (playlistId) => {
-        navigate(`/playlistDetail/${playlistId}`);
+        navigate(`/playlistDetail/${userNickname}/${playlistId}`);
     }
 
     return (

@@ -68,11 +68,14 @@ function Profile() {
 
 
     const handleFollowToggle = () =>{
+        const requestData = {
+            followerNickName : `${nickName}`, 
+        };
+
         if(isFollowed){
             //언팔
-            axios.post(`http://localhost:8080/api/unfollow/${nickName}`, {
+            axios.post('http://localhost:8080/api/follow/unfollow',requestData, {
                 headers:{
-                    'Content-Type': `application/json`,
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420',
                 },
@@ -85,9 +88,8 @@ function Profile() {
                 console.log('언팔로우 실패', error);
             });
         } else {
-            axios.post(`http://localhost:8080/api/follow/${nickName}`, {
+            axios.post('http://localhost:8080/api/follow/follow',requestData, {
                 headers:{
-                    'Content-Type': `application/json`,
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'ngrok-skip-browser-warning': '69420',
                 },
@@ -117,7 +119,7 @@ function Profile() {
                         {isOwnProfile ? (
                             <div className='user-container d-flex align-items-center mb-3'>
                                 <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px', backgroundcolor:'white'}} />
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px', backgroundColor:"white" }} />
                                 </div>
                                 <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
                                     <div className="d-flex align-items-center">
@@ -134,7 +136,7 @@ function Profile() {
                         ) : (
                             <div className='user-container d-flex align-items-center mb-3'>
                                 <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px'}} />
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px' , backgroundColor:"white" }} />
                                 </div>
                                 <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
                                     <div className="d-flex align-items-center">
