@@ -3,6 +3,7 @@ import { PC, Mobile } from '../Responsive';
 import Loading from '../Loading';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import PlaylistCard from '../Common/PlaylistCard';
 
 function ProfilePlayList({userNickname}) {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,57 +30,38 @@ function ProfilePlayList({userNickname}) {
             });
     }, [])
 
-    const openPlayListDetail = (playlistId) => {
+    const openPlaylistDetail = (playlistId) => {
         navigate(`/playlistDetail/${userNickname}/${playlistId}`);
     }
 
     return (
         <div>
+            {isLoading ? <Loading /> : null}
             <PC>
-                <div className='row'>
-                    {isLoading ? <Loading /> : null}
-                    {playlistData ? (
-                        playlistData.slice().reverse().map((playlist) => (
-                            <div className='col-md-3' key={playlist.id} style={{ cursor: 'pointer' }} onClick={() => openPlayListDetail(playlist.id)}>
-                                <div className='card mb-2' style={{ backgroundColor: "#242424", color: "white" }}>
-                                    <div className='card-body'>
-                                        <div>
-                                            <img className='img-fluid rounded-start mb-3' style={{ width: '150px', height: '150px', cursor: 'pointer' }} src={playlist.imageFileUrl} alt={playlist.title} />
-                                        </div>
-                                        <p className='mb-0'><b>{playlist.title}</b></p>
-                                        <p className='mb-0' style={{ fontSize: '12px', color: 'gray' }}>{`${playlist.musicInfoList.length} 곡`}</p>
-                                        <p style={{ fontSize: '12px', color: 'gray' }}>Like : {playlist.feedLike}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>플레이리스트가 없습니다.</p>
-                    )
-                    }
-                </div>
+                {/* <div className='profile-container' style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 15px"}}> */}
+                    <div className='row ms-4 me-4' >
+                        {isLoading ? <Loading /> : null}
+                        {playlistData && playlistData.length > 0 ? (
+                            playlistData.reverse().map((playlist) => (
+                                    <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail}/>
+                                ))
+                            ) : (
+                                <p style={{ color: '#aaa', textAlign: 'center', marginTop: '2rem' }}>아직 플레이리스트가 없어요.</p>
+                            )
+                        }
+                    </div>
+                {/* </div> */}
+                
             </PC>
             <Mobile>
-                <div className='row'>
-                    {isLoading ? <Loading /> : null}
-                    {playlistData ? (
-                        playlistData.slice().reverse().map((playlist) => (
-                            <div className='col-4' key={playlist.id} style={{ cursor: 'pointer' }} onClick={() => openPlayListDetail(playlist.id)}>
-                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
-                                    <div className='card-body'>
-                                        <div>
-                                            <img className='img-fluid rounded-start mb-3' style={{ width: '110px', height: '110px', cursor: 'pointer' }} src={playlist.imageFileUrl} alt={playlist.title} />
-                                        </div>
-                                        <p className='mb-0'><b>{playlist.title}</b></p>
-                                        <p className='mb-0' style={{ fontSize: '12px', color: 'gray' }}>{`${playlist.musicInfoList.length} 곡`}</p>
-                                        <p style={{ fontSize: '12px', color: 'gray' }}>Like : {playlist.feedLike}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>플레이리스트가 없습니다.</p>
-                    )
+                <div className='row' >
+                    {playlistData && playlistData.length > 0 ? (
+                        playlistData.reverse().map((playlist) => (
+                                <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail}/>
+                            ))
+                        ) : (
+                            <p style={{ color: '#aaa', textAlign: 'center', marginTop: '2rem' }}>아직 플레이리스트가 없어요.</p>
+                        )
                     }
                 </div>
             </Mobile>

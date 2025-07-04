@@ -1,3 +1,18 @@
 #clicked {
     color: #27A8FC;
 }
+
+.home-card {
+    width: 38rem;
+    background-color: #1E1E1E;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:  0 8px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.03);
+}

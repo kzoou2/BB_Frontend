@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SiHeadspace } from "react-icons/si";
 import { Overlay, TextInputModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
 import ModalContainer from '../Config/ModalContainer';
 import useOutSideClick from '../../../hooks/useOutSideClick';
@@ -7,17 +6,23 @@ import Tagify from '@yaireo/tagify';
 import '@yaireo/tagify/dist/tagify.css';
 import '../../../style/css/Hashtag.css';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from "react-icons/fa";
 import PostPicSelect from './PostPicSelect';
 import { postChkAtom } from '../../../state/PostAtom';
 import { useRecoilState } from 'recoil';
+import { CloseButton } from 'react-bootstrap';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import MusicSearch from './MusicSearch';
+import "../../../style/css/TextInput.css";
+import { PrimaryButton,SecondaryButton } from '../../../style/styled_components/Button_Style';
+
 
 // 가수, 노래제목, 발매연도, 앨범이름, 사진, 글, 해시태그, 작성자, 비디오아이디
 function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const inputFileRef = useRef(null);
-    const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
+    // const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
+    const [isMusicSearchOpen, setIsMusicSearchOpen] = useState(false);
     const [hashtagList, setHashtagList] = useState([]);
     const [content, setContent] = useState('');
     const [imageSrc, setImageSrc] = useState(albumImage);
@@ -72,13 +77,22 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
                 console.log(result);
                 setPostChk(true);
                 onClose?.();
+
+                setTimeout(()=>{
+                    window.location.reload();
+                },300);
             })
             .catch(error => console.log('error', error));
     }
 
-    const goPostPicSelect = () => {
-        setIsPostPicSelectOpen(true);
+    // const goPostPicSelect = () => {
+    //     setIsPostPicSelectOpen(true);
+    // }
+
+    const goMusicSearch = () => {
+        setIsMusicSearchOpen(true);
     }
+
 
     const handleClose = () => {
         onClose?.();
@@ -128,40 +142,45 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
 
     return (
         <div>
-            {isPostPicSelectOpen ? null : (
+            {/* {isPostPicSelectOpen ? null : ( */}
+            {isMusicSearchOpen ? null : (
                 <ModalContainer>
                     <Overlay>
                         <TextInputModalWrap ref={modalRef}>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
-                                <div className='row'>
-                                    <FaArrowLeft className='col' size='28' onClick={() => goPostPicSelect()} style={{ color: "blue", cursor: "pointer" }} />
-                                    <h3 className='col-10 text-center'>New Post (PostText)</h3>
-                                    <div className='col'></div>
-                                </div>
-
-                                <div className='d-flex justify-content-center'>
-                                    <hr style={{ width: "80%" }} />
-                                </div>
-
-                                <div className='d-flex justify-content-center'>
-                                    <div className='d-flex justify-content-center' style={{ width: "55%" }}>
-                                        <img className='mt-5' style={{ width: "80%", height: "80%" }} src={imageSrc} alt="Album cover" />
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <FaArrowLeftLong size={24} onClick={() => goMusicSearch()} style={{ color: "fff", cursor: "pointer" }} />
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">New Post</h3>
+                                        <p className="subtitle">Post Text</p>
                                     </div>
-                                    <div style={{ width: "45%" }}>
-                                        <div className='d-flex justify-content-start ms-4 mb-3'>
-                                            <SiHeadspace className='me-2' size='40' color='black' />
+                                </div>
+
+                                <div className='d-flex justify-content-center'>
+                                    <hr style={{ width: "90%", marginTop:'0',marginBottom:'35px' }} />
+                                </div>
+
+                                <div className='d-flex justify-content-center'>
+                                    <div className='d-flex justify-content-center' style={{ width: "50%", position: 'relative' }}>
+                                        <img className='postimg '  src={imageSrc} alt="Album cover"/>
+                                        <div className='img-overlay'  onClick={() => inputFileRef.current.click()} >
+                                            <span className='overlay-text'>이미지 변경</span>
                                         </div>
+                                        <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
+                                    </div>
+                                    <div style={{ width: "50%", height:'380px'}}>
                                         <div className='d-flex flex-column align-items-center mb-3'>
-                                            <textarea id='contentInput' type="text" className="form-control mb-2" placeholder="" onChange={handleContentChange} value={content} style={{ width: "90%", height: "280px", resize: "none" }} />
-                                            <input id='hashtagInput' type="text" className="form-control" placeholder="해시태그를 추가하세요." />
+                                            <textarea id='contentInput' type="text" className="contentInput mb-2" placeholder="내용을 입력해주세요" onChange={handleContentChange} value={content}  />
+                                            <input id='hashtagInput' type="text" className="hashtagInput" placeholder="해시태그를 추가하세요." />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className='d-flex justify-content-center mt-1'>
-                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
-                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
-                                    <Button className='btn btn-primary' onClick={() => postFeed()}>Post</Button>
+                                    {/* <SecondaryButton type="button" className=" me-3" style={{ width: '10rem'}} onClick={() => inputFileRef.current.click()}>Change Image</SecondaryButton>
+                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} /> */}
+                                    <PrimaryButton style={{ width: '10rem'}} onClick={() => postFeed()}>작성</PrimaryButton>
                                 </div>
                             </Contents>
                         </TextInputModalWrap>
@@ -170,10 +189,19 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             )}
 
             {/* TODO: 이전으로 돌아갈 때 검색한 정보 유지되도록 */}
-            {isPostPicSelectOpen && (<PostPicSelect
+            {/* {isPostPicSelectOpen && (<PostPicSelect
                 open={isPostPicSelectOpen}
                 onClose={() => {
                     setIsPostPicSelectOpen(false);
+                    if (onClose) {
+                        onClose();
+                    }
+                }}
+            />)} */}
+            {isMusicSearchOpen && (<MusicSearch
+                open={isMusicSearchOpen}
+                onClose={() => {
+                    setIsMusicSearchOpen(false);
                     if (onClose) {
                         onClose();
                     }

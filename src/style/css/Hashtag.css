@@ -1,4 +1,37 @@
 .tagify {
     width: 90%;
-    /* max-width: 700px; */
+    color: #999;
+
+}
+.tagify__input::before {
+    color: #999 !important; 
+    font-size: 14px;
+}
+
+.tags-container{
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;  
+    align-items:flex-start;  
+    width: 100%;  
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.hashtag {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    color: #fff; 
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    display: inline-block;
+    border: 1px solid rgba(200, 200, 200, 0.2);
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+}
+
+.hashtag:hover {
+    background: rgba(255, 255, 255, 0.15); 
+    color: #fefefe; 
 }

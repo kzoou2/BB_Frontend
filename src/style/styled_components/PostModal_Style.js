@@ -16,7 +16,7 @@ export const ModalWrap = styled.div`
 width: 600px;
 height: 600px;
 border-radius: 15px;
-background-color: #242424;
+background-color: #1E1E1E;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -27,12 +27,22 @@ export const TextInputModalWrap = styled.div`
 width: 900px;
 height: 600px;
 border-radius: 15px;
-background-color: #242424;
+background-color: #1E1E1E;
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 
+`;
+export const DeleteModalWrap = styled.div`
+width: 450px;
+height: 300px;
+border-radius: 15px;
+background-color: #1E1E1E;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 `;
 
 export const Contents = styled.div`
@@ -44,11 +54,11 @@ export const Button = styled.button`
 font-size: 16px;
 padding: 10px 20px;
 border: none;
-background-color: #ababab;
+background-color: #898989;
 border-radius: 10px;
 color: white;
 cursor: pointer;
 &:hover {
-    background-color: #898989;
+    background-color: #ababab;
 }
 `;

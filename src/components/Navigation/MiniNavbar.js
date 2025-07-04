@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { NavContainer, Outside, Ul } from "../../style/styled_components/MiniNavbar_Style";
 import { PC, Mobile } from "../Responsive";
-import { IoHomeSharp } from 'react-icons/io5';
-import { FaSearch } from "react-icons/fa";
-import { LuMessageCircle } from "react-icons/lu";
-import { FaItunesNote, FaRegSquarePlus } from "react-icons/fa6";
-import { SiHeadspace } from "react-icons/si";
-import { RiPlayListFill } from "react-icons/ri";
-import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { FiSearch, FiHome, FiPlusSquare,FiLogIn,FiLogOut} from 'react-icons/fi';
+import { MdOutlineQueueMusic } from 'react-icons/md';
+import { HiOutlineMail } from "react-icons/hi";
 import CreatePost from '../Modal/Post/CreatePost';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { SlPlaylist } from "react-icons/sl";
+
+
 
 function MiniNavbar() {
     const [userNickname, setUserNickname] = useState("");
@@ -54,6 +53,8 @@ function MiniNavbar() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('nickName');
+        localStorage.removeItem('token');
         setIsLogin(false);
 
         await axios.post(
@@ -82,27 +83,24 @@ function MiniNavbar() {
                     <Outside className={"in"}>
                         <div className="inside">
                             <Ul className={"in"}>
-                                {/* <h2 className='mt-3'>BeatBuddy</h2> */}
+                                <SlPlaylist   size={40} style={{margin: '20px auto', color: '#FEF164' }} />
                                 <Link to='/'>
                                     <img  />
                                 </Link>
                                 <li className='text-start'>
-                                    <Link to='/'><IoHomeSharp className='me-2' size='25' color='white' /></Link>
+                                    <Link to='/'><FiHome  size={26} style={{ marginRight: '10px' }} /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/playlist'><RiPlayListFill className='me-2' size='25' color='white' /></Link>
+                                    <Link to='/playlist'><MdOutlineQueueMusic size={26} style={{ marginRight: '10px' }} /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/Search'><FaSearch className='me-2' size='25' color='white' /></Link>
+                                    <Link to='/Search'><FiSearch  size={26} style={{ marginRight: '10px' }} /></Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/DM'><LuMessageCircle className='me-2' size='25' color='white' /></Link>
+                                    <Link to='/DM'><HiOutlineMail size={26} style={{ marginRight: '10px' }} /></Link>
                                 </li>
-                                {/* <li className='text-start'>
-                                    <Link to='/Alarm'><FaItunesNote className='me-2' size='25' color='white' /></Link>
-                                </li> */}
                                 <li className='text-start' onClick={() => openCreatePost()}>
-                                    <span style={{ color: "white", cursor: "pointer" }}/><FaRegSquarePlus className='me-2' size='25' color='white'/>
+                                    <span style={{ color: "white", cursor: "pointer" }}/><FiPlusSquare size={26} style={{ marginRight: '10px' }}/>
                                 </li>
                                 {isLogin ? (
                                     <>
@@ -112,12 +110,12 @@ function MiniNavbar() {
                                         </Link>
                                     </li>
                                     <li className='text-start'>
-                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><IoMdLogOut  className='me-2' size='25' color='white'/></span>
+                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><FiLogOut   size={26} style={{ marginRight: '10px' }}/></span>
                                     </li>
                                     </>
                                 ) : (
                                     <li className='text-start'>
-                                        <Link to='/Login'><IoMdLogIn className='me-2' size='25' color='white' /> </Link>
+                                        <Link to='/Login'><FiLogIn size={26} style={{ marginRight: '10px' }} /> </Link>
                                     </li>
                                 )}
                             </Ul>
@@ -132,38 +130,6 @@ function MiniNavbar() {
                     }}
                 />)}
             </PC>
-
-            {/* TODO: 플레이리스트 부분 추가하기 */}
-            <Mobile>
-                <div className="button-container border fixed-bottom">
-                    <button className="button">
-                        <IoHomeSharp className='me-2' size='25' color='black' />
-                    </button>
-                    <button className="button">
-                        <FaSearch className='me-2' size='25' color='black' />
-                    </button>
-                    <button className="button">
-                        <LuMessageCircle className='me-2' size='25' color='black' />
-                    </button>
-                    <button className='button'>
-                        <FaItunesNote className='me-2' size='25' color='black' />
-                    </button>
-                    <button className="button" onClick={() => openCreatePost()}>
-                        <FaRegSquarePlus className='me-2' size='40' color='black' />
-                    </button>
-                    <button className="button">
-                        <SiHeadspace className='me-2' size='40' color='gray' />
-                    </button>
-                </div>
-
-                {isCreatePostOpen && (<CreatePost
-                    open={isCreatePostOpen}
-                    onClose={() => {
-                        setIsCreatePostOpen(false);
-                    }}
-                />)}
-            </Mobile>
-
         </div>
     );
 }

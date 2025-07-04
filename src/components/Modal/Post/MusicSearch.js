@@ -5,8 +5,12 @@ import useOutSideClick from '../../../hooks/useOutSideClick';
 import PostPicSelect from './PostPicSelect';
 import axios from 'axios';
 import SpotifyAPI from '../../../api/SpotifyAPI';
-import { FaArrowLeft } from "react-icons/fa";
 import CreatePost from './CreatePost';
+import TextInput from '../../Common/TextInput';
+import { CloseButton } from 'react-bootstrap';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { IoIosSearch} from "react-icons/io";
+import { TbMusicSearch } from "react-icons/tb";
 
 // TODO: 검색결과 없을 때 알림창 띄우기
 function MusicSearch({ onClose }) {
@@ -109,21 +113,23 @@ function MusicSearch({ onClose }) {
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
+                        <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
-                                <div className='row'>
-                                    <FaArrowLeft className='col' size='36' onClick={() => goCreatePost()} style={{ color: "blue", cursor: "pointer" }} />
-                                    <h3 className='col-10 text-center'>New Post (MusicSearch)</h3>
-                                    <div className='col'></div>
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <FaArrowLeftLong  size={24} onClick={() => goCreatePost()} style={{ flex: '0 0 auto', color: "#fff", cursor: "pointer" }}/>
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">New Post</h3>
+                                        <p className="subtitle">Music Search</p>
+                                    </div>
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-1'>
-                                    <hr style={{ width: "80%" }} />
+                                    <hr style={{ width: "80%", marginTop:'0' }} />
                                 </div>
 
-                                <div className='d-flex justify-content-center mb-3'>
-                                    <input type="text" className="form-control" placeholder="노래, 앨범, 아티스트 검색" style={{ width: "60%" }}
-                                        value={searchQuery} onChange={handleInputChange} onKeyDown={handleKeyPress}
-                                    />
+                                <div className='d-flex justify-content-center mb-3' > 
+                                    <TextInput  type="text" className="form-control" placeholder="노래, 앨범, 아티스트 검색" size="small" searchIcon={IoIosSearch}
+                                        value={searchQuery} onChange={handleInputChange} onKeyDown={handleKeyPress} style={{width:'450px'}} />
                                 </div>
 
                                 <div className='justify-content-center mt-2 mb-1' style={{ width: "", height: "400px", overflow: "scroll" }}>
@@ -140,28 +146,40 @@ function MusicSearch({ onClose }) {
                                                         releaseDate: data.album.release_date
                                                     })
                                                 }>
-                                                <div className='border-bottom mb-1' style={{ height: "70px", alignItems: "center" }}>
-                                                    {/* 앨범 이미지 */}
-                                                    <img className='float-start me-3' src={data.album.images[0].url} alt={`Thumbnail ${index}`} style={{ width: "80px", height: "60px" }} />
 
-                                                    {/* 노래 제목 */}
-                                                    <span className='align-middle mt-1' dangerouslySetInnerHTML={{ __html: data.name }} />
+                                                <div className="musicSearch-card-container">
+                                                    <div className='musicSearch-card mb-1'>
+                                                        {/* 앨범 이미지 */}
+                                                        <img className='music-img me-3' src={data.album.images[0].url} alt={`Thumbnail ${index}`}  />
 
-                                                    {/* 가수 이름 */}
-                                                    <p className='align-middle mt-1' dangerouslySetInnerHTML={{ __html: data.album.artists[0].name }} />
+                                                        <div className='music-text-container'>
+                                                            {/* 노래 제목 */}
+                                                            <span className='music-title  ' dangerouslySetInnerHTML={{ __html: data.name }} />
+                                                            {/* 가수 이름 */}
+                                                            <p className='artist-name' dangerouslySetInnerHTML={{ __html: data.album.artists[0].name }} />
+                                                            {/* 노래 시간 */}
+                                                            <p className='song-duration'>
+                                                                {Math.floor(data.duration_ms / 60000)}:{Math.floor((data.duration_ms % 60000) / 1000)}
+                                                            </p>
+                                                        </div>
 
-                                                    {/* 앨범 이름 */}
-                                                    {/* <p className='align-middle' dangerouslySetInnerHTML={{ __html: data.album.name }} /> */}
+                                                        {/* 앨범 이름 */}
+                                                        {/* <p className='align-middle' dangerouslySetInnerHTML={{ __html: data.album.name }} /> */}
 
-                                                    {/* 발매 연도 */}
-                                                    {/* <p className='align-middle' dangerouslySetInnerHTML={{ __html: data.album.release_date }} /> */}
-
+                                                        {/* 발매 연도 */}
+                                                        {/* <p className='align-middle' dangerouslySetInnerHTML={{ __html: data.album.release_date }} /> */}
+                                                    </div>
                                                 </div>
+                                                
+
                                             </div>
                                         )))
                                         : (
-                                            <div className='d-flex align-items-center justify-content-center' style={{ height: "300px" }}>
-                                                <h2 className='text-center align-middle'>검색어를 입력하세요.</h2>
+                                            <div  className="d-flex flex-column align-items-center justify-content-center" style={{ height: "300px", textAlign: "center", color: "#ccc" }}>
+                                                <div style={{ backgroundColor: "#2a2a2a",borderRadius: "50%",padding: "20px",boxShadow: "0 4px 20px rgba(0,0,0,0.2)",marginBottom: "16px"}}>
+                                                    <TbMusicSearch size={50} color="#ccc" />
+                                                </div>
+                                                <h2 style={{ fontSize: "20px", fontWeight: 500, margin: 0 }}>검색어를 입력하세요.</h2>
                                             </div>
                                         )
                                     }

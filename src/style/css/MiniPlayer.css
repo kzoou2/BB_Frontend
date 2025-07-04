@@ -1,67 +1,378 @@
-.buttons {
+.playlist-wrapper {
+    border-radius: 20px;
+    max-height: 94vh;
+    margin: 15px 15px 10px 0px;
+    background-color: #1e1e1e;
+    padding: 15px 10px;
     display: flex;
+    flex-direction: column;
 }
 
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
+/* 플레이어 컨테이너 */
+.player-container {
+    text-align: center;
 }
+
+.empty-playlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #888;
+}
+
+.empty-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.player_info {
+    text-align: center;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.player_album{
+    margin-top: 5px;
+    position: relative; 
+    width: 75%; 
+    height: 75%;
+    object-fit: cover; 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease; 
+}
+
+.player_album:hover {
+    transform: scale(1.05);
+}
+
+.player_music {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f0f0f0 ;
+}
+
+
+.player_artist {
+    font-size: 15px;
+    color: #B0B0B0;
+}
+
+/* 컨트롤 버튼 영역 */
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.player-controls button {
+    background-color: #B0B0B0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 아이콘 크기 조정 */
+.player-controls button svg {
+    width: 15px;
+    height: 15px;
+    color: 1e1e1e;
+}
+
+/* 호버 효과 */
+.player-controls button:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+}
+
+/* 비활성화된 버튼 */
+.player-controls button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* 진행 바 */
 
 .custom-progress {
-    width: 160px;
+    /* width: 95%;
     height: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ddd;
-    outline: none;
+    background-color: #2e2e2e; 
+    border-radius: 999px;
     appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 10px;
+    overflow: hidden; */
+    width: 95%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);  /* 투명 유리 느낌 */
+    backdrop-filter: blur(3px);
+    border-radius: 999px;
+    overflow: hidden;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    margin-top: 10px;
 }
 
 .custom-progress::-webkit-progress-bar {
-    background-color: #ddd;
-    border-radius: 5px;
+    background-color: transparent;
 }
 
 .custom-progress::-webkit-progress-value {
-    background-color: #27A8FC;
-    border-radius: 5px;
+    background: linear-gradient(90deg, #d8d05b, #58b6ec); 
+    border-radius: 999px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.15); 
+    transition: box-shadow 0.3s ease;
 }
 
-.custom-progress::-moz-progress-bar {
-    background-color: #27A8FC;
-    border-radius: 5px;
+.custom-progress:hover::-webkit-progress-value {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-.custom-range {
-    width: 160px;
+.player-options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 10px;
+}
+
+/* 전체 볼륨 컨테이너 */
+.player-volume-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+    position: relative;
+}
+
+/* volume 아이콘 */
+
+.player-volume-icon {
+    font-size: 20px;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.player-volume-icon:hover {
+    color: #fff;
+}
+/* 볼륨 조절 슬라이더 */
+.player_volume {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 60%;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 999px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
+    transition: height 0.1s ease;
+}
+
+/* 볼륨 슬라이더 썸 */
+.player_volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: -200px 0 0 200px #b0b0b0; 
+    box-shadow: -200px 0 0 200px #b0b0b0; 
+}
+
+.player-volume-container:hover .player_volume::-webkit-slider-thumb {
+    -webkit-box-shadow: -200px 0 0 200px #ffffff;
+    box-shadow: -200px 0 0 200px #ffffff;
+}
+.player-volume-container:hover .player_volume {
     height: 10px;
+}
+
+/* 볼륨 슬라이더가 보여지는 상태 */
+.show-volume-slider .player_volume {
+    display: block;
+}
+
+/* volume 슬라이더가 숨겨진 상태 */
+.hide-volume-slider .player_volume {
+    display: none;
+}
+
+
+/* 토글 버튼 */
+.playlist-toggle {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #b0b0b0;
     border: none;
-    border-radius: 5px;
-    background-color: #ddd;
-    outline: none;
-    appearance: none;
-    margin-top: 5px;
-    /* Adjust as needed for spacing */
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.custom-range::-webkit-slider-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: #27A8FC;
-    cursor: pointer;
-    appearance: none;
-    /* Center thumb vertically */
+
+/* 플레이리스트 컨테이너 */
+.playlist-container {
+    transition: height 0.5s ease-in-out;
+    overflow: scroll;
+    scrollbar-width: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.custom-range::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: #27A8FC;
+.playlist-container::-webkit-scrollbar {
+    display: none;
+}
+
+.playlist-container.closed {
+    height: 0 !important;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+
+/* 개별 음악 항목 */
+.playlist-item {
+    display: flex;
+    padding: 8px;
+    border-radius: 10px;
+    color: #ffffff;
+    transition: all 0.3s ease;
     cursor: pointer;
-    appearance: none;
-    /* Center thumb vertically */
+    background-color: #1e1e1e;
+    margin-bottom: 5px;
+}
+
+/* 호버 효과 */
+.playlist-item:hover {
+    background-color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 현재 재생 중인 음악 강조 */
+.playlist-item.active {
+    font-weight: bold;;
+}
+
+/* 목록 인덱스 */
+.music-number {
+    font-size: 12px;
+    color: #aaa;
+    width: 22px; 
+    text-align: left;
+    margin-top: 3px;
+    flex-shrink: 0;
+    z-index: 2;
+    
+    
+}
+
+.player_pfp {
+    height:25px; 
+    width: 50px;
+    gap: 5px;
+    display: none;
+}
+
+.playlist-item.active .player_pfp {
+    display: flex;
+}   
+
+.player_playing {
+    display: flex;
+    justify-content: center;
+    gap: 1.5px;
+    width: 25px; 
+    height: 25px;
+    align-items: center;
+    animation: none;
+}
+
+.player_line {
+    background-color: #FEF164;
+    height: 12px;
+    width: 2.5px;
+    position: relative;
+    transform-origin: bottom;
+    box-shadow: 0 0 4px #FEF164AA
+}
+
+/* 애니메이션 */
+@keyframes player_playing {
+    0% { transform: scaleY(0.1); }
+    30% { transform: scaleY(1.1); }
+    60% { transform: scaleY(0.8); }
+    100% { transform: scaleY(0.1); }
+}
+
+.playlist-item.active .line-1,
+.playlist-item.active .line-2,
+.playlist-item.active .line-3 {
+    animation: player_playing 1s ease-in-out infinite alternate;
+}
+
+.playlist-item.active .line-1 { animation-delay: 0.2s; }
+.playlist-item.active .line-2 { animation-delay: 0.5s; }
+.playlist-item.active .line-3 { animation-delay: 0.6s; }
+
+
+/*가수,제목*/
+.music-info {
+    display: flex;
+    width: 150px; 
+    position: relative;
+    z-index: 1;
+}
+
+.music-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 6px;
+    white-space: nowrap;
+}
+
+/* 가수 이름 */
+.music-artist {
+    font-size: 13px;
+    color: rgba(176, 176, 176, 0.9);
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.playlist-item:hover .music-info {
+    animation: scrolling 5s linear infinite;  /* 흐르는 애니메이션 */
+}
+
+/* 텍스트가 흐르는 애니메이션 */
+@keyframes scrolling {
+    0% {
+        transform: translateX(0%); 
+    }
+    100% {
+        transform: translateX(-100%);  
+    }
 }

@@ -13,6 +13,7 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
     const [roomId, setRoomId] = useRecoilState(DmRoomIdAtom);
     const currentUser = window.localStorage.getItem('nickName');
 
+
     useEffect(() => {
         ChatRoomList();
     }, [roomId]);
@@ -54,18 +55,19 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
     return (
         <div>
             <PC>
-                <div className='dm-list' style={{height: "96vh", borderRadius:"15px", backgroundColor: "#181818"}}>
+                <div className='dm-list' style={{height: "96vh", borderRadius:"15px", backgroundColor: "#1E1E1E"}}>
                     <div className='list-user' style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }} >
                         <h3 style={{marginLeft:'20px', marginTop:'10px'}}> {currentUser}</h3>
-                        <button className='button' onClick={() => openNewCaht()} >
+                        <button className='newmessage' style={{background: 'transparent',border: 'none',marginRight: '15px',cursor: 'pointer'}} onClick={() => openNewCaht()} >
                             <BiMessageEdit className='' size='27' color='white' />
                         </button>
                     </div>
 
                     <div>
                         <p> 메세지</p>
+                    
                     </div>
-
+                    
                     <ListContainer as='ul'>
                         {chatRooms.map((room) => (
                             <StyledChatButton
@@ -75,22 +77,17 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
                                 as="li"
                             >
                                 <div className='chat'>
-                                    {Array.isArray(room.participants) && room.participants.length > 0 ? (
+                                    {room.participants && room.participants.length > 0 && (
                                         <img
-                                            src={room.participants.find(participant => participant.participantName !== currentUser)?.participantImgSrc}
-                                            style={{ width: '50px', height: '50px', borderRadius: '50%' , marginRight: '10px', backgroundColor:'white'}}
-                                            alt="Participant Image"
+                                            src={room.participants.find(p => p.participantName !== currentUser)?.participantImgSrc}
+                                            alt="user"
                                         />
-                                    ) : null}
-                                    <div>
+                                    )}
+                                    <div className='chat-meta'>
                                         <strong>
-                                            {Array.isArray(room.participants) ? (
-                                                room.participants
-                                                    .filter(participant => participant.participantName !== currentUser)
-                                                    .map(participant => participant.participantName)
-                                                    .join(', ')
-                                            ) : null}
+                                            {room.participants.filter(p => p.participantName !== currentUser).map(p => p.participantName).join(', ')}
                                         </strong>
+                                        <div className="chat-preview">최근 메시지 내용</div>
                                     </div>
                                 </div>
                             </StyledChatButton>

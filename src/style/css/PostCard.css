@@ -1,0 +1,75 @@
+
+.Post-card {
+    position: relative;
+    width: 100%; 
+    aspect-ratio: 1 / 1; 
+    background-color: #242424;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.Post-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+    
+}
+
+.Post-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(64, 64, 64, 0.75);
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.Post-card:hover .Post-content {
+    transform: rotateX(0deg);
+}
+
+.Post-feedImgSrc,
+.Post-albumUrl{
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 10px;
+    
+}
+
+.Post-title {
+    margin: 0;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 900;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal; /* 텍스트가 여러 줄로 자동 넘칠 수 있도록 설정 */
+    display: -webkit-box; /* Flexbox 스타일로 줄바꿈을 적용 */
+    -webkit-line-clamp: 2; /* 최대 2줄로 제한 */
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+}
+.Post-Artist{
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.Post-albumName,
+.Post-date {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.4;
+}

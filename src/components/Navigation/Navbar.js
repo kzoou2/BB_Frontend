@@ -2,21 +2,23 @@ import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import { NavContainer, Outside, Ul } from "../../style/styled_components/navbar_Style";
 import { PC, Mobile } from "../Responsive";
-import { IoHomeSharp } from 'react-icons/io5';
-import { FaSearch } from "react-icons/fa";
-import { LuMessageCircle } from "react-icons/lu";
-import { FaItunesNote, FaRegSquarePlus } from "react-icons/fa6";
-import { SiHeadspace } from "react-icons/si";
-import { RiPlayListFill } from "react-icons/ri";
-import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { FiSearch, FiHome, FiPlusSquare,FiLogIn,FiLogOut} from 'react-icons/fi';
+import { MdOutlineQueueMusic } from 'react-icons/md';
+import { HiOutlineMail } from "react-icons/hi";
 import CreatePost from '../Modal/Post/CreatePost';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilValue  } from "recoil";
+import { userNicknameAtom } from '../../state/UserAtom';
+import { useLocation } from 'react-router-dom';
 
 function Navbar() {
-    const [userNickname, setUserNickname] = useState("");
+    const userNickname = useRecoilValue(userNicknameAtom); 
     const [userInfo, setUserInfo] = useState('');
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
+    const location = useLocation();
+    const isDMPage = location.pathname.startsWith('/DM');
+
     const openCreatePost = () => {
         setIsCreatePostOpen(true);
     };
@@ -30,8 +32,6 @@ function Navbar() {
             setIsLogin(loggedin);
     
             if (loggedin) {
-                const storedNickname = localStorage.getItem('nickName');
-                setUserNickname(storedNickname);
     
                 try{
                     const res = await axios.get(`http://localhost:8080/api/v1/users/info`,{
@@ -54,6 +54,8 @@ function Navbar() {
         localStorage.removeItem('isLogin');
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('nickName');
+        localStorage.removeItem('token');
         setIsLogin(false);
 
         await axios.post(
@@ -70,7 +72,7 @@ function Navbar() {
             console.log("로그아웃 API 호출 중 오류", error);
         });
 
-        // navigate("/login");
+        navigate("/login");
         window.location.reload();
     }
 
@@ -81,44 +83,40 @@ function Navbar() {
                 <NavContainer>
                     <Outside className={"in"}>
                         <div className="inside">
-                            <Ul className={"in"}>
-                                {/* <h2 className='mt-3'>BeatBuddy</h2> */}
+                            <Ul className={`in ${isDMPage ? 'mini' : ''}`}>
                                 <Link to='/'>
                                     <img src='https://github.com/eeeeeddy/eeeeeddy/assets/71869717/ba3957b2-2b3c-4f55-8426-008dfc56e00b' alt='BeatBuddy' width={'100%'} />
                                 </Link>
                                 <li className='text-start'>
-                                    <Link to='/'><IoHomeSharp className='me-2' size='25' color='white' />Home</Link>
+                                    <Link to='/' ><FiHome size={26} style={{ marginRight: '10px' }} />Home</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/playlist'><RiPlayListFill className='me-2' size='25' color='white' />PlayList</Link>
+                                    <Link to='/playlist'><MdOutlineQueueMusic size={26} style={{ marginRight: '10px' }} />PlayList</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/Search'><FaSearch className='me-2' size='25' color='white' />Search</Link>
+                                    <Link to='/Search'><FiSearch size={26} style={{ marginRight: '10px' }} />Search</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/DM'><LuMessageCircle className='me-2' size='25' color='white' />DM</Link>
+                                    <Link to='/DM'><HiOutlineMail size={26} style={{ marginRight: '10px' }}/>DM</Link>
                                 </li>
-                                {/* <li className='text-start'>
-                                    <Link to='/Alarm'><FaItunesNote className='me-2' size='25' color='white' />Alarm</Link>
-                                </li> */}
                                 <li className='text-start' onClick={() => openCreatePost()}>
-                                    <span style={{ color: "white", cursor: "pointer" }}><FaRegSquarePlus className='me-2' size='25' />Post</span>
+                                    <span style={{ color: "white", cursor: "pointer" }}><FiPlusSquare size={26} style={{ marginRight: '10px' }} />Post</span>
                                 </li>
                                 {isLogin ? (
                                     <>
                                     <li className='text-start'>
-                                        <Link to={`/profile/${userNickname}`}>
-                                            <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px', backgroundColor:"white"}}/>
-                                            <b style={{fontSize:'17px'}}>{userNickname}</b>
+                                        <Link to={`/profile/${userInfo.nickName}`}>
+                                            <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px',background:'#fff'}}/>
+                                            <b style={{fontSize:'17px'}}>{userInfo.nickName}</b>
                                         </Link>
                                     </li>
                                     <li className='text-start'>
-                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><IoMdLogOut  className='me-2' size='25' color='white'/>Logout</span>
+                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><FiLogOut  size={26} style={{ marginRight: '10px' }}/>Logout</span>
                                     </li>
                                     </>
                                 ) : (
                                     <li className='text-start'>
-                                        <Link to='/Login'><IoMdLogIn className='me-2' size='25' color='white' /> Login</Link>
+                                        <Link to='/Login'><FiLogIn size={26} style={{ marginRight: '10px' }} /> Login</Link>
                                     </li>
                                 )}
                             </Ul>
@@ -138,22 +136,26 @@ function Navbar() {
             <Mobile>
                 <div className="button-container border fixed-bottom">
                     <button className="button">
-                        <IoHomeSharp className='me-2' size='25' color='black' />
+                        <FiHome size={26} style={{ marginRight: '10px' }}/>
                     </button>
                     <button className="button">
-                        <FaSearch className='me-2' size='25' color='black' />
+                        <FiSearch size={26} style={{ marginRight: '10px' }}/>
                     </button>
                     <button className="button">
-                        <LuMessageCircle className='me-2' size='25' color='black' />
+                        <HiOutlineMail csize={26} style={{ marginRight: '10px' }} />
                     </button>
                     <button className='button'>
-                        <FaItunesNote className='me-2' size='25' color='black' />
+                        <MdOutlineQueueMusic size={26} style={{ marginRight: '10px' }} />
                     </button>
                     <button className="button" onClick={() => openCreatePost()}>
-                        <FaRegSquarePlus className='me-2' size='40' color='black' />
+                        <FiPlusSquare size={26} style={{ marginRight: '10px' }} />
                     </button>
                     <button className="button">
-                        <SiHeadspace className='me-2' size='40' color='gray' />
+                        {isLogin ? (
+                            <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'25px', height:'25px', borderRadius:'50%', marginRight:'15px'}}/>
+                        ) : (   
+                            <FiLogIn size={26} style={{ marginRight: '10px' }} /> 
+                        )}
                     </button>
                 </div>
 

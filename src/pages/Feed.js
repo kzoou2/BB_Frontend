@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { SiHeadspace } from "react-icons/si";
 import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { PC, Mobile } from "../components/Responsive";
@@ -7,6 +6,7 @@ import '../style/css/Home.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import FeedDetail from '../components/Modal/Feed/FeedDetail';
 import axios from 'axios';
+import '../style/css/Hashtag.css';
 
 function Feed({ feedData }) {
     const navigate = useNavigate();
@@ -60,14 +60,14 @@ function Feed({ feedData }) {
     return (
         <div>
             <PC>
-                <div className='mt-5'>
+                {/* <div className='mt-5'>
                     <div className='d-flex justify-content-center mb-4' key={feedData.id}>
                         <div className="border-bottom" style={{ width: "40rem", height: "auto" }}>
                             <div>
                                 <div className='d-flex justify-content-center'>
                                     <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
                                         <Link to={`/profile/${feedData.nickName}`} style={{ textDecorationLine: "none", color: "white" }}><img className='userimg' src={feedData.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', marginRight:'13px', borderRadius:'50%'}} />
-                                            <b>{feedData.nickName}</b>
+                                            <span>{feedData.nickName}</span>
                                         </Link>
                                     </div>
                                     <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
@@ -90,6 +90,37 @@ function Feed({ feedData }) {
                                     <p>{feedData.content}<span className='ms-2' style={{ color: "grey", cursor: "pointer" }} onClick={() => openFeedDetail(feedData)}>더보기</span></p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div> */}
+                <div className="mt-5 d-flex justify-content-center" key={feedData.id}>
+                    <div className="home-card" >
+                        <div className="d-flex justify-content-between align-items-center p-3">
+                            <Link to={`/profile/${feedData.nickName}`} className="d-flex align-items-center text-light text-decoration-none">
+                                <img src={feedData.userImgSrc} alt="User Avatar" className="me-3 rounded-circle" style={{ width: "45px", height: "45px", backgroundColor:'white' }} />
+                                <span style={{fontSize:'1.2rem', fontWeight:'600'}}>{feedData.nickName}</span>
+                            </Link>
+                            <div>
+                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='23' onClick={() => clickNote()} style={{ cursor: "pointer", color:'white'}} />
+                                <IoPaperPlaneOutline className='me-4' size='23' onClick={() => goDM()} style={{ cursor: "pointer", color:'white' }} />
+                                {isBookmarked ? (
+                                    <FaBookmark className='' size='22' onClick={() => onBookmark()} style={{ cursor: "pointer", color:'white' }} />
+                                ) : (
+                                    <FaRegBookmark className='' size='22' onClick={() => onBookmark()} style={{ cursor: "pointer", color:'white' }} />
+                                )}
+                            </div>
+                        </div>
+
+                        <img className="w-100"  style={{ objectFit:'cover', maxHeight: "400px" }}   src={feedData.feedImgSrc || feedData.musicInfoList[0].albumUrl} alt={feedData.musicInfoList[0].musicTitle}/>
+                        <div className="p-3 text-light">
+                            <h5 className="mb-1">{feedData.musicInfoList[0].musicTitle} · {feedData.musicInfoList[0].musicArtist}</h5>
+                            <p className="mb-2" style={{ fontSize: "0.85rem",color:'#B0B0B0' }}>{feedData.musicInfoList[0].albumName} · {feedData.musicInfoList[0].releaseDate}</p>
+                            <div className="mb-2 ">
+                                {feedData.tagName.map((tag, index) => (<span key={index} className="hashtag me-2" >#{tag}</span>))}
+                            </div>
+                            <p className="mb-0"> {feedData.content.length > 35 ? `${feedData.content.slice(0, 35)}...` : feedData.content}
+                                <span className='ms-2' style={{ color: "grey", cursor: "pointer", fontWeight: "500", fontSize:'0.9rem' }} onClick={() => openFeedDetail(feedData)}>더보기</span>
+                            </p>
                         </div>
                     </div>
                 </div>
