@@ -170,7 +170,7 @@ function PlayListEdit({ onClose, playlistId, playlist }){
                 <ModalContainer>
                     <Overlay>
                         <TextInputModalWrap ref={modalRef}>
-                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
+                            <CloseButton classNameName="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
                             <Contents>
                                 <div className='row'>
                                     <h3 className='col-10 text-center'>PlayList Edit (PlayListEdit)</h3>

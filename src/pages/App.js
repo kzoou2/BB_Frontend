@@ -4,7 +4,6 @@ import '../style/css/App.css';
 import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
-import Alarm from './Alarm';
 import DM from './DM';
 import Search from './Search';
 import Profile from './Profile';
@@ -22,38 +21,54 @@ import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
 import MiniPlayer from '../components/Player/MiniPlayer';
 import DmRoom from '../components/DM/DmRoom';
-import PlaylistByLikes from '../components/Playlist/PlaylistByLikes';
 import SearchByPlaylist from '../components/Search/SearchByPlaylist';
 import SearchByFeed from '../components/Search/SearchByFeed';
 import SearchByTag from '../components/Search/SearchByTag';
 import { WebSocketConnection } from '../components/WebSocketConnection';
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
-    let loginChk = false;
+    const [isLoading, setIsLoading] = useState(true);
+    // let loginChk = false;
 
-    if (window.localStorage.getItem("isLogin")) {
-        loginChk = true
-    }
+    // if (window.localStorage.getItem("isLogin")) {
+    //     loginChk = true
+    // }
 
+    // useEffect(() => {
+    //     if (loginChk) {
+    //         setIsLogin(true)
+    //     }
+    // }, []);
     useEffect(() => {
-        if (loginChk) {
-            setIsLogin(true)
-        }
+    const isLoginStored = localStorage.getItem("isLogin");
+
+    if (isLoginStored === "true") {
+        setIsLogin(true);
+    } else {
+        setIsLogin(false);
+    }
     }, []);
 
 
+    useEffect(()=>{
+        setTimeout(()=>{
+            setIsLoading(false);
+        },)
+    },[])
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <div className="App" style={{backgroundColor: "black", color: "white"}}>
+            <div className="App" style={{backgroundColor: "#111111", color: "white"}}>
+                {isLoading && <Loading />}
                 <Routes>
-                    {/* <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} /> */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/" element={isLogin ? <Home /> : <Login />} />
                     <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/alarm" element={<Alarm />} />
                     <Route path="/dm/*" element={ <WebSocketConnection> <DM /> </WebSocketConnection> }/>
                         <Route path=":dmRoomId" element={<DmRoom />} />
                     <Route path="/search" element={<Search />} />
@@ -66,7 +81,6 @@ function App() {
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
                     <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
-                    <Route path="/playlist/likes" element={<PlaylistByLikes /> }/>
                     <Route path="/miniplayer" element={<MiniPlayer />} />
 
                     {/* Test */}

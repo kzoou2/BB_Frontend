@@ -1,9 +1,6 @@
 import React,{useState, useEffect, useRef} from "react";
 import { Link } from "react-router-dom";
 import NewDm from '../Modal/DM/NewDm';
-import { IoMdSend } from "react-icons/io";
-import { AiOutlineMessage } from "react-icons/ai";
-import { StyledButton } from '../../style/styled_components/DM_Style';
 import "../../style/css/DmRoom.css";
 import { Mobile,PC } from "../Responsive";
 import axios from 'axios';
@@ -11,6 +8,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { DmRoomIdAtom } from "../../state/DmAtom";
 import {userNicknameAtom} from "../../state/UserAtom";
 import { useWebSocket } from "../WebSocketConnection";
+import TextInput from "../Common/TextInput";
+import { VscSend } from "react-icons/vsc";
 
 const DmRoom= ({ selectedChatInfo  }) => {
     const dmRoomId = useRecoilValue(DmRoomIdAtom);
@@ -21,15 +20,13 @@ const DmRoom= ({ selectedChatInfo  }) => {
     const [userData, setUserData] = useRecoilState(userNicknameAtom);
     const otherImgSrc = selectedChatInfo?.participantImgSrc;
     const otherName = selectedChatInfo?.participantName;
-
-    const openNewCaht = () => {
-        setIsNewChatOpen(true);
-    };
+    const subscriptionRef =  useRef(null);
+        const bottomRef = useRef(null);
 
     const handleKeyDown =(e) =>{
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter' && !e.shiftKey ){
             e.preventDefault();
-            publish(message);
+            handleSendMessage();
         }
     }
     const handleSendMessage = () =>{
@@ -37,55 +34,81 @@ const DmRoom= ({ selectedChatInfo  }) => {
     };
 
     useEffect(() => {
-            subscribe();
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView({ behavior: "auto" });
+        }
+    }, [chatList]);
+
+    useEffect(() => {
+        if (!connected || !client.current || !dmRoomId) return;
+
+        unsubscribe();
+        subscribe(dmRoomId);
+
         return () => {
-                unsubscribe();
+            unsubscribe();
         };
-    }, [dmRoomId]);
+    }, [dmRoomId, connected]);
+
+    const subscribe =(dmRoomId) =>{
+        const headers={ Authorization: localStorage.getItem('accessToken')};
+
+        const subscriptionId = `sub-${dmRoomId}`;
+        const stompClient = client.current;
+        
+        if(!stompClient || !stompClient.connected){
+            console.log("웹소켓연결안됨")
+        }
+
+        const subscription = stompClient.subscribe(`/chatting/topic/room/${dmRoomId}`,({body}) =>{
+            const parsedMessage = JSON.parse(body);
+
+            if (!parsedMessage.createdTime) {
+                parsedMessage.createdTime = new Date().toISOString(); 
+            }
+            if (parsedMessage.chatType === "MESSAGE") {
+                setChatList(prevChatList => [...prevChatList, parsedMessage]);
+            }
+
+        },
+        {
+            id: subscriptionId,
+            ...headers,
+        }
+    );
+    subscriptionRef.current = subscription;
+    console.log(`🟢 Subscribed to room ${dmRoomId} with id ${subscriptionId}`);
+
+    axios.get(`http://localhost:8080/room/${dmRoomId}/messages`,{
+        headers:{
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            'ngrok-skip-browser-warning': '69420',
+        },
+    })
+    .then(res=> setChatList(res.data))
+    .catch(err => console.error('채팅내역 불러오기 실패 '))
+    };
 
 
-    const subscribe = () => {
+    const unsubscribe = () => {
         const headers = {
             Authorization: window.localStorage.getItem('accessToken')
         };
-    
-        // 채팅방 구독
-        client.subscribe(`/chatting/topic/room/${dmRoomId}`, ({ body}) => {
-            const parsedMessage = JSON.parse(body);
-            if (parsedMessage.chatType === "MESSAGE") {
-                setChatList(prevChatList => [...prevChatList, parsedMessage]);
-            } 
-        }, headers);
-    
-        // 기존 채팅 내역 불러오기
-        axios.get(`http://localhost:8080/room/${dmRoomId}/messages`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
-            },
 
-        })
-        .then(response => {
-            setChatList(response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching chat history:', error);
-        });
+        if (subscriptionRef.current) {
+            subscriptionRef.current.unsubscribe(headers);
+            console.log(`🔴 Unsubscribed from ${JSON.stringify(subscriptionRef.current)}`);
+            subscriptionRef.current = null;
+        }
     };
 
-    const unsubscribe =()=>{
-            const headers = {
-                Authorization: window.localStorage.getItem('accessToken')
-            };
-            client.unsubscribe(`/chatting/topic/room/${dmRoomId}`, headers);
-    };
 
     const publish = (message) => {
-    if (!client|| !connected || message.trim()== '') {
+    if (!client.current|| !connected || message.trim()== '') {
         return;
     }
 
-    client.publish({
+    client.current?.publish({
         destination: "/chatting/pub/message",
         headers: { Authorization: window.localStorage.getItem('accessToken') },
         body: JSON.stringify({ message, roomId:`${dmRoomId}` , chatType: "MESSAGE"}),
@@ -96,40 +119,43 @@ const DmRoom= ({ selectedChatInfo  }) => {
 
 
 
-const isDifferentDate = (prevMessage, currentMessage) => {
-    const prevDate = new Date(prevMessage.createdTime).toLocaleDateString();
-    const currentDate = new Date(currentMessage.createdTime).toLocaleDateString();
-    return prevDate !== currentDate;
-};
+    const isDifferentDate = (prevMessage, currentMessage) => {
+        const prevDate = new Date(prevMessage.createdTime).toLocaleDateString();
+        const currentDate = new Date(currentMessage.createdTime).toLocaleDateString();
+        return prevDate !== currentDate;
+    };
 
-const isDifferentTime = (prevMessage, currentMessage) => {
-    const prevTime = formatTime(prevMessage.createdTime);
-    const currentTime = formatTime(currentMessage.createdTime);
-    return prevTime !== currentTime;
-};
+    const isDifferentTime = (prevMessage, currentMessage) => {
+        const prevTime = formatTime(prevMessage.createdTime);
+        const currentTime = formatTime(currentMessage.createdTime);
+        return prevTime !== currentTime;
+    };
 
-const formatDate = (dateTimeString) => {
-    const date = new Date(dateTimeString);
-    return `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
-};
+    const formatDate = (dateTimeString) => {
+        // const date = new Date(dateTimeString);
+        // return `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
+        const date = new Date(dateTimeString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
 
-const formatTime = (dateTimeString) => {
-    const date = new Date(dateTimeString);
-    const hours = date.getHours() % 12 || 12; // 12시간 형식으로 변경
-    const ampm = date.getHours() < 12 ? '오전' : '오후';
-    return `${ampm} ${hours.toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-};
+        return `${year}년 ${month}월 ${day}일`;
+    };
 
-
+    const formatTime = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        const hours = date.getHours() % 12 || 12; // 12시간 형식으로 변경
+        const ampm = date.getHours() < 12 ? 'AM' : 'PM';
+        return `${ampm} ${hours.toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    };
 
 
     return(
         <div>
             <PC>
-                {dmRoomId !== 0 ? (
-                <>
+                {/* {dmRoomId !== 0 ? (
+                <> */}
                 <div className="dm-card" >
-
                     <div className="dm-header">
                         <Link to={`/profile/${otherName}`} style={{ textDecorationLine: "none", color: "white" }} >
                             <img className="img-avatar" src={otherImgSrc} alt="Participant Avatar" />
@@ -137,44 +163,41 @@ const formatTime = (dateTimeString) => {
                         </Link>
                     </div>
 
-                    <div className="dm-body"  style={{ maxHeight: "auto", overflow: "auto" }}>
+                    <div className="dm-body" >
                         {chatList.map((chat, index) => (
-                            <div key={index} className={`message-box ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
-                            {index === 0 || isDifferentDate(chatList[index - 1], chat) && (
-                                <div className="message-date">
-                                <div>{formatDate(chat.createdTime)}</div>
-                                <div> chatType: {chat.chatType} </div>
-                                </div>
-                            )}
-                            {chat.sender === otherName && (<img className="userimg" src={otherImgSrc} alt="User Avatar" />)}
+                            <div key={index}>
+                                {(index === 0 || isDifferentDate(chatList[index - 1], chat)) && (
+                                        <>
+                                        {index !== 0 && <hr />}
+                                        <div className="message-date">
+                                            <div>{formatDate(chat.createdTime)}</div>
+                                        </div>
+                                    </>
+                                )}
 
-                            <div className='message'> {chat.message}  </div>
-                            {(index === chatList.length - 1 || isDifferentTime(chat, chatList[index + 1])) && (
-                                <div className={`count ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
-                                    <div className="message-time">{formatTime(chat.createdTime)}</div>
-                                    {chat.readCount === 0 && <div className="count">읽음</div>}
+                                <div className={`message-box ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
+                                    {chat.sender === otherName && (
+                                        <img className="userimg" src={otherImgSrc} alt="User Avatar" />
+                                    )}
+                                    <div className="message-container">
+                                        <div className='message'>{chat.message}</div>
+                                        {(index === chatList.length - 1 || isDifferentTime(chat, chatList[index + 1])) && (
+                                            <div className={`count ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
+                                                {chat.readCount === 0 && <div className="read-status">읽음</div>}
+                                                <div className="message-time">{formatTime(chat.createdTime)}</div>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            )}
                             </div>
                         ))}
-                            </div>
-                        
-                        <div className="dm-input">
-                            <input className="messageInput" type="text" required="" placeholder="메시지 입력.." 
-                            value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} />
-                            {/* <IoMdSend onClick={handleSendMessage} className="button-send"/> */}
-                            <button onClick={handleSendMessage} className="button-send">send</button>
-                        </div>
+                        <div ref={bottomRef} />
                     </div>
-                    </>
-                    ) : (
-                        <div >
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <AiOutlineMessage size='100' color='white' style={{ marginBottom: '20px' }} />
-                                <StyledButton onClick={() => openNewCaht()} > <b> 메시지 보내기 </b> </StyledButton>
-                            </div>
-                        </div>
-                    )}
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+                        <TextInput value={message} onChange={(e) => setMessage(e.target.value)} onClick={handleSendMessage} placeholder="메시지 입력.." size="large" icon={VscSend} onKeyDown={handleKeyDown}  />
+                    </div>
+                </div>
+
             {isNewChatOpen && (<NewDm
                 open={isNewChatOpen}
                 onClose={() => {

@@ -139,7 +139,7 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                 <ModalContainer>
                     <Overlay>
                         <TextInputModalWrap ref={modalRef}>
-                            <CloseButton class="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
                             <Contents >
                                 <div className="row" >
                                     <h3 className='col-10 text-center' style={{color:'white'}}>FeedEdit</h3>

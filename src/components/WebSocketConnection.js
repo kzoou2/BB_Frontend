@@ -53,7 +53,7 @@ export const WebSocketConnection = ({ children }) => {
     };
 
     return (
-        <WebSocketContext.Provider value={{ client: client.current, connected }}>
+        <WebSocketContext.Provider value={{ client, connected }}>
             {children}
         </WebSocketContext.Provider>
     );

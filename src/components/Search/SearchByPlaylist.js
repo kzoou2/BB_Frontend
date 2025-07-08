@@ -6,6 +6,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MiniPlayer from '../../components/Player/MiniPlayer';
 import '../../style/css/Search.css';
+import PlaylistCard from "../Common/PlaylistCard";
+import TextInput from "../Common/TextInput";
+import { IoIosSearch,IoMdClose } from "react-icons/io";
+import { TbMoodCry} from "react-icons/tb"
 
 function SearchByPlaylist ({searchText: initialSearchText, filter}){
     const navigate = useNavigate();
@@ -50,6 +54,16 @@ function SearchByPlaylist ({searchText: initialSearchText, filter}){
         }
     }, [searchText]);
 
+    const transformPlaylistData = (result) => ({
+        id: result.playlist_id,
+        imageFileUrl: result.img_src,
+        plLike: result.likes ?? 0,  
+        title: result.title,
+        userImgSrc: result.user_img_src,
+        nickName: result.nick_name,
+        tagName: Array.isArray(result.tag_name) ? result.tag_name : [result.tag_name] 
+    });
+
     const goSearchByAll = (searchText) => {
         navigate('/search', { state: { searchText, filter } })
         setSelectedButton('all');
@@ -69,6 +83,10 @@ function SearchByPlaylist ({searchText: initialSearchText, filter}){
         setSelectedButton('tag');
     };
 
+    const openPlaylistDetail = (result) => {;
+        navigate(`/playlistDetail/${result.nickName}/${result.id}`);
+    }
+
     return(
         <div>
             <PC>
@@ -78,38 +96,34 @@ function SearchByPlaylist ({searchText: initialSearchText, filter}){
                     </div>
 
                     <div className="col-md-8">
-                        <div className='search-input d-flex' style={{ marginTop: '30px', marginBottom: '30px' }}>
-                            <input class="textInput me-2" type="text" placeholder="Search" value={searchText} onChange={handleInputChange} />
+                        <div className="search-filter-container">
+                            <div className='search-input d-flex ms-4 me-4' style={{ marginTop: '35px', marginBottom: '10px' }}>
+                                <TextInput  value={searchText} onChange={handleInputChange} placeholder="검색어를 입력해보세요." size='large' searchIcon={IoIosSearch} closeIcon={searchText.length > 0 ? IoMdClose : null } onClose={() => setSearchText('')}  />
+                            </div>
+                            <div className='filter-buttons' >
+                                <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`}  onClick={() => goSearchByAll(searchText)}>모두</button>
+                                <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`}  onClick={() => goSearchByFeed(searchText)}>게시글</button>
+                                <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} onClick={() => goSearchByPlaylist(searchText)}>플레이리스트</button>
+                                <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`} onClick={() => goSearchByTag(searchText)}>태그</button>
+                            </div>
                         </div>
-                        <div className='filter-buttons' >
-                            <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`} style={{ color: 'white' }} onClick={() => goSearchByAll(searchText)}>모두</button>
-                            <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`} style={{ color: 'white' }} onClick={() => goSearchByFeed(searchText)}>게시글</button>
-                            <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} style={{ color: 'white' }} onClick={() => goSearchByPlaylist(searchText)}>플레이리스트</button>
-                            <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`} style={{ color: 'white' }} onClick={() => goSearchByTag(searchText)}>태그</button>
-                        </div>
+                        
 
-
-                        <div className="Playlist-result mt-5">
-                            <h3> 플레이리스트 </h3>
+                        <div className="Playlist-result ms-4 me-4">
+                            <h3 style={{textAlign:'left'}}> 플레이리스트 </h3>
                                 <hr />
                             <div className="result-container">
                                 <div className="row">
-                                    {playlistResult.slice().map((result) => (
-                                        <div className="col-md-3" key={result.playlist_id}  >
-                                            <div className="card mb-2" style={{ backgroundColor: "#242424", color: "white" }}>
-                                                <div className="card-body">
-                                                    <div>
-                                                        <img className="mb-3" src={result.img_src} alt={result.title} style={{ width: '150px', height: 'auto' }} />
-                                                    </div>
-                                                    <p>{result.title}</p>
-                                                    <div className="UserInfo">
-                                                        <p><img className="" src={result.user_img_src} alt={result.nick_name} style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '10px' }} />{result.nick_name}</p>
-                                                    </div>
-                                                    <p style={{ backgroundColor: '#fedc00ff', color: 'black', width: '50px', borderRadius: '30px', fontSize: '12px' }}>{result.tag_name}</p>
-                                                </div>
-                                            </div>
+                                    {playlistResult.length > 0 ? (
+                                        playlistResult?.map((result) => (
+                                            <PlaylistCard key={result.id} playlist={transformPlaylistData(result)} onClick={openPlaylistDetail} />
+                                        ))
+                                    ) : (
+                                        <div style={{ textAlign: 'center', width: '100%', padding: '40px 20px', color: '#aaa' }}>
+                                            <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
+                                            <p style={{ fontSize: '16px', marginBottom: '5px' }}>검색 결과가 없습니다.</p>
                                         </div>
-                                    ))}
+                                    )}
                                 </div>
                             </div>
                         </div>

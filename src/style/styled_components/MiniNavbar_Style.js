@@ -29,7 +29,7 @@ transition: 0;
     border-radius: 0 100% 100% 0;
     transition: all 0.25s cubic-bezier(1, 0.05, 1, 1.5);
     transition-delay: 0.5s;
-    background-color: #121212;
+    background-color: #1e1e1e;
 }
 
 &.in > div {
@@ -45,7 +45,7 @@ padding: 0;
 line-height: 2;
 
 > li {
-    background: #121212;
+    background: #1e1e1e;
     opacity: 0;
     padding: 12px 22px;
     // border-bottom: 1px solid rgba(255, 255, 255, 0.5);

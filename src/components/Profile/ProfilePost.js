@@ -4,6 +4,7 @@ import { PC, Mobile } from '../Responsive';
 import FeedDetail from '../Modal/Feed/FeedDetail';
 import axios from 'axios';
 import Loading from '../Loading';
+import PostCard from '../Common/PostCard';
 
 function ProfilePost({ postCount }) {
     const { nickName } = useParams();
@@ -28,7 +29,6 @@ function ProfilePost({ postCount }) {
             },
         })
             .then((response) => {
-                console.log("서버에서 받아온 결과", response.data);
                 const temp = response.data;
                 setFeedData(temp);
                 postCount(temp.length);
@@ -38,41 +38,25 @@ function ProfilePost({ postCount }) {
                 console.error('API 요청 중 오류 발생:', error);
             });
     }, [nickName, postCount])
+    
 
     return (
         <div>
             <PC>
-                <div className='row'>
-                    {isLoading ? <Loading /> : null}
-                    {feedData ? (
-                        feedData.slice().reverse().map((music) => (
-                            <div className='col-md-3' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
-                                <div className='card mb-2' style={{ backgroundColor: "#242424", color: "white"}}>
-                                    <div className='card-body'>
-                                        <div>
-                                            {music.feedImgSrc !== null ? (
-                                                <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.feedImgSrc}
-                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
-                                            ):(
-                                                <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.musicInfoList[0].albumUrl}
-                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
-                                            )}
-
-                                        </div>
-                                        <p className='mb-0'><b>{music.musicInfoList[0].musicTitle}</b></p>
-                                        <b>{music.musicInfoList[0].musicArtist}</b>
-                                        <div className='mt-2 mb-0'>
-                                            <p className='mt-0 mb-0' style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName}</p>
-                                            <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].releaseDate}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>게시글이 없습니다.</p>
-                    )}
+                <div className='profile-container' style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 15px"}}>
+                    <div className='row' >
+                        {isLoading ? <Loading /> : null}
+                        {feedData && feedData.length > 0 ? (
+                            feedData.slice().reverse().map((music) => (
+                                <PostCard key={music.id} music={music} onClick={openFeedDetail} postListLength={feedData.length}/>
+                                
+                            ))
+                        ) : (
+                            <p style={{ color: '#aaa', textAlign: 'center', marginTop: '2rem' }}>게시물이 아직 없어요.</p>
+                        )}
+                    </div>
                 </div>
+                
 
                 {isFeedDetailOpen && (
                     <FeedDetail
@@ -91,20 +75,28 @@ function ProfilePost({ postCount }) {
                     {feedData ? (
                         feedData.slice().reverse().map((music) => (
                             <div className='col-4' key={music.id} onClick={() => openFeedDetail(music)} style={{ cursor: 'pointer' }}>
-                                <div className='card mb-2' style={{ backgroundColor: "#f3f3f3" }}>
-                                    <div className='card-body'>
-                                        <div>
-                                            <img className='mb-3' style={{ width: '110px', height: 'auto' }} src={music.imageFileUrl || music.musicInfoList[0].albumUrl}
-                                                alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                <div className='col-md-3' >
+                                    <div className='Post-card mb-2' >
+                                        <div className="Post-img">
+                                            {music.feedImgSrc !== null ? (
+                                                    <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.feedImgSrc}
+                                                    alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                                ):(
+                                                    <img className='mb-3' style={{ width: '150px', height: 'auto' }} src={music.musicInfoList[0].albumUrl}
+                                                    alt={`Album cover for ${music.musicInfoList[0].musicTitle}`} />
+                                                )}
                                         </div>
-                                        <p className='mb-0'><b>{music.musicInfoList[0].musicTitle}</b></p>
-                                        <b>{music.musicInfoList[0].musicArtist}</b>
-                                        <div className='mt-2 mb-0'>
-                                            <p className='mt-0 mb-0' style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName}</p>
-                                            <p style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].releaseDate}</p>
+                                        <div className='Post-content'>
+                                            <span className="Post-title">{music.musicInfoList[0].musicTitle}</span>
+                                            <span className="Post-Artist">{music.musicInfoList[0].musicArtist} </span>
+
+                                            <p className='Post-albumName' style={{ fontSize: '12px', color: 'gray' }}>{music.musicInfoList[0].albumName}</p>
+                                            <p className="Post-date">{music.musicInfoList[0].releaseDate}</p>
+
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         ))
                     ) : (

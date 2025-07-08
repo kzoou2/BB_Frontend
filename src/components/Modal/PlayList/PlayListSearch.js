@@ -4,9 +4,14 @@ import { Button, Contents, ModalWrap, Overlay } from '../../../style/styled_comp
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import PlayListText from './PlayListText';
 import axios from 'axios';
-import { FaArrowLeft } from "react-icons/fa";
 import CreatePost from '../Post/CreatePost';
-import { IoText } from 'react-icons/io5';
+import TextInput from '../../Common/TextInput';
+import { CloseButton } from 'react-bootstrap';
+import { FaArrowLeftLong} from "react-icons/fa6";
+import { IoIosSearch} from "react-icons/io";
+import { TiDelete } from "react-icons/ti";
+import { HiHashtag } from "react-icons/hi";
+import { SecondaryButton } from '../../../style/styled_components/Button_Style';
 
 function PlayListSearch({ onClose, searchKeyword }) {
     const modalRef = useRef(null);
@@ -82,11 +87,14 @@ function PlayListSearch({ onClose, searchKeyword }) {
         setSearchResults(updateResults)
     }
 
+    // FIXME:중복및다른유저게시글도포함됨 
     const returnPlayList = () => {
         setSearchResults(originalResults)
     }
 
     useOutSideClick(modalRef, handleClose)
+
+    console.log(searchResults);
 
     return (
         <div>
@@ -94,59 +102,58 @@ function PlayListSearch({ onClose, searchKeyword }) {
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
-                                <div className='row'>
-                                    <FaArrowLeft className='col' size='36' onClick={() => goCreatePost()} style={{ color: "blue", cursor: "pointer" }} />
-                                    <h3 className='col-10 text-center'>New PlayList (PlayListSearch)</h3>
-                                    <div className='col'></div>
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <FaArrowLeftLong  size={24} onClick={() => goCreatePost()} style={{ flex: '0 0 auto', color: "#fff", cursor: "pointer" }}/>
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">New PlayList</h3>
+                                        <p className="subtitle">PlayList Search</p>
+                                    </div>
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-1'>
-                                    <hr style={{ width: "80%" }} />
+                                    <hr style={{ width: "80%", marginTop:'0' }} />
                                 </div>
 
                                 <div className='d-flex justify-content-center mb-3'>
-                                    <input type="text" className="form-control" placeholder="해시태그 검색" style={{ width: "60%" }}
-                                        value={searchQuery} onChange={handleInputChange} onKeyDown={handleKeyPress}
-                                    />
+                                    <TextInput type="text" className="form-control" placeholder="해시태그 검색" size="small" searchIcon={IoIosSearch}
+                                        value={searchQuery} onChange={handleInputChange} onKeyDown={handleKeyPress} style={{width:'450px'}} />
                                 </div>
 
-                                <div className='mt-2 mb-1' style={{ width: "", height: "350px", overflow: "scroll" }}>
-                                    <table className='table'>
-                                        <tbody>
-                                            {(searchResults && searchResults.length > 0) ? (
-                                                searchResults.map((music, index) => (
-                                                    <tr key={index}>
-
-                                                        {/* 앨범 이미지 */}
-                                                        <td><img className='float-start' src={music.musicInfoList[0].albumUrl} alt={`Thumbnail ${index}`} style={{ width: "80px", height: "60px" }} /></td>
-
-                                                        {/* 노래 제목 */}
-                                                        <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicTitle }}></td>
-
-                                                        {/* 가수 이름 */}
-                                                        <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicArtist }}></td>
-
-                                                        <td style={{ verticalAlign: 'middle' }}>
-                                                            <button className='btn btn-danger btn-sm' onClick={() => deleteMusic(music.id)}>DELETE</button>
-                                                        </td>
-                                                    </tr>
-                                                )))
-                                                : (
-                                                    <tr className='text-center align-middle'>
-                                                        <td style={{ borderBottom: "none", height: "300px"}}>
-                                                            <h2>해시태그를 입력하세요.</h2>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            }
-                                        </tbody>
-                                    </table>
+                                <div className='justify-content-center mt-2 ' style={{ width: "", height: "370px", overflow: "scroll" }}>
+                                    <div className="playlistSearch-container">
+                                        {(searchResults && searchResults.length > 0) ? (
+                                            searchResults.map((music, index) => (
+                                            <div key={index} className="playlist-card" style={{ cursor: 'pointer', marginBottom: '10px' }}>
+                                                <img className="playlist-img" src={music.musicInfoList[0].albumUrl} alt={`Thumbnail ${index}`} />
+                                                <div className="playlist-text-container">
+                                                    <span className="playlist-title" dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicTitle }} />
+                                                    <p className="playlist-artist"  dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicArtist }} />
+                                                </div>
+                                                <div className='playlist-tag'> 
+                                                    {[...music.tagName.filter(tag => tag === searchQuery), ...music.tagName.filter(tag => tag !== searchQuery)]
+                                                    .slice(0, 2).map((tag, tagIndex) => (
+                                                        <span key={tagIndex} className="tag-item">#{tag}</span>
+                                                    ))}
+                                                </div>
+                                                <button className="playlist-delete-btn" onClick={() => deleteMusic(music.id)}> <TiDelete  /> </button>
+                                            </div>
+                                            ))
+                                        ) : (
+                                            <div  className="d-flex flex-column align-items-center justify-content-center" style={{ height: "300px", textAlign: "center", color: "#ccc" }}>
+                                                <div style={{ backgroundColor: "#2a2a2a",borderRadius: "50%",padding: "20px",boxShadow: "0 4px 20px rgba(0,0,0,0.2)",marginBottom: "16px"}}>
+                                                    <HiHashtag size={50} color="#ccc" />
+                                                </div>
+                                                <h2 style={{ fontSize: "20px", fontWeight: 500, margin: 0 }}>해시태그를 입력하세요.</h2>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className='d-flex justify-content-center'>
-                                    <Button className='me-3' onClick={() => returnPlayList()}>Return</Button>
-                                    <Button onClick={() => goPlayListText()}>Next</Button>
+                                    <SecondaryButton className='me-3' onClick={() => returnPlayList()} style={{fontSize:'14px'}}>초기화</SecondaryButton>
+                                    <SecondaryButton onClick={() => goPlayListText()} style={{fontSize:'14px'}}>다음</SecondaryButton>
                                 </div>
                             </Contents>
                         </ModalWrap>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { PC, Mobile } from '../components/Responsive';
 import '../style/css/Login.css';
+import { IoIosAlert } from "react-icons/io";
 
 function SignUp() {
     const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ function SignUp() {
             window.localStorage.setItem('email', email);
 
             try {
-                const userImgSrc = "https://cdn.icon-icons.com/icons2/3066/PNG/512/user_person_profile_avatar_icon_190943.png";
+                const userImgSrc = "https://github.com/kzoou2/kzoou2/blob/main/assets/icon-user-profile-9803278.png?raw=true";
                 const result = await axios.post("http://localhost:8080/api/v1/users/sign-up", {
                     email: email,
                     nickName: nickName,
@@ -86,6 +87,7 @@ function SignUp() {
                     setPasswordConfirm("")
                 } else {
                     console.log("가입 실패:", error);
+                    setErrorMessage(["회원가입에 실패했습니다. 다시 시도해주세요."]);
                 }
             }
         }
@@ -97,76 +99,59 @@ function SignUp() {
             <PC>
                 <div className='container' >
                     <div className='content'>
-                        {token ? (
-                            <div className='signup-form-ui'>
-                                <form className='google-form' onSubmit={onSubmit}>
-                                    <div className='google-form-body'>
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2"><b>가입하기</b></div>
-                                        </div>
-                                        <div className='input-area'>
-                                            {errorMessage.length > 0 &&
-                                                (<div className="alert alert-danger" role="alert">
-                                                    {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                                </div>)
-                                            }
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type='text' id="nickname" name='nickname' placeholder='닉네임'/>
-                                            </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                            <button className="submit-button" type='submit'><b>가입하기</b></button>
-                                        </div>
+                        <div className='SignUp-wrapper'> 
+                            <div className='SignUp-form-container'>
+                                <div className="signup-form-header">
+                                    <img src='https://raw.githubusercontent.com/kzoou2/kzoou2/main/assets/293721930-ba3957b2-2b3c-4f55-8426-008dfc56e00b1.png' alt='BeatBuddy' style={{width:'95%', marginTop:'-15px' }} />
+                                    <div className="Singup-title">나만의 노래 아카이브, <br/> 지금 가입하고 만들어보세요!</div>
+                                </div>
+
+                                {errorMessage.length > 0 &&(
+                                    <div className="form-error-box" >
+                                        {errorMessage.map((message, index) => (<div key={index}> <IoIosAlert /> {message}</div>))}
+                                    </div>
+                                )}
+
+                                <form className='form' onSubmit={onSubmit}>
+                                    
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">이메일</label>
+                                        <input className="form-input" onChange={onChange} value={email} type='email' id="email" name='email'/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="nickname">닉네임</label>
+                                        <input className="form-input" onChange={onChange} type='text' id="nickname" name='nickname'/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="password">비밀번호</label>
+                                        <input className="form-input" onChange={onChange}type="password" id="password" name="password" placeholder="" autoComplete="new-password"/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">비밀번호 확인</label>
+                                        <input className="form-input" onChange={onChange}  type="password" id="passwordConfirm" name="passwordConfirm" placeholder="" autoComplete="new-password" />
+                                    </div>
+
+                                    <div className="submit-button">
+                                        <button className="submitbtn" type="submit">가입하기</button>
+                                    </div>
+
+                                    <div className="content__or-text">
+                                        <span></span>
+                                        <span>or</span>
+                                        <span></span>
+                                    </div>
+
+                                    <div className='sign-pass'>
+                                        <span>이미 계정이 있으신가요?</span>
+                                        <Link to="/login"><button className='signUp-button'>로그인</button></Link>
                                     </div>
                                 </form>
+
                             </div>
-                        ) : (
-                            <div className='signup-form-ui'>
-                                <form className='signup-form' onSubmit={onSubmit}>
-                                    <div className='signup-form-body'>
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2">가입하기</div>
-                                        </div>
-                                        <div className='input-area'>
-                                            {errorMessage.length > 0 &&
-                                                (<div className="alert alert-danger" role="alert">
-                                                    {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                                </div>)
-                                            }
-
-                                            <div className="form-inp">
-                                                <input  onChange={onChange} placeholder="이메일" value={email} type='email' id="email" name='email'/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type='text' id="nickname" name='nickname' placeholder='닉네임'/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" autoComplete="new-password"/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인" autoComplete="new-password" />
-                                            </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                            <button className="submit-button" type='submit'><b>가입하기</b></button>
-                                        </div>
-
-                                        <div className="content__or-text">
-                                            <span></span>
-                                            <span> or </span>
-                                            <span></span>
-                                        </div>
-
-                                        <div className='forgot-pass'>
-                                            <button> <Link to='/login'><span>Already have an acount ?</span><button className='signUp-button'>Login</button> </Link></button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             </PC>
@@ -174,76 +159,59 @@ function SignUp() {
             <Mobile>
                 <div className='container' >
                     <div className='content'>
-                        {token ? (
-                            <div className='signup-form-ui'>
-                                <form className='google-form' onSubmit={onSubmit}>
-                                    <div className='google-form-body'>
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2"><b>가입하기</b></div>
-                                        </div>
-                                        <div className='input-area'>
-                                            {errorMessage.length > 0 &&
-                                                (<div className="alert alert-danger" role="alert">
-                                                    {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                                </div>)
-                                            }
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type='text' id="nickname" name='nickname' placeholder='닉네임'/>
-                                            </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                            <button className="submit-button" type='submit'><b>가입하기</b></button>
-                                        </div>
+                    <div className='SignUp-wrapper'> 
+                            <div className='SignUp-form-container'>
+                                <div className="signup-form-header">
+                                    <img src='https://raw.githubusercontent.com/kzoou2/kzoou2/main/assets/293721930-ba3957b2-2b3c-4f55-8426-008dfc56e00b1.png' alt='BeatBuddy' style={{width:'95%', marginTop:'-15px' }} />
+                                    <div className="Singup-title">나만의 노래 아카이브, <br/> 지금 가입하고 만들어보세요!</div>
+                                </div>
+
+                                {errorMessage.length > 0 &&(
+                                    <div className="form-error-box" >
+                                        {errorMessage.map((message, index) => (<div key={index}> <IoIosAlert /> {message}</div>))}
+                                    </div>
+                                )}
+
+                                <form className='form' onSubmit={onSubmit}>
+                                    
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">이메일</label>
+                                        <input className="form-input" onChange={onChange} value={email} type='email' id="email" name='email'/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="nickname">닉네임</label>
+                                        <input className="form-input" onChange={onChange} type='text' id="nickname" name='nickname'/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="password">비밀번호</label>
+                                        <input className="form-input" onChange={onChange}type="password" id="password" name="password" placeholder="" autoComplete="new-password"/>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">비밀번호 확인</label>
+                                        <input className="form-input" onChange={onChange}  type="password" id="passwordConfirm" name="passwordConfirm" placeholder="" autoComplete="new-password" />
+                                    </div>
+
+                                    <div className="submit-button">
+                                        <button className="submitbtn" type="submit">가입하기</button>
+                                    </div>
+
+                                    <div className="content__or-text">
+                                        <span></span>
+                                        <span>or</span>
+                                        <span></span>
+                                    </div>
+
+                                    <div className='sign-pass'>
+                                        <span>이미 계정이 있으신가요?</span>
+                                        <Link to="/login"><button className='signUp-button'>로그인</button></Link>
                                     </div>
                                 </form>
+
                             </div>
-                        ) : (
-                            <div className='signup-form-ui'>
-                                <form className='signup-form' onSubmit={onSubmit}>
-                                    <div className='signup-form-body'>
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2">가입하기</div>
-                                        </div>
-                                        <div className='input-area'>
-                                            {errorMessage.length > 0 &&
-                                                (<div className="alert alert-danger" role="alert">
-                                                    {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                                </div>)
-                                            }
-
-                                            <div className="form-inp">
-                                                <input  onChange={onChange} placeholder="이메일" value={email} type='email' id="email" name='email'/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type='text' id="nickname" name='nickname' placeholder='닉네임'/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type="password" id="password" name="password" placeholder="비밀번호" autoComplete="new-password"/>
-                                            </div>
-                                            <div className='form-inp'>
-                                                <input onChange={onChange} type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인" autoComplete="new-password" />
-                                            </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                            <button className="submit-button" type='submit'><b>가입하기</b></button>
-                                        </div>
-
-                                        <div className="content__or-text">
-                                            <span></span>
-                                            <span> or </span>
-                                            <span></span>
-                                        </div>
-
-                                        <div className='forgot-pass'>
-                                            <button> <Link to='/login'><span>Already have an acount ?</span><button className='signUp-button'>Login</button> </Link></button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             </Mobile>

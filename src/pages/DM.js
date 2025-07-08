@@ -8,10 +8,10 @@ import { DmRoomIdAtom } from '../state/DmAtom';
 import MiniNavbar from '../components/Navigation/MiniNavbar';
 import MiniPlayer from '../components/Player/MiniPlayer';
 import { useNavigate } from 'react-router-dom';
-import { useWebSocket, WebSocketConnection } from '../components/WebSocketConnection';
+import { useWebSocket } from '../components/WebSocketConnection';
 import { AiOutlineMessage } from "react-icons/ai";
-import { StyledButton } from '../style/styled_components/DM_Style';
 import '../style/css/DmRoom.css';
+import { SoftButton } from '../style/styled_components/Button_Style';
 
 
 function DM() {
@@ -39,7 +39,6 @@ function DM() {
     };
 
     return (
-        <WebSocketConnection>
             <div>
                 <PC>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0px', }}>
@@ -52,14 +51,18 @@ function DM() {
                             dmRoomId && dmRoomId !== "0" ? (
                                 <DmRoom selectedChatInfo={selectedChatInfo} />
                             ) : (
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <AiOutlineMessage size='100' color='white' style={{ marginBottom: '20px' }} />
-                                    <div style={{ marginBottom: '3%' }}><b> 내 메세지 </b></div>
-                                    <StyledButton onClick={() => openNewCaht()}><b> 메시지 보내기 </b></StyledButton>
+                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90%' }}>
+                                    <AiOutlineMessage size='100' color='white' style={{ marginBottom: '20px'}} />
+                                    <div style={{ fontSize: '28px', fontWeight: '600', color: 'white' }}> 내 메시지</div>
+                                    <p style={{ fontSize: '14px', color: '#888',marginTop:'5px' }}> 새로운 메시지를 시작해보세요 </p>
+                                    <SoftButton onClick={openNewCaht}>메세지 보내기</SoftButton>
                                 </div>
                             )
                         ) : (
-                            <div>Connecting...</div>
+                            <div>
+                                <div style={{ fontSize: '28px', fontWeight: '600', color: 'white' }}>내 메시지</div>
+                                <p style={{ fontSize: '14px', color: '#888', marginTop: '5px' }}>채팅방을 여는 중이에요...</p>
+                            </div>
                         )}
                         </div>
 
@@ -75,10 +78,13 @@ function DM() {
                     />)}    
                     </div>
                 </PC>
-                <Mobile></Mobile>
+                <Mobile>
+                <MiniNavbar/>
+                    <div>
+                    <DmList setSelectedChatInfo={setSelectedChatInfo}  selectedChatInfo={selectedChatInfo} />
+                    </div>
+                </Mobile>
             </div>
-        </WebSocketConnection>
-        
     );
 }
 
