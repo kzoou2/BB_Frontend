@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ModalContainer from '../Config/ModalContainer';
-import { Button, Contents, TextInputModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
-import { SiHeadspace } from "react-icons/si";
+import { Contents, TextInputModalWrap, Overlay } from '../../../style/styled_components/PostModal_Style';
 import { CloseButton } from 'react-bootstrap';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import Tagify from '@yaireo/tagify';
 import '@yaireo/tagify/dist/tagify.css';
 import axios from "axios";
+import "../../../style/css/TextInput.css";
+import { PrimaryButton } from "../../../style/styled_components/Button_Style";
+
 
 function PlayListEdit({ onClose, playlistId, playlist }){
     const modalRef = useRef(null);
@@ -66,12 +68,12 @@ function PlayListEdit({ onClose, playlistId, playlist }){
 
         formdata.append('playlistRequestDto', new Blob([JSON.stringify({
             title: newplData.title,
-            content: newplData.contents,
-            // musicInfoList: newplData.musicInfoList,
+            contents: newplData.contents,
             musicInfoList: plData.musicInfoList,
             hashTags: newplData.tagName.map(tag => ({ id: 0, tagName: tag }))
         })], { type: 'application/json' }));
 
+        console.log(newplData.contents);
 
         var requestOptions = {
             method: 'PUT',
@@ -88,47 +90,15 @@ function PlayListEdit({ onClose, playlistId, playlist }){
             .then(result => {
                 console.log(result);
                 onClose?.();
+
+                // setTimeout(()=>{
+                //     window.location.reload();
+                // },300);
+                // fetchPlaylistAgain();
+                // window.location.reload();
             })
             .catch(error => console.log('error', error));
     }
-
-    // const handlePlSubmit = async (e) => {
-    //     e.preventDefault();
-    
-    //     const formData = new FormData();
-    
-    //     if (inputFileRef.current.files[0]) {
-    //         formData.append("imageFile", inputFileRef.current.files[0]);
-    //     }
-    
-    //     console.log("musicInfoList before axios", newplData.musicInfoList);
-    
-    //     const requestData = {
-    //         title: newplData.title,
-    //         content: newplData.contents,
-    //         albumSrc: newplData.albumUrl,
-    //         // musicInfoList: newplData.musicInfoList,
-    //         hashTags: newplData.tagName.map(tag => ({ id: 0, tagName: tag }))
-    //     };
-    
-    //     formData.append('playlistRequestDto', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
-    
-    //     try {
-    //         const response = await axios.put(`http://localhost:8080/api/playlist/${playlistId}`, formData, {
-    //             headers: {
-    //                 "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-    //                 'ngrok-skip-browser-warning': '69420', // ngrok ERR_NGROK_6024 오류 관련 헤더
-    //                 'Content-Type': 'multipart/form-data',
-    //             }
-    //         });
-    
-    //         console.log(response.data);
-    //         onClose?.();
-    //     } catch (error) {
-    //         console.log('error', error);
-    //     }
-    // }
-
     
     const onUpload = (e)=>{
         const file = e.target.files[0];
@@ -151,7 +121,6 @@ function PlayListEdit({ onClose, playlistId, playlist }){
         // 태그가 추가되면 이벤트 발생
         tagify.on('add', function (e) {
             const tags = tagify.value.map(tag => tag.value); // 입력된 태그 정보 객체의 value만을 리스트로 저장
-            console.log("태그", tags);
             setNewplData((prevData) => ({ ...prevData, tagName: tags }));
         });
     
@@ -162,6 +131,7 @@ function PlayListEdit({ onClose, playlistId, playlist }){
     }, []);
 
 
+
     useOutSideClick(modalRef, handleClose)
 
     return(
@@ -170,40 +140,49 @@ function PlayListEdit({ onClose, playlistId, playlist }){
                 <ModalContainer>
                     <Overlay>
                         <TextInputModalWrap ref={modalRef}>
-                            <CloseButton classNameName="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
-                                <div className='row'>
-                                    <h3 className='col-10 text-center'>PlayList Edit (PlayListEdit)</h3>
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">PlayList Edit</h3>
+                                        <p className="subtitle">PlayListEdit</p>
+                                    </div>
                                 </div>
 
                                 <div className='d-flex justify-content-center'>
-                                    <hr style={{ width: "80%" }} />
+                                    <hr style={{ width: "90%", marginTop:'0' }} />
                                 </div>
 
-                                <div className="d-flex justify-content-center">
-                                    <div className="d-flex justify-content-center" style={{ width: "55%" }}>
-                                        {newplData.imageFileUrl ?(
-                                            <img className='mt-5' style={{ width: "80%", height: "80%" }} src={newplData.imageFileUrl} alt="Album cover"></img>
-                                        ):(
-                                            <img className='mt-5' style={{ width: "80%", height: "80%" }} src={plData.imageFileUrl} alt="Album cover"></img>
+                                <div className='d-flex justify-content-center'>
+                                    <div className='mt-4'  style={{ width: "50%", position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        {newplData.imageFileUrl ? (
+                                            <>
+                                                <img className='playlist-img-preview' src={newplData.imageFileUrl} alt="Album cover"></img>
+                                                <div className='playlist-overlay' onClick={() => inputFileRef.current.click()}>
+                                                    <span className='playlist-overlay-text'>이미지 변경</span>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <img className='playlist-upload-img' src={plData.imageFileUrl} alt="Album cover"></img>
+                                                <div className='playlist-overlay' onClick={() => inputFileRef.current.click()}>
+                                                    <span className='playlist-overlay-text'>이미지 변경</span>
+                                                </div>
+                                            </>
                                         )}
+                                        <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
                                     </div>
-
-                                    <div style={{ width: "45%" }}>
-                                        <div className='d-flex justify-content-start ms-4 mb-3'>
-                                            <SiHeadspace className='me-2' size='40' color='black' />
-                                        </div>
+                                    <div style={{ width: "50%", height:'390px', marginTop:'10px' }}>
                                         <div className='d-flex flex-column align-items-center mb-3'>
-                                            <input id='titleInput' name='title' type="text" className="form-control mb-2" onChange={handlePLChange} value={newplData.title}  style={{ width: "90%" }} />
-                                            <textarea id='contentInput' name="contents" type="text" className="form-control mb-2" onChange={handlePLChange} value={newplData.contents} style={{ width: "90%", height: "250px", resize: "none" }} />
-                                            <input id='hashtagInput' type="text" className="form-control" value={newplData.tagName} />
+                                            <input id='titleInput' type="text" name="title" className="titleInput mt-2 mb-2" onChange={handlePLChange} value={newplData.title} />
+                                            <textarea id='contentInput' type="text" name="contents" className="contentInput mb-2" onChange={handlePLChange} value={newplData.contents} />
+                                            <input id='hashtagInput' type="text" className="hashtagInput " value={newplData.tagName} />
                                         </div>
                                     </div>
                                 </div>
-                                <div className='d-flex justify-content-center mt-1'>
-                                    <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
-                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} />
-                                    <Button className='btn btn-primary' onClick={(e)=> handlePlSubmit(e)}>Edit</Button>
+
+                                <div className='d-flex justify-content-center mt-4'>
+                                    <PrimaryButton style={{width:'10rem'}} onClick={(e)=> handlePlSubmit(e)}>작성</PrimaryButton>
                                 </div>
                             </Contents>
                         </TextInputModalWrap>

@@ -116,8 +116,8 @@ function NewDm({ onClose }){
                                 <hr style={{width:'95%' ,marginBottom:'1.5rem'}}/>
                                 
                                 <div className='d-flex justify-content-center align-items-center'>
-                                    <span style={{margin:'5px'}}><b> 받는사람 : </b></span>
-                                    <TextInput type="text" value={nickname} onChange={(e) => {setNickname(e.target.value); setUserInfo([]);} } onKeyDown={handleKeyPress} placeholder="검색.. " size="small" searchIcon={IoIosSearch} />
+                                    <span style={{margin:'5px'}}><b> 받는사람:  </b></span>
+                                    <TextInput type="text" value={nickname} onChange={(e) => {setNickname(e.target.value); setUserInfo([]);} } onKeyDown={handleKeyPress} placeholder="검색.. " size="small" searchIcon={IoIosSearch} style={{width:'420px'}}/>
 
                                 </div>
                                 <div className='d-flex justify-content-start align-items-center' style={{ marginTop: '10px', marginLeft:'5%' }}>

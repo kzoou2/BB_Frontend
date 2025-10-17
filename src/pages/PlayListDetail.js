@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navigation/Navbar';
 import { PC, Mobile } from '../components/Responsive';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import { useRecoilState,useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { currentVideoIndexAtom, currentVideoTitleAtom, playStateAtom, videoIdListAtom, videoPlaylistAtom } from '../state/MusicPlayerAtom';
+import { currentPlayListIdAtom } from '../state/PlayListAtom';
 import { useParams, Link } from 'react-router-dom';
-import MiniPlayer from '../components/Player/MiniPlayer';
 import { GrEdit } from "react-icons/gr";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoMusicalNoteSharp} from "react-icons/io5";
@@ -24,6 +24,8 @@ function PlayListDetail() {
     const [playState, setPlayState] = useRecoilState(playStateAtom);
     const [currentVideoIndex, setCurrentVideoIndex] = useRecoilState(currentVideoIndexAtom); // 현재 재생 중인 동영상의 인덱스
     const [currentVideoTitle, setCurrentVideoTitle] = useRecoilState(currentVideoTitleAtom); // 현재 재생 중인 동영상의 제목
+    const [currentPlayListId, setCurrentPlayListId] = useRecoilState(currentPlayListIdAtom);
+    const isThisPlayListPlaying = currentPlayListId === playlistId && playState;
 
     const [playlistData, setPlaylistData] = useState([]);
     const [musicInfoList, setMusicInfoList] = useState([]);
@@ -36,7 +38,7 @@ function PlayListDetail() {
     const [isMyPlaylist, setIsMyPlaylist]= useState(false);
     const userNickname = localStorage.getItem("nickName");
     const [animate, setAnimate] = useState(false);
-        const [isToggled, setIsToggled] = useState(false);
+    const [isToggled, setIsToggled] = useState(false);
 
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
@@ -66,20 +68,24 @@ function PlayListDetail() {
 
     // FIXME: 동작 로직 수정 필요 (두번째 클릭 시에 어떻게 동작할 지 수정해야함.)
     const addPlayList = () => {
-        if (videoIdList.length !== 0) {
-            setVideoIdList([])
-            setVideoPlayList([])
+        if (currentPlayListId !== playlistId) {
+            setVideoIdList([]);
+            setVideoPlayList([]);
+            setCurrentPlayListId(playlistId); 
+        }
+        
+        if (currentPlayListId === playlistId && playState) {
+            setPlayState(false);
+            return;
         }
 
         setVideoIdList((prev) => [...prev, ...musicInfoList.map(item => `https://www.youtube.com/watch?v=` + item.videoId)])
         setVideoPlayList((prev) => [...prev, ...musicInfoList])
-        setPlayState(!playState);
 
-        // 만약 재생 중이지 않다면 첫 번째 동영상을 재생
-        if (!playState && currentVideoIndex === null) {
-            setCurrentVideoIndex(0);
-            setCurrentVideoTitle(videoPlayList[0].musicTitle);
-        }
+        setCurrentVideoIndex(0);
+        setCurrentVideoTitle(musicInfoList[0]?.musicTitle || '');
+        setCurrentPlayListId(playlistId); 
+        setPlayState(true);
 
         setAnimate(true);
         setTimeout(() => setAnimate(false), 700); // 애니메이션 지속 시간 후 제거
@@ -124,116 +130,121 @@ function PlayListDetail() {
     return (
         <div>
             <PC>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Navbar />
-                    </div>
-                    <div className='col-md-8' style={{maxHeight: "100vh", overflow: "scroll"}}>
-                        {isMyPlaylist ? (
-                            <div className='text-start mt-3' style={{ backgroundColor: 'rgba(0, 0, 0, 6)' }}>
-                                <div className="pl-details">
-                                    <img className="plimg" src={playlistData.imageFileUrl} alt="cover" />
+                <div >
+                    {isMyPlaylist ? (
+                        <div className='text-start mt-3' style={{ backgroundColor: 'rgba(0, 0, 0, 6)' }}>
+                            <div className="pl-details">
+                                <img className="plimg" src={playlistData.imageFileUrl} alt="cover" />
 
-                                    <div className="pltextbox">
-                                        <div className='btn-group' style={{ width:""}}>
-                                            <button className='editbtn' onClick={()=> goPlayListEdit()}><GrEdit className="icon"  /></button>
-                                            <button className='delbtn' onClick={()=> goPlayListDelete()}><RiDeleteBinLine className="icon"/></button>
-                                        </div>
-                                        <span className="pltitle">{playlistData.title}</span>
-                                        <div className='tags-container'>
-                                            {playlistData.tagName?.map((tag, index) =>(
-                                                <span key= {index} className='hashtag'>#{tag} </span>
-                                            ))}
-                                        </div>
-                                        <span className="plcontents">{playlistData.contents}</span>
-                                        <div className="plUserInfo">
-                                            <Link to={`/profile/${playlistData.nickName}`} className="profile-link" style={{textDecorationLine: "none", color: "white"}}>
-                                                <img src={playlistData.userImgSrc} style={{width:'25px', height:'25px', borderRadius:'50%', marginRight:'5px', background:'white'}}/>
-                                                <span className='usernickname'> {playlistData.nickName} </span> 
-                                            </Link> 
-                                            <span>• {playlistData.musicInfoList?.length}곡</span>
-                                            <span>• 좋아요 {playlistData.plLike}</span>
-                                        </div>
-                                        <div className="plbtn-container">
-                                            <button onClick={() => addPlayList()}>
-                                                {playState ? <FaPause /> : <FaPlay />}
-                                            </button>
-                                        </div>
+                                <div className="pltextbox">
+                                    <div className='btn-group' style={{ width:""}}>
+                                        <button className='editbtn' onClick={()=> goPlayListEdit()}><GrEdit className="icon"  /></button>
+                                        <button className='delbtn' onClick={()=> goPlayListDelete()}><RiDeleteBinLine className="icon"/></button>
                                     </div>
-                                </div>
-                            </div>
-                        ):(
-                            <div className='text-start mt-3' style={{ backgroundColor: 'rgba(0, 0, 0, 6)' }}>
-                                <div className='pl-details'>
-                                    <img className='plimg' src={playlistData.imageFileUrl} alt='Playlist Image' />
-                                    
-                                    <div className='pltextbox'>
-                                        <div className='pltextcontent'>
-                                            <span className='pltitle'>{playlistData.title}</span>
-                                                <div className='tags-container'>
-                                                    {playlistData.tagName?.map((tag, index) =>(
-                                                        <span key= {index} className='hashtag'>#{tag} </span>
-                                                    ))}
-                                                </div>
-                                            <div className='plInfo'>
-                                                <span className='plcontents'>{playlistData.contents}</span>
-                                                <div className='plUserInfo'>
-                                                    <Link to={`/profile/${playlistData.nickName}`} className="profile-link" style={{textDecorationLine: "none", color: "white"}}>
-                                                        <img src={playlistData.userImgSrc} style={{width:'25px', height:'25px', borderRadius:'50%', marginRight:'5px', background:'white'}}/>
-                                                        <span className='usernickname'> {playlistData.nickName} </span> 
-                                                    </Link> 
-                                                    <span className='SongCount'>• {playlistData.musicInfoList? playlistData.musicInfoList.length : 0}곡 </span>
-                                                    <span className='Likes'>• 좋아요: {playlistData.plLike} </span>
-                                                    <IoMusicalNoteSharp id={`${isLiked ? 'liked' : 'unliked'}`} className='me-4' size='26' onClick={() => handleLikeToggle()} style={{ cursor: "pointer", marginLeft:"10px" }} /> 
-                                                </div>
+                                    <span className="pltitle">{playlistData.title}</span>
+                                    <div className='tags-container'>
+                                        {playlistData.tagName?.map((tag, index) =>(
+                                            <span key= {index} className='hashtag'>#{tag} </span>
+                                        ))}
+                                    </div>
+                                    <span className="plcontents">{playlistData.contents}</span>
+                                    <div className="plUserInfo">
+                                        <Link to={`/profile/${playlistData.nickName}`} className="profile-link" style={{textDecorationLine: "none", color: "white"}}>
+                                            <img src={playlistData.userImgSrc} style={{width:'25px', height:'25px', borderRadius:'50%', marginRight:'5px', background:'white'}}/>
+                                            <span className='usernickname'> {playlistData.nickName} </span> 
+                                        </Link> 
+                                        <span>• {playlistData.musicInfoList?.length}곡 •</span>
+                                        <div className='LikesTooltip' >
+                                            <div className='tooltip-target'onClick={() => handleLikeToggle()}>
+                                                <IoMusicalNoteSharp id={isLiked ? 'liked' : 'unliked'} size={22} style={{color: isLiked ? '#FEF164' : ''}}/>
+                                                <span>{playlistData.plLike}</span>
+                                                <span className='tooltip-text'>좋아요</span>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className='plbtn-container d-flex justify-content-center mt-3 mb-3'>
-                                        <button className={animate ? 'clicked' : ''} type="checkbox" checked={playState}  onClick={() => addPlayList()}>
-                                            {playState ? <FaPause /> : <FaPlay />}
+                                    <div className="plbtn-container">
+                                        <button onClick={() => addPlayList()}>
+                                            {isThisPlayListPlaying ? <FaPause /> : <FaPlay />}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        )}
-                        <div>
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">  </th>
-                                        <th scope="col">제목</th>
-                                        <th scope="col">가수</th>
-                                        <th scope="col">앨범</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {isLoading ? <tr><td><Loading /></td></tr> : null}
-                                    {musicInfoList.map((music, index) => (
-                                        <tr key={index}>
-                                            <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
-                                            <td >
-                                                <img
-                                                    src={music.albumUrl}
-                                                    alt="앨범 이미지"
-                                                    style={{ verticalAlign: "middle", maxWidth: '50px', maxHeight: '50px' }}
-                                                />
-                                            </td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicTitle }}></td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicArtist }}></td>
-                                            <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.albumName }}></td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
                         </div>
-                    </div>
-                    <div className='col-md-2'>
-                        <MiniPlayer />
+                    ):(
+                        <div className='text-start mt-3' style={{ backgroundColor: 'rgba(0, 0, 0, 6)' }}>
+                            <div className='pl-details'>
+                                <img className='plimg' src={playlistData.imageFileUrl} alt='Playlist Image' />
+                                
+                                <div className='pltextbox'>
+                                    <div className='pltextcontent'>
+                                        <span className='pltitle'>{playlistData.title}</span>
+                                            <div className='tags-container'>
+                                                {playlistData.tagName?.map((tag, index) =>(
+                                                    <span key= {index} className='hashtag'>#{tag} </span>
+                                                ))}
+                                            </div>
+                                        <div className='plInfo'>
+                                            <span className='plcontents'>{playlistData.contents}</span>
+                                            <div className='plUserInfo'>
+                                                <Link to={`/profile/${playlistData.nickName}`} className="profile-link" style={{textDecorationLine: "none", color: "white"}}>
+                                                    <img src={playlistData.userImgSrc} style={{width:'25px', height:'25px', borderRadius:'50%', marginRight:'5px', background:'white'}}/>
+                                                    <span className='usernickname'> {playlistData.nickName} </span> 
+                                                </Link> 
+                                                <span className='SongCount'>• {playlistData.musicInfoList? playlistData.musicInfoList.length : 0}곡 •</span>
+                                                <div className='LikesTooltip' >
+                                                    <div className='tooltip-target'onClick={() => handleLikeToggle()}>
+                                                        <IoMusicalNoteSharp id={isLiked ? 'liked' : 'unliked'} size={22} style={{color: isLiked ? '#FEF164' : ''}}/>
+                                                        <span>{playlistData.plLike}</span>
+                                                        <span className='tooltip-text'>좋아요</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='plbtn-container d-flex justify-content-center mt-3 mb-3'>
+                                    <button className={animate ? 'clicked' : ''} type="checkbox" checked={playState}  onClick={() => addPlayList()}>
+                                        {isThisPlayListPlaying ? <FaPause /> : <FaPlay />}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    <div>
+                        <table className='table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">  </th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">가수</th>
+                                    <th scope="col">앨범</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {isLoading ? <tr><td><Loading /></td></tr> : null}
+                                {musicInfoList.map((music, index) => (
+                                    <tr key={index}>
+                                        <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
+                                        <td >
+                                            <img
+                                                src={music.albumUrl}
+                                                alt="앨범 이미지"
+                                                style={{ verticalAlign: "middle", maxWidth: '50px', maxHeight: '50px' }}
+                                            />
+                                        </td>
+                                        <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicTitle }}></td>
+                                        <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.musicArtist }}></td>
+                                        <td style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: music.albumName }}></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+
 
                 {isPlayListEdit&&(<PlayListEdit
                     playlistId={playlistId}
@@ -250,6 +261,7 @@ function PlayListDetail() {
                     }}
                 />)}
             </PC>
+
             <Mobile>
                 <div className='row'>
                     <div className='col-md-3'>

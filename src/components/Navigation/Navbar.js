@@ -11,13 +11,15 @@ import axios from 'axios';
 import { useRecoilValue  } from "recoil";
 import { userNicknameAtom } from '../../state/UserAtom';
 import { useLocation } from 'react-router-dom';
+import { SlPlaylist } from "react-icons/sl";
 
 function Navbar() {
     const userNickname = useRecoilValue(userNicknameAtom); 
     const [userInfo, setUserInfo] = useState('');
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
     const location = useLocation();
-    const isDMPage = location.pathname.startsWith('/DM');
+    // const isDMPage = /^\/DM(\/.*)?$/.test(location.pathname); 
+    const isDMPage = location.pathname.toLowerCase().startsWith('/dm');
 
     const openCreatePost = () => {
         setIsCreatePostOpen(true);
@@ -80,43 +82,49 @@ function Navbar() {
     return (
         <div>
             <PC>
-                <NavContainer>
-                    <Outside className={"in"}>
+                <NavContainer isMini={isDMPage}>
+                    <Outside className={`in ${isDMPage ? 'mini' : ''}`}>
                         <div className="inside">
                             <Ul className={`in ${isDMPage ? 'mini' : ''}`}>
-                                <Link to='/'>
-                                    <img src='https://github.com/eeeeeddy/eeeeeddy/assets/71869717/ba3957b2-2b3c-4f55-8426-008dfc56e00b' alt='BeatBuddy' width={'100%'} />
-                                </Link>
+                                {isDMPage ? (
+                                    <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+                                        <SlPlaylist size={40} style={{ color: '#FEF164' }} />
+                                    </div>
+                                ):(
+                                    <Link to='/'>
+                                        <img src='https://github.com/eeeeeddy/eeeeeddy/assets/71869717/ba3957b2-2b3c-4f55-8426-008dfc56e00b' alt='BeatBuddy' width={'100%'} />
+                                    </Link>
+                                )}
                                 <li className='text-start'>
-                                    <Link to='/' ><FiHome size={26} style={{ marginRight: '10px' }} />Home</Link>
+                                    <Link to='/' ><FiHome size={26} style={{ marginRight: '10px' }} />{!isDMPage && "Home"}</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/playlist'><MdOutlineQueueMusic size={26} style={{ marginRight: '10px' }} />PlayList</Link>
+                                    <Link to='/playlist'><MdOutlineQueueMusic size={26} style={{ marginRight: '10px' }} />{!isDMPage && "PlayList"}</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/Search'><FiSearch size={26} style={{ marginRight: '10px' }} />Search</Link>
+                                    <Link to='/Search'><FiSearch size={26} style={{ marginRight: '10px' }} />{!isDMPage && "Search"}</Link>
                                 </li>
                                 <li className='text-start'>
-                                    <Link to='/DM'><HiOutlineMail size={26} style={{ marginRight: '10px' }}/>DM</Link>
+                                    <Link to='/DM'><HiOutlineMail size={26} style={{ marginRight: '10px' }}/>{!isDMPage && "DM"}</Link>
                                 </li>
                                 <li className='text-start' onClick={() => openCreatePost()}>
-                                    <span style={{ color: "white", cursor: "pointer" }}><FiPlusSquare size={26} style={{ marginRight: '10px' }} />Post</span>
+                                    <span style={{ color: "white", cursor: "pointer" }}><FiPlusSquare size={26} style={{ marginRight: '10px' }} />{!isDMPage && "Post"}</span>
                                 </li>
                                 {isLogin ? (
                                     <>
                                     <li className='text-start'>
                                         <Link to={`/profile/${userInfo.nickName}`}>
                                             <img src={userInfo.userImgSrc} alt={userInfo.nickName}  style={{ width:'30px', height:'30px', borderRadius:'50%', marginRight:'15px',background:'#fff'}}/>
-                                            <b style={{fontSize:'17px'}}>{userInfo.nickName}</b>
+                                            {!isDMPage && <b style={{ fontSize: '17px' }}>{userInfo.nickName}</b>}
                                         </Link>
                                     </li>
                                     <li className='text-start'>
-                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><FiLogOut  size={26} style={{ marginRight: '10px' }}/>Logout</span>
+                                        <span style={{ color: "white", cursor: "pointer" }} onClick={() => logout()}><FiLogOut  size={26} style={{ marginRight: '10px' }}/>{!isDMPage && "Logout"}</span>
                                     </li>
                                     </>
                                 ) : (
                                     <li className='text-start'>
-                                        <Link to='/Login'><FiLogIn size={26} style={{ marginRight: '10px' }} /> Login</Link>
+                                        <Link to='/Login'><FiLogIn size={26} style={{ marginRight: '10px' }} /> {!isDMPage && "Login"}</Link>
                                     </li>
                                 )}
                             </Ul>

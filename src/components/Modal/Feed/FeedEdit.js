@@ -4,11 +4,12 @@ import useOutSideClick from "../../../hooks/useOutSideClick";
 import Tagify from "@yaireo/tagify";
 import '@yaireo/tagify/dist/tagify.css';
 import '../../../style/css/Hashtag.css'
-import { SiHeadspace } from "react-icons/si";
 import { PC, Mobile } from "../../Responsive";
 import { CloseButton } from 'react-bootstrap';
 import { Overlay, Contents, TextInputModalWrap, Button } from "../../../style/styled_components/PostModal_Style";
 import axios from "axios";
+import "../../../style/css/TextInput.css";
+import { PrimaryButton } from "../../../style/styled_components/Button_Style";
 
 function FeedEdit({ onClose, feedId, musicInfoList }){
     const modalRef = useRef(null);
@@ -34,6 +35,8 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
             setEditFeedData({
                 content: response.data.content,
                 tagName: response.data.tagName,
+                feedImgSrc: response.data.feedImgSrc || '',
+                musicInfo: feedData.musicInfoList?.[0]
             });
             console.log('Music Info List:', response.data.musicInfoList);
         })
@@ -69,7 +72,7 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                     musicTitle: `${feedData.musicInfoList[0].musicTitle}`,
                     albumName: `${feedData.musicInfoList[0].albumName}`,
                     videoId: `${feedData.musicInfoList[0].videoId}`,
-                    albumUrl: `${feedData.musicInfoList[0]?.albumImage || ''}`
+                    albumUrl: feedData.musicInfoList[0].albumUrl
                 },
                 albumSrc: `${feedData.musicInfoList[0]?.albumImage || ''}`,
                 hashTags: editFeedData.tagName.map(tag => ({ id: 0, tagName: tag }))
@@ -141,7 +144,7 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                         <TextInputModalWrap ref={modalRef}>
                             <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
                             <Contents >
-                                <div className="row" >
+                                {/* <div className="row" >
                                     <h3 className='col-10 text-center' style={{color:'white'}}>FeedEdit</h3>
                                 </div>
 
@@ -176,6 +179,61 @@ function FeedEdit({ onClose, feedId, musicInfoList }){
                                     <Button type="button" className="btn btn-primary me-3" onClick={() => inputFileRef.current.click()}>Change Image</Button>
                                     <input ref={inputFileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => openFileInput(e)} />
                                     <Button className='btn btn-primary' onClick={(e) => hanleFeedSubmit(e)}>Edit</Button>
+                                </div> */}
+
+                                            {/*  */}
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">Feed Edit</h3>
+                                        <p className="subtitle">Feed Edit</p>
+                                    </div>
+                                </div>
+
+                                <div className='d-flex justify-content-center'>
+                                    <hr style={{ width: "90%", marginTop:'0',marginBottom:'35px' }} />
+                                </div>
+
+                                <div className='d-flex justify-content-center'>
+                                    <div className='d-flex justify-content-center' style={{ width: "50%", position: 'relative' }}>
+                                        {/*  */}
+                                        {editFeedData.feedImgSrc ?(
+                                            <>
+                                            <img className='postimg'  style={{width:'80%', height:'80%'}} src={editFeedData.feedImgSrc} alt="feedImgSrc"/>
+                                            <div className='img-overlay' onClick={() => inputFileRef.current.click()}>
+                                                <span className='overlay-text'>이미지 변경</span>
+                                            </div>
+                                            </>
+                                        ):(
+                                            feedData.feedImgSrc !==  null ? (
+                                                <>
+                                                    <img  className='postimg' src={feedData.feedImgSrc} alt="Album cover"/>
+                                                    <div className='img-overlay' onClick={() => inputFileRef.current.click()}>
+                                                        <span className='overlay-text'>이미지 변경</span>
+                                                    </div>
+                                                </>
+                                                
+                                            ) : (
+                                                <>
+                                                <img className='postimg' src={feedData.musicInfoList[0].albumUrl} alt="Album cover"/>
+                                                <div className='img-overlay' onClick={() => inputFileRef.current.click()}>
+                                                    <span className='overlay-text'>이미지 변경</span>
+                                                </div>
+                                                </>
+                                                
+                                            )
+                                        )}
+                                        <input ref={inputFileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => openFileInput(e)} />
+                                    </div>
+                                    <div style={{ width: "50%", height:'380px' }}>
+                                        <div className='d-flex flex-column align-items-center mb-3'>
+                                            <textarea id='contentInput' type="text" name='content' className="contentInput mb-2"onChange={(e)=>handleContentChange(e)} value={editFeedData.content} />
+                                            <input id='hashtagInput' type="text" className="hashtagInput "value={editFeedData.tagName} />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='d-flex justify-content-center mt-4'>
+                                    <PrimaryButton style={{width:'10rem'}} onClick={(e)=> hanleFeedSubmit(e)}>작성</PrimaryButton>
                                 </div>
                             </Contents>
                         </TextInputModalWrap>

@@ -60,39 +60,6 @@ function Feed({ feedData }) {
     return (
         <div>
             <PC>
-                {/* <div className='mt-5'>
-                    <div className='d-flex justify-content-center mb-4' key={feedData.id}>
-                        <div className="border-bottom" style={{ width: "40rem", height: "auto" }}>
-                            <div>
-                                <div className='d-flex justify-content-center'>
-                                    <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                        <Link to={`/profile/${feedData.nickName}`} style={{ textDecorationLine: "none", color: "white" }}><img className='userimg' src={feedData.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', marginRight:'13px', borderRadius:'50%'}} />
-                                            <span>{feedData.nickName}</span>
-                                        </Link>
-                                    </div>
-                                    <div className='d-flex justify-content-end mb-3' style={{ width: "50%" }}>
-                                        <span className='mt-2'>
-                                            <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
-                                            <IoPaperPlaneOutline className='me-4' size='26' onClick={() => goDM()} style={{ cursor: "pointer" }} />
-                                            {isBookmarked ? (
-                                                <FaBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
-                                            ) : (
-                                                <FaRegBookmark className='' size='26' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
-                                            )}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="">
-                                    <img style={{ width: "70%", height: "70%" }} src={feedData.feedImgSrc || feedData.musicInfoList[0].albumUrl} alt={feedData.musicInfoList.musicTitle}></img>
-                                    <h5 className='mt-3'>{feedData.musicInfoList[0].musicTitle} · {feedData.musicInfoList[0].musicArtist}</h5>
-                                    <p>{feedData.musicInfoList[0].albumName} · {feedData.musicInfoList[0].releaseDate}</p>
-                                    <p style={{ color: '#27A8FC' }}>{feedData.tagName.map((tag, index) => `#${tag} ${index < feedData.tagName.length - 1 ? ' ' : ''}`)}</p>
-                                    <p>{feedData.content}<span className='ms-2' style={{ color: "grey", cursor: "pointer" }} onClick={() => openFeedDetail(feedData)}>더보기</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="mt-5 d-flex justify-content-center" key={feedData.id}>
                     <div className="home-card" >
                         <div className="d-flex justify-content-between align-items-center p-3">
@@ -101,7 +68,7 @@ function Feed({ feedData }) {
                                 <span style={{fontSize:'1.2rem', fontWeight:'600'}}>{feedData.nickName}</span>
                             </Link>
                             <div>
-                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='23' onClick={() => clickNote()} style={{ cursor: "pointer", color:'white'}} />
+                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : ''}`} className='me-4' size='23' onClick={() => clickNote()} style={{ cursor: "pointer", color: isNoteClicked ? '#FEF164' : 'white'  }} />
                                 <IoPaperPlaneOutline className='me-4' size='23' onClick={() => goDM()} style={{ cursor: "pointer", color:'white' }} />
                                 {isBookmarked ? (
                                     <FaBookmark className='' size='22' onClick={() => onBookmark()} style={{ cursor: "pointer", color:'white' }} />

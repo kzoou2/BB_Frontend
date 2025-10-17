@@ -27,22 +27,13 @@ import SearchByTag from '../components/Search/SearchByTag';
 import { WebSocketConnection } from '../components/WebSocketConnection';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
+import Layout from '../components/Common/Layout';
 
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    // let loginChk = false;
-
-    // if (window.localStorage.getItem("isLogin")) {
-    //     loginChk = true
-    // }
-
-    // useEffect(() => {
-    //     if (loginChk) {
-    //         setIsLogin(true)
-    //     }
-    // }, []);
+    
     useEffect(() => {
     const isLoginStored = localStorage.getItem("isLogin");
 
@@ -64,33 +55,36 @@ function App() {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className="App" style={{backgroundColor: "#111111", color: "white"}}>
                 {isLoading && <Loading />}
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/" element={isLogin ? <Home /> : <Login />} />
-                    <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/dm/*" element={ <WebSocketConnection> <DM /> </WebSocketConnection> }/>
-                        <Route path=":dmRoomId" element={<DmRoom />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path='/search/playlist' element={<SearchByPlaylist />}/>
-                    <Route path='/search/feed' element={<SearchByFeed />} />
-                    <Route path='/search/tag' element={<SearchByTag />} />
-                    <Route path="/profile/:nickName" element={<Profile />} />
-                    <Route path="/Profile/edit/:nickName" element={<ProfileEdit />} />
-                    <Route path="/feed/:feedId" element={<Feed />} />
-                    <Route path="/detail" element={<FeedDetail />} />
-                    <Route path="/playlist" element={<Playlist />} />
-                    <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
-                    <Route path="/miniplayer" element={<MiniPlayer />} />
+                <Layout>
+                    <Routes>
+                        {/* <Route path="/" element={<Home />} /> */}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/" element={isLogin ? <Home /> : <Login />} />
+                        <Route path="/signUp" element={<SignUp />} />
+                        <Route path="/dm/*" element={ <WebSocketConnection> <DM /> </WebSocketConnection> }/>
+                            <Route path=":dmRoomId" element={<DmRoom />} />
+                        <Route path="/search" element={<Search />} />
+                        <Route path='/search/playlist' element={<SearchByPlaylist />}/>
+                        <Route path='/search/feed' element={<SearchByFeed />} />
+                        <Route path='/search/tag' element={<SearchByTag />} />
+                        <Route path="/profile/:nickName" element={<Profile />} />
+                        <Route path="/Profile/edit/:nickName" element={<ProfileEdit />} />
+                        <Route path="/feed/:feedId" element={<Feed />} />
+                        <Route path="/detail" element={<FeedDetail />} />
+                        <Route path="/playlist" element={<Playlist />} />
+                        <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
+                        <Route path="/miniplayer" element={<MiniPlayer />} />
 
-                    {/* Test */}
-                    <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
-                    <Route path="/post" element={<MusicSearch />} /> {/* Post Test Link */}
-                    <Route path="/post/1" element={<PostPicSelect />} /> {/* Post Test Link */}
-                    <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
-                    <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
-                    <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
-                </Routes>
+                        {/* Test */}
+                        <Route path="/create" element={<CreatePost />} /> {/* Post Test Link */}
+                        <Route path="/post" element={<MusicSearch />} /> {/* Post Test Link */}
+                        <Route path="/post/1" element={<PostPicSelect />} /> {/* Post Test Link */}
+                        <Route path="/post/2" element={<FeedTextInput />} /> {/* Post Test Link */}
+                        <Route path="/pl" element={<PlayListSearch />} /> {/* Post Test Link */}
+                        <Route path="/pl/1" element={<PlayListText />} /> {/* Post Test Link */}
+                    </Routes>
+                </Layout>
+                
             </div>
         </BrowserRouter>
     );
