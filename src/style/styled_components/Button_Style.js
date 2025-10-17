@@ -1,67 +1,5 @@
 import styled from "styled-components";
 
-
-// export const PrimaryButton = styled.button`
-//     background-color: rgba(254, 241, 100, 1);
-//     color: rgba(17, 24, 39, 1);
-//     border: none;
-//     border-radius: 0.375rem;
-//     font-weight: 500;
-//     transition: all 0.3s ease;
-
-//     &:hover {
-//         background-color: rgba(255, 246, 130, 1);
-//         transform: scale(1.01);
-//     }
-// `;
-// export const PrimaryButton = styled.button`
-//     padding: 12px 20px;
-//     font-size: 16px;
-//     font-weight: 600;
-//     border: none;
-//     border-radius: 10px;
-//     background-color: #fef164;
-//     color: #1e1e1e;
-//     cursor: pointer;
-//     transition: background-color 0.3s ease;
-
-//     &:hover {
-//         background-color: #fff78f;
-//     }
-
-//     &:disabled {
-//         background-color: #d4d4d4;
-//         color: #888;
-//         cursor: not-allowed;
-//     }
-// `;
-
-// export const PrimaryButton = styled.button`
-//     padding: 10px 20px;
-//     font-size: 16px;
-//     font-weight: 600;
-//     border-radius: 999px;
-//     border: none;
-//     background-color: #f5e94a; /* 약간 투명도 줘서 부드러운 느낌 */
-//     color: #1e1e1e;
-//     cursor: pointer;
-//     transition: all 0.3s ease;
-
-//     &:hover {
-//         background-color: #e9db45; /* hover도 투명하게 맞춤 */
-//     }
-
-//     &:active {
-//         transform: scale(0.98);
-//     }
-
-//     &:disabled {
-//         background-color: #d4d4d4;
-//         color: #888;
-//         cursor: not-allowed;
-//     }
-// `;
-
 export const PrimaryButton = styled.button`
     font-size: 15px;
     font-weight: 600;
@@ -130,7 +68,6 @@ export const SoftButton = styled.button`
     }
 `;
 
-
 export const FollowButton = styled.button`
     padding: 8px 16px;
     font-size: 14px;
@@ -184,50 +121,6 @@ export const FollowingButton = styled.button`
         cursor: not-allowed;
     }
 `;
-
-// export const FlatButton = styled.button`
-//   padding: 10px 24px;
-//   font-size: 14px;
-//   font-weight: 600;
-//   color: #fff;
-//   background-color: #555;
-//   border: none;
-//   border-radius: 9999px;
-//   cursor: pointer;
-//   transition: background-color 0.3s ease;
-
-//   &:hover {
-//     background-color: #fef164;  /* 메인 컬러 */
-//     color: #111;
-//   }
-
-//   &:active {
-//     transform: scale(0.95);
-//   }
-// `;
-
-
-// export const SecondaryButton = styled.button`
-//     background-color: #ffffff15;
-//     color: #fff;
-//     border: 1px solid #555;
-//     border-radius: 0.5rem;
-//     transition: all 0.3s ease;
-//     padding: 8px 16px
-
-//     &:hover {
-//         background-color: #ffffff25;
-//     }
-// `;
-
-// const secondaryBtn=styled.button`
-// borderRadius: '0.5rem',
-// backgroundColor: '#ffffff15',
-// border: '1px solid #555',
-// color: '#fff', 
-// padding: '8px 16px',
-// transition: 'background-color 0.3s ease'
-// `
 
 export const DeleteButton = styled.button`
     background-color: #EF4444;

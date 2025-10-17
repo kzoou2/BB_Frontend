@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BiMessageEdit } from "react-icons/bi";
 import { PC, Mobile } from '../Responsive';
 import { ListContainer, StyledChatButton } from '../../style/styled_components/DmList_Style';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { DmRoomIdAtom } from '../../state/DmAtom';
 
-const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
+const DmList = ({ selectedChat, setSelectedChatInfo }) => {
     const [isNewChatOpen, setIsNewChatOpen] = useState(false);
     const [chatRooms, setChatRooms] = useState([]);
     const [roomId, setRoomId] = useRecoilState(DmRoomIdAtom);
@@ -55,7 +55,7 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
     return (
         <div>
             <PC>
-                <div className='dm-list' style={{height: "96vh", borderRadius:"15px", backgroundColor: "#1E1E1E"}}>
+                <div className='dm-list' style={{height: "95vh", borderRadius:"15px", backgroundColor: "#1E1E1E"}}>
                     <div className='list-user' style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }} >
                         <h3 style={{marginLeft:'20px', marginTop:'10px'}}> {currentUser}</h3>
                         <button className='newmessage' style={{background: 'transparent',border: 'none',marginRight: '15px',cursor: 'pointer'}} onClick={() => openNewCaht()} >
@@ -68,20 +68,12 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
                     
                     </div>
                     
-                    <ListContainer as='ul'>
+                    <ListContainer as='ul' >
                         {chatRooms.map((room) => (
-                            <StyledChatButton
-                                key={room.id}
-                                onClick={() => onSelectChat(room.id)}
-                                selected={selectedChat === room.id}
-                                as="li"
-                            >
+                            <StyledChatButton key={room.id} onClick={() => onSelectChat(room.id)} selected={selectedChat === room.id} as="li" >
                                 <div className='chat'>
                                     {room.participants && room.participants.length > 0 && (
-                                        <img
-                                            src={room.participants.find(p => p.participantName !== currentUser)?.participantImgSrc}
-                                            alt="user"
-                                        />
+                                        <img src={room.participants.find(p => p.participantName !== currentUser)?.participantImgSrc} alt="user" />
                                     )}
                                     <div className='chat-meta'>
                                         <strong>

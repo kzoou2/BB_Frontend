@@ -12,7 +12,6 @@ import ProfilePlayList from '../components/Profile/ProfilePlayList';
 import { FaEdit } from 'react-icons/fa';
 import '../style/css/Profile.css';
 import axios from 'axios';
-import MiniPlayer from '../components/Player/MiniPlayer';
 import { FollowButton, FollowingButton,SecondaryButton } from '../style/styled_components/Button_Style';
 
 
@@ -96,70 +95,57 @@ function Profile() {
     return (
         <div>
             <PC>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Navbar />
-                    </div>
-
-                    <div className='col-md-8' style={{ paddingLeft: '1rem', paddingRight: '1rem', maxHeight: '96vh', overflowY: 'auto'}} >
-                        {isOwnProfile ? (
-                            <div className='user-container d-flex align-items-center mb-3 '>
-                                <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '9.375rem', height:'9.375rem', borderRadius:'50%', background:'#Fff'}} />
-                                </div>
-                                <div className=' col-md-6 user-info ml-auto 'style={{ marginLeft: '3rem' }}>
-                                    <div className="d-flex align-items-center"style={{gap: '3rem'}}>
-                                        <p style={{ fontSize: '1.5rem'}}> <b>{userInfo.nickName}</b> </p>
-                                        <Link to={`/profile/edit/${nickName}`}><SecondaryButton className='btn btn-outline-secondary' > <FaEdit /> 프로필 편집 </SecondaryButton></Link>
-                                    </div>
-                                    <div className="d-flex align-items-center" style={{ gap: '2rem', marginTop: '0.625rem',fontSize: '1rem', fontWeight: 500 }} >
-                                        <span className='me-4'> 게시글 <b >{postCount}</b> </span>
-                                        <span className='me-4' > 팔로우 <b > {userInfo.followingCnt} </b>  </span>
-                                        <span> 팔로워  <b> {userInfo.followerCnt} </b> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className='user-container d-flex align-items-center mb-3'>
-                                <div className=' col-md-2 offset-md-1 mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '9.375rem', height:'9.375rem', backgroundColor:'#Fff', borderRadius:'50%' }} />
-                                </div>
-                                <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '3rem'  }}>
-                                    <div className="d-flex align-items-center">
-                                        <p style={{ fontSize: '1.5rem', marginRight: '3rem' }}> <b>{userInfo.nickName}</b> </p>
-                                        {isFollowed ?(
-                                            <FollowingButton onClick={handleFollowToggle}><RiUserHeartLine style={{ marginRight: '6px',fontSize: '18px' }} />팔로잉</FollowingButton>
-                                        ):(
-                                            <FollowButton onClick={handleFollowToggle}> <TbUserHeart style={{ marginRight: '6px',fontSize: '18px' }} /> 팔로우</FollowButton>
-                                        )}
-                                    </div>
-                                    <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '0.625rem',fontSize: '1rem' }} >
-                                        <span className='me-4' > 게시글 <b style={{  marginRight: '0.25rem'}}>{postCount}</b> </span>
-                                        <span className='me-4'> 팔로우 <b style={{  marginRight: '0.25rem'}}>{userInfo.followingCnt}</b> </span>
-                                        <span > 팔로워  <b style={{  marginRight: '0.25rem'}}>{userInfo.followerCnt}</b> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        <hr className="tab-divider"/>      
-
-                        <div className='button-container'  >
-                            <button onClick={() => handleTabChange('post')} className={`tab-button ${activeTab === 'post' ? 'active' : ''}`}><RiFolderMusicLine className="icon" size={19} />게시물</button>
-                            <button onClick={() => handleTabChange('playlist')} className={`tab-button ${activeTab === 'playlist' ? 'active' : ''}`}><TbPlaylist className="icon" size={19} />플레이리스트</button>
-                            <button onClick={() => handleTabChange('saved')} className={`tab-button ${activeTab === 'saved' ? 'active' : ''}`} ><FiBookmark className="icon" size={19} />저장됨</button>
+                {isOwnProfile ? (
+                    <div className='user-container d-flex align-items-center mb-3 '>
+                        <div className=' col-md-2 offset-md-1 user-img mt-5 '>
+                            <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '9.375rem', height:'9.375rem', borderRadius:'50%', background:'#Fff'}} />
                         </div>
-                        <div className='contents' >
-                            {activeTab === 'post' && <ProfilePost  userNickname={userInfo.nickName} postCount={handlePostCount}  />}
-                            {activeTab === 'playlist' && <ProfilePlayList userNickname={userInfo.nickName}/>}
-                            {activeTab === 'saved' && <ProfileSaved userNickname={userInfo.nickName}/>}
+                        <div className=' col-md-6 user-info ml-auto 'style={{ marginLeft: '3rem' }}>
+                            <div className="d-flex align-items-center"style={{gap: '3rem'}}>
+                                <p style={{ fontSize: '1.5rem'}}> <b>{userInfo.nickName}</b> </p>
+                                <Link to={`/profile/edit/${nickName}`}><SecondaryButton className='btn btn-outline-secondary' > <FaEdit /> 프로필 편집 </SecondaryButton></Link>
+                            </div>
+                            <div className="d-flex align-items-center" style={{ gap: '2rem', marginTop: '0.625rem',fontSize: '1rem', fontWeight: 500 }} >
+                                <span className='me-4'> 게시글 <b >{postCount}</b> </span>
+                                <span className='me-4' > 팔로우 <b > {userInfo.followingCnt} </b>  </span>
+                                <span> 팔로워  <b> {userInfo.followerCnt} </b> </span>
+                            </div>
                         </div>
-
                     </div>
-
-                    <div className='col-md-2'>
-                        <MiniPlayer />
+                ) : (
+                    <div className='user-container d-flex align-items-center mb-3'>
+                        <div className=' col-md-2 offset-md-1 mt-5 '>
+                            <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '9.375rem', height:'9.375rem', backgroundColor:'#Fff', borderRadius:'50%' }} />
+                        </div>
+                        <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '3rem'  }}>
+                            <div className="d-flex align-items-center">
+                                <p style={{ fontSize: '1.5rem', marginRight: '3rem' }}> <b>{userInfo.nickName}</b> </p>
+                                {isFollowed ?(
+                                    <FollowingButton onClick={handleFollowToggle}><RiUserHeartLine style={{ marginRight: '6px',fontSize: '18px' }} />팔로잉</FollowingButton>
+                                ):(
+                                    <FollowButton onClick={handleFollowToggle}> <TbUserHeart style={{ marginRight: '6px',fontSize: '18px' }} /> 팔로우</FollowButton>
+                                )}
+                            </div>
+                            <div className="d-flex align-items-center" style={{ marginLeft: 'auto', marginTop: '0.625rem',fontSize: '1rem' }} >
+                                <span className='me-4' > 게시글 <b style={{  marginRight: '0.25rem'}}>{postCount}</b> </span>
+                                <span className='me-4'> 팔로우 <b style={{  marginRight: '0.25rem'}}>{userInfo.followingCnt}</b> </span>
+                                <span > 팔로워  <b style={{  marginRight: '0.25rem'}}>{userInfo.followerCnt}</b> </span>
+                            </div>
+                        </div>
                     </div>
+                )}
+
+                <hr className="tab-divider"/>      
+
+                <div className='button-container'  >
+                    <button onClick={() => handleTabChange('post')} className={`tab-button ${activeTab === 'post' ? 'active' : ''}`}><RiFolderMusicLine className="icon" size={19} />게시물</button>
+                    <button onClick={() => handleTabChange('playlist')} className={`tab-button ${activeTab === 'playlist' ? 'active' : ''}`}><TbPlaylist className="icon" size={19} />플레이리스트</button>
+                    <button onClick={() => handleTabChange('saved')} className={`tab-button ${activeTab === 'saved' ? 'active' : ''}`} ><FiBookmark className="icon" size={19} />저장됨</button>
+                </div>
+                <div className='contents' >
+                    {activeTab === 'post' && <ProfilePost  userNickname={userInfo.nickName} postCount={handlePostCount}  />}
+                    {activeTab === 'playlist' && <ProfilePlayList userNickname={userInfo.nickName}/>}
+                    {activeTab === 'saved' && <ProfileSaved userNickname={userInfo.nickName}/>}
                 </div>
             </PC>
 

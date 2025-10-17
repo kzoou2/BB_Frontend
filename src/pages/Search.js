@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navigation/Navbar';
 import { Mobile, PC } from '../components/Responsive';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import MiniPlayer from '../components/Player/MiniPlayer';
 import '../style/css/Search.css';
 import PlaylistCard from '../components/Common/PlaylistCard';
 import PostCard from '../components/Common/PostCard';
@@ -111,25 +109,6 @@ function Search() {
 
 
 
-    const filteredResult = () => {
-        let results = [];
-
-        if (filter === 'all') {
-            results = searchResult;
-        } else if (filter === 'post') {
-            results = searchResult.filter(result => result.article_type === 'FEED_TYPE').slice(0, 5);
-        } else if (filter === 'playlist') {
-            results = searchResult.filter(result => result.article_type === 'PLAYLIST_TYPE').slice(0, 5);
-        } else if (filter === 'user') {
-            results = userDetails;
-        } else  {
-            results = [];
-        }
-
-        return results;
-    };
-
-
     const handleInputChange = (e) => {
         setSearchText(e.target.value);
     };
@@ -187,123 +166,110 @@ function Search() {
     return (
         <div>
             <PC>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Navbar/>
+                <div className='search-filter-container'>
+                    <div className='input-container d-flex ms-4 me-4' style={{ marginTop: '35px', marginBottom: '10px' }}>
+                        <TextInput  value={searchText} onChange={handleInputChange} placeholder="검색어를 입력해보세요." size='large' searchIcon={IoIosSearch} closeIcon={searchText.length > 0 ? IoMdClose : null } onClose={() => setSearchText('')}  />
                     </div>
-
-                    <div className='col-md-8' style={{ maxHeight: '96vh', overflowY: 'auto' }}>
-                        <div className='search-filter-container'>
-                            <div className='input-container d-flex ms-4 me-4' style={{ marginTop: '35px', marginBottom: '10px' }}>
-                                <TextInput  value={searchText} onChange={handleInputChange} placeholder="검색어를 입력해보세요." size='large' searchIcon={IoIosSearch} closeIcon={searchText.length > 0 ? IoMdClose : null } onClose={() => setSearchText('')}  />
-                            </div>
-                            <div className='filter-buttons'>
-                                <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`}> 모두</button>
-                                <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`}  onClick={() => goSearchByFeed({ searchText })}>게시글</button>
-                                <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} onClick={() => goSearchByPlaylist({ searchText })}>플레이리스트</button>
-                                <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`}  onClick={() => goSearchByTag({ searchText })} >태그</button>
-                            </div>
-                        </div>
-
-                        <div className='result-container ms-4 me-4'>
-                            <div>
-                                {!searchText ?(
-                                    <div className="no-search-container">
-                                        <h3 className='mt-5 mb-2' style={{ textAlign: 'center' }}>인기 플레이리스트</h3>
-                                        <div className='row' >
-                                            {plByLikes?.slice(0, 3).map((playlist) =>(
-                                                <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail} />
-                                            ) )}
-                                        </div>
-                                    </div>
-                                ):(
-                                    
-                                <>
-                                    <div className='user-container'>
-                                        <h3 style={{ textAlign: 'left' }}>사용자</h3>
-                                            {userDetails?.length > 0 ? (
-                                                <div className='row'>
-                                                    {userDetails.map((user, index) => (
-                                                        <div className='col-md-4' key={index}>
-                                                            <Link to={`/profile/${user.nickName}`} className="profile-link" state={{ textDecorationLine: "none", color: "white" }}>
-                                                                <div className="profile-card mb-2">
-                                                                    <div className="profile-img">
-                                                                        <img src={user.userImgSrc} alt={user.nick_name} className="profile-img-tag" />
-                                                                    </div>
-                                                                    <div className="profile-text">
-                                                                        <p className="profile-nickname">{user.nickName}</p>
-                                                                        <p className="profile-following"> 팔로워 {user.followerCnt}명 • 팔로잉 {user.followingCnt}명</p>
-                                                                    </div>
-                                                                </div>
-                                                            </Link>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <div className='no-results'>
-                                                    <div style={{ textAlign: 'center', color: '#aaa' }}>
-                                                        <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
-                                                        <p style={{ fontSize: '16px', marginBottom: '5px' }}>사용자 검색 결과가 없습니다.</p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    <hr/>
-
-
-                                        <div className='posts-container'>
-                                            <h3 className='mt-4 mb-2' style={{ textAlign: 'left' }}>게시글</h3>
-                                            {searchResult.filter(result => result.article_type === "FEED_TYPE").length > 0 ? (
-                                                <div className='row'>
-                                                    {searchResult.filter(result => result.article_type === "FEED_TYPE").map((result) => (
-                                                        <PostCard key={result.id} music={transformMusicData(result)} onClick={() => openFeedDetail(result)} />
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <div className="no-results">
-                                                    <div style={{ textAlign: 'center', color: '#aaa' }}>
-                                                        <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
-                                                        <p style={{ fontSize: '16px', marginBottom: '5px' }}>게시글 검색 결과가 없습니다.</p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    <hr />
-
-                                        <div className='playlists-container'>
-                                            <h3 className='mt-4 mb-2' style={{ textAlign: 'left' }}>플레이리스트</h3>
-                                            {searchResult.filter(result => result.article_type === "PLAYLIST_TYPE").length > 0 ? (
-                                            <div className='row'>
-                                                {searchResult.filter(result => result.article_type === "PLAYLIST_TYPE").slice(0, 6).map((result) => {
-                                                    const transformedData = transformPlaylistData(result);
-                                                    return (
-                                                        <PlaylistCard key={transformedData.id} playlist={transformedData} onClick={openPlaylistDetail} />
-                                                    );
-                                                })}
-                                            </div>
-                                            ) : (
-                                                <div className="no-results">
-                                                    <div style={{ textAlign: 'center', color: '#aaa' }}>
-                                                        <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
-                                                        <p style={{ fontSize: '16px', marginBottom: '5px' }}>플레이리스트 검색 결과가 없습니다.</p>
-                                                    </div>
-                                                    
-                                                </div>
-                                            )}
-                                        </div>
-                                    <hr />
-                                </>
-                            )}
-
-                            </div>
-                        </div>
+                    <div className='filter-buttons'>
+                        <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`}> 모두</button>
+                        <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`}  onClick={() => goSearchByFeed({ searchText })}>게시글</button>
+                        <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} onClick={() => goSearchByPlaylist({ searchText })}>플레이리스트</button>
+                        <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`}  onClick={() => goSearchByTag({ searchText })} >태그</button>
                     </div>
-
-                    <div className='col-md-2'>
-                        <MiniPlayer/>
-                    </div>
-
                 </div>
+
+                <div className='result-container ms-4 me-4'>
+                    <div>
+                        {!searchText ?(
+                            <div className="no-search-container">
+                                <h3 className='mt-5 mb-2' style={{ textAlign: 'center' }}>인기 플레이리스트</h3>
+                                <div className='row' >
+                                    {plByLikes?.slice(0, 3).map((playlist) =>(
+                                        <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail} />
+                                    ) )}
+                                </div>
+                            </div>
+                        ):(
+                            
+                        <>
+                            <div className='user-container'>
+                                <h3 style={{ textAlign: 'left' }}>사용자</h3>
+                                    {userDetails?.length > 0 ? (
+                                        <div className='row'>
+                                            {userDetails.map((user, index) => (
+                                                <div className='col-md-4' key={index}>
+                                                    <Link to={`/profile/${user.nickName}`} className="profile-link" state={{ textDecorationLine: "none", color: "white" }}>
+                                                        <div className="profile-card mb-2">
+                                                            <div className="profile-img">
+                                                                <img src={user.userImgSrc} alt={user.nick_name} className="profile-img-tag" />
+                                                            </div>
+                                                            <div className="profile-text">
+                                                                <p className="profile-nickname">{user.nickName}</p>
+                                                                <p className="profile-following"> 팔로워 {user.followerCnt}명 • 팔로잉 {user.followingCnt}명</p>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className='no-results'>
+                                            <div style={{ textAlign: 'center', color: '#aaa' }}>
+                                                <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
+                                                <p style={{ fontSize: '16px', marginBottom: '5px' }}>사용자 검색 결과가 없습니다.</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            <hr/>
+
+
+                                <div className='posts-container'>
+                                    <h3 className='mt-4 mb-2' style={{ textAlign: 'left' }}>게시글</h3>
+                                    {searchResult.filter(result => result.article_type === "FEED_TYPE").length > 0 ? (
+                                        <div className='row'>
+                                            {searchResult.filter(result => result.article_type === "FEED_TYPE").map((result) => (
+                                                <PostCard key={result.id} music={transformMusicData(result)} onClick={() => openFeedDetail(result)} />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="no-results">
+                                            <div style={{ textAlign: 'center', color: '#aaa' }}>
+                                                <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
+                                                <p style={{ fontSize: '16px', marginBottom: '5px' }}>게시글 검색 결과가 없습니다.</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            <hr />
+
+                                <div className='playlists-container'>
+                                    <h3 className='mt-4 mb-2' style={{ textAlign: 'left' }}>플레이리스트</h3>
+                                    {searchResult.filter(result => result.article_type === "PLAYLIST_TYPE").length > 0 ? (
+                                    <div className='row'>
+                                        {searchResult.filter(result => result.article_type === "PLAYLIST_TYPE").slice(0, 6).map((result) => {
+                                            const transformedData = transformPlaylistData(result);
+                                            return (
+                                                <PlaylistCard key={transformedData.id} playlist={transformedData} onClick={openPlaylistDetail} />
+                                            );
+                                        })}
+                                    </div>
+                                    ) : (
+                                        <div className="no-results">
+                                            <div style={{ textAlign: 'center', color: '#aaa' }}>
+                                                <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
+                                                <p style={{ fontSize: '16px', marginBottom: '5px' }}>플레이리스트 검색 결과가 없습니다.</p>
+                                            </div>
+                                            
+                                        </div>
+                                    )}
+                                </div>
+                            <hr />
+                        </>
+                    )}
+                    </div>
+                </div>
+
                 {isFeedDetailOpen && (
                     <FeedDetail
                         open={isFeedDetailOpen}

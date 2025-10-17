@@ -1,10 +1,8 @@
 import React, { useEffect,useState } from "react";
 import { useLocation } from "react-router-dom";
 import { PC, Mobile } from "../Responsive";
-import Navbar from '../../components/Navigation/Navbar';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import MiniPlayer from '../../components/Player/MiniPlayer';
 import '../../style/css/Search.css';
 import PlaylistCard from "../Common/PlaylistCard";
 import TextInput from "../Common/TextInput";
@@ -90,50 +88,37 @@ function SearchByPlaylist ({searchText: initialSearchText, filter}){
     return(
         <div>
             <PC>
-                <div className="row">
-                    <div className="col-md-2">
-                        <Navbar/>
+                <div className="search-filter-container">
+                    <div className='search-input d-flex ms-4 me-4' style={{ marginTop: '35px', marginBottom: '10px' }}>
+                        <TextInput  value={searchText} onChange={handleInputChange} placeholder="검색어를 입력해보세요." size='large' searchIcon={IoIosSearch} closeIcon={searchText.length > 0 ? IoMdClose : null } onClose={() => setSearchText('')}  />
                     </div>
-
-                    <div className="col-md-8">
-                        <div className="search-filter-container">
-                            <div className='search-input d-flex ms-4 me-4' style={{ marginTop: '35px', marginBottom: '10px' }}>
-                                <TextInput  value={searchText} onChange={handleInputChange} placeholder="검색어를 입력해보세요." size='large' searchIcon={IoIosSearch} closeIcon={searchText.length > 0 ? IoMdClose : null } onClose={() => setSearchText('')}  />
-                            </div>
-                            <div className='filter-buttons' >
-                                <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`}  onClick={() => goSearchByAll(searchText)}>모두</button>
-                                <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`}  onClick={() => goSearchByFeed(searchText)}>게시글</button>
-                                <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} onClick={() => goSearchByPlaylist(searchText)}>플레이리스트</button>
-                                <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`} onClick={() => goSearchByTag(searchText)}>태그</button>
-                            </div>
-                        </div>
-                        
-
-                        <div className="Playlist-result ms-4 me-4">
-                            <h3 style={{textAlign:'left'}}> 플레이리스트 </h3>
-                                <hr />
-                            <div className="result-container">
-                                <div className="row">
-                                    {playlistResult.length > 0 ? (
-                                        playlistResult?.map((result) => (
-                                            <PlaylistCard key={result.id} playlist={transformPlaylistData(result)} onClick={openPlaylistDetail} />
-                                        ))
-                                    ) : (
-                                        <div style={{ textAlign: 'center', width: '100%', padding: '40px 20px', color: '#aaa' }}>
-                                            <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
-                                            <p style={{ fontSize: '16px', marginBottom: '5px' }}>검색 결과가 없습니다.</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-2">
-                        <MiniPlayer/>
+                    <div className='filter-buttons' >
+                        <button className={`filterbtn ${selectedButton === 'all' ? 'selected' : ''}`}  onClick={() => goSearchByAll(searchText)}>모두</button>
+                        <button className={`filterbtn ${selectedButton === 'feed' ? 'selected' : ''}`}  onClick={() => goSearchByFeed(searchText)}>게시글</button>
+                        <button className={`filterbtn ${selectedButton === 'playlist' ? 'selected' : ''}`} onClick={() => goSearchByPlaylist(searchText)}>플레이리스트</button>
+                        <button className={`filterbtn ${selectedButton === 'tag' ? 'selected' : ''}`} onClick={() => goSearchByTag(searchText)}>태그</button>
                     </div>
                 </div>
                 
+
+                <div className="Playlist-result ms-4 me-4">
+                    <h3 style={{textAlign:'left'}}> 플레이리스트 </h3>
+                        <hr />
+                    <div className="result-container">
+                        <div className="row">
+                            {playlistResult.length > 0 ? (
+                                playlistResult?.map((result) => (
+                                    <PlaylistCard key={result.id} playlist={transformPlaylistData(result)} onClick={openPlaylistDetail} />
+                                ))
+                            ) : (
+                                <div style={{ textAlign: 'center', width: '100%', padding: '40px 20px', color: '#aaa' }}>
+                                    <TbMoodCry size={40} style={{ marginBottom: '10px', color: '#888' }} />
+                                    <p style={{ fontSize: '16px', marginBottom: '5px' }}>검색 결과가 없습니다.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </PC>
             <Mobile></Mobile>
         </div>

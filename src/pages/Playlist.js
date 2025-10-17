@@ -5,7 +5,6 @@ import '../style/css/Home.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import MiniPlayer from '../components/Player/MiniPlayer';
 import '../style/css/PlayList.css';
 import PlaylistCard from '../components/Common/PlaylistCard';
 
@@ -57,38 +56,31 @@ function Playlist() {
     return (
         <div>
             <PC>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Navbar />
-                    </div>
-                    <div className='col-md-8' style={{ maxHeight: '96vh', overflowY: 'auto' }}>
-                        <div className='mt-5' >
-                            <div className='tabs-container'>
-                                <div className='tabs'>
-                                    <input type="radio" id="latest" name="playlist_sort" defaultChecked className="tabs" onClick={()=>handleTabChange('latest')}/>
-                                    <label htmlFor="latest" className="tab">최신순</label>
+                <div className='mt-5' >
+                    <div className='tabs-container'>
+                        <div className='tabs'>
+                            <input type="radio" id="latest" name="playlist_sort" defaultChecked className="tabs" onClick={()=>handleTabChange('latest')}/>
+                            <label htmlFor="latest" className="tab">최신순</label>
 
-                                    <input type="radio" id="popular" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('popular')}/>
-                                    <label htmlFor="popular" className="tab">인기순</label>
+                            <input type="radio" id="popular" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('popular')}/>
+                            <label htmlFor="popular" className="tab">인기순</label>
 
-                                    <input type="radio" id="most_songs" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('most_songs')}/>
-                                    <label htmlFor="most_songs" className="tab">곡 많은</label>
-                                    <span class="glider"></span>
-                                </div>
-                            </div>
-
-                            {isLoading ? <Loading /> : null}
-                            <div className='row ms-4 me-4'>
-                                {sortedData().map((playlist) => (
-                                    <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail}/>
-                                ))}
-                            </div>
+                            <input type="radio" id="most_songs" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('most_songs')}/>
+                            <label htmlFor="most_songs" className="tab">곡 많은</label>
+                            <span class="glider"></span>
                         </div>
                     </div>
-                    <div className='col-md-2'>
-                        <MiniPlayer />
+
+                    {isLoading ? <Loading /> : null}
+                    <div className='row ms-4 me-4'>
+                        {sortedData().map((playlist) => (
+                            <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail}/>
+                        ))}
                     </div>
                 </div>
+
+
+
             </PC>
 
             <Mobile>

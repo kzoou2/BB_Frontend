@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Overlay, TextInputModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
+import { Overlay, TextInputModalWrap, Contents} from '../../../style/styled_components/PostModal_Style';
 import ModalContainer from '../Config/ModalContainer';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import Tagify from '@yaireo/tagify';
@@ -13,12 +13,12 @@ import { CloseButton } from 'react-bootstrap';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import MusicSearch from './MusicSearch';
 import "../../../style/css/TextInput.css";
-import { PrimaryButton,SecondaryButton } from '../../../style/styled_components/Button_Style';
+import { PrimaryButton } from '../../../style/styled_components/Button_Style';
 
 
 // 가수, 노래제목, 발매연도, 앨범이름, 사진, 글, 해시태그, 작성자, 비디오아이디
 function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const modalRef = useRef(null);
     const inputFileRef = useRef(null);
     // const [isPostPicSelectOpen, setIsPostPicSelectOpen] = useState(false);
@@ -84,10 +84,6 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             })
             .catch(error => console.log('error', error));
     }
-
-    // const goPostPicSelect = () => {
-    //     setIsPostPicSelectOpen(true);
-    // }
 
     const goMusicSearch = () => {
         setIsMusicSearchOpen(true);
@@ -178,8 +174,6 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
                                 </div>
 
                                 <div className='d-flex justify-content-center mt-1'>
-                                    {/* <SecondaryButton type="button" className=" me-3" style={{ width: '10rem'}} onClick={() => inputFileRef.current.click()}>Change Image</SecondaryButton>
-                                    <input ref={inputFileRef} accept="image/*" multiple type="file" style={{ display: 'none' }} onChange={(e) => onUpload(e)} /> */}
                                     <PrimaryButton style={{ width: '10rem'}} onClick={() => postFeed()}>작성</PrimaryButton>
                                 </div>
                             </Contents>

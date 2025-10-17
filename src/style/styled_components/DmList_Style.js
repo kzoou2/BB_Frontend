@@ -1,38 +1,39 @@
 import styled from "styled-components";
 
 export const ListContainer = styled.ul`
-    overflow-y: auto;
-    // height: 70vh;
-    list-style: none;
-    padding: 0;
-    margin: 5%;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 5%;
+  max-width: 100%;
+  box-sizing: border-box;
 `
 
 export const StyledChatButton = styled.li`
-display: flex;
-align-items: center;
-justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%; 
+  box-sizing: border-box; 
+
+  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
+  border: none;
+  background: ${({ selected }) => (selected ? '#EAEAEA' : 'gray')};
+  transition: background 0.3s;
+
+  border-radius: 0.45rem; 
+  margin-bottom: 0.625rem;  
+  padding: 0.625rem 0.925rem;
+  cursor: pointer;
 
 
+  &:not(:hover) {
+      background: ${({ selected }) => (selected ? '#EAEAEA' : '#1E1E1E')};
+  }
 
-font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
-border: none;
-background: ${({ selected }) => (selected ? '#EAEAEA' : 'gray')};
-transition: background 0.3s;
-
-border-radius: 7px;
-margin-bottom: 10px;
-padding: 10px 15px;
-cursor: pointer;
-
-
-&:not(:hover) {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : '#1E1E1E')};
-}
-
-&:hover {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : '#333')}; 
-}
+  &:hover {
+      background: ${({ selected }) => (selected ? '#EAEAEA' : '#333')}; 
+  }
 
   .chat {
     display: flex;
@@ -40,8 +41,8 @@ cursor: pointer;
     
 
     img {
-      width: 45px;
-      height: 45px;
+      width: 3rem;
+      height: 3rem;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 12px;
@@ -51,10 +52,11 @@ cursor: pointer;
     .chat-meta {
       display: flex;
       flex-direction: column;
+      justify-content: center;
 
       strong {
         color: white;
-        font-size: 16px;
+        font-size: 1.1rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -62,10 +64,10 @@ cursor: pointer;
       }
 
       .chat-preview {
-        font-size: 13px;
+        font-size: 0.9rem;
         color: #b0b0b0;
-        margin-top: 4px;
-        margin-left: 12px
+        margin-top: 0.2rem;
+        margin-left: 0.9rem
       }
     }
 `;

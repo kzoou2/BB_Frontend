@@ -4,7 +4,7 @@ import NewDm from '../Modal/DM/NewDm';
 import "../../style/css/DmRoom.css";
 import { Mobile,PC } from "../Responsive";
 import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { DmRoomIdAtom } from "../../state/DmAtom";
 import {userNicknameAtom} from "../../state/UserAtom";
 import { useWebSocket } from "../WebSocketConnection";
@@ -17,11 +17,12 @@ const DmRoom= ({ selectedChatInfo  }) => {
     const [message, setMessage] = useState('');     
     const [chatList, setChatList] = useState([]);   // 채팅기록
     const [isNewChatOpen, setIsNewChatOpen] = useState(false);
-    const [userData, setUserData] = useRecoilState(userNicknameAtom);
+    const currentUserNickname = useRecoilValue(userNicknameAtom);
+
     const otherImgSrc = selectedChatInfo?.participantImgSrc;
     const otherName = selectedChatInfo?.participantName;
     const subscriptionRef =  useRef(null);
-        const bottomRef = useRef(null);
+    const bottomRef = useRef(null);
 
     const handleKeyDown =(e) =>{
         if(e.key === 'Enter' && !e.shiftKey ){
@@ -111,7 +112,7 @@ const DmRoom= ({ selectedChatInfo  }) => {
     client.current?.publish({
         destination: "/chatting/pub/message",
         headers: { Authorization: window.localStorage.getItem('accessToken') },
-        body: JSON.stringify({ message, roomId:`${dmRoomId}` , chatType: "MESSAGE"}),
+        body: JSON.stringify({ message, roomId:`${dmRoomId}` , chatType: "MESSAGE",sender: currentUserNickname, }),
     });
 
     setMessage("");
@@ -126,14 +127,13 @@ const DmRoom= ({ selectedChatInfo  }) => {
     };
 
     const isDifferentTime = (prevMessage, currentMessage) => {
+        if (!prevMessage || !currentMessage) return true;
         const prevTime = formatTime(prevMessage.createdTime);
         const currentTime = formatTime(currentMessage.createdTime);
         return prevTime !== currentTime;
     };
 
     const formatDate = (dateTimeString) => {
-        // const date = new Date(dateTimeString);
-        // return `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
         const date = new Date(dateTimeString);
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -153,8 +153,6 @@ const DmRoom= ({ selectedChatInfo  }) => {
     return(
         <div>
             <PC>
-                {/* {dmRoomId !== 0 ? (
-                <> */}
                 <div className="dm-card" >
                     <div className="dm-header">
                         <Link to={`/profile/${otherName}`} style={{ textDecorationLine: "none", color: "white" }} >
@@ -175,15 +173,17 @@ const DmRoom= ({ selectedChatInfo  }) => {
                                     </>
                                 )}
 
-                                <div className={`message-box ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
-                                    {chat.sender === otherName && (
+                                <div className={`message-box ${chat.sender === currentUserNickname ? 'outgoing' : 'incoming'}`}>
+                                    {(chat.sender === otherName && (index === 0 || isDifferentTime(chat, chatList[index + 1], chat))) ? (
                                         <img className="userimg" src={otherImgSrc} alt="User Avatar" />
+                                    ):(
+                                        <div className="userimg-placeholder" />
                                     )}
                                     <div className="message-container">
                                         <div className='message'>{chat.message}</div>
                                         {(index === chatList.length - 1 || isDifferentTime(chat, chatList[index + 1])) && (
-                                            <div className={`count ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
-                                                {chat.readCount === 0 && <div className="read-status">읽음</div>}
+                                            <div className={`count ${chat.sender === currentUserNickname ? 'outgoing' : 'incoming'}`}>
+                                                {chat.sender === currentUserNickname && chat.readCount === 0 && <div className="read-status">읽음</div>}
                                                 <div className="message-time">{formatTime(chat.createdTime)}</div>
                                             </div>
                                         )}

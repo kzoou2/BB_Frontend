@@ -126,7 +126,7 @@ function PlayListSearch({ onClose, searchKeyword }) {
                                         {(searchResults && searchResults.length > 0) ? (
                                             searchResults.map((music, index) => (
                                             <div key={index} className="playlist-card" style={{ cursor: 'pointer', marginBottom: '10px' }}>
-                                                <img className="playlist-img" src={music.musicInfoList[0].albumUrl} alt={`Thumbnail ${index}`} />
+                                                <img className="playlist-img" src={music.feedImgSrc || music.musicInfoList[0].albumUrl} alt={`Thumbnail ${index}`} />
                                                 <div className="playlist-text-container">
                                                     <span className="playlist-title" dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicTitle }} />
                                                     <p className="playlist-artist"  dangerouslySetInnerHTML={{ __html: music.musicInfoList[0].musicArtist }} />

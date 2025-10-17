@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import {PC, Mobile} from "../Responsive";
-import Navbar from "../Navigation/Navbar";
+
 import Loading from "../Loading";
 import { useParams } from "react-router-dom";
-import MiniPlayer from "../Player/MiniPlayer";
+
 import "../../style/css/Edit.css";
 import ProfileDelete from "../Modal/Profile/ProfileDelete";
 import { GrEdit } from "react-icons/gr";
@@ -131,88 +131,72 @@ function ProfileEdit (){
     return(
         <div>
             <PC>
-                <div className="row">
-                    {isLoading ? <Loading /> : null}
-                    <div className="col-md-2">
-                        <Navbar/>
-                    </div>
-
-
-                    <div className="col-md-8">
-                        <div className="P-container">
-                                <div className="profile-edit-container">
-                                    <div className="profile-header">
-                                        <div className="header-text">프로필 편집</div>
-                                        <button className="withdraw-btn" type="submit" onClick={() => goProfileDelete()}>회원탈퇴</button>
-                                    </div>
-                                    
-                                    
-                                    <form className="profile-edit-form" onSubmit={handleFormSubmit}>
-                                        <div className="profile-picture-section">
-                                            {formData.profilePictureUrl ? (
-                                                <div className="profile-image-wrapper" onClick={() => document.getElementById("fileInput").click()}>
-                                                    <img className="profile-image" src={formData.profilePictureUrl} alt="프로필 이미지" />
-                                                    <div className="hover-overlay"><GrEdit/></div>
-                                                </div>
-                                            ) : (
-                                                userData.userImgSrc && (
-                                                    <div className="profile-image-wrapper" onClick={() => document.getElementById("fileInput").click()}>
-                                                        <img className="profile-image" src={userData.userImgSrc} alt="프로필 이미지" />
-                                                        <div className="hover-overlay"><GrEdit/></div>
-                                                    </div>
-                                                )
-                                            )}
-                                            <label className="file-input-label">
-                                                <input id="fileInput" type="file" name="userimgSrc" accept="image/*" onChange={handleFormChangeFile} style={{ display: 'none' }}/>
-                                            </label>
-                                        </div>
-                                        
-                                        <div className="form-group">
-                                            <label className="form-label">이메일</label>
-                                            <div className="tooltip-wrapper" data-tooltip="이메일은 변경할 수 없습니다.">
-                                                <input className="form-input read-only" readOnly value={userData.email} />
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group">
-                                            <label className="form-label">닉네임</label>
-                                            <input className="form-input" type="text" name="nickName" value={formData.nickName} onChange={handleFormChange} />
-                                        </div>
-                                        
-                                        <div className="form-group">
-                                            <label className="form-label">이름</label>
-                                            <input className="form-input" type="text" name="userName" value={formData.userName} onChange={handleFormChange} />
-                                        </div>
-
-                                        <div className="form-group-inline">
-                                            <div className="form-group half-width">
-                                                <label className="form-label">성별</label>
-                                                <select className="form-select" name="gender" value={formData.gender} onChange={handleFormChange}>
-                                                    <option value="">선택</option>
-                                                    <option value="남">남</option>
-                                                    <option value="여">여</option>
-                                                </select>
-                                            </div>
-                                            <div className="form-group half-width">
-                                                <label className="form-label">생일</label>
-                                                <input className="form-input" type="date" name="birth" value={formData.birth} onChange={handleFormChange} />
-                                            </div>
-                                        </div>
-
-                                        <div className="button-group">
-                                            <SecondaryButton className="btn" Click={handleCancel} type="button" >취소</SecondaryButton>
-                                            <PrimaryButton className="btn" type="submit" >수정</PrimaryButton>
-                                        </div>
-
-
-                                    </form>
-
-                                </div>
+                {isLoading ? <Loading /> : null}
+                <div className="P-container">
+                    <div className="profile-edit-container">
+                        <div className="profile-header">
+                            <div className="header-text">프로필 편집</div>
+                            <button className="withdraw-btn" type="submit" onClick={() => goProfileDelete()}>회원탈퇴</button>
                         </div>
-                    </div>
+                        
+                        <form className="profile-edit-form" onSubmit={handleFormSubmit}>
+                            <div className="profile-picture-section">
+                                {formData.profilePictureUrl ? (
+                                    <div className="profile-image-wrapper" onClick={() => document.getElementById("fileInput").click()}>
+                                        <img className="profile-image" src={formData.profilePictureUrl} alt="프로필 이미지" />
+                                        <div className="hover-overlay"><GrEdit/></div>
+                                    </div>
+                                ) : (
+                                    userData.userImgSrc && (
+                                        <div className="profile-image-wrapper" onClick={() => document.getElementById("fileInput").click()}>
+                                            <img className="profile-image" src={userData.userImgSrc} alt="프로필 이미지" />
+                                            <div className="hover-overlay"><GrEdit/></div>
+                                        </div>
+                                    )
+                                )}
+                                <label className="file-input-label">
+                                    <input id="fileInput" type="file" name="userimgSrc" accept="image/*" onChange={handleFormChangeFile} style={{ display: 'none' }}/>
+                                </label>
+                            </div>
+                            
+                            <div className="form-group">
+                                <label className="form-label">이메일</label>
+                                <div className="tooltip-wrapper" data-tooltip="이메일은 변경할 수 없습니다.">
+                                    <input className="form-input read-only" readOnly value={userData.email} />
+                                </div>
+                            </div>
 
-                    <div className="col-md-2">
-                        <MiniPlayer/>
+                            <div className="form-group">
+                                <label className="form-label">닉네임</label>
+                                <input className="form-input" type="text" name="nickName" value={formData.nickName} onChange={handleFormChange} />
+                            </div>
+                            
+                            <div className="form-group">
+                                <label className="form-label">이름</label>
+                                <input className="form-input" type="text" name="userName" value={formData.userName} onChange={handleFormChange} />
+                            </div>
+
+                            <div className="form-group-inline">
+                                <div className="form-group half-width">
+                                    <label className="form-label">성별</label>
+                                    <select className="form-select" name="gender" value={formData.gender} onChange={handleFormChange}>
+                                        <option value="">선택</option>
+                                        <option value="남">남</option>
+                                        <option value="여">여</option>
+                                    </select>
+                                </div>
+                                <div className="form-group half-width">
+                                    <label className="form-label">생일</label>
+                                    <input className="form-input" type="date" name="birth" value={formData.birth} onChange={handleFormChange} />
+                                </div>
+                            </div>
+
+                            <div className="button-group">
+                                <SecondaryButton className="btn" onClick={handleCancel} type="button" >취소</SecondaryButton>
+                                <PrimaryButton className="btn" type="submit" >수정</PrimaryButton>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
 

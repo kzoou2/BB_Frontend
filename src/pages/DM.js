@@ -5,8 +5,6 @@ import NewDm from '../components/Modal/DM/NewDm';
 import { Mobile, PC } from '../components/Responsive';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { DmRoomIdAtom } from '../state/DmAtom';
-import MiniNavbar from '../components/Navigation/MiniNavbar';
-import MiniPlayer from '../components/Player/MiniPlayer';
 import { useNavigate } from 'react-router-dom';
 import { useWebSocket } from '../components/WebSocketConnection';
 import { AiOutlineMessage } from "react-icons/ai";
@@ -41,12 +39,11 @@ function DM() {
     return (
             <div>
                 <PC>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0px', }}>
-                        <div className='col-md-1'><MiniNavbar/></div>
-                        <div className='col-md-2' >
+                    <div className='row'>
+                        <div className='col-md-3' >
                             <DmList setSelectedChatInfo={setSelectedChatInfo}  selectedChatInfo={selectedChatInfo} />
                         </div>
-                        <div className='col-md-7'>
+                        <div className='col-md-9'>
                         {connected ? (
                             dmRoomId && dmRoomId !== "0" ? (
                                 <DmRoom selectedChatInfo={selectedChatInfo} />
@@ -64,12 +61,8 @@ function DM() {
                                 <p style={{ fontSize: '14px', color: '#888', marginTop: '5px' }}>채팅방을 여는 중이에요...</p>
                             </div>
                         )}
-                        </div>
-
-                        <div className='col-md-2'>
-                            <MiniPlayer />
-                        </div>
-
+                    </div>
+                    
                     {isNewChatOpen && (<NewDm
                         open={isNewChatOpen}
                         onClose={() => {
@@ -78,8 +71,8 @@ function DM() {
                     />)}    
                     </div>
                 </PC>
+
                 <Mobile>
-                <MiniNavbar/>
                     <div>
                     <DmList setSelectedChatInfo={setSelectedChatInfo}  selectedChatInfo={selectedChatInfo} />
                     </div>

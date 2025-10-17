@@ -177,7 +177,7 @@ function FeedDetail({ onClose, music, musicId }) {
                                             </div>
 
                                             <div className="icon-group">
-                                                <IoMusicalNoteSharp id={`${isLiked ? 'liked' : 'unliked'}`} size={20} onClick={handleLikeToggle} style={{ cursor: "pointer" }} />
+                                                <IoMusicalNoteSharp id={`${isLiked ? 'liked' : 'unliked'}`} size={20} onClick={handleLikeToggle} style={{ cursor: "pointer", color: isLiked ? '#FEF164' : '' }} />
                                                 <IoPaperPlaneOutline size={20} onClick={goDM} style={{ cursor: "pointer" }} />
                                                 {isBookmarked ? (
                                                     <FaBookmark size={20} onClick={handleBookmark} style={{ cursor: "pointer" }} />
