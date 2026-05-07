@@ -6,6 +6,8 @@ import { BsMusicNoteList } from "react-icons/bs";
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import MusicSearch from './MusicSearch';
 import PlayListSearch from '../PlayList/PlayListSearch';
+import { CloseButton } from 'react-bootstrap';
+import '../../../style/css/PostModal.css'
 
 function CreatePost({ onClose }) {
     const modalRef = useRef(null);
@@ -41,6 +43,7 @@ function CreatePost({ onClose }) {
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
                                 <h3 className='d-flex justify-content-center'>New Post</h3>
                                 <div className='d-flex justify-content-center mb-3'>
@@ -48,13 +51,23 @@ function CreatePost({ onClose }) {
                                 </div>
 
                                 <div className='d-flex justify-content-center mt-5 pt-5'>
-                                    <div className='me-5' onClick={() => goMusicSearch()} style={{ cursor: "pointer" }}>
-                                        <FaItunesNote className='mb-3' size='130' color='black' />
-                                        <h5 className='ms-3'>Create Post</h5>
+                                    <div className='me-5 create-container' onClick={() => goMusicSearch()} style={{ cursor: "pointer" }}>
+                                        <FaItunesNote className='mb-3' size='130' color='white' />
+                                        <button className='create-more'>
+                                            <span className='circle' aria-hidden='true'>
+                                                <span className='icon arrow'></span>
+                                            </span>
+                                            <span className='create-btn-textL'>Create Post</span>
+                                        </button>
                                     </div>
-                                    <div className='ms-5' onClick={() => goPlayListSearch()} style={{ cursor: "pointer" }}>
-                                        <BsMusicNoteList className='ms-4 mb-3' size='130' color='black' />
-                                        <h5 className='ms-3'>Create PlayList</h5>
+                                    <div className='ms-3 create-container' onClick={() => goPlayListSearch()} style={{ cursor: "pointer" }}>
+                                        <BsMusicNoteList className='ms-4 mb-3' size='130' color='white' />
+                                        <button className='create-more'>
+                                            <span className='circle' aria-hidden='true'>
+                                                <span className='icon arrow'></span>
+                                            </span>
+                                            <span className='create-btn-textR'>Create PlayList</span>
+                                        </button>
                                     </div>
                                 </div>
                             </Contents>

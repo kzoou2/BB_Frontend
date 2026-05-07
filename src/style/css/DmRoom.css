@@ -1,6 +1,8 @@
 
 .dm-card {
-    background-color: #181818;
+    overflow-y: auto;
+    height: 95vh;
+    background-color: #1e1e1e;
     border-radius: 10px;
     padding: 15px;
     margin: 20px;
@@ -8,7 +10,6 @@
     flex-direction: column;
     width: 90%;
 }
-
 
 .dm-header {
     display: flex;
@@ -23,184 +24,162 @@
     border-radius: 50%;
     margin-right: 30px;
     margin-left: 10px;
-    background-color: #333;
+    background-color: white;
 }
 
 .dm-header .text-chat {
     color: white;
-    font-style:normal;
     margin: 0;
-    font-size: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: inline-block;
 }
 
 /* 채팅창 */
 .dm-body {
     flex: 1;
     overflow-y: auto;
+    padding: 20px 2.5%; 
+    height: "500px" 
 }
 
-.messages-container {
-    padding: 15px;
+.message-date {
+    font-size: 11px;
+    color:#B0B0B0;
+    text-align: center;
+    /* margin-bottom: 20px; */
+        margin: 30px 0 10px;
+}
+
+hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.3); 
+    margin: 30px 0 10px; 
+    width: 100%;
+}
+
+.dm-body .userimg{
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.dm-body .userimg-placeholder {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .message-box {
-    margin-bottom: 5px;
-    border-radius: 10px;
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    animation: fadeIn 0.3s ease;
 }
 
-.userimg{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-left: 15px;
-    background-color: #333;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+.message-container {
+    width: 100%;
+    display: flex;
+    gap: 5px; 
+}
 
-/* 말풍선  */
+/* incoming message (상대방) */
+.message-box.incoming .message-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    transform: translateY(50%);
+}
+
 .message-box.incoming .message {
-    background-color: #f1f1f1;
-    color: black;
-    font-size: 14px;
+    /* background-color: #f1f1f1; */
+    background-color: #2a2a2a ;
+    color: #f1f1f1;
+    font-size: 0.9rem;
+    font-weight: 500;
     text-align: left;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0.625rem 0.875rem ;
+    border-radius: 0 1rem 1rem 1rem;
     word-wrap: break-word;
     white-space: pre-line;
     width: fit-content;
-    height:fit-content;
-    margin-left: 45px;
-    margin-bottom: 5px;
-    /* flex-grow: 1; */
+    max-width: 300px; 
+    order: 0;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
-.message-box .count.incoming {
-    font-size: 10px;
-    color: white;
-    text-align: left;
-    margin-left: 50px;
-    margin-bottom: 10px;
+.message-box.incoming .count {
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
-.message-time .incoming{
-    font-size: 10px;
-    color: white;
-    margin-left: 50px;
+.message-box.incoming .message-time {
+order: 0;
+}
 
+.message-box.incoming .read-status {
+order: 1;
+}
+
+/* outgoing message (내 채팅) */
+.message-box.outgoing .message-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
 }
 
 .message-box.outgoing .message{
-    background-color: #333;
-    color: #fff;
-    font-size: 14px;
+    background-color: #FFE95E;
+    color: #1e1e1e;
+    font-size: 0.9rem;
+    font-weight: 500;
     right: 0;
     text-align: right;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0.625rem 0.875rem;
+    border-radius: 1rem 1rem 0 1rem; 
     word-wrap: break-word;
     white-space: pre-line;
+    line-height: 1.5;
     width: fit-content;
-    height:fit-content;
-    flex-grow: 1;
-    margin-left: auto; 
-    margin-right: 15px;
-}
-.message-box .count.outgoing {
-    font-size: 10px;
-    color: white;
-    display: inline;
-    text-align: right;
-    margin-left: auto;
-    margin-right: 20px;
-    margin-bottom: 10px;
-}
-.message-time .outgoing{
-    font-size: 10px;
-    color: white;
-    display: inline;
-    text-align: right;
-    margin-left: auto;
-    margin-right: 20px;
-    margin-bottom: 10px;
-
+    max-width: 65%;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
+    
 }
 
-.message-date{
-    font-size: 11px;
-    font: bold;
-    color: white;
-    /* background-color: #CCC; */
-    border-radius: 15px;
-    padding: 5px;
-    margin: 0 auto;
-    width:fit-content;
+.message-box.outgoing .count {
+    flex-direction: row;
+    justify-content: flex-end;
 }
-.message-time{
+
+.message-box.outgoing .read-status {
+    order: 0;
+}
+
+.message-box.outgoing .message-time {
+    order: 1;
+
+}
+.message-time {
     font-size: 10px;
-    color: white;
-    margin: 0 auto;
+    color: gray;
+}
+
+.count {
     display: flex;
-    margin-top: 2px;
-}
-
-
-/* 입력창 */
-.dm-input {
-    /* padding: 5px;
-    border-top: 1px solid #ccc; */
-    width: 100%;
-    height: 50px;
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    background-color: #2d2d2d;
-    padding: 0 15px;
-    border-radius: 10px;
-    border: 1px solid rgb(63, 63, 63);
-}
-.dm-input .messageInput{
-    width: 90%;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    padding: 10px;
-    padding-left: 10px;
-    color: white;
-}
-.dm-input:focus-within {
-    border: 1px solid rgb(110, 110, 110);
+    font-size: 10px;
+    color: gray;
+    gap: 4px;
 }
 
-.dm-input .message-send {
-    width: 200px;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    padding-left: 10px;
-    color: white;
-}
 
-.dm-input .button-send {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    box-shadow: 0 4px 5px 0 rgba(254,241,100,.14), 0 1px 10px 0 rgba(254,241,100.12), 0 2px 4px -1px rgba(254,241,100.2);
-}
 
-.dm-input .button-send:hover {
-    /* background-color: #FEF164 ; */
-    color: #333;
-    background-color: #FEF164;
-    border-color: #FEF164;
-}
+

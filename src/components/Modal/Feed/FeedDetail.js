@@ -1,37 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import ModalContainer from '../Config/ModalContainer';
 import { PCContents, MobileContents, PCModalWrap, MobileModalWrap, Overlay } from '../../../style/styled_components/FeedDetailModal_Style';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import { Mobile, PC } from '../../Responsive';
-import { SiHeadspace } from "react-icons/si";
 import { IoMusicalNoteSharp, IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { LuMoreHorizontal, LuMoreVertical  } from "react-icons/lu";
 import { GrEdit } from "react-icons/gr";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { CloseButton } from 'react-bootstrap';
+import FeedEdit from './FeedEdit';
+import FeedDelete from './FeedDelete';
+import TextInput from '../../Common/TextInput';
+import { VscSend } from "react-icons/vsc";
+import { IoMusicalNotes } from "react-icons/io5";
+import '../../../style/css/Hashtag.css'
 import '../../../style/css/FeedDetail.css'
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 
 // Home에서 좋아요, 북마크 변수 값 받아야함. 디테일에서 변경한 값도 Home으로 보내서 공유해야함.
 // TODO: 모바일 미작업, 디테일 클릭할 때 다시 서버에서 통신해야할 듯
-function FeedDetail({ onClose, music }) {
+function FeedDetail({ onClose, music, musicId }) { 
     const modalRef = useRef(null);
     const navigate = useNavigate();
-    const [isNoteClicked, setIsNoteClicked] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [comment, setComment] = useState("");
     const [commentList, setCommentList] = useState(music.comments);
     const [isToggled, setIsToggled] = useState(false);
+    const [isFeedEdit, setIsFeedEdit] = useState(false);
+    const [isFeedDelete, setIsFeedDelete] = useState(false);
 
-
-    console.log(music)
 
     const handleClose = () => {
         onClose?.();
     };
+
 
     useEffect(() => {
         const $body = document.querySelector("body");
@@ -42,20 +48,56 @@ function FeedDetail({ onClose, music }) {
         };
     }, []);
 
-    const clickNote = () => {
-        setIsNoteClicked(!isNoteClicked);
-    }
+    const handleLikeToggle = async() => {
+        try{
+            const url = `http://localhost:8080/api/feeds/${music.id}/${isLiked ? 'unlike' : 'like'}`;
+            
+            const response = await axios.post(url, null, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                    'ngrok-skip-browser-warning': '69420',
+                },
+            });
+            if (response.status === 200) {
+                setIsLiked(prev => !prev); 
+                console.log(isLiked ? '좋아요 취소 성공' : '좋아요 성공');
+            }
+        } catch (error) {
+            console.error('좋아요 토글 중 오류 발생:', error);
+        }
+    };
 
     const goDM = () => {
         navigate('/dm');
     }
 
-    const onBookmark = () => {
-        setIsBookmarked(!isBookmarked);
-    }
+    const handleBookmark = async() => {
+        try{
+            const res = await axios.post(`http://localhost:8080/api/feeds/${music.id}/${isBookmarked ? 'unbookmark' : 'bookmark'}`, null,{
+                headers:{
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                    'ngrok-skip-browser-warning': '69420',
+                },
+            });
+            if (res.status === 200){
+                setIsBookmarked(prev => !prev);
+                console.log(isBookmarked? '북마크 취소 성공':'북마크 성공');
+            }
+        } catch(error){
+            console.log('북마크 토글 중 오류 발생', error);
+        }
+    };
 
     const handleCommentChange = (event) => {
         setComment(event.target.value);
+    }
+
+    const goFeedEdit = () =>{
+        setIsFeedEdit(true);
+    }
+
+    const goFeedDelete = () =>{
+        setIsFeedDelete(true);
     }
 
     const inputComment = async (feedId) => {
@@ -81,20 +123,6 @@ function FeedDetail({ onClose, music }) {
             });
     };
 
-    // useEffect(()=>{
-    //     axios.get(`http://localhost:8080/api/v1/users/search/${music.nickName}`,{
-    //         headers:{
-    //             'Content-Type': `application/json`,
-    //             'ngrok-skip-browser-warning': '69420',
-    //         },
-    //     })
-    //         .then((response) => {
-    //             console.log("result", response.data);
-    //         })
-    //         .catch((error) =>{
-    //             console.error("오류", error)
-    //         })
-    // },[music.nickName]);
 
     const handleClick = ()=> {
         setIsToggled(!isToggled);
@@ -102,96 +130,166 @@ function FeedDetail({ onClose, music }) {
 
     useOutSideClick(modalRef, handleClose)
 
+    const getRelativeTime = (dateString) => {
+        const now = new Date();
+        const createdAt = new Date(dateString);
+        const diffInMs = now - createdAt; // 밀리초 차이
+        const diffInSeconds = diffInMs / 1000;
+        const diffInMinutes = diffInSeconds / 60;
+        const diffInHours = diffInMinutes / 60;
+        const diffInDays = diffInHours / 24;
+        const diffInWeeks = diffInDays / 7;
+
+        if (diffInDays < 7) {
+            if (diffInDays < 1) {
+                if (diffInHours < 1) {
+                    return `${Math.round(diffInMinutes)}분 전`;
+                }
+                return `${Math.round(diffInHours)}시간 전`;
+            }
+            return `${Math.round(diffInDays)}일 전`;
+        } else {
+            return `${Math.round(diffInWeeks)}주 전`;
+        }
+    };
+
     return (
         <div>
             <PC>
+            {isFeedEdit || isFeedDelete ? null : (
                 <ModalContainer>
                     <Overlay>
                         <PCModalWrap ref={modalRef}>
-                            <CloseButton class="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '10px', right: '10px' }}></CloseButton>
-                            <PCContents>
-                                <div className='d-flex justify-content-center'>
-                                    <div className='justify-content-center' style={{ width: "50%", backgroundColor: "#242424" }}>
-                                        <div className='d-flex justify-content-end me-4' style={{}}>
-                                            <span className=''>
-                                                <IoMusicalNoteSharp id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} className='me-4' size='26' onClick={() => clickNote()} style={{ cursor: "pointer" }} />
-                                                <IoPaperPlaneOutline className='me-4' size='26' color='white' onClick={() => goDM()} style={{ cursor: "pointer" }} />
-                                                {isBookmarked ? (
-                                                    <FaBookmark className='' size='26' color='white' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
-                                                ) : (
-                                                    <FaRegBookmark className='' size='26' color='white' onClick={() => onBookmark()} style={{ cursor: "pointer" }} />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <img className='mt-3' style={{ width: "95%", height: "90%" }} src={music.feedImgSrc || music.musicInfoList[0].albumUrl} alt={music.musicInfoList[0].musicTitle}></img>
+                            <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
+                            <PCContents >
+                                <div style={{ display: 'flex', height: '100%' }}>
+                                    <div className="musicdetail-left">
+                                        <img src={music.feedImgSrc || music.musicInfoList[0].albumUrl} alt="앨범 커버" className="musicimg" />
                                     </div>
-                                    <div className='ms-2' style={{ width: "50%", backgroundColor: "#242424", color: "white" }}>
-                                        <div className='d-flex justify-content-start'>
-                                            <Link to={`/profile/${music.nickName}`} style={{ textDecorationLine: "none", color: "white" }}>
-                                            <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px'}} /> {music.nickName}</Link>
-                                            <div className='edbtn' >
-                                                <button onClick={handleClick}>
-                                                    {isToggled ? 
-                                                    <>
-                                                        <LuMoreVertical style={{color:'white', margin: '10px'}} />
-                                                            <GrEdit id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer", margin:'5px' }} />
-                                                            <RiDeleteBinLine id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer", margin:'5px' }} />
-                                                        {/* <button className='editbtn'><GrEdit id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer" }} /></button>
-                                                        <button className='delbtn'><RiDeleteBinLine id={`${isNoteClicked ? 'clicked' : 'unclicked'}`} style={{ cursor: "pointer" }} /></button> */}
-                                                            {/* <button class="edit-button" onClick={() => console.log('삭제')}>
-                                                                <svg class="edit-svgIcon" viewBox="0 0 512 512">
-                                                                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
-                                                                </svg>
+
+                                    <div className="musicdetail-right">
+                                        <div className="music-header">
+                                            <div className="user-music-info">
+                                                <Link to={`/profile/${music.nickName}`} className="musicuser">
+                                                    <img src={music.userImgSrc} alt="유저" className="musicuserimg" />
+                                                    <span className="musicusername">{music.nickName}</span>
+                                                </Link>
+                                            </div>
+
+                                            <div className="icon-group">
+                                                <IoMusicalNoteSharp id={`${isLiked ? 'liked' : 'unliked'}`} size={20} onClick={handleLikeToggle} style={{ cursor: "pointer", color: isLiked ? '#FEF164' : '' }} />
+                                                <IoPaperPlaneOutline size={20} onClick={goDM} style={{ cursor: "pointer" }} />
+                                                {isBookmarked ? (
+                                                    <FaBookmark size={20} onClick={handleBookmark} style={{ cursor: "pointer" }} />
+                                                ) : (
+                                                    <FaRegBookmark size={20} onClick={handleBookmark} style={{ cursor: "pointer" }} />
+                                                )}
+                                                {music.nickName === localStorage.getItem("nickName") && (
+                                                    <div className="dropdown-wrapper">
+                                                        <button onClick={handleClick} className="toggle-btn">
+                                                            {isToggled ? (
+                                                            <LuMoreVertical size={20} style={{ color: 'white' }} />
+                                                            ) : (
+                                                            <LuMoreHorizontal size={20} style={{ color: 'white' }} />
+                                                            )}
+                                                        </button>
+
+                                                        <div className={`dropdown ${isToggled ? 'show' : ''}`}>
+                                                            <button className="editbtn" onClick={goFeedEdit}>
+                                                                <GrEdit size={18} /><span  style={{fontSize:'14px'}}>수정</span>
                                                             </button>
-                                                            <button class="delete-button" onClick={() => console.log('수정')}>
-                                                                <svg class="delete-svgIcon" viewBox="0 0 448 512">
-                                                                    <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                                                                </svg>
-                                                            </button> */}
-                                                        </> : 
-                                                        
-                                                        <LuMoreHorizontal style={{color:'white', margin: '10px'}} />}
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                        <hr />
-                                        {/* 뮤직정보표시  */}
-                                        <div className='musiccard' style={{}}>
-                                            <div className='musicContent'>
-                                                <p className='musictitle'>{music.musicInfoList[0].musicTitle}</p>
-                                                <p className='Artist' >{music.musicInfoList[0].musicArtist}</p>
-                                                <p className='albumInfo'>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
+                                                            <button className="delbtn" onClick={goFeedDelete}>
+                                                                <RiDeleteBinLine size={18} /><span style={{fontSize:'14px'}}>삭제</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
+                                        
+                                        {/* 음악정보 */}
+                                        <div style={{display:'flex', justifyContent:'center'}}>
+                                            <div className='musiccard'>
+                                                <div className="musicInfoWrapper">
+                                                    <div className="musicIcon"><IoMusicalNotes/></div>
+                                                </div>
+                                                
+                                                <div className='musicContent'>
+                                                    <div className='titleRow'>
+                                                        <span className="musictitle">{music.musicInfoList[0].musicTitle} </span>
+                                                    </div>
+                                                    <span className="Artist">{music.musicInfoList[0].musicArtist}</span>
+                                                    <p className='albumInfo'>{music.musicInfoList[0].albumName} · {music.musicInfoList[0].releaseDate}</p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <div className='feedcontent'>
-                                            <div className='justify-content-start text-start'>
-                                                <p style={{fontSize:'16px', color:'white'}} className='feedtext'>{music.content}</p>
-                                                {music.tagName.map((tag, index) => (
-                                                    <p key={index} className='btn btn-warning btn-sm me-2 rounded-pill' style={{fontSize:'13px'}}>#{tag}</p>
+                                        <div className="feedcontent">{music.content}</div>
+                                            {/* 해시태그 */}
+                                            <div className="musictag">
+                                                {music.tagName.map((tag, i) => (
+                                                    <span key={i} className="hashtag">#{tag}</span>
                                                 ))}
                                             </div>
+                                        <hr style={{marginTop:'1px'}}/>
+
+                                        {/* 댓글 리스트 */}
+                                        <div className="musiccommentlist">
+                                            {commentList?.length === 0 ?(
+                                                <div className="no-comments">첫 댓글을 남겨보세요!</div>
+                                            ):(
+                                                commentList.map((data) => (
+                                                <div key={data.id} className="comment-item">
+                                                    <Link to={`/profile/${data.nickName}`} className="comment-user">
+                                                        <img className='comment-avatar' src={data.userImgSrc} alt="User Avatar" />
+                                                        <span className="comment-nickname">{data.nickName}</span>
+                                                    </Link>
+                                                    <div className='comment-content'>
+                                                        <span className="comment-text">{data.comment}</span>
+                                                        <span className='comment-time'>{getRelativeTime(data.createdAt)}</span>
+                                                    </div>
+                                                </div>
+                                            )))}
                                         </div>
-                                        <hr />
-                                        <div className='justify-content-start text-start' style={{ height: "20vh", overflow: "scroll" }}>
-                                            {commentList.map((data) => (
-                                                <p key={data.id}> <img className='userimg' src={music.userimgSrc} alt="User Avatar" style={{ width: '30px', height:'30px'}} /> {data.nickName} : {data.comment}</p>
-                                            ))}
-                                        </div>
-                                        <div className="d-flex justify-content-center" id='search'>
-                                            <input type="text" className="search_input" placeholder="댓글을 입력하세요." onChange={handleCommentChange} value={comment} />
-                                            <button className="search_button" onClick={() => inputComment(music.id)}>입력</button>
+                                        <div className="comment-input-wrap" style={{marginLeft:'-10px'}}>
+                                            <TextInput value={comment} onChange={handleCommentChange} placeholder="댓글을 입력하세요." size="small" icon={VscSend} onKeyDown={(e) => { if (e.key === 'Enter'){ inputComment(music.id) };}} />
                                         </div>
                                     </div>
                                 </div>
                             </PCContents>
+
+
                         </PCModalWrap>
                     </Overlay>
                 </ModalContainer>
+                )}
+                
+
+                {isFeedEdit &&(<FeedEdit
+                    feedId={music.id}
+                    musicInfoList={music}
+                    open={isFeedEdit}
+                    onClose={() => {
+                        setIsFeedEdit(false);
+                        if(onClose){
+                            onClose();
+                        }
+                    }}
+                />)}
+
+                {isFeedDelete &&(<FeedDelete
+                    feedId={music.id}
+                    open={isFeedDelete}
+                    onClose={() => {
+                        setIsFeedDelete(false);
+                        if(onClose){
+                            onClose();
+                        }
+                    }}
+                />)}
             </PC>
 
-            <Mobile>
+            {/* <Mobile>
                 <ModalContainer>
                     <Overlay>
                         <MobileModalWrap ref={modalRef}>
@@ -229,7 +327,7 @@ function FeedDetail({ onClose, music }) {
                                         </div>
                                         <hr />
                                         <div className='text-start'>
-                                            {music.comments.map((data) => (
+                                            { music.comments.map((data) => (
                                                 <p key={data.id}>{data.nickName} : {data.comment}</p>
                                             ))}
                                         </div>
@@ -243,7 +341,7 @@ function FeedDetail({ onClose, music }) {
                         </MobileModalWrap>
                     </Overlay>
                 </ModalContainer>
-            </Mobile>
+            </Mobile> */}
         </div>
     );
 }

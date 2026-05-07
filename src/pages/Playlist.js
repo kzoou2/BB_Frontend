@@ -5,12 +5,15 @@ import '../style/css/Home.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
-import MiniPlayer from '../components/Player/MiniPlayer';
+import '../style/css/PlayList.css';
+import PlaylistCard from '../components/Common/PlaylistCard';
+
 
 function Playlist() {
     const navigate = useNavigate();
     const [playlistData, setPlaylistData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [sortType, setSortType] = useState('latest');
 
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기
@@ -32,6 +35,20 @@ function Playlist() {
             });
     }, [])
 
+    const handleTabChange = (type) => {
+        setSortType(type);  // 탭 변경 시 해당 탭으로 정렬 상태 변경
+    };
+
+    // 데이터 정렬
+    const sortedData = () => {
+        if (sortType === 'popular') {
+            return [...playlistData].sort((a, b) => b.plLike - a.plLike); 
+        } else if (sortType === 'most_songs') {
+            return [...playlistData].sort((a, b) => b.musicInfoList.length - a.musicInfoList.length); 
+        }
+        return playlistData;  
+    };
+
     const openPlaylistDetail = (playlist) => {
         navigate(`/playlistDetail/${playlist.nickName}/${playlist.id}`);
     }
@@ -39,35 +56,31 @@ function Playlist() {
     return (
         <div>
             <PC>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Navbar />
-                    </div>
-                    <div className='col-md-8'>
-                        <div className='mt-5' style={{ maxHeight: "700px", overflow: "scroll" }}>
-                            {isLoading ? <Loading /> : null}
-                            <div className='row ms-5 me-5'>
-                                {playlistData.slice().reverse().map((playlist) => (
-                                    <div className='col-md-3' key={playlist.id}>
-                                        <div className="card mb-2" style={{ height: "auto", backgroundColor: "#242424", color: "white" }}>
-                                            <div className="card-body">
-                                                <img style={{ width: "70%", height: "70%" }} src={playlist.imageFileUrl} alt={playlist.title}></img>
-                                                <p className='mt-2'><b className='mt-3'>{playlist.title}</b></p>
-                                                <p>{`${playlist.nickName}`}</p>
-                                                <p>{`${playlist.musicInfoList.length} 곡`}</p>
-                                                {/* <p style={{ color: '#4887E5' }}>{playlist.tagName.map((tag, index) => `#${tag} ${index < playlist.tagName.length - 1 ? ' ' : ''}`)}</p> */}
-                                                <p>{playlist.content}<span style={{ color: "grey", cursor: "pointer" }} onClick={() => openPlaylistDetail(playlist)}>더보기</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                <div className='mt-5' >
+                    <div className='tabs-container'>
+                        <div className='tabs'>
+                            <input type="radio" id="latest" name="playlist_sort" defaultChecked className="tabs" onClick={()=>handleTabChange('latest')}/>
+                            <label htmlFor="latest" className="tab">최신순</label>
+
+                            <input type="radio" id="popular" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('popular')}/>
+                            <label htmlFor="popular" className="tab">인기순</label>
+
+                            <input type="radio" id="most_songs" name="playlist_sort" className="tabs" onClick={()=>handleTabChange('most_songs')}/>
+                            <label htmlFor="most_songs" className="tab">곡 많은</label>
+                            <span class="glider"></span>
                         </div>
                     </div>
-                    <div className='col-md-2'>
-                        <MiniPlayer />
+
+                    {isLoading ? <Loading /> : null}
+                    <div className='row ms-4 me-4'>
+                        {sortedData().map((playlist) => (
+                            <PlaylistCard key={playlist.id} playlist={playlist} onClick={openPlaylistDetail}/>
+                        ))}
                     </div>
                 </div>
+
+
+
             </PC>
 
             <Mobile>
@@ -82,7 +95,7 @@ function Playlist() {
                                     <img style={{ width: "80%", height: "80%" }} src={playlist.imageFileUrl} alt={playlist.title}></img>
                                     <p className='mt-2'><b>{playlist.title}</b></p>
                                     <p className='mt-0'>{`${playlist.musicInfoList.length} 곡`}</p>
-                                    {/* <p style={{ color: '#4887E5' }}>{playlist.tagName.map((tag, index) => `#${tag} ${index < playlist.tagName.length - 1 ? ' ' : ''}`)}</p> */}
+                                
                                     <p>{playlist.content}<span style={{ color: "grey", cursor: "pointer" }} onClick={() => openPlaylistDetail(playlist)}>더보기</span></p>
                                 </div>
                             </div>

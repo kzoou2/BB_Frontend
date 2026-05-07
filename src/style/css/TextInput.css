@@ -1,0 +1,131 @@
+
+.text-input {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding-left: 30px;
+    padding-right: 40px;
+    color: white;
+}
+
+/* 공통 스타일 */
+.input-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d2d2d;
+    padding: 0 15px;
+    border-radius: 30px;
+    border: 1px solid rgb(63, 63, 63);
+    position: relative;
+    gap: 5px;
+    box-sizing: border-box;
+}
+
+.input-wrapper:focus-within {
+    border: 1px solid rgb(110, 110, 110);
+}
+
+/* 사이즈별 스타일 */
+/* 댓글창,Postmodal */
+.input-small {
+    height: 45px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* DM입력창 */
+.input-medium {
+    width: 580px;
+    height: 45px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* 검색페이지 */
+.input-large {
+    width: 650px;
+    height: 50px;
+    font-size: 16px;
+    padding: 15px;
+}
+
+.search-icon {
+    /* position: absolute; */
+    left: 20px; 
+    font-size: 23px;
+    color: gray;
+}
+
+.close-icon{
+    position: absolute;
+    right: 20px;
+    font-size: 25px;
+    color: gray !important;
+    cursor: pointer;
+}
+
+.send-icon {
+    position: absolute;
+    right: 20px; 
+    font-size: 23px;
+    color:  rgb(110, 110, 110);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.input-wrapper.filled .send-icon,
+.input-wrapper.filled .close-icon {
+    color: white;
+}
+
+
+
+
+/*PostText*/
+.contentInput{
+    width: 80%;
+    max-width: 600px;
+    height: 260px;
+    color: white;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    border: 1px solid rgb(63, 63, 63);
+    padding: 16px;
+    resize: none;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.05);
+}
+.hashtagInput{
+    width: 80%;
+    max-width: 600px;
+    color: white;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    border: 1px solid rgb(63, 63, 63);
+    padding: 8px 13px;
+}
+
+.titleInput{
+    width: 80%;
+    height: 40px;
+    padding: 15px;
+    color: white;
+    background-color: #2A2A2A;
+    border-radius: 10px;
+    border: 1px solid rgb(63, 63, 63);
+}
+
+.contentInput::placeholder,
+.hashtagInput::placeholder {
+    color: #999;
+}
+
+
+.contentInput:focus,
+.titleInput:focus {
+    border: 1px solid rgb(110, 110, 110);
+    outline: none;
+    color: #fff;
+}

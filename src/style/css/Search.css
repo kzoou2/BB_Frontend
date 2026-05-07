@@ -1,0 +1,102 @@
+.search-filter-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+/* 필터 */
+.filterbtn {
+    padding: 5px 10px;
+    font-size: 15px;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    background-color: #333; 
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+.filterbtn:hover {
+    background-color: #555; 
+}
+
+.filterbtn.selected {
+    background-color: #FEF164;
+    color: #212121;
+    font-weight: 550;
+}
+
+
+/* user-profile */
+.profile-card {
+    width: 100%;
+    max-width: 270px;
+    height: 65px;
+    background: #353535;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    backdrop-filter: blur(10px);
+    transition: 0.5s ease-in-out;
+}
+
+.profile-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* 프로필 이미지 (배경) */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: linear-gradient(#d7cfcf, #9198e5); */
+}
+
+/* 실제 프로필 사진 스타일 */
+.profile-img-tag {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-card:hover .profile-img {
+    transition: 0.5s ease-in-out;
+}
+
+.profile-text {
+    width: calc(100% - 90px);
+    margin-left: 18px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-nickname {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 3px;
+}
+
+.profile-following {
+    font-size: 12px;
+    font-weight: lighter;
+    margin: 5px;
+
+}

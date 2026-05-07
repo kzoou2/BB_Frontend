@@ -8,6 +8,10 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useResetRecoilState } from 'recoil';
 import { currentVideoTitleAtom, videoPlaylistAtom } from '../state/MusicPlayerAtom';
+import { IoIosAlert } from "react-icons/io";
+import { useSetRecoilState } from 'recoil';
+import { userNicknameAtom } from '../state/UserAtom';
+import { PrimaryButton } from '../style/styled_components/Button_Style';
 
 function Login() {
     const [isLogin, setIsLogin] = useState(false);
@@ -18,11 +22,14 @@ function Login() {
     const clientId = '293049760557-j0ki70fdjtfcltgd712dtghlf8gntq33.apps.googleusercontent.com';
     const setVideoPlayList = useResetRecoilState(videoPlaylistAtom);
     const setCurrentVideoTitle = useResetRecoilState(currentVideoTitleAtom);
+    const setUserNickname = useSetRecoilState(userNicknameAtom);
 
-    // const handleLogin = () => {
-    //     setIsLogin(true);
-    //     navigate("/");
-    // };
+    useEffect(() => {
+        const storedNickname = localStorage.getItem('nickName');
+        if (storedNickname) {
+            setUserNickname(storedNickname);
+        }
+    }, []);
 
     const openSignUp = () => {
         setIsLogin(true);
@@ -103,6 +110,7 @@ function Login() {
                         window.localStorage.setItem("accessToken", accessToken);
                         window.localStorage.setItem("refreshToken", refreshToken);
                         navigate("/");
+                        window.location.reload();
 
                         setTimeout(() => {
                             refreshAccessToken();
@@ -112,17 +120,16 @@ function Login() {
                         setCurrentVideoTitle('');
 
                     } else if (response.data.message === "비밀번호가 일치하지 않습니다.") {
-                        console.log("로그인 실패");
-                        alert("비밀번호가 일치하지 않습니다.");
+                        console.log("로그인 실패 - 비밀번호 오류류");
+                        setErrorMessage(["비밀번호가 일치하지 않습니다."]);
                     } else {
                         console.log("로그인 실패");
-                        alert("가입되지 않은 아이디입니다.")
+                        setErrorMessage(["로그인에 실패했습니다. 다시 시도해주세요."]);
                     }
                 })
                 .catch((error) => {
-                    // setEmail("");
-                    // setPassword("");
-                    console.log("로그인 API 호출 중 호류: ", error);
+                    console.log("로그인 API 호출 중 오류: ", error);
+                    setErrorMessage(["로그인에 실패했습니다. 다시 시도해주세요."]);
                 })
         }
     }
@@ -130,44 +137,50 @@ function Login() {
     return (
         <div>
             <PC>
-                <div className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className='container' style={{  justifyContent: 'center', alignItems: 'center' }}>
                     <div className='content'>
                         <div>
-                            <div className="form-ui">
+                            <div className="form-container">
+                                <div className="form-header">    
+                                    <img src='https://raw.githubusercontent.com/kzoou2/kzoou2/main/assets/293721930-ba3957b2-2b3c-4f55-8426-008dfc56e00b1.png' alt='BeatBuddy' width={'95%'} />
+                                    <div className="Login-title">
+                                        지금 로그인하고, <br></br>
+                                        나만의 음악을 공유해보세요!
+                                    </div>
+                                </div>
+    
+                                {errorMessage.length > 0 &&(
+                                    <div className="form-error-box">
+                                        {errorMessage.map((message, index) => (<div key={index}><IoIosAlert />{message}</div>))}
+                                    </div>
+                                )}
+
                                 <form className='form' onSubmit={onSubmit}>
-                                    <div className="form-body">
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2"><b>LogIn</b></div>
-                                        </div>
-                                        <div className="input-area">
-                                        {errorMessage.length > 0 &&
-                                            (<div className="alert alert-danger" role="alert">
-                                                {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                            </div>)
-                                        }
-                                        <div className="form-inp">
-                                            <input  onChange={onChange} placeholder="이메일" type="email" id='email' name='email'/>
-                                        </div>
-                                        <div className="form-inp">
-                                            <input onChange={onChange} type='password'  placeholder="비밀번호" id='password' name='password' />
-                                        </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                            <button className="submit-button" type="submit">Login</button>
-                                        </div>
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">이메일</label>
+                                        <input className="form-input" onChange={onChange} type='email' name='email' placeholder=''/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label"  for="password">비밀번호</label>
+                                        <input className="form-input" onChange={onChange} type="password" name="password" id="password"/>
+                                    </div> 
 
-                                        <div className="content__or-text">
-                                            <span></span>
-                                            <span> or </span>
-                                            <span></span>
-                                        </div>
+                                    <div className="submit-button">
+                                        <button className="submitbtn" type="submit">로그인하기</button>
+                                    </div>
 
-                                        <div className='forgot-pass'>
-                                            <button><Link to="/signup"> <span >Don't have an account?</span> <button className='signUp-button'>SignUp</button></Link></button>
-                                        </div>
+                                    <div className="content__or-text">
+                                        <span></span>
+                                        <span>or</span>
+                                        <span></span>
+                                    </div>
+
+                                    <div className='sign-pass'>
+                                        <span>계정이 없으신가요?</span>
+                                        <Link to="/signup"><button className='signUp-button'>회원가입</button></Link>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
 
@@ -200,44 +213,50 @@ function Login() {
             </PC>
 
             <Mobile>
-            <div className='container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className='container' style={{  justifyContent: 'center', alignItems: 'center' }}>
                     <div className='content'>
                         <div>
-                            <div id="form-ui">
+                            <div className="form-container">
+                                <div className="form-header">    
+                                    <img src='https://raw.githubusercontent.com/kzoou2/kzoou2/main/assets/293721930-ba3957b2-2b3c-4f55-8426-008dfc56e00b1.png' alt='BeatBuddy' width={'95%'} />
+                                    <div className="Login-title">
+                                        지금 로그인하고, <br></br>
+                                        나만의 음악을 공유해보세요!
+                                    </div>
+                                </div>
+    
+                                {errorMessage.length > 0 &&(
+                                    <div className="form-error-box">
+                                        {errorMessage.map((message, index) => (<div key={index}><IoIosAlert />{message}</div>))}
+                                    </div>
+                                )}
+
                                 <form className='form' onSubmit={onSubmit}>
-                                    <div className="form-body">
-                                        <div className="welcome-lines">
-                                            <div className="welcome-line-1">BeatBuddy</div>
-                                            <div className="welcome-line-2">Login</div>
-                                        </div>
-                                        <div className="input-area">
-                                        {errorMessage.length > 0 &&
-                                            (<div className="alert alert-danger" role="alert">
-                                                {errorMessage.map((message, index) => (<div key={index}>{message}</div>))}
-                                            </div>)
-                                        }
-                                        <div className="form-inp">
-                                            <input  onChange={onChange} placeholder="Email Address" type="email" id='email' name='email'/>
-                                        </div>
-                                        <div className="form-inp">
-                                            <input onChange={onChange} type='password'  placeholder="Password" id='password' name='password' />
-                                        </div>
-                                        </div>
-                                        <div className="submit-button-cvr">
-                                        <button className="submit-button" type="submit">Login</button>
-                                        </div>
+                                    <div className="form-group">
+                                        <label className="form-label" for="email">이메일</label>
+                                        <input className="form-input" onChange={onChange} type='email' name='email' placeholder=''/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label"  for="password">비밀번호</label>
+                                        <input className="form-input" onChange={onChange} type="password" name="password" id="password"/>
+                                    </div> 
 
-                                        <div className="content__or-text">
-                                            <span></span>
-                                            <span> or </span>
-                                            <span></span>
-                                        </div>
+                                    <div className="submit-button">
+                                        <button className="submitbtn" type="submit">로그인하기</button>
+                                    </div>
 
-                                        <div className='forgot-pass'>
-                                            <button><Link to="/signup"> <span >Don't have an account?</span> <button className='signUp-button'>SignUp</button></Link></button>
-                                        </div>
+                                    <div className="content__or-text">
+                                        <span></span>
+                                        <span>or</span>
+                                        <span></span>
+                                    </div>
+
+                                    <div className='sign-pass'>
+                                        <span>계정이 없으신가요?</span>
+                                        <Link to="/signup"><button className='signUp-button'>회원가입</button></Link>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
 

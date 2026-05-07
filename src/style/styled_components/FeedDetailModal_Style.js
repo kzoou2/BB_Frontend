@@ -13,7 +13,7 @@ z-index: 9999;
 `;
 
 export const PCModalWrap = styled.div`
-width: 900px;
+width: 900px; 
 height: 600px;
 border-radius: 15px;
 background-color: #242424;
@@ -21,6 +21,8 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+padding-left: 20px;
+padding-right: 20px;
 `;
 
 export const MobileModalWrap = styled.div`
@@ -35,7 +37,7 @@ transform: translate(-50%, -50%);
 `;
 
 export const PCContents = styled.div`
-margin: 50px 30px;
+margin: 30px 30px;
 `;
 
 export const MobileContents = styled.div`
@@ -51,6 +53,6 @@ border-radius: 10px;
 color: white;
 cursor: pointer;
 &:hover {
-    background-color: #898989;
+background-color: #898989;
 }
 `;

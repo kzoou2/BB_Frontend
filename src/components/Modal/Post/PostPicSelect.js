@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Overlay, ModalWrap, Contents, Button } from '../../../style/styled_components/PostModal_Style';
 import ModalContainer from '../Config/ModalContainer';
 import useOutSideClick from '../../../hooks/useOutSideClick';
 import PostText from './PostText';
 import axios from 'axios';
-import { FaArrowLeft } from "react-icons/fa";
 import MusicSearch from './MusicSearch';
+import { CloseButton } from 'react-bootstrap';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { SecondaryButton} from '../../../style/styled_components/Button_Style';
 
 function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
     const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY_3;
@@ -65,30 +67,34 @@ function PostPicSelect({ onClose, albumImage, musicTitle, musicArtist, albumName
                 <ModalContainer>
                     <Overlay>
                         <ModalWrap ref={modalRef}>
+                        <CloseButton className="btn-close btn-close-white" aria-label="Close" onClick={handleClose} style={{ position: 'absolute', top: '11px', right: '12px' }}></CloseButton>
                             <Contents>
-                                <div className='row'>
-                                    <FaArrowLeft className='col' size='36' onClick={() => goMusicSearch()} style={{ color: "blue", cursor: "pointer" }} />
-                                    <h3 className='col-10 text-center'>New Post (PostPicSelect)</h3>
-                                    <div className='col'></div>
+                                <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'center', padding: '0 20px' }}>
+                                    <FaArrowLeftLong size={24} onClick={() => goMusicSearch()} style={{ color: "fff", cursor: "pointer" }} />
+                                    <div style={{flex: '1 1 auto',textAlign:"center"}}>
+                                        <h3 className="modal-title">New Post</h3>
+                                        <p className="subtitle">PostPic Select</p>
+                                    </div>
                                 </div>
 
-                                <div className='d-flex justify-content-center mb-3'>
-                                    <hr style={{ width: "80%" }} />
+                                <div className='d-flex justify-content-center mb-3' >
+                                    <hr style={{ width: "80%", marginTop:'0' }} />
                                 </div>
 
-                                <div className='d-flex justify-content-center mb-3'>
-                                    <img style={{ width: "14vw", height: "auto" }} src={albumImage} alt="Album cover"></img>
+                                <div className='d-flex justify-content-center mb-4 mt-5' style={{ position: 'relative' }}>
+                                    <img style={{ width: "14vw", height: "auto", borderRadius:'12px', objectFit:'cover', boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }} src={albumImage} alt="Album cover"></img>
+                                    
                                 </div>
 
                                 <div>
-                                    <h5 className='d-flex justify-content-center'>{musicTitle}</h5>
-                                    <h5 className='d-flex justify-content-center'>{musicArtist}</h5>
-                                    <p className='d-flex justify-content-center'>{albumName} · {releaseDate}</p>
+                                    <h5 className='d-flex justify-content-center' style={{fontSize:'20px', fontWeight:'700',marginBottom: '10px'}}>{musicTitle}</h5>
+                                    <h5 className='d-flex justify-content-center' style={{ fontSize:'17px', marginBottom: '4px', color: '#ccc' }}>{musicArtist}</h5>
+                                    <p className='d-flex justify-content-center' style={{fontSize:'14px', marginTop:'5px', color: '#aaa'}}>{albumName} · {releaseDate}</p>
                                 </div>
 
-                                <div className='d-flex justify-content-center mb-5'>
+                                <div className='d-flex justify-content-center mb-4'>
                                     {/* <Button className='btn btn-primary me-3' onClick={() => openYouTube()}>Open YouYube</Button> */}
-                                    <Button className='btn btn-primary' onClick={() => goFeedText()}>Next</Button>
+                                    <SecondaryButton className='mt-5'onClick={() => goFeedText()}>다음</SecondaryButton>
                                 </div>
                             </Contents>
                         </ModalWrap>
